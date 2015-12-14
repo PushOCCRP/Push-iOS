@@ -8,6 +8,7 @@
 
 #import "ArticlePageViewController.h"
 #import "ArticleViewController.h"
+#import <ShareKit/ShareKit.h>
 
 @interface ArticlePageViewController ()
 
@@ -25,6 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem * shareBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped)];
+    self.navigationItem.rightBarButtonItem = shareBarButtonItem;
+    
+
     // Do any additional setup after loading the view.
 }
 
@@ -33,6 +38,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)shareButtonTapped {
+    //Build url from currently showing article
+    NSURL * url = [NSURL URLWithString:@""];
+    SHKItem * item = [SHKItem URL:url title:@"" contentType:SHKURLContentTypeWebpage];
+    
+    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
+    // but sometimes it may not find one. To be safe, set it explicitly
+    [SHK setRootViewController:self];
+    
+    SHKAlertController * alertController = [SHKAlertController actionSheetForItem:item];
+    [alertController setModalPresentationStyle:UIModalPresentationPopover];
+    UIPopoverPresentationController * popPresenter = [alertController popoverPresentationController];
+    popPresenter.barButtonItem = self.toolbarItems[1];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 #pragma mark - UIPageViewDelegate
 
@@ -69,14 +89,4 @@
 {
     return [self.articles indexOfObject:[(ArticleViewController*)pageViewController.viewControllers.firstObject article]];
 }
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}*/
-
-
 @end
