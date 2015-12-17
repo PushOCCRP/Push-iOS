@@ -13,5 +13,6 @@
 
 @property (nonatomic, retain) Article * article;
 - (instancetype)initWithArticle:(Article*)article;
+- (void)shareButtonTapped;
 
 @end

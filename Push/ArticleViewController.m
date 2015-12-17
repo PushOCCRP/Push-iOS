@@ -38,18 +38,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    self.contentView = [[UIStackView alloc] initWithArrangedSubviews:@[self.image, self.caption, self.headline, self.body]];
-    
+    [self setShareButton];
+    [self setupScrollView];
+    [self setupContentView];
+    [self setContraints];
+}
+
+- (void)setShareButton {
+    UIBarButtonItem * shareBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped)];
+    self.navigationItem.rightBarButtonItem = shareBarButtonItem;
+}
+
+- (void)setupScrollView {
     self.scrollView = [[UIScrollView alloc] init];
-
+    
     [self.view addSubview:self.scrollView];
-
+    
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.edges.equalTo(self.view);
     }];
-    
-    self.contentView = [[UIView alloc] init];
+}
 
+- (void)setupContentView {
+    self.contentView = [[UIView alloc] init];
+    
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, self.contentView.frame.size.height)];
     self.image.clipsToBounds = YES;
     self.image.contentMode = UIViewContentModeScaleAspectFill;
@@ -67,28 +79,13 @@
     [self.contentView addSubview:self.headline];
     [self.contentView addSubview:self.body];
     
-    UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
-    
-    [self.image setImageWithURL:[NSURL URLWithString:self.article.imageUrls.firstObject]];
-    
-    __weak typeof(self) weakSelf = self;
-    [self.image setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.article.imageUrls.firstObject]] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-        weakSelf.image.image = image;
-    } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-        NSLog(@"Error loading image: %@", error.localizedDescription);
-    }];
-    
-    
-    self.headline.text = self.article.headline;
-    self.headline.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
-    
-    self.body.attributedText = [[NSAttributedString alloc] initWithData:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
-                                     options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                               NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-                          documentAttributes:nil error:nil];
-    self.body.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
+    [self setViewsForArticle];
     
     [self.scrollView addSubview:self.contentView];
+}
+
+- (void)setContraints {
+    UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
 
     [self.contentView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.edges.equalTo(self.scrollView);
@@ -100,7 +97,7 @@
         make.top.equalTo(self.contentView.mas_top);
         make.left.equalTo(self.contentView.mas_left);
         make.right.equalTo(self.contentView.mas_right);
-        
+        make.height.lessThanOrEqualTo(self.scrollView).multipliedBy(0.5f);
     }];
     
     [self.headline mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,13 +113,40 @@
         make.bottom.equalTo(self.body.superview.mas_bottom);
         make.width.equalTo(self.scrollView).with.sizeOffset(CGSizeMake(-20.0f, 0.0f));
     }];
+}
 
+- (void)setViewsForArticle {
+    [self.image setImageWithURL:[NSURL URLWithString:self.article.imageUrls.firstObject]];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.image setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.article.imageUrls.firstObject]] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+        weakSelf.image.image = image;
+    } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        NSLog(@"Error loading image: %@", error.localizedDescription);
+    }];
+    
+    
+    self.headline.text = self.article.headline;
+    self.headline.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
+    
+    self.body.attributedText = [[NSAttributedString alloc] initWithData:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
+                                                                options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                          NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                                     documentAttributes:nil error:nil];
+    self.body.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)shareButtonTapped {
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[self.article.headline, self.article.linkURL] applicationActivities:nil];
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
 
 #pragma mark - UITextViewDelegate
 

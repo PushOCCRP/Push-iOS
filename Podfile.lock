@@ -26,139 +26,40 @@ PODS:
   - Bolts/AppLinks (1.5.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.5.0)
-  - Dropbox-iOS-SDK (1.3.13)
-  - Evernote-SDK-iOS (1.3.1):
-    - SSKeychain (~> 1.2.2)
-  - Facebook-iOS-SDK (3.24.1):
-    - Bolts (~> 1.2)
+  - FBSDKCoreKit (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.8.0)
+    - FBSDKCoreKit/no-arc (= 4.8.0)
+  - FBSDKCoreKit/arc (4.8.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.8.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.8.0):
+    - FBSDKCoreKit
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
-  - Pinterest-iOS (2.3)
-  - PKMultipartInputStream (1.1.0)
-  - PocketAPI (1.0.3)
-  - SAMTextView (0.2.2)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
-  - ShareKit (4.0.4):
-    - ShareKit/Core (= 4.0.4)
-    - ShareKit/Delicious (= 4.0.4)
-    - ShareKit/Diigo (= 4.0.4)
-    - ShareKit/Dropbox (= 4.0.4)
-    - ShareKit/Evernote (= 4.0.4)
-    - ShareKit/Facebook (= 4.0.4)
-    - ShareKit/Flickr (= 4.0.4)
-    - ShareKit/Foursquare (= 4.0.4)
-    - ShareKit/GooglePlus (= 4.0.4)
-    - ShareKit/Hatena (= 4.0.4)
-    - ShareKit/Imgur (= 4.0.4)
-    - ShareKit/Instagram (= 4.0.4)
-    - ShareKit/Instapaper (= 4.0.4)
-    - ShareKit/Kippt (= 4.0.4)
-    - ShareKit/LinkedIn (= 4.0.4)
-    - ShareKit/Pinboard (= 4.0.4)
-    - ShareKit/Pinterest (= 4.0.4)
-    - ShareKit/Plurk (= 4.0.4)
-    - ShareKit/Pocket (= 4.0.4)
-    - ShareKit/Reachability (= 4.0.4)
-    - ShareKit/Readability (= 4.0.4)
-    - ShareKit/ReadItLater (= 4.0.4)
-    - ShareKit/SinaWeibo (= 4.0.4)
-    - ShareKit/Tumblr (= 4.0.4)
-    - ShareKit/Twitter (= 4.0.4)
-    - ShareKit/Vkontakte (= 4.0.4)
-    - ShareKit/WhatsApp (= 4.0.4)
-  - ShareKit/Core (4.0.4):
-    - PKMultipartInputStream
-    - SAMTextView (~> 0.2.1)
-    - SDWebImage (~> 3.7)
-    - ShareKit/Reachability
-    - SSKeychain (~> 1.2.2)
-    - UIActivityIndicator-for-SDWebImage (~> 1.2)
-  - ShareKit/Delicious (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Diigo (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Dropbox (4.0.4):
-    - Dropbox-iOS-SDK (~> 1.3.11)
-    - ShareKit/Core
-  - ShareKit/Evernote (4.0.4):
-    - Evernote-SDK-iOS (~> 1.3.1)
-    - ShareKit/Core
-  - ShareKit/Facebook (4.0.4):
-    - Facebook-iOS-SDK (~> 3.2)
-    - ShareKit/Core
-  - ShareKit/Flickr (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Foursquare (4.0.4):
-    - ShareKit/Core
-  - ShareKit/GooglePlus (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Hatena (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Imgur (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Instagram (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Instapaper (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Kippt (4.0.4):
-    - ShareKit/Core
-  - ShareKit/LinkedIn (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Pinboard (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Pinterest (4.0.4):
-    - Pinterest-iOS (~> 2.3)
-    - ShareKit/Core
-  - ShareKit/Plurk (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Pocket (4.0.4):
-    - PocketAPI (~> 1.0.2)
-    - ShareKit/Core
-  - ShareKit/Reachability (4.0.4)
-  - ShareKit/Readability (4.0.4):
-    - ShareKit/Core
-  - ShareKit/ReadItLater (4.0.4):
-    - ShareKit/Core
-  - ShareKit/SinaWeibo (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Tumblr (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Twitter (4.0.4):
-    - ShareKit/Core
-  - ShareKit/Vkontakte (4.0.4):
-    - ShareKit/Core
-  - ShareKit/WhatsApp (4.0.4):
-    - ShareKit/Core
-  - SSKeychain (1.2.3)
   - SVPullToRefresh (0.4.1)
-  - UIActivityIndicator-for-SDWebImage (1.2):
-    - SDWebImage (~> 3.7)
 
 DEPENDENCIES:
   - AFNetworking
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - Masonry
   - MBProgressHUD (~> 0.9.1)
-  - ShareKit
   - SVPullToRefresh
 
 SPEC CHECKSUMS:
   AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
-  Dropbox-iOS-SDK: e0c9b08d1604b39cb78c1d0333251de0f6bdec60
-  Evernote-SDK-iOS: beab0882c4bcdc05117ea0b56119da12cff47fbb
-  Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
+  FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
+  FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
+  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  Pinterest-iOS: e79d1536a7a275e3340cdeb678e85b350f798562
-  PKMultipartInputStream: 1fb466fac9347857e3477e4dfc6fcc62fea7a944
-  PocketAPI: 561fd4f428a38a4662c5837247c85f9962393f01
-  SAMTextView: 979c43bb1fa5859ddfbfeb35e9c296a2b0ec55fd
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  ShareKit: 48a9a3aed20d4b59b49ae3c8efdbb46e95beab33
-  SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
-  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
 COCOAPODS: 0.39.0

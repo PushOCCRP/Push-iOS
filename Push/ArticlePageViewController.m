@@ -8,7 +8,6 @@
 
 #import "ArticlePageViewController.h"
 #import "ArticleViewController.h"
-#import <ShareKit/ShareKit.h>
 
 @interface ArticlePageViewController ()
 
@@ -19,8 +18,13 @@
 - (instancetype)initWithArticles:(NSArray *)articles
 {
     self = [super initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    self.articles = articles;
     
+    self.articles = articles;
+    self.view.userInteractionEnabled = YES;
+    self.dataSource = self;
+    self.delegate = self;
+    self.view.backgroundColor = [UIColor whiteColor];
+
     return self;
 }
 
@@ -39,20 +43,9 @@
 }
 
 - (void)shareButtonTapped {
-    //Build url from currently showing article
-    NSURL * url = [NSURL URLWithString:@""];
-    SHKItem * item = [SHKItem URL:url title:@"" contentType:SHKURLContentTypeWebpage];
-    
-    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
-    // but sometimes it may not find one. To be safe, set it explicitly
-    [SHK setRootViewController:self];
-    
-    SHKAlertController * alertController = [SHKAlertController actionSheetForItem:item];
-    [alertController setModalPresentationStyle:UIModalPresentationPopover];
-    UIPopoverPresentationController * popPresenter = [alertController popoverPresentationController];
-    popPresenter.barButtonItem = self.toolbarItems[1];
-    [self presentViewController:alertController animated:YES completion:nil];
+    [(ArticleViewController*)self.viewControllers.firstObject shareButtonTapped];
 }
+
 
 #pragma mark - UIPageViewDelegate
 

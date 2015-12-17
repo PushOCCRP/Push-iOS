@@ -71,6 +71,10 @@
     return self;
 }
 
+- (NSURL*)linkURL {
+    NSURL * url = [NSURL URLWithString:@""];
+    return url;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {

@@ -24,6 +24,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) ArticleLanguage language;
 @property (nonatomic, retain) NSArray * captions;
 
+@property (nonatomic, readonly) NSURL * linkURL;
+
 + (instancetype)articleFromDictionary:(NSDictionary *)jsonDictionary;
 - (instancetype)initWithDictionary:(NSDictionary *)jsonDictionary;
 

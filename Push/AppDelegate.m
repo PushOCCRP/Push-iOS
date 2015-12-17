@@ -27,6 +27,7 @@
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:mainController];
     
     [self formatNavigationBar:navigationController.navigationBar];
+    [self formatPageIndicatorView];
     
     [window setRootViewController:navigationController];
     [window makeKeyAndVisible];
@@ -45,6 +46,13 @@
     
     bar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     bar.barStyle = UIBarStyleBlack;
+}
+
+- (void)formatPageIndicatorView {
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
