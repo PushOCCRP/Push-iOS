@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+@import HockeySDK;
+
 
 @interface AppDelegate ()
 
@@ -17,6 +21,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Fabric with:@[[Crashlytics class]]];
+   
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"0dce3b5dc14d4f0889881da636cead08"];
+    // Do some additional configuration if needed here
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator
+     authenticateInstallation];
+
     // Override point for customization after application launch.
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     

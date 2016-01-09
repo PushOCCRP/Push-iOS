@@ -17,6 +17,8 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <AFNetworking/UIImage+AFNetworking.h>
 
+#import <Crashlytics/Crashlytics.h>
+
 // These are also set in the respective nibs, so if you change it make sure you change it there too
 static NSString * featuredCellIdentifier = @"FEATURED_ARTICLE_STORY_CELL";
 static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
@@ -45,6 +47,11 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     }];
     
     [self loadInitialArticles];
+    
+    // TODO: Track the user action that is important for you.
+    [Answers logContentViewWithName:@"Article List" contentType:nil contentId:@"article_list" customAttributes:nil];
+    
+
 }
 
 - (void)setupNavigationBar

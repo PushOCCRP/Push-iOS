@@ -60,11 +60,17 @@
 }
 
 - (void)setupContentView {
+    
+    //Create the content views
     self.contentView = [[UIView alloc] init];
     
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, self.contentView.frame.size.height)];
     self.image.clipsToBounds = YES;
     self.image.contentMode = UIViewContentModeScaleAspectFill;
+    
+    self.caption = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
+    self.caption.numberOfLines = 3;
+    self.caption.lineBreakMode = NSLineBreakByWordWrapping;
     
     self.headline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
     self.headline.numberOfLines = 3;
@@ -75,16 +81,22 @@
     self.body.editable = NO;
     self.body.scrollEnabled = NO;
     
+    // Add the content views to the main view
     [self.contentView addSubview:self.image];
+    [self.contentView addSubview:self.caption];
     [self.contentView addSubview:self.headline];
     [self.contentView addSubview:self.body];
     
+    // Set all the data to views for the article
     [self setViewsForArticle];
     
+    // Make it scroll
     [self.scrollView addSubview:self.contentView];
 }
 
 - (void)setContraints {
+    
+    // Set the stack up. This is pretty basic stuff
     UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
 
     [self.contentView mas_makeConstraints:^(MASConstraintMaker * make) {
@@ -100,8 +112,14 @@
         make.height.lessThanOrEqualTo(self.scrollView).multipliedBy(0.5f);
     }];
     
-    [self.headline mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.caption mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.image.mas_bottom).with.offset(padding.top);
+        make.left.equalTo(self.caption.superview.mas_left).with.offset(padding.left);
+        make.right.equalTo(self.caption.superview.mas_right).with.offset(-padding.right);
+    }];
+    
+    [self.headline mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.caption.mas_bottom).with.offset(padding.top);
         make.left.equalTo(self.headline.superview.mas_left).with.offset(padding.left);
         make.right.equalTo(self.headline.superview.mas_right).with.offset(-padding.right);
     }];
@@ -116,6 +134,8 @@
 }
 
 - (void)setViewsForArticle {
+    
+    //Load image from web if the cache doesn't exist (this is handled in UIImageView+AFNetworking
     [self.image setImageWithURL:[NSURL URLWithString:self.article.imageUrls.firstObject]];
     
     __weak typeof(self) weakSelf = self;
@@ -125,10 +145,19 @@
         NSLog(@"Error loading image: %@", error.localizedDescription);
     }];
     
+    //Set image caption, hide if there is none.
+    if(self.article.captions.count > 0){
+        self.caption.text = self.article.captions[0];
+        self.caption.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
+    } else {
+        self.caption.hidden = YES;
+    }
     
+    //Set the headline
     self.headline.text = self.article.headline;
     self.headline.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
     
+    //Set the body using html for the formatting
     self.body.attributedText = [[NSAttributedString alloc] initWithData:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
                                                                 options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                           NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
