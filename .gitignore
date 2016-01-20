@@ -6,6 +6,9 @@
 build/
 DerivedData
 
+## Secret Keys
+Push/SecretKeys.plist
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
