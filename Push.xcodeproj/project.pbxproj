@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		759D9719B4C5EEBCDCF029D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B78C631CA26E450459BEC3F /* libPods.a */; };
 		9DA572CF1BF87FDC00A8C439 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DA572CE1BF87FDC00A8C439 /* logo.png */; };
+		9DBFF9CF1C50031600ABCD2C /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */; };
+		9DBFF9D31C50069800ABCD2C /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBFF9D21C50069800ABCD2C /* SettingsManager.m */; };
+		9DBFF9D71C501B8400ABCD2C /* play@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9D41C501B8400ABCD2C /* play@1x.png */; };
+		9DBFF9D81C501B8400ABCD2C /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9D51C501B8400ABCD2C /* play@2x.png */; };
+		9DBFF9D91C501B8400ABCD2C /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9D61C501B8400ABCD2C /* play@3x.png */; };
+		9DBFF9DE1C50270C00ABCD2C /* YouTubePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBFF9DD1C50270C00ABCD2C /* YouTubePlayerViewController.m */; };
+		9DBFF9E21C50283900ABCD2C /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBFF9E11C50283900ABCD2C /* VideoPlayerViewController.m */; };
+		9DBFF9E81C50402F00ABCD2C /* Assets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9E71C50402F00ABCD2C /* Assets.bundle */; };
+		9DBFF9EC1C50489600ABCD2C /* PlayerControlBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBFF9EB1C50489600ABCD2C /* PlayerControlBarView.m */; };
+		9DBFF9EE1C5048BB00ABCD2C /* PlayerControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9ED1C5048BB00ABCD2C /* PlayerControlBarView.xib */; };
 		9DC0E14C1BF62B08004A47D4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0E14B1BF62B08004A47D4 /* SearchViewController.m */; };
 		9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC797C1BF3639900F28F18 /* MainViewController.m */; };
 		9DCC797F1BF3639900F28F18 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC797D1BF3639900F28F18 /* MainViewController.xib */; };
@@ -16,10 +26,12 @@
 		9DCC79891BF3764200F28F18 /* PushSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC79881BF3764200F28F18 /* PushSyncManager.m */; };
 		9DCC798D1BF393B600F28F18 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC798B1BF393B600F28F18 /* ArticleViewController.m */; };
 		9DCC798E1BF393B600F28F18 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC798C1BF393B600F28F18 /* ArticleViewController.xib */; };
+		9DD418041C46E342000D6DC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DD418021C46E342000D6DC8 /* Localizable.strings */; };
+		9DD4180B1C46F131000D6DC8 /* LanguagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4180A1C46F131000D6DC8 /* LanguagePickerView.m */; };
+		9DDBE7051C46E16700D2A7E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DDBE7041C46E16700D2A7E5 /* LaunchScreen.storyboard */; };
 		9DE4A1031BE2531E00B69170 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1021BE2531E00B69170 /* main.m */; };
 		9DE4A1061BE2531E00B69170 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1051BE2531E00B69170 /* AppDelegate.m */; };
 		9DE4A10E1BE2531E00B69170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE4A10D1BE2531E00B69170 /* Assets.xcassets */; };
-		9DE4A1111BE2531E00B69170 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE4A10F1BE2531E00B69170 /* LaunchScreen.storyboard */; };
 		9DE4A11C1BE2531F00B69170 /* PushTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A11B1BE2531F00B69170 /* PushTests.m */; };
 		9DE4A1271BE2531F00B69170 /* PushUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1261BE2531F00B69170 /* PushUITests.m */; };
 		9DE4A13D1BE260BD00B69170 /* FeaturedArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A13C1BE260BD00B69170 /* FeaturedArticleTableViewCell.m */; };
@@ -28,6 +40,9 @@
 		9DE4A1451BE2637F00B69170 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DE4A1431BE2637F00B69170 /* ArticleTableViewCell.xib */; };
 		9DE4A14A1BE2668200B69170 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1491BE2668200B69170 /* Article.m */; };
 		9DE4A1501BE2691C00B69170 /* ArticlePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A14F1BE2691C00B69170 /* ArticlePageViewController.m */; };
+		9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9B0F21C41198F00EA3BFA /* LanguageManager.m */; };
+		9DFE930A1C51564A00780D78 /* PlayerNavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFE93091C51564A00780D78 /* PlayerNavigationBarView.xib */; };
+		9DFE930D1C51565A00780D78 /* PlayerNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFE930C1C51565A00780D78 /* PlayerNavigationBarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +67,20 @@
 		3E6CD016E3789A2EEA3DDA4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		40AAA7836813F16CB9C6DB1D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9DA572CE1BF87FDC00A8C439 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Assets/logo.png; sourceTree = SOURCE_ROOT; };
+		9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SecretKeys.plist; sourceTree = "<group>"; };
+		9DBFF9D11C50069800ABCD2C /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
+		9DBFF9D21C50069800ABCD2C /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
+		9DBFF9D41C501B8400ABCD2C /* play@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@1x.png"; sourceTree = "<group>"; };
+		9DBFF9D51C501B8400ABCD2C /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		9DBFF9D61C501B8400ABCD2C /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
+		9DBFF9DC1C50270C00ABCD2C /* YouTubePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubePlayerViewController.h; sourceTree = "<group>"; };
+		9DBFF9DD1C50270C00ABCD2C /* YouTubePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubePlayerViewController.m; sourceTree = "<group>"; };
+		9DBFF9E01C50283900ABCD2C /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
+		9DBFF9E11C50283900ABCD2C /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
+		9DBFF9E71C50402F00ABCD2C /* Assets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Assets.bundle; sourceTree = "<group>"; };
+		9DBFF9EA1C50489600ABCD2C /* PlayerControlBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerControlBarView.h; sourceTree = "<group>"; };
+		9DBFF9EB1C50489600ABCD2C /* PlayerControlBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerControlBarView.m; sourceTree = "<group>"; };
+		9DBFF9ED1C5048BB00ABCD2C /* PlayerControlBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerControlBarView.xib; sourceTree = "<group>"; };
 		9DC0E14A1BF62B08004A47D4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9DC0E14B1BF62B08004A47D4 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		9DCC797B1BF3639900F28F18 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -63,12 +92,18 @@
 		9DCC798A1BF393B600F28F18 /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
 		9DCC798B1BF393B600F28F18 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
 		9DCC798C1BF393B600F28F18 /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
+		9DD418031C46E342000D6DC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9DD418051C46E348000D6DC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9DD418061C46E351000D6DC8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9DD418071C46E35D000D6DC8 /* az */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = az; path = az.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9DD418091C46F131000D6DC8 /* LanguagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagePickerView.h; sourceTree = "<group>"; };
+		9DD4180A1C46F131000D6DC8 /* LanguagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagePickerView.m; sourceTree = "<group>"; };
+		9DDBE7041C46E16700D2A7E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DE4A0FE1BE2531E00B69170 /* Push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Push.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE4A1021BE2531E00B69170 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9DE4A1041BE2531E00B69170 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9DE4A1051BE2531E00B69170 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9DE4A10D1BE2531E00B69170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9DE4A1101BE2531E00B69170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DE4A1121BE2531E00B69170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE4A1171BE2531F00B69170 /* PushTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE4A11B1BE2531F00B69170 /* PushTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushTests.m; sourceTree = "<group>"; };
@@ -86,6 +121,11 @@
 		9DE4A1491BE2668200B69170 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		9DE4A14E1BE2691C00B69170 /* ArticlePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlePageViewController.h; sourceTree = "<group>"; };
 		9DE4A14F1BE2691C00B69170 /* ArticlePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlePageViewController.m; sourceTree = "<group>"; };
+		9DF9B0F11C41198F00EA3BFA /* LanguageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageManager.h; sourceTree = "<group>"; };
+		9DF9B0F21C41198F00EA3BFA /* LanguageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageManager.m; sourceTree = "<group>"; };
+		9DFE93091C51564A00780D78 /* PlayerNavigationBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerNavigationBarView.xib; sourceTree = "<group>"; };
+		9DFE930B1C51565A00780D78 /* PlayerNavigationBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerNavigationBarView.h; sourceTree = "<group>"; };
+		9DFE930C1C51565A00780D78 /* PlayerNavigationBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerNavigationBarView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,9 +174,60 @@
 		9DA572CD1BF87FCE00A8C439 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				9DBFF9DA1C501B8800ABCD2C /* play */,
 				9DA572CE1BF87FDC00A8C439 /* logo.png */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		9DBFF9D01C50064000ABCD2C /* SettingsManager */ = {
+			isa = PBXGroup;
+			children = (
+				9DBFF9D11C50069800ABCD2C /* SettingsManager.h */,
+				9DBFF9D21C50069800ABCD2C /* SettingsManager.m */,
+			);
+			name = SettingsManager;
+			sourceTree = "<group>";
+		};
+		9DBFF9DA1C501B8800ABCD2C /* play */ = {
+			isa = PBXGroup;
+			children = (
+				9DBFF9D41C501B8400ABCD2C /* play@1x.png */,
+				9DBFF9D51C501B8400ABCD2C /* play@2x.png */,
+				9DBFF9D61C501B8400ABCD2C /* play@3x.png */,
+			);
+			name = play;
+			sourceTree = "<group>";
+		};
+		9DBFF9DB1C5026E300ABCD2C /* YouTube Player View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9DBFF9DC1C50270C00ABCD2C /* YouTubePlayerViewController.h */,
+				9DBFF9DD1C50270C00ABCD2C /* YouTubePlayerViewController.m */,
+			);
+			name = "YouTube Player View Controller";
+			sourceTree = "<group>";
+		};
+		9DBFF9DF1C50282300ABCD2C /* Video Player View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9DFE93081C51562C00780D78 /* Player Navigation Bar View */,
+				9DBFF9E91C50487900ABCD2C /* Player Control Bar View */,
+				9DBFF9DB1C5026E300ABCD2C /* YouTube Player View Controller */,
+				9DBFF9E01C50283900ABCD2C /* VideoPlayerViewController.h */,
+				9DBFF9E11C50283900ABCD2C /* VideoPlayerViewController.m */,
+			);
+			name = "Video Player View Controller";
+			sourceTree = "<group>";
+		};
+		9DBFF9E91C50487900ABCD2C /* Player Control Bar View */ = {
+			isa = PBXGroup;
+			children = (
+				9DBFF9EA1C50489600ABCD2C /* PlayerControlBarView.h */,
+				9DBFF9EB1C50489600ABCD2C /* PlayerControlBarView.m */,
+				9DBFF9ED1C5048BB00ABCD2C /* PlayerControlBarView.xib */,
+			);
+			name = "Player Control Bar View";
 			sourceTree = "<group>";
 		};
 		9DC0E1491BF62AD7004A47D4 /* Search View Controller */ = {
@@ -151,6 +242,8 @@
 		9DCC79841BF375C000F28F18 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				9DBFF9D01C50064000ABCD2C /* SettingsManager */,
+				9DF9B0F01C41196A00EA3BFA /* LanguageManager */,
 				9DCC79861BF375EE00F28F18 /* PushSyncManager */,
 			);
 			name = Managers;
@@ -163,6 +256,15 @@
 				9DCC79881BF3764200F28F18 /* PushSyncManager.m */,
 			);
 			name = PushSyncManager;
+			sourceTree = "<group>";
+		};
+		9DD418081C46F10F000D6DC8 /* Language Picker */ = {
+			isa = PBXGroup;
+			children = (
+				9DD418091C46F131000D6DC8 /* LanguagePickerView.h */,
+				9DD4180A1C46F131000D6DC8 /* LanguagePickerView.m */,
+			);
+			name = "Language Picker";
 			sourceTree = "<group>";
 		};
 		9DE4A0F51BE2531D00B69170 = {
@@ -207,8 +309,11 @@
 		9DE4A1011BE2531E00B69170 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9DBFF9E71C50402F00ABCD2C /* Assets.bundle */,
+				9DD418021C46E342000D6DC8 /* Localizable.strings */,
 				9DA572CD1BF87FCE00A8C439 /* Assets */,
 				9DE4A1021BE2531E00B69170 /* main.m */,
+				9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -234,6 +339,7 @@
 		9DE4A1341BE257E800B69170 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9DBFF9DF1C50282300ABCD2C /* Video Player View Controller */,
 				9DC0E1491BF62AD7004A47D4 /* Search View Controller */,
 				9DE4A14D1BE268F500B69170 /* Article Page View Controller */,
 				9DE4A14B1BE268E300B69170 /* Article View Controller */,
@@ -255,6 +361,7 @@
 		9DE4A1361BE2580C00B69170 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9DD418081C46F10F000D6DC8 /* Language Picker */,
 				9DE4A1391BE2582F00B69170 /* Table View Cells */,
 			);
 			name = Views;
@@ -272,7 +379,7 @@
 		9DE4A1381BE2582400B69170 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				9DE4A10F1BE2531E00B69170 /* LaunchScreen.storyboard */,
+				9DDBE7041C46E16700D2A7E5 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -340,6 +447,25 @@
 				9DE4A14F1BE2691C00B69170 /* ArticlePageViewController.m */,
 			);
 			name = "Article Page View Controller";
+			sourceTree = "<group>";
+		};
+		9DF9B0F01C41196A00EA3BFA /* LanguageManager */ = {
+			isa = PBXGroup;
+			children = (
+				9DF9B0F11C41198F00EA3BFA /* LanguageManager.h */,
+				9DF9B0F21C41198F00EA3BFA /* LanguageManager.m */,
+			);
+			name = LanguageManager;
+			sourceTree = "<group>";
+		};
+		9DFE93081C51562C00780D78 /* Player Navigation Bar View */ = {
+			isa = PBXGroup;
+			children = (
+				9DFE930B1C51565A00780D78 /* PlayerNavigationBarView.h */,
+				9DFE930C1C51565A00780D78 /* PlayerNavigationBarView.m */,
+				9DFE93091C51564A00780D78 /* PlayerNavigationBarView.xib */,
+			);
+			name = "Player Navigation Bar View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,6 +558,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				az,
 			);
 			mainGroup = 9DE4A0F51BE2531D00B69170;
 			productRefGroup = 9DE4A0FF1BE2531E00B69170 /* Products */;
@@ -450,14 +578,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DBFF9CF1C50031600ABCD2C /* SecretKeys.plist in Resources */,
 				9DCC79831BF374A900F28F18 /* Podfile in Resources */,
+				9DBFF9D81C501B8400ABCD2C /* play@2x.png in Resources */,
+				9DDBE7051C46E16700D2A7E5 /* LaunchScreen.storyboard in Resources */,
 				9DE4A1451BE2637F00B69170 /* ArticleTableViewCell.xib in Resources */,
 				9DCC798E1BF393B600F28F18 /* ArticleViewController.xib in Resources */,
-				9DE4A1111BE2531E00B69170 /* LaunchScreen.storyboard in Resources */,
+				9DBFF9D71C501B8400ABCD2C /* play@1x.png in Resources */,
+				9DD418041C46E342000D6DC8 /* Localizable.strings in Resources */,
+				9DBFF9D91C501B8400ABCD2C /* play@3x.png in Resources */,
+				9DFE930A1C51564A00780D78 /* PlayerNavigationBarView.xib in Resources */,
 				9DA572CF1BF87FDC00A8C439 /* logo.png in Resources */,
+				9DBFF9E81C50402F00ABCD2C /* Assets.bundle in Resources */,
 				9DCC797F1BF3639900F28F18 /* MainViewController.xib in Resources */,
 				9DE4A13F1BE260FB00B69170 /* FeaturedArticleTableViewCell.xib in Resources */,
 				9DE4A10E1BE2531E00B69170 /* Assets.xcassets in Resources */,
+				9DBFF9EE1C5048BB00ABCD2C /* PlayerControlBarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +692,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DBFF9E21C50283900ABCD2C /* VideoPlayerViewController.m in Sources */,
+				9DD4180B1C46F131000D6DC8 /* LanguagePickerView.m in Sources */,
 				9DE4A1501BE2691C00B69170 /* ArticlePageViewController.m in Sources */,
 				9DE4A13D1BE260BD00B69170 /* FeaturedArticleTableViewCell.m in Sources */,
 				9DC0E14C1BF62B08004A47D4 /* SearchViewController.m in Sources */,
@@ -564,8 +702,13 @@
 				9DE4A1061BE2531E00B69170 /* AppDelegate.m in Sources */,
 				9DCC79891BF3764200F28F18 /* PushSyncManager.m in Sources */,
 				9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */,
+				9DBFF9DE1C50270C00ABCD2C /* YouTubePlayerViewController.m in Sources */,
+				9DFE930D1C51565A00780D78 /* PlayerNavigationBarView.m in Sources */,
+				9DBFF9D31C50069800ABCD2C /* SettingsManager.m in Sources */,
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
+				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
 				9DE4A1031BE2531E00B69170 /* main.m in Sources */,
+				9DBFF9EC1C50489600ABCD2C /* PlayerControlBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,12 +744,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9DE4A10F1BE2531E00B69170 /* LaunchScreen.storyboard */ = {
+		9DD418021C46E342000D6DC8 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9DE4A1101BE2531E00B69170 /* Base */,
+				9DD418031C46E342000D6DC8 /* Base */,
+				9DD418051C46E348000D6DC8 /* en */,
+				9DD418061C46E351000D6DC8 /* ru */,
+				9DD418071C46E35D000D6DC8 /* az */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -649,7 +795,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -688,7 +834,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -706,7 +852,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "$(PROFILE_UUID)";
 			};
@@ -722,7 +868,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "$(PROFILE_UUID)";
 			};

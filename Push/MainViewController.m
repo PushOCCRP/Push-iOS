@@ -16,6 +16,8 @@
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <AFNetworking/UIImage+AFNetworking.h>
+#import "LanguageManager.h"
+#import "LanguagePickerView.h"
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -27,6 +29,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 @interface MainViewController ()
 
 @property (nonatomic, retain) IBOutlet UITableView * tableView;
+@property (nonatomic, retain) LanguagePickerView * languagePickerView;
 
 @property (nonatomic, retain) NSArray * articles;
 
@@ -36,7 +39,6 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     [self setupNavigationBar];
     [self setupTableView];
@@ -50,8 +52,6 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     // TODO: Track the user action that is important for you.
     [Answers logContentViewWithName:@"Article List" contentType:nil contentId:@"article_list" customAttributes:nil];
-    
-
 }
 
 - (void)setupNavigationBar
@@ -78,8 +78,27 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     // Add search button
     UIBarButtonItem * searchBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonTapped)];
-    [self.navigationItem setRightBarButtonItem:searchBarButton];
+    
+    // Add language button
+    UIBarButtonItem * languageBarButton = [[UIBarButtonItem alloc] initWithTitle:@"AД" style:UIBarButtonItemStylePlain target:self action:@selector(languageButtonTapped)];
+    [self.navigationItem setRightBarButtonItems:@[languageBarButton, searchBarButton]];
 
+    // Set Back button to correct language
+    [self setUpBackButton];
+}
+
+// The back button needs to be translated, which requires a new button everytime.
+- (void)setUpBackButton
+{
+    UIBarButtonItem * backButton = [[UIBarButtonItem alloc] initWithTitle:MYLocalizedString(@"Back", @"Back") style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    
+    self.navigationItem.backBarButtonItem = backButton;
+}
+
+// Just pop off the view controller
+- (void)goBack
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)setupTableView
@@ -97,8 +116,8 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [self.tableView.pullToRefreshView stopAnimating];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } failure:^(NSError *error) {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Connection Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:MYLocalizedString(@"ConnectionError", @"Connection Error") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:MYLocalizedString(@"OK", @"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
@@ -122,7 +141,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
     } failure:^(NSError *error) {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Connection Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:MYLocalizedString(@"ConnectionError", @"Connection Error") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         
         [alert addAction:defaultAction];
@@ -131,11 +150,71 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     }];
 }
 
+#pragma mark - Menu Button Handling
+
 - (void)searchButtonTapped
 {
     SearchViewController * searchViewController = [[SearchViewController alloc] init];
     [self.navigationController pushViewController:searchViewController animated:YES];
 }
+
+
+- (void)languageButtonTapped
+{
+    if(!self.languagePickerView){
+        [self showLanguagePicker];
+    } else {
+        [self hideLanguagePicker];
+    }
+}
+
+#pragma mark Language Picker
+
+- (void)languagePickerDidChooseLanguage:(NSString *)language
+{
+    [[LanguageManager sharedManager] setLanguage:language];
+    [self hideLanguagePicker];
+    
+    //Reload the view?
+    [self setUpBackButton];
+    [self loadArticles];
+    [self.view setNeedsDisplay];
+}
+
+- (void)showLanguagePicker
+{
+    if(self.languagePickerView){
+        return;
+    }
+    
+    self.languagePickerView = [[LanguagePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300.0f)];
+    self.languagePickerView.delegate = self;
+    
+    [self.view addSubview:self.languagePickerView];
+    [UIView animateWithDuration:1.0f animations:^{
+        CGRect frame = self.languagePickerView.frame;
+        frame.origin.y = self.view.frame.size.height - frame.size.height;
+        self.languagePickerView.frame = frame;
+    }];
+}
+
+- (void)hideLanguagePicker
+{
+    if(!self.languagePickerView){
+        return;
+    }
+    
+    [UIView animateWithDuration:1.0f animations:^{
+        CGRect frame = self.languagePickerView.frame;
+        frame.origin.y = self.view.frame.size.height;
+        self.languagePickerView.frame = frame;
+    } completion:^(BOOL finished) {
+        [self.languagePickerView removeFromSuperview];
+        self.languagePickerView = nil;
+    }];
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

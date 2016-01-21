@@ -13,6 +13,7 @@
 #import "Article.h"
 #import "ArticleTableViewCell.h"
 #import "ArticleViewController.h"
+#import "LanguageManager.h"
 
 static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
@@ -44,7 +45,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)setupSearchBar
 {
     self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.placeholder = @"Search";
+    self.searchBar.placeholder = MYLocalizedString(@"Search", @"Search");
     self.searchBar.delegate = self;
     
     [self.view addSubview:self.searchBar];
@@ -98,15 +99,15 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 [hud setMode:MBProgressHUDModeText];
-                [hud setLabelText:@"No results found"];
+                [hud setLabelText:MYLocalizedString(@"NoResultsFound", @"No search results found")];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                 });
             });
         }
     } failure:^(NSError *error) {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Connection Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:MYLocalizedString(@"ConnectionError", @"Connection Error") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:MYLocalizedString(@"OK", @"Assertive yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];

@@ -8,6 +8,7 @@
 
 #import "ArticlePageViewController.h"
 #import "ArticleViewController.h"
+#import "LanguageManager.h"
 
 @interface ArticlePageViewController ()
 
@@ -30,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem * shareBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped)];
+    UIBarButtonItem * shareBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:MYLocalizedString(@"Share", @"Share") style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped)];
     self.navigationItem.rightBarButtonItem = shareBarButtonItem;
     
 

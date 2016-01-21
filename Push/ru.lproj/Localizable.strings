@@ -1,0 +1,29 @@
+/* 
+  Strings-Russian.strings
+  Push
+
+  Created by Christopher Guess on 1/9/16.
+  Copyright © 2016 OCCRP. All rights reserved.
+*/
+
+/* Share */
+"Share" = "Share";
+
+/* Connection Error */
+"ConnectionErorr" = "Connection Error";
+
+/* OK */
+"OK" = "OK";
+
+/* Back */
+"Back" = "назад";
+
+/* Share */
+"Share" = "Поделиться";
+
+/* Choose Language */
+"ChooseLanguage" = "Выберите язык";
+
+/* Search */
+"Search" = "Поиск";
+"NoResultsFound" = "Поиск не найден";

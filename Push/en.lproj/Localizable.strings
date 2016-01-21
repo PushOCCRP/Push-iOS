@@ -1,0 +1,29 @@
+/* 
+  Strings-English.strings
+  Push
+
+  Created by Christopher Guess on 1/9/16.
+  Copyright © 2016 OCCRP. All rights reserved.
+*/
+
+/* Share */
+"Share" = "Share";
+
+/* Connection Error */
+"ConnectionErorr" = "Connection Error";
+
+/* OK */
+"OK" = "OK";
+
+/* Back */
+"Back" = "Back";
+
+/* Share */
+"Share" = "Share";
+
+/* Choose Language */
+"ChooseLanguage" = "Choose Language";
+
+/* Search */
+"Search" = "Search";
+"NoResultsFound" = "No Results Found";

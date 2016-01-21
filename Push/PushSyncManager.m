@@ -7,6 +7,8 @@
 //
 
 #import "PushSyncManager.h"
+#import "SettingsManager.h"
+#import "LanguageManager.h"
 #import <AFNetworking/AFHTTPRequestOperation.h>
 
 @interface PushSyncManager()
@@ -32,7 +34,7 @@
 
 - (instancetype)init
 {
-    return [super initWithBaseURL:[NSURL URLWithString:@"https://push-backend.herokuapp.com"]];
+    return [super initWithBaseURL:[NSURL URLWithString:[SettingsManager sharedManager].PushUrl]];
 }
 
 // Returns the current cached array, and then does another call.
@@ -40,7 +42,8 @@
 // If the return is nil there is nothing stored and the call will still be made.
 - (NSArray*)articlesWithCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
 {
-    [self GET:@"articles" parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+
+    [self GET:@"articles" parameters:@{@"language":[LanguageManager sharedManager].languageShortCode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         NSDictionary * response = (NSDictionary*)responseObject;
         NSArray * articlesResponse = response[@"results"];
@@ -72,7 +75,7 @@
 
 - (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
 {
-    [self GET:@"search" parameters:@{@"q":searchTerms} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    [self GET:@"search" parameters:@{@"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         NSDictionary * response = (NSDictionary*)responseObject;
         NSArray * articlesResponse = response[@"results"];

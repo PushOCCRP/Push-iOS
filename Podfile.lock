@@ -48,6 +48,7 @@ PODS:
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
   - SVPullToRefresh (0.4.1)
+  - youtube-ios-player-helper (0.1.5)
 
 DEPENDENCIES:
   - AFNetworking
@@ -60,6 +61,7 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD (~> 0.9.1)
   - SVPullToRefresh
+  - youtube-ios-player-helper (~> 0.1.5)
 
 SPEC CHECKSUMS:
   AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
@@ -73,5 +75,6 @@ SPEC CHECKSUMS:
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+  youtube-ios-player-helper: 8706bb155ffee74fbe5f2f5cf41c2dafe60dc155
 
 COCOAPODS: 0.39.0

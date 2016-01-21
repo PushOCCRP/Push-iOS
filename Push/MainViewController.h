@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LanguagePickerView.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, LanguagePickerViewDelegate>
 
 @end

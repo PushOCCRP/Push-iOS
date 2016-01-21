@@ -35,7 +35,7 @@
     self.headlineLabel.text = article.headline;
     
     __weak typeof(self) weakSelf = self;
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:article.imageUrls.firstObject]];
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:article.images.firstObject[@"url"]]];
     [self.imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         weakSelf.articleImageView.image = image;
     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {

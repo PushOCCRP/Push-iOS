@@ -30,7 +30,8 @@
         self.headline           = [aDecoder decodeObjectForKey:@"headline"];
         self.descriptionText    = [aDecoder decodeObjectForKey:@"description"];
         self.body               = [aDecoder decodeObjectForKey:@"body"];
-        self.imageUrls          = [aDecoder decodeObjectForKey:@"image_urls"];
+        self.images             = [aDecoder decodeObjectForKey:@"images"];
+        self.videos             = [aDecoder decodeObjectForKey:@"videos"];
         self.author             = [aDecoder decodeObjectForKey:@"author"];
         self.captions           = [aDecoder decodeObjectForKey:@"captions"];
         self.publishDate        = [formatter
@@ -56,7 +57,8 @@
     self.headline           = jsonDictionary[@"headline"];
     self.descriptionText    = jsonDictionary[@"description"];
     self.body               = jsonDictionary[@"body"];
-    self.imageUrls          = jsonDictionary[@"image_urls"];
+    self.images             = jsonDictionary[@"images"];
+    self.videos             = jsonDictionary[@"videos"];
     self.author             = jsonDictionary[@"author"];
     self.captions           = jsonDictionary[@"captions"];
     self.publishDate        = [formatter dateFromString:jsonDictionary[@"publish_date"]];
@@ -66,6 +68,8 @@
         self.language = ENGLISH;
     } else if([language isEqualToString:@"ru"]){
         self.language = RUSSIAN;
+    } else if([language isEqualToString:@"az"]){
+        self.language = AZERBAIJANI;
     }
     
     return self;
@@ -84,7 +88,8 @@
     [encoder encodeObject:self.headline forKey:@"headline"];
     [encoder encodeObject:self.descriptionText forKey:@"description"];
     [encoder encodeObject:self.body forKey:@"body"];
-    [encoder encodeObject:self.imageUrls forKey:@"image_urls"];
+    [encoder encodeObject:self.images forKey:@"images"];
+    [encoder encodeObject:self.videos forKey:@"videos"];
     [encoder encodeObject:self.author forKey:@"author"];
     [encoder encodeObject:self.captions forKey:@"captions"];
     [encoder encodeObject:[formatter stringFromDate:self.publishDate] forKey:@"publish_date"];
