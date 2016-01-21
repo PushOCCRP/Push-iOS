@@ -42,9 +42,13 @@
     return self;
 }
 
-- (NSString*)PushUrl
+- (NSString*)pushUrl
 {
     return self.settingsDictionary[@"push_url"];
 }
 
+- (NSString*)hockeyAppId
+{
+    return self.settingsDictionary[@"hockey_app_id"];
+}
 @end

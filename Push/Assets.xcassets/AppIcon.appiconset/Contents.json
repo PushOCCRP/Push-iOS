@@ -3,79 +3,79 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "app_icon@2x.png",
+      "filename" : "icon@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "app_icon@3x.png",
+      "filename" : "icon@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "app_icon@2x-1.png",
+      "filename" : "icon-spotlight@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "app_icon@3x-1.png",
+      "filename" : "icon-spotlight@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "app_icon@2x-2.png",
+      "filename" : "icon@2x-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "app_icon@3x-2.png",
+      "filename" : "icon@3x-1.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "app_icon.png",
+      "filename" : "icon@1x.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "app_icon@3x-6.png",
+      "filename" : "icon@2x-3.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "app_icon-1.png",
+      "filename" : "icon@1x-1.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "app_icon@3x-5.png",
+      "filename" : "icon@2x-4.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "app_icon-2.png",
+      "filename" : "icon@1x-2.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "app_icon@3x-3.png",
+      "filename" : "icon@2x-5.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "app_icon@3x-4.png",
+      "filename" : "icon@3x-2.png",
       "scale" : "2x"
     }
   ],

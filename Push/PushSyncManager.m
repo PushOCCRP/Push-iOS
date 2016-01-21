@@ -34,7 +34,7 @@
 
 - (instancetype)init
 {
-    return [super initWithBaseURL:[NSURL URLWithString:[SettingsManager sharedManager].PushUrl]];
+    return [super initWithBaseURL:[NSURL URLWithString:[SettingsManager sharedManager].pushUrl]];
 }
 
 // Returns the current cached array, and then does another call.

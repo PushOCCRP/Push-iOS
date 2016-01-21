@@ -11,6 +11,7 @@
 @interface SettingsManager : NSObject
 + (SettingsManager *)sharedManager;
 
-@property (nonatomic, readonly) NSString * PushUrl;
+@property (nonatomic, readonly) NSString * pushUrl;
+@property (nonatomic, readonly) NSString * hockeyAppId;
 
 @end

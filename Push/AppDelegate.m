@@ -10,6 +10,8 @@
 #import "MainViewController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "SettingsManager.h"
+
 @import HockeySDK;
 
 
@@ -23,11 +25,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[[Crashlytics class]]];
    
-    //[[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"0dce3b5dc14d4f0889881da636cead08"];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[SettingsManager sharedManager].hockeyAppId];
     // Do some additional configuration if needed here
-    //[[BITHockeyManager sharedHockeyManager] startManager];
-    //[[BITHockeyManager sharedHockeyManager].authenticator
-    // authenticateInstallation];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 
     // Override point for customization after application launch.
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
@@ -52,12 +53,13 @@
 
 - (void)formatNavigationBar:(UINavigationBar*)bar
 {
-    bar.barTintColor= [UIColor colorWithRed:156.0f/255.0f green:26.0f/255.0f blue:30.0f/255.0f alpha:1.0f];
-    bar.tintColor = [UIColor whiteColor];
+    bar.barTintColor= [UIColor colorWithRed:254.0f/255.0f green:254.0f/255.0f blue:250.0f/255.0f alpha:1.0f];
+    UIColor * darkColor = [UIColor colorWithRed:180.0f/255.0f green:36.0f/255.0f blue:42.0f/255.0f alpha:1.0f];
+    bar.tintColor = darkColor;
     bar.translucent = NO;
     
-    bar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    bar.barStyle = UIBarStyleBlack;
+    bar.titleTextAttributes = @{NSForegroundColorAttributeName: darkColor};
+    bar.barStyle = UIBarStyleDefault;
 }
 
 - (void)formatPageIndicatorView {
