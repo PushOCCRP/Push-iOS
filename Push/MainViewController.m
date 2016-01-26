@@ -18,6 +18,9 @@
 #import <AFNetworking/UIImage+AFNetworking.h>
 #import "LanguageManager.h"
 #import "LanguagePickerView.h"
+#import "AboutViewController.h"
+
+#import "AboutBarButtonView.h"
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -76,12 +79,15 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     self.navigationItem.leftBarButtonItem = occrpLogoButton;
     self.navigationController.navigationItem.leftBarButtonItem = occrpLogoButton;
     
+    // Add about button
+    UIBarButtonItem * aboutBarButton = [[UIBarButtonItem alloc] initWithCustomView:[[AboutBarButtonView alloc] initWithTarget:self andSelector:@selector(aboutButtonTapped)]];
+    
     // Add search button
     UIBarButtonItem * searchBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonTapped)];
     
     // Add language button
     UIBarButtonItem * languageBarButton = [[UIBarButtonItem alloc] initWithTitle:@"AД" style:UIBarButtonItemStylePlain target:self action:@selector(languageButtonTapped)];
-    [self.navigationItem setRightBarButtonItems:@[languageBarButton, searchBarButton]];
+    [self.navigationItem setRightBarButtonItems:@[languageBarButton, searchBarButton, aboutBarButton]];
 
     // Set Back button to correct language
     [self setUpBackButton];
@@ -151,6 +157,12 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 }
 
 #pragma mark - Menu Button Handling
+
+- (void)aboutButtonTapped
+{
+    AboutViewController * aboutViewController = [[AboutViewController alloc] init];
+    [self.navigationController pushViewController:aboutViewController animated:YES];
+}
 
 - (void)searchButtonTapped
 {

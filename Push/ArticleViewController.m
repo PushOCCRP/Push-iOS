@@ -51,7 +51,12 @@
 }
 
 - (void)setShareButton {
-    UIBarButtonItem * shareBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped)];
+    UIBarButtonItem * shareBarButtonItem = [[UIBarButtonItem alloc]
+                                            initWithTitle:@"Share"
+                                            style:UIBarButtonItemStylePlain
+                                            target:self
+                                            action:@selector(shareButtonTapped)];
+    
     self.navigationItem.rightBarButtonItem = shareBarButtonItem;
 }
 
