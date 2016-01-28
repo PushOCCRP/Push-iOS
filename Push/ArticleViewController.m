@@ -173,6 +173,17 @@
         self.videoPlayerButton.hidden = YES;
     } else {
         self.videoPlayerButton.hidden = NO;
+        
+        // This sets some filler space while an image loads so the play button doesn't go off the top of the screen
+        // When the image loads everything resizes correctly
+        if(self.image.frame.size.height == 0){
+            [self.image mas_remakeConstraints:^(MASConstraintMaker * make) {
+                make.top.equalTo(self.contentView.mas_top);
+                make.left.equalTo(self.contentView.mas_left);
+                make.right.equalTo(self.contentView.mas_right);
+                make.height.equalTo(self.videoPlayerButton.mas_height).valueOffset(@50);
+            }];
+        }
     }
     
     //Set image caption, hide if there is none.
@@ -188,10 +199,16 @@
     self.headline.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
     
     //Set the body using html for the formatting
-    self.body.attributedText = [[NSAttributedString alloc] initWithData:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
-                                                                options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                                                          NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-                                                     documentAttributes:nil error:nil];
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 7.0f;
+
+    NSMutableAttributedString * bodyAttributedText =[[NSMutableAttributedString alloc] initWithData:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
+                                                                              options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                        NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                                                   documentAttributes:nil error:nil];
+    [bodyAttributedText setAttributes:@{NSParagraphStyleAttributeName: paragraphStyle} range:NSMakeRange(0, bodyAttributedText.string.length)];
+
+    self.body.attributedText = bodyAttributedText;
     self.body.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
 }
 

@@ -6,8 +6,8 @@
   Copyright © 2016 OCCRP. All rights reserved.
 */
 
-/* Share */
-"Share" = "Share";
+/* Language Name */
+"LanguageName" = "English";
 
 /* Connection Error */
 "ConnectionErorr" = "Connection Error";

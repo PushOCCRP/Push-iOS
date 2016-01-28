@@ -56,7 +56,7 @@
 
 - (void)addPickerView
 {
-    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 80.0f)];
+    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 20.0f, self.frame.size.width, self.frame.size.height - 80.0f)];
 
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
@@ -110,7 +110,7 @@
 //UIPickerViewDelegate
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [LanguageManager sharedManager].availableLanguages[row];
+    return [LanguageManager sharedManager].nativeAvailableLanguages[row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component

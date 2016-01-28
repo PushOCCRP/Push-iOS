@@ -32,6 +32,8 @@
 - (void)setupViews
 {
     self.aboutTextView = [[UITextView alloc] init];
+    self.aboutTextView.editable = NO;
+    
     [self.view addSubview:self.aboutTextView];
     [self.aboutTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -42,10 +44,16 @@
 {
     NSData * htmlAbout = [self dataFromHtmlFile];
     
-    self.aboutTextView.attributedText = [[NSAttributedString alloc] initWithData:htmlAbout
+    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithData:htmlAbout
                                                                 options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                           NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
                                                      documentAttributes:nil error:nil];
+
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 7.0f;
+    [text setAttributes:@{NSParagraphStyleAttributeName:paragraphStyle}  range:NSMakeRange(0, text.length)];
+
+    self.aboutTextView.attributedText = text;
     self.aboutTextView.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
 }
 

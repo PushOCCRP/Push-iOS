@@ -67,17 +67,22 @@ static NSString * languageKey = @"push_language_key";
     }
     
     
+    _bundle = [self bundleForLanguageShortCode:languageShortCode];
+}
+
+- (NSBundle*)bundleForLanguageShortCode:(NSString*)languageShortCode
+{
+    NSBundle * bundle;
     NSString *path = [[NSBundle mainBundle] pathForResource:languageShortCode ofType:@"lproj"];
     if (!path)
     {
-        _bundle = [NSBundle mainBundle];
+        bundle = [NSBundle mainBundle];
         NSLog(@"Warning: No lproj for %@, system default set instead !", languageShortCode);
-        return;
+    } else {
+        bundle = [NSBundle bundleWithPath:path];
     }
     
-    _bundle = [NSBundle bundleWithPath:path];
-
-
+    return bundle;
 }
 
 // Adopted from https://stackoverflow.com/questions/1669645/how-to-force-nslocalizedstring-to-use-a-specific-language
@@ -86,7 +91,18 @@ static NSString * languageKey = @"push_language_key";
 - (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value
 {
     // bundle was initialized with [NSBundle mainBundle] as default and modified in setLanguage method
-    return [self.bundle localizedStringForKey:key value:value table:nil];
+    return [self localizedStringForKey:key value:value withBundle:self.bundle];
+}
+
+- (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)comment forLanguageShortCode:(NSString*)languageShortCode
+{
+    NSBundle * languageBundle = [self bundleForLanguageShortCode:languageShortCode];
+    return [self localizedStringForKey:key value:comment withBundle:languageBundle];
+}
+
+- (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)value withBundle:(NSBundle*)bundle
+{
+    return [bundle localizedStringForKey:key value:value table:nil];
 }
 
 - (NSString*)language
@@ -129,6 +145,18 @@ static NSString * languageKey = @"push_language_key";
     return [NSArray arrayWithArray:localizationsFullName];
 }
 
+- (NSArray*)nativeAvailableLanguages
+{
+    NSDictionary * languages = [self languageDictionary];
+    NSMutableArray * mutableLangugages = [NSMutableArray array];
+    
+    for(NSString * key in languages.allKeys){
+        [mutableLangugages addObject:[self localizedStringForKey:@"LanguageName" value:@"nil" forLanguageShortCode:key]];
+    }
+    
+    return [NSArray arrayWithArray:mutableLangugages];
+}
+
 - (NSDictionary*)languageDictionary
 {
     NSDictionary * languageFullNames = @{ @"en": @"English",
@@ -138,6 +166,17 @@ static NSString * languageKey = @"push_language_key";
     return languageFullNames;
 }
 
+- (NSDictionary*)nativeLanguageDictionary
+{
+    NSDictionary * languages = [self languageDictionary];
+    NSMutableDictionary * mutableLangugages = [NSMutableDictionary dictionaryWithDictionary:languages];
+    
+    for(NSString * key in mutableLangugages.allKeys){
+        mutableLangugages[key] = [self localizedStringForKey:@"LanguageName" value:@"nil" forLanguageShortCode:key];
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:mutableLangugages];
+}
 
 @end
 

@@ -21,9 +21,16 @@
     [super setArticle:article];
     self.descriptionLabel.text = @"";
     
-    self.descriptionLabel.text = article.descriptionText;
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 5.0f;
+    
+    NSAttributedString * descriptionText = [[NSAttributedString alloc] initWithString:article.descriptionText attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
+    
+    self.descriptionLabel.attributedText = descriptionText;
     self.descriptionLabel.font = [UIFont fontWithName:@"Palatino-Roman" size:16.0f];
     self.headlineLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
+    
+    
 }
 
 @end

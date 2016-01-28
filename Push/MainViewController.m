@@ -199,11 +199,11 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         return;
     }
     
-    self.languagePickerView = [[LanguagePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300.0f)];
+    self.languagePickerView = [[LanguagePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 200.0f)];
     self.languagePickerView.delegate = self;
     
     [self.view addSubview:self.languagePickerView];
-    [UIView animateWithDuration:1.0f animations:^{
+    [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.languagePickerView.frame;
         frame.origin.y = self.view.frame.size.height - frame.size.height;
         self.languagePickerView.frame = frame;
@@ -216,7 +216,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         return;
     }
     
-    [UIView animateWithDuration:1.0f animations:^{
+    [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.languagePickerView.frame;
         frame.origin.y = self.view.frame.size.height;
         self.languagePickerView.frame = frame;

@@ -18,7 +18,11 @@
 + (LanguageManager *)sharedManager;
 
 - (NSArray*)availableLanguages;
+- (NSArray*)nativeAvailableLanguages;
 
 - (NSString*)localizedStringForKey:(NSString*)key value:(NSString*)comment;
+- (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)comment forLanguageShortCode:(NSString*)languageShortCode;
+- (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)value withBundle:(NSBundle*)bundle;
+
 
 @end
