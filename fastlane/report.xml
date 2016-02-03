@@ -3,42 +3,42 @@
   <testsuite name="run">
     
       
-      <testcase name="0: Verifying required fastlane version" time="0.000786">
+      <testcase name="0: Verifying required fastlane version" time="0.000527">
         
       </testcase>
     
       
-      <testcase name="1: default_platform" time="0.000312">
+      <testcase name="1: default_platform" time="0.000252">
         
       </testcase>
     
       
-      <testcase name="2: cocoapods" time="10.584665">
+      <testcase name="2: cocoapods" time="8.444202">
         
       </testcase>
     
       
-      <testcase name="3: increment_build_number" time="1.072456">
+      <testcase name="3: increment_build_number" time="1.414308">
         
       </testcase>
     
       
-      <testcase name="4: cert" time="54.96929">
+      <testcase name="4: cert" time="26.588742">
         
       </testcase>
     
       
-      <testcase name="5: sigh" time="46.569917">
+      <testcase name="5: sigh" time="33.542717">
         
       </testcase>
     
       
-      <testcase name="6: gym" time="74.656829">
+      <testcase name="6: gym" time="81.227962">
         
       </testcase>
     
       
-      <testcase name="7: hockey" time="27.501079">
+      <testcase name="7: hockey" time="367.08568">
         
       </testcase>
     

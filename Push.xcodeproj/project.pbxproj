@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5A65E7CBE3E0888A2D523B04 /* libPods-Push.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D35D0B63E1C02262AEF5F5 /* libPods-Push.a */; };
+		9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B01C624D2800D537EF /* PlayButtonView.m */; };
+		9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B91C62624100D537EF /* PlayButton.m */; };
+		9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1E91C62756E00D537EF /* PauseButton.m */; };
+		9D69C1ED1C62758400D537EF /* PauseButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1EC1C62758400D537EF /* PauseButtonView.m */; };
 		9D8D33371C610C5E0053FE3E /* NSMutableAttributedString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D33361C610C5E0053FE3E /* NSMutableAttributedString+HTML.m */; };
 		9DAC1DF41C57048E00126A83 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC1DF31C57048E00126A83 /* AboutViewController.m */; };
 		9DAC1DF91C57097200126A83 /* about_text-az.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DAC1DF61C57097200126A83 /* about_text-az.html */; };
@@ -81,6 +85,14 @@
 		03D35D0B63E1C02262AEF5F5 /* libPods-Push.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Push.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
 		6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
+		9D69C1AF1C624D2800D537EF /* PlayButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonView.h; sourceTree = "<group>"; };
+		9D69C1B01C624D2800D537EF /* PlayButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonView.m; sourceTree = "<group>"; };
+		9D69C1B81C62624100D537EF /* PlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButton.h; sourceTree = "<group>"; };
+		9D69C1B91C62624100D537EF /* PlayButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButton.m; sourceTree = "<group>"; };
+		9D69C1E81C62756E00D537EF /* PauseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseButton.h; sourceTree = "<group>"; };
+		9D69C1E91C62756E00D537EF /* PauseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseButton.m; sourceTree = "<group>"; };
+		9D69C1EB1C62758400D537EF /* PauseButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseButtonView.h; sourceTree = "<group>"; };
+		9D69C1EC1C62758400D537EF /* PauseButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseButtonView.m; sourceTree = "<group>"; };
 		9D8D33351C610C5E0053FE3E /* NSMutableAttributedString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+HTML.h"; sourceTree = "<group>"; };
 		9D8D33361C610C5E0053FE3E /* NSMutableAttributedString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+HTML.m"; sourceTree = "<group>"; };
 		9DAC1DF21C57048E00126A83 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -196,6 +208,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9D69C1A81C624C8100D537EF /* Play */ = {
+			isa = PBXGroup;
+			children = (
+				9D69C1B81C62624100D537EF /* PlayButton.h */,
+				9D69C1B91C62624100D537EF /* PlayButton.m */,
+				9D69C1AF1C624D2800D537EF /* PlayButtonView.h */,
+				9D69C1B01C624D2800D537EF /* PlayButtonView.m */,
+			);
+			name = Play;
+			sourceTree = "<group>";
+		};
+		9D69C1E71C62753A00D537EF /* Pause */ = {
+			isa = PBXGroup;
+			children = (
+				9D69C1E81C62756E00D537EF /* PauseButton.h */,
+				9D69C1E91C62756E00D537EF /* PauseButton.m */,
+				9D69C1EB1C62758400D537EF /* PauseButtonView.h */,
+				9D69C1EC1C62758400D537EF /* PauseButtonView.m */,
+			);
+			name = Pause;
+			sourceTree = "<group>";
+		};
 		9D8D332F1C5FABEE0053FE3E /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +279,8 @@
 		9DAC1E031C57720900126A83 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9D69C1E71C62753A00D537EF /* Pause */,
+				9D69C1A81C624C8100D537EF /* Play */,
 				9DAC1E041C57720F00126A83 /* About */,
 			);
 			name = Icons;
@@ -824,17 +860,21 @@
 				9DAC1DF41C57048E00126A83 /* AboutViewController.m in Sources */,
 				9DBFF9E21C50283900ABCD2C /* VideoPlayerViewController.m in Sources */,
 				9DD4180B1C46F131000D6DC8 /* LanguagePickerView.m in Sources */,
+				9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */,
 				9DE4A1501BE2691C00B69170 /* ArticlePageViewController.m in Sources */,
 				9DE4A13D1BE260BD00B69170 /* FeaturedArticleTableViewCell.m in Sources */,
 				9DC0E14C1BF62B08004A47D4 /* SearchViewController.m in Sources */,
 				9DCC798D1BF393B600F28F18 /* ArticleViewController.m in Sources */,
 				9DE4A14A1BE2668200B69170 /* Article.m in Sources */,
+				9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */,
 				9DE4A1061BE2531E00B69170 /* AppDelegate.m in Sources */,
+				9D69C1ED1C62758400D537EF /* PauseButtonView.m in Sources */,
 				9DCC79891BF3764200F28F18 /* PushSyncManager.m in Sources */,
 				9DAC1E0A1C5772F800126A83 /* AboutBarButtonView.m in Sources */,
 				9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */,
 				9DBFF9DE1C50270C00ABCD2C /* YouTubePlayerViewController.m in Sources */,
 				9DFE930D1C51565A00780D78 /* PlayerNavigationBarView.m in Sources */,
+				9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */,
 				9DBFF9D31C50069800ABCD2C /* SettingsManager.m in Sources */,
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
 				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
@@ -980,7 +1020,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -996,7 +1036,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

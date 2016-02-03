@@ -7,10 +7,15 @@
 //
 
 #import "PlayerControlBarView.h"
+#import "PlayButtonView.h"
+#import "PauseButtonView.h"
 
 @interface PlayerControlBarView ()
 
 @property (nonatomic, retain) IBOutlet UISlider * scrubber;
+
+@property (nonatomic, retain) UIView * playButtonView;
+@property (nonatomic, retain) UIView * pauseButtonView;
 
 @end
 
@@ -21,8 +26,22 @@
     self = [[NSBundle mainBundle] loadNibNamed:@"PlayerControlBarView" owner:self options:nil].firstObject;
     [self.scrubber addTarget:self action:@selector(scrubberDidChangeValue:) forControlEvents:UIControlEventValueChanged];
     
+    [self createPlayButtonViews];
+
     return self;
 }
+
+- (void)createPlayButtonViews
+{
+    [self.playButton setTitle:@"" forState:UIControlStateNormal];
+    CGRect frame = self.playButton.frame;
+    frame.origin = CGPointMake(0, 0);
+    self.playButtonView = [[PlayButtonView alloc] initWithFrame:frame Target:self andSelector:@selector(playButtonTapped:)];
+    self.pauseButtonView = [[PauseButtonView alloc] initWithFrame:frame Target:self andSelector:@selector(playButtonTapped:)];
+    
+    [self.playButton addSubview:self.playButtonView];
+}
+
 
 - (IBAction)playButtonTapped:(id)sender
 {
@@ -37,13 +56,19 @@
     
     switch (playState) {
         case pushPlaying:
-            [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
+            [self.playButtonView removeFromSuperview];
+            [self.playButton addSubview:self.pauseButtonView];
+            //[self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
             break;
         case pushPaused:
-            [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
+            [self.pauseButtonView removeFromSuperview];
+            [self.playButton addSubview:self.playButtonView];
+            //[self.playButton setTitle:@"Play" forState:UIControlStateNormal];
             break;
         case pushStopped:
-            [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
+            [self.pauseButtonView removeFromSuperview];
+            [self.playButton addSubview:self.playButtonView];
+            //[self.playButton setTitle:@"Play" forState:UIControlStateNormal];
             break;
         default:
             break;

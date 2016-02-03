@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
@@ -10,11 +10,11 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="62"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-hR-YuT">
+                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-hR-YuT">
                     <rect key="frame" x="67" y="16" width="503" height="31"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </slider>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSj-ac-HIa">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSj-ac-HIa">
                     <rect key="frame" x="17" y="16" width="30" height="30"/>
                     <state key="normal" title="Play">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -28,12 +28,10 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Ybl-hR-YuT" secondAttribute="bottom" constant="16" id="13F-bZ-MYy"/>
                 <constraint firstItem="Ybl-hR-YuT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="621-Zo-QyP"/>
-                <constraint firstAttribute="bottom" secondItem="vSj-ac-HIa" secondAttribute="bottom" constant="16" id="Gpf-7r-56B"/>
+                <constraint firstItem="vSj-ac-HIa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="19" id="TMb-b0-LXA"/>
                 <constraint firstItem="vSj-ac-HIa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="17" id="XUI-QD-jRs"/>
                 <constraint firstItem="Ybl-hR-YuT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fDH-6B-rk8"/>
-                <constraint firstItem="vSj-ac-HIa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="gxu-UN-DEO"/>
                 <constraint firstAttribute="trailing" secondItem="Ybl-hR-YuT" secondAttribute="trailing" constant="32" id="pxE-kV-CwG"/>
-                <constraint firstItem="vSj-ac-HIa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v3h-hK-Xcy"/>
                 <constraint firstItem="Ybl-hR-YuT" firstAttribute="leading" secondItem="vSj-ac-HIa" secondAttribute="trailing" constant="22" id="vWg-W1-Rjb"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

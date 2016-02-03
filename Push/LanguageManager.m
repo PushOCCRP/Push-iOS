@@ -85,6 +85,7 @@ static NSString * languageKey = @"push_language_key";
         bundle = [NSBundle bundleWithPath:path];
     }
     
+    [bundle load];
     return bundle;
 }
 
@@ -126,7 +127,9 @@ static NSString * languageKey = @"push_language_key";
 //This is not a great hack, but since the server doesn't return time yet it'll do
 - (NSString*)localizedRelativeDate:(NSString*)relativeDate
 {
-    return MYLocalizedString(relativeDate, @"yesterday, tomorrow etc.");
+    //NSString * localizedRelativeDate = MYLocalizedString(relativeDate, @"yesterday, tomorrow etc.");
+    //return localizedRelativeDate;
+    return relativeDate;
 }
 
 - (NSString*)language
