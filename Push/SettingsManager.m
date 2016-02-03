@@ -51,4 +51,10 @@
 {
     return self.settingsDictionary[@"hockey_app_id"];
 }
+
+- (NSURL*)cmsBaseUrl
+{
+    return [NSURL URLWithString:self.settingsDictionary[@"cms_base_url"]];
+}
+
 @end

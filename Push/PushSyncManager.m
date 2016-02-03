@@ -9,7 +9,7 @@
 #import "PushSyncManager.h"
 #import "SettingsManager.h"
 #import "LanguageManager.h"
-#import <AFNetworking/AFHTTPRequestOperation.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface PushSyncManager()
 

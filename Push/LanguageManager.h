@@ -24,5 +24,9 @@
 - (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)comment forLanguageShortCode:(NSString*)languageShortCode;
 - (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)value withBundle:(NSBundle*)bundle;
 
+- (NSString*)localizedRelativeDate:(NSString*)relativeDate;
+
+- (NSString*)bylineFormatForLanguage:(NSString*)language;
+- (NSString*)bylineFormatForLanguageShortCode:(NSString*)languageShortCode;
 
 @end

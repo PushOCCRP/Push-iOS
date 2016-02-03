@@ -29,10 +29,9 @@
     self.headlineLabel.text = @"";
     self.imageView.image = nil;
     
-    self.headlineLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:20.0f];
-    
     _article = article;
     self.headlineLabel.text = article.headline;
+    self.dateBylinesLabel.text = article.shortDateByline;
     
     __weak typeof(self) weakSelf = self;
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:article.images.firstObject[@"url"]]];

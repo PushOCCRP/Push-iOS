@@ -7,6 +7,9 @@
 //
 
 #import "LanguageManager.h"
+#import <DateTools/DateTools.h>
+
+
 @interface LanguageManager()
 
 @property (nonatomic, retain) NSBundle * bundle;
@@ -45,7 +48,7 @@ static NSString * languageKey = @"push_language_key";
     [[NSUserDefaults standardUserDefaults] setObject:language forKey:languageKey];
 
     NSSet * keys = [[self languageDictionary] keysOfEntriesPassingTest:^BOOL(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        if(obj == language){
+        if([(NSString*)obj isEqualToString:language]){
             return YES;
         }
         return NO;
@@ -103,6 +106,27 @@ static NSString * languageKey = @"push_language_key";
 - (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)value withBundle:(NSBundle*)bundle
 {
     return [bundle localizedStringForKey:key value:value table:nil];
+}
+
+- (NSString*)bylineFormatForLanguage:(NSString*)language
+{
+    return [self bylineFormatForLanguageShortCode:[self languageDictionary][language]];
+}
+
+- (NSString*)bylineFormatForLanguageShortCode:(NSString*)languageShortCode
+{
+    NSDictionary * bylineFormatByLanguage = @{ @"en": @"%%@ %@ %%@",
+                                               @"az": @"%%@%@ %%@",
+                                               @"ru": @"%%@%@ %%@" };
+    NSString * localizedString = MYLocalizedString(@"by", @"between the author and date");
+    NSString * format = [NSString stringWithFormat:bylineFormatByLanguage[languageShortCode], localizedString];
+    return format;
+}
+
+//This is not a great hack, but since the server doesn't return time yet it'll do
+- (NSString*)localizedRelativeDate:(NSString*)relativeDate
+{
+    return MYLocalizedString(relativeDate, @"yesterday, tomorrow etc.");
 }
 
 - (NSString*)language

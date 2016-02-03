@@ -238,7 +238,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 {
     CGFloat height = 100.0f;
     if(indexPath.row == 0){
-        height = 400.0f;
+        height = 434.0f;
     }
 
     return height;

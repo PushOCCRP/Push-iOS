@@ -16,7 +16,7 @@
 "OK" = "OK";
 
 /* Back */
-"Back" = "назад";
+"Back" = "Назад";
 
 /* Share */
 "Share" = "Поделиться";
@@ -27,3 +27,47 @@
 /* Search */
 "Search" = "Поиск";
 "NoResultsFound" = "Поиск не найден";
+
+/* By */
+"by" = ",";
+
+/* Yesterday */
+"Yesterday" = "Вчера";
+
+/* January */
+"January" = "январь";
+
+/* February */
+"February" = "февраль";
+
+/* March */
+"March" = "март";
+
+/* April */
+"April" = "апрель";
+
+/* May */
+"May" = "май";
+
+/* June */
+"June" = "июнь";
+
+/* July */
+"July" = "июль";
+
+/* August */
+"August" = "август";
+
+/* September */
+"September" = "сентябрь";
+
+/* October */
+"October" = "октябрь";
+
+/* November */
+"November" = "ноябрь";
+
+/* December */
+"December" = "декабрь";
+
+

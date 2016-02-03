@@ -26,4 +26,46 @@
 
 /* Search */
 "Search" = "Search";
-"NoResultsFound" = "No Results Found";q
+"NoResultsFound" = "No Results Found";
+
+/* By */
+"by" = "by";
+
+/* Yesterday */
+"Yesterday" = "Yesterday";
+
+/* January */
+"January" = "January";
+
+/* February */
+"February" = "February";
+
+/* March */
+"March" = "March";
+
+/* April */
+"April" = "April";
+
+/* May */
+"May" = "May";
+
+/* June */
+"June" = "June";
+
+/* July */
+"July" = "July";
+
+/* August */
+"August" = "August";
+
+/* September */
+"September" = "September";
+
+/* October */
+"October" = "October";
+
+/* November */
+"November" = "November";
+
+/* December */
+"December" = "December";

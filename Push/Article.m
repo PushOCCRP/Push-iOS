@@ -7,6 +7,8 @@
 //
 
 #import "Article.h"
+#import "LanguageManager.h"
+#import <DateTools/DateTools.h>
 
 @interface Article ()
 
@@ -33,15 +35,17 @@
         self.images             = [aDecoder decodeObjectForKey:@"images"];
         self.videos             = [aDecoder decodeObjectForKey:@"videos"];
         self.author             = [aDecoder decodeObjectForKey:@"author"];
-        self.captions           = [aDecoder decodeObjectForKey:@"captions"];
         self.publishDate        = [formatter
                                    dateFromString:[aDecoder decodeObjectForKey:@"publish_date"]];
+        self.linkURL            = [aDecoder decodeObjectForKey:@"linkURL"];
         
         NSString * language = [aDecoder decodeObjectForKey:@"language"];
         if([language isEqualToString:@"en-Gb"]) {
             self.language = ENGLISH;
         } else if([language isEqualToString:@"ru"]){
             self.language = RUSSIAN;
+        } else if([language isEqualToString:@"az"]){
+            self.language = AZERBAIJANI;
         }
 
     }
@@ -52,7 +56,7 @@
     self = [super init];
     
     NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
-    formatter.dateFormat = @"%Y%m%d";
+    formatter.dateFormat = @"yyyyMMdd";
 
     self.headline           = jsonDictionary[@"headline"];
     self.descriptionText    = jsonDictionary[@"description"];
@@ -60,24 +64,64 @@
     self.images             = jsonDictionary[@"images"];
     self.videos             = jsonDictionary[@"videos"];
     self.author             = jsonDictionary[@"author"];
-    self.captions           = jsonDictionary[@"captions"];
     self.publishDate        = [formatter dateFromString:jsonDictionary[@"publish_date"]];
+    NSURL * url = [NSURL URLWithString:jsonDictionary[@"url"]];
+    self.linkURL            = url;
     
     NSString * language = jsonDictionary[@"language"];
-    if([language isEqualToString:@"en-Gb"]) {
+    if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"en"]) {
         self.language = ENGLISH;
-    } else if([language isEqualToString:@"ru"]){
+    } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"ru"]){
         self.language = RUSSIAN;
-    } else if([language isEqualToString:@"az"]){
+    } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"az"]){
         self.language = AZERBAIJANI;
     }
     
     return self;
 }
 
-- (NSURL*)linkURL {
-    NSURL * url = [NSURL URLWithString:@""];
-    return url;
+- (NSString*)dateByline
+{
+    NSDateFormatter * formatter = [self formatterForDate:NSDateFormatterLongStyle];
+    NSString * dateString = [formatter stringFromDate:self.publishDate];
+    return [self dateBylineForDateString:dateString];
+}
+
+- (NSString*)shortDateByline
+{
+    NSString * dateString;
+    if(self.publishDate.daysAgo > 1){
+        NSDateFormatter * formatter = [self formatterForDate:NSDateFormatterShortStyle];
+        dateString = [formatter stringFromDate:self.publishDate];
+    } else {
+        dateString = [[LanguageManager sharedManager] localizedRelativeDate:self.publishDate.timeAgoSinceNow];
+    }
+    
+    return [self dateBylineForDateString:dateString];
+}
+
+- (NSString*)dateBylineForDateString:(NSString*)dateString
+{
+    NSString * dateBylineText;
+    if(self.author && self.author.length > 0){
+        NSString * format = [[LanguageManager sharedManager] bylineFormatForLanguageShortCode:[LanguageManager sharedManager].languageShortCode];
+        dateBylineText = [NSString stringWithFormat:format, dateString, self.author];
+    } else {
+        dateBylineText = dateString;
+    }
+    
+    return dateBylineText;
+}
+
+- (NSDateFormatter*)formatterForDate:(NSDateFormatterStyle)formatterStyle
+{
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    formatter.timeStyle = NSDateFormatterNoStyle;
+    formatter.dateStyle = formatterStyle;
+    
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:[LanguageManager sharedManager].languageShortCode];
+    
+    return formatter;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -91,15 +135,18 @@
     [encoder encodeObject:self.images forKey:@"images"];
     [encoder encodeObject:self.videos forKey:@"videos"];
     [encoder encodeObject:self.author forKey:@"author"];
-    [encoder encodeObject:self.captions forKey:@"captions"];
     [encoder encodeObject:[formatter stringFromDate:self.publishDate] forKey:@"publish_date"];
-
+    [encoder encodeObject:self.linkURL forKey:@"linkURL"];
+    
+    NSString * languageKey = @"language";
     switch (self.language) {
         case ENGLISH:
-            [encoder encodeObject:@"en-GB" forKey:@"language"];
+            [encoder encodeObject:@"en-GB" forKey:languageKey];
             break;
         case RUSSIAN:
-            [encoder encodeObject:@"ru" forKey:@"language"];
+            [encoder encodeObject:@"ru" forKey:languageKey];
+        case AZERBAIJANI:
+            [encoder encodeObject:@"az" forKey:languageKey];
         default:
             break;
     }

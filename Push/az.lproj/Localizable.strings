@@ -27,3 +27,45 @@
 /* Search */
 "Search" = "Axtar";
 "NoResultsFound" = "Heç bir nəticə tapılmadı";
+
+/* By */
+"by" = ",";
+
+/* Yesterday */
+"Yesterday" = "Dünən";
+
+/* January */
+"January" = "yanvar";
+
+/* February */
+"February" = "fevral";
+
+/* March */
+"March" = "mart";
+
+/* April */
+"April" = "aprel";
+
+/* May */
+"May" = "may";
+
+/* June */
+"June" = "iyun";
+
+/* July */
+"July" = "iyul";
+
+/* August */
+"August" = "avqust";
+
+/* September */
+"September" = "sentyabr";
+
+/* October */
+"October" = "oktyabr";
+
+/* November */
+"November" = "noyabr";
+
+/* December */
+"December" = "dekabr";

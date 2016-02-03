@@ -9,13 +9,18 @@
 #import "ArticleViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <Masonry/Masonry.h>
+#import "LanguageManager.h"
 #import "YouTubePlayerViewController.h"
+#import "SettingsManager.h"
+
+#import "NSMutableAttributedString+HTML.h"
 
 @interface ArticleViewController ()
 
 @property (nonatomic, retain) UIImageView * image;
 @property (nonatomic, retain) UIButton * videoPlayerButton;
 @property (nonatomic, retain) UILabel * caption;
+@property (nonatomic, retain) UILabel * date;
 @property (nonatomic, retain) UILabel * headline;
 @property (nonatomic, retain) UITextView * body;
 
@@ -88,6 +93,8 @@
     self.caption.numberOfLines = 3;
     self.caption.lineBreakMode = NSLineBreakByWordWrapping;
     
+    self.date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
+    
     self.headline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
     self.headline.numberOfLines = 3;
     self.headline.lineBreakMode = NSLineBreakByWordWrapping;
@@ -96,11 +103,13 @@
     self.body.delegate = self;
     self.body.editable = NO;
     self.body.scrollEnabled = NO;
+    self.body.dataDetectorTypes = UIDataDetectorTypeLink;
     
     // Add the content views to the main view
     [self.contentView addSubview:self.image];
     [self.contentView addSubview:self.videoPlayerButton];
     [self.contentView addSubview:self.caption];
+    [self.contentView addSubview:self.date];
     [self.contentView addSubview:self.headline];
     [self.contentView addSubview:self.body];
     
@@ -140,8 +149,14 @@
         make.right.equalTo(self.caption.superview.mas_right).with.offset(-padding.right);
     }];
     
-    [self.headline mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.date mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.caption.mas_bottom).with.offset(padding.top);
+        make.left.equalTo(self.date.superview.mas_left).with.offset(padding.left);
+        make.right.equalTo(self.date.superview.mas_right).with.offset(padding.right);
+    }];
+    
+    [self.headline mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.date.mas_bottom).with.offset(padding.top);
         make.left.equalTo(self.headline.superview.mas_left).with.offset(padding.left);
         make.right.equalTo(self.headline.superview.mas_right).with.offset(-padding.right);
     }];
@@ -187,12 +202,16 @@
     }
     
     //Set image caption, hide if there is none.
-    if(self.article.captions.count > 0){
-        self.caption.text = self.article.captions[0];
+    if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
+        self.caption.text = [self.article.images[0] valueForKey:@"caption"];
         self.caption.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
     } else {
         self.caption.hidden = YES;
     }
+    
+    //Set date
+    self.date.text = self.article.dateByline;
+    self.date.font = [UIFont fontWithName:@"TrebuchetMS" size:13.0f];
     
     //Set the headline
     self.headline.text = self.article.headline;
@@ -201,13 +220,13 @@
     //Set the body using html for the formatting
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 7.0f;
-
-    NSMutableAttributedString * bodyAttributedText =[[NSMutableAttributedString alloc] initWithData:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
-                                                                              options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                                                                        NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-                                                                   documentAttributes:nil error:nil];
-    [bodyAttributedText setAttributes:@{NSParagraphStyleAttributeName: paragraphStyle} range:NSMakeRange(0, bodyAttributedText.string.length)];
-
+    
+    NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
+                                                      initWithHTML:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
+                                                      baseURL:[SettingsManager sharedManager].cmsBaseUrl
+                                                      documentAttributes:nil];
+    
+    [bodyAttributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, bodyAttributedText.string.length)];
     self.body.attributedText = bodyAttributedText;
     self.body.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
 }

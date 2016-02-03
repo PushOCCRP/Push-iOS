@@ -1,58 +1,47 @@
 PODS:
-  - AFNetworking (2.6.2):
-    - AFNetworking/NSURLConnection (= 2.6.2)
-    - AFNetworking/NSURLSession (= 2.6.2)
-    - AFNetworking/Reachability (= 2.6.2)
-    - AFNetworking/Security (= 2.6.2)
-    - AFNetworking/Serialization (= 2.6.2)
-    - AFNetworking/UIKit (= 2.6.2)
-  - AFNetworking/NSURLConnection (2.6.2):
+  - AFNetworking (3.0.4):
+    - AFNetworking/NSURLSession (= 3.0.4)
+    - AFNetworking/Reachability (= 3.0.4)
+    - AFNetworking/Security (= 3.0.4)
+    - AFNetworking/Serialization (= 3.0.4)
+    - AFNetworking/UIKit (= 3.0.4)
+  - AFNetworking/NSURLSession (3.0.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.2):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.2)
-  - AFNetworking/Security (2.6.2)
-  - AFNetworking/Serialization (2.6.2)
-  - AFNetworking/UIKit (2.6.2):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.0.4)
+  - AFNetworking/Security (3.0.4)
+  - AFNetworking/Serialization (3.0.4)
+  - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
-  - Bolts (1.5.0):
-    - Bolts/AppLinks (= 1.5.0)
-    - Bolts/Tasks (= 1.5.0)
-  - Bolts/AppLinks (1.5.0):
+  - Bolts (1.6.0):
+    - Bolts/AppLinks (= 1.6.0)
+    - Bolts/Tasks (= 1.6.0)
+  - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.5.0)
-  - Crashlytics (3.4.1):
-    - Fabric (~> 1.6.0)
-  - Fabric (1.6.1)
-  - FBSDKCoreKit (4.8.0):
-    - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc (= 4.8.0)
-    - FBSDKCoreKit/no-arc (= 4.8.0)
-  - FBSDKCoreKit/arc (4.8.0):
-    - Bolts (~> 1.1)
-  - FBSDKCoreKit/no-arc (4.8.0):
-    - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.8.0):
+  - Bolts/Tasks (1.6.0)
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
+  - DateTools (1.7.0)
+  - Fabric (1.6.4)
+  - FBSDKCoreKit (4.9.1):
+    - Bolts (~> 1.5)
+  - FBSDKLoginKit (4.9.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.8.0):
+  - FBSDKShareKit (4.9.1):
     - FBSDKCoreKit
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
-  - Masonry (0.6.3)
-  - MBProgressHUD (0.9.1)
+  - Masonry (0.6.4)
+  - MBProgressHUD (0.9.2)
   - SVPullToRefresh (0.4.1)
   - youtube-ios-player-helper (0.1.5)
 
 DEPENDENCIES:
   - AFNetworking
   - Crashlytics
+  - DateTools (from `~/Repositories/DateTools`)
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -63,18 +52,25 @@ DEPENDENCIES:
   - SVPullToRefresh
   - youtube-ios-player-helper (~> 0.1.5)
 
+EXTERNAL SOURCES:
+  DateTools:
+    :path: "~/Repositories/DateTools"
+
 SPEC CHECKSUMS:
-  AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
-  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
-  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
-  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
-  FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
-  FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
-  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
+  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
+  DateTools: e24f6e774ee6ac7295db87150068ff7acfab69e5
+  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
+  FBSDKCoreKit: aee20b6d9855f15b618d4fddd1a5ad45f5a4a59d
+  FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
+  FBSDKShareKit: b8c8ef0ed173f9fc1b3c8df384a0202ce53008d4
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
-  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
-  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   youtube-ios-player-helper: 8706bb155ffee74fbe5f2f5cf41c2dafe60dc155
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 6300bc3b04d44ebb2cb8f27e21119763dd24d8b2
+
+COCOAPODS: 1.0.0.beta.2

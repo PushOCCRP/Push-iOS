@@ -7,6 +7,8 @@
 //
 
 #import "PlayerNavigationBarView.h"
+#import "LanguageManager.h"
+
 @interface PlayerNavigationBarView()
 
 @property (nonatomic, retain) IBOutlet UIButton * backButton;
@@ -18,6 +20,8 @@
 - (instancetype)init
 {
     self = [[NSBundle mainBundle] loadNibNamed:@"PlayerNavigationBarView" owner:self options:nil].firstObject;
+    
+    [self.backButton setTitle:MYLocalizedString(@"Back", @"back button") forState:UIControlStateNormal];
     
     return self;
 }

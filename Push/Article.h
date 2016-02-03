@@ -24,9 +24,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, retain) NSDate * publishDate;
 @property (nonatomic, retain) NSString * author;
 @property (nonatomic, assign) ArticleLanguage language;
-@property (nonatomic, retain) NSArray * captions;
+@property (nonatomic, retain) NSURL * linkURL;
 
-@property (nonatomic, readonly) NSURL * linkURL;
+@property (nonatomic, readonly) NSString * dateByline;
+@property (nonatomic, readonly) NSString * shortDateByline;
 
 + (instancetype)articleFromDictionary:(NSDictionary *)jsonDictionary;
 - (instancetype)initWithDictionary:(NSDictionary *)jsonDictionary;

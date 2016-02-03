@@ -14,5 +14,6 @@
 @property (nonatomic, retain) Article * article;
 @property IBOutlet UILabel * headlineLabel;
 @property IBOutlet UIImageView * articleImageView;
+@property IBOutlet UILabel * dateBylinesLabel;
 
 @end

@@ -13,5 +13,6 @@
 
 @property (nonatomic, readonly) NSString * pushUrl;
 @property (nonatomic, readonly) NSString * hockeyAppId;
+@property (nonatomic, readonly) NSURL * cmsBaseUrl;
 
 @end
