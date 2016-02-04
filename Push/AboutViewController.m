@@ -6,6 +6,7 @@
 //  Copyright © 2016 OCCRP. All rights reserved.
 //
 
+#import "AnalyticsManager.h"
 #import "AboutViewController.h"
 #import <Masonry/Masonry.h>
 #import "LanguageManager.h"
@@ -22,6 +23,18 @@
     [super viewDidLoad];
     [self setupViews];
     [self loadAboutText];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [AnalyticsManager logContentViewWithName:@"About Page Appeared" contentType:@"Navigation"
+                                   contentId:nil customAttributes:nil];
+    [AnalyticsManager startTimerForContentViewWithObject:self name:@"About Page Viewed Time" contentType:@"About Page View Time" contentId:nil customAttributes:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"About Page Viewed Time"];
 }
 
 - (void)didReceiveMemoryWarning {

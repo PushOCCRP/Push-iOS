@@ -5,7 +5,7 @@
 //  Created by Christopher Guess on 1/20/16.
 //  Copyright © 2016 OCCRP. All rights reserved.
 //
-
+#import "AnalyticsManager.h"
 #import "VideoPlayerViewController.h"
 #import <Masonry/Masonry.h>
 
@@ -36,6 +36,18 @@
     self.showingControls = YES;
     [self startHideControlTimer];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [AnalyticsManager logContentViewWithName:@"Video Player Appeared" contentType:@"Navigation"
+                                   contentId:self.videoId customAttributes:nil];
+    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Video Viewed Time" contentType:@"Video View Time" contentId:self.videoId customAttributes:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Video Viewed Time"];
 }
 
 - (BOOL)shouldAutorotate

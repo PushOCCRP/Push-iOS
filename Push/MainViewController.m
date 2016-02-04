@@ -22,7 +22,7 @@
 
 #import "AboutBarButtonView.h"
 
-#import <Crashlytics/Crashlytics.h>
+#import "AnalyticsManager.h"
 
 // These are also set in the respective nibs, so if you change it make sure you change it there too
 static NSString * featuredCellIdentifier = @"FEATURED_ARTICLE_STORY_CELL";
@@ -48,13 +48,24 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     __weak typeof(self) weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
+        [AnalyticsManager logCustomEventWithName:@"Pulled To Refresh Home Screen" customAttributes:nil];
         [weakSelf loadArticles];
     }];
     
     [self loadInitialArticles];
     
     // TODO: Track the user action that is important for you.
-    [Answers logContentViewWithName:@"Article List" contentType:nil contentId:@"article_list" customAttributes:nil];
+    [AnalyticsManager logContentViewWithName:@"Article List" contentType:nil contentId:nil customAttributes:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article List Timer"];
 }
 
 - (void)setupNavigationBar
@@ -160,12 +171,18 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)aboutButtonTapped
 {
+    [AnalyticsManager logContentViewWithName:@"About Tapped" contentType:@"Navigation"
+                          contentId:nil customAttributes:nil];
+
     AboutViewController * aboutViewController = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:aboutViewController animated:YES];
 }
 
 - (void)searchButtonTapped
 {
+    [AnalyticsManager logContentViewWithName:@"Search Tapped" contentType:@"Navigation"
+                          contentId:nil customAttributes:nil];
+
     SearchViewController * searchViewController = [[SearchViewController alloc] init];
     [self.navigationController pushViewController:searchViewController animated:YES];
 }
@@ -174,8 +191,14 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)languageButtonTapped
 {
     if(!self.languagePickerView){
+        [AnalyticsManager logContentViewWithName:@"Language Button Tapped and Shown" contentType:@"Settings"
+                              contentId:nil customAttributes:nil];
+
         [self showLanguagePicker];
     } else {
+        [AnalyticsManager logContentViewWithName:@"Language Button Tapped and Hidden" contentType:@"Settings"
+                              contentId:nil customAttributes:nil];
+
         [self hideLanguagePicker];
     }
 }
@@ -184,6 +207,9 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)languagePickerDidChooseLanguage:(NSString *)language
 {
+    [AnalyticsManager logContentViewWithName:@"Language Chosen" contentType:@"Settings"
+                          contentId:language customAttributes:@{@"language":language}];
+
     [[LanguageManager sharedManager] setLanguage:language];
     [self hideLanguagePicker];
     
@@ -246,12 +272,20 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
     
     ArticlePageViewController * articlePageViewController = [[ArticlePageViewController alloc] initWithArticles:self.articles];
     
-    ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:self.articles[indexPath.row]];
+    Article * article = self.articles[indexPath.row];
+
+    ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:article];
     [articlePageViewController setViewControllers:@[articleViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    [AnalyticsManager logContentViewWithName:@"Article List Item Tapped" contentType:@"Navigation"
+                          contentId:article.description customAttributes:article.trackingProperties];
+    
+    
     [self.navigationController pushViewController:articlePageViewController animated:YES];
 }
 

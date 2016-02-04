@@ -28,6 +28,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, readonly) NSString * dateByline;
 @property (nonatomic, readonly) NSString * shortDateByline;
+@property (nonatomic, readonly) NSDictionary * trackingProperties;
 
 + (instancetype)articleFromDictionary:(NSDictionary *)jsonDictionary;
 - (instancetype)initWithDictionary:(NSDictionary *)jsonDictionary;

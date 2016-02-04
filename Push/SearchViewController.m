@@ -6,6 +6,7 @@
 //  Copyright © 2015 OCCRP. All rights reserved.
 //
 
+#import "AnalyticsManager.h"
 #import "SearchViewController.h"
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -37,9 +38,18 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [AnalyticsManager logContentViewWithName:@"Search Page Appeared" contentType:@"Navigation"
+                                   contentId:nil customAttributes:nil];
+    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Search Page Viewed Time" contentType:@"Search Page View Time" contentId:nil customAttributes:nil];
+
     if(!self.articles || self.articles.count < 1){
         [self.searchBar becomeFirstResponder];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Search Page Viewed Time"];
 }
 
 - (void)setupSearchBar
@@ -87,6 +97,8 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    [AnalyticsManager logSearchWithQuery:searchBar.text customAttributes:nil];
+    
     [searchBar resignFirstResponder];
 
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -126,9 +138,11 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
-    
-    
-    ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:self.articles[indexPath.row]];
+    Article * article = self.articles[indexPath.row];
+    [AnalyticsManager logContentViewWithName:@"Search List Item Tapped" contentType:@"Navigation"
+                                   contentId:article.description customAttributes:article.trackingProperties];
+
+    ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:article];
     [self.navigationController pushViewController:articleViewController animated:YES];
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A65E7CBE3E0888A2D523B04 /* libPods-Push.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D35D0B63E1C02262AEF5F5 /* libPods-Push.a */; };
+		9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3910521C638E130061E094 /* AnalyticsManager.m */; };
 		9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B01C624D2800D537EF /* PlayButtonView.m */; };
 		9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B91C62624100D537EF /* PlayButton.m */; };
 		9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1E91C62756E00D537EF /* PauseButton.m */; };
@@ -85,6 +86,8 @@
 		03D35D0B63E1C02262AEF5F5 /* libPods-Push.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Push.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
 		6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
+		9D3910511C638E130061E094 /* AnalyticsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsManager.h; sourceTree = "<group>"; };
+		9D3910521C638E130061E094 /* AnalyticsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsManager.m; sourceTree = "<group>"; };
 		9D69C1AF1C624D2800D537EF /* PlayButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonView.h; sourceTree = "<group>"; };
 		9D69C1B01C624D2800D537EF /* PlayButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonView.m; sourceTree = "<group>"; };
 		9D69C1B81C62624100D537EF /* PlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButton.h; sourceTree = "<group>"; };
@@ -206,6 +209,15 @@
 				03D35D0B63E1C02262AEF5F5 /* libPods-Push.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D3910501C638DFB0061E094 /* AnalyticsManager */ = {
+			isa = PBXGroup;
+			children = (
+				9D3910511C638E130061E094 /* AnalyticsManager.h */,
+				9D3910521C638E130061E094 /* AnalyticsManager.m */,
+			);
+			name = AnalyticsManager;
 			sourceTree = "<group>";
 		};
 		9D69C1A81C624C8100D537EF /* Play */ = {
@@ -359,6 +371,7 @@
 		9DCC79841BF375C000F28F18 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				9D3910501C638DFB0061E094 /* AnalyticsManager */,
 				9DBFF9D01C50064000ABCD2C /* SettingsManager */,
 				9DF9B0F01C41196A00EA3BFA /* LanguageManager */,
 				9DCC79861BF375EE00F28F18 /* PushSyncManager */,
@@ -858,6 +871,7 @@
 			files = (
 				9D8D33371C610C5E0053FE3E /* NSMutableAttributedString+HTML.m in Sources */,
 				9DAC1DF41C57048E00126A83 /* AboutViewController.m in Sources */,
+				9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */,
 				9DBFF9E21C50283900ABCD2C /* VideoPlayerViewController.m in Sources */,
 				9DD4180B1C46F131000D6DC8 /* LanguagePickerView.m in Sources */,
 				9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */,

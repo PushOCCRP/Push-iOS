@@ -6,6 +6,8 @@
 //  Copyright © 2015 OCCRP. All rights reserved.
 //
 
+#import "AnalyticsManager.h"
+
 #import "ArticleViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <Masonry/Masonry.h>
@@ -14,6 +16,7 @@
 #import "SettingsManager.h"
 
 #import "NSMutableAttributedString+HTML.h"
+
 
 @interface ArticleViewController ()
 
@@ -53,6 +56,23 @@
     [self setupScrollView];
     [self setupContentView];
     [self setContraints];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article Viewed Time" contentType:@"Article View Time"
+                                               contentId:self.article.description customAttributes:self.article.trackingProperties];
+    [AnalyticsManager startTimerForContentViewWithObject:self name:self.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];
+    
+    [AnalyticsManager logContentViewWithName:@"Article List Appeared" contentType:@"Navigation"
+                          contentId:self.article.description customAttributes:self.article.trackingProperties];
+    [AnalyticsManager logContentViewWithName:self.article.headline contentType:@"Article View" contentId:nil customAttributes:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article Viewed Time"];
+    [AnalyticsManager endTimerForContentViewWithObject:self andName:self.article.headline];
 }
 
 - (void)setShareButton {
@@ -246,6 +266,9 @@
 
 - (void)videoButtonTapped
 {
+    [AnalyticsManager logContentViewWithName:@"Video Button Tapped" contentType:@"Navigation"
+                                   contentId:self.article.description customAttributes:self.article.trackingProperties];
+
     YouTubePlayerViewController * youTubePlayerViewController = [[YouTubePlayerViewController alloc] initWithVideoId:self.article.videos.firstObject[@"youtube_id"]];
     youTubePlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     youTubePlayerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

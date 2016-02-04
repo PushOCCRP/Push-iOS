@@ -152,5 +152,21 @@
     }
 }
 
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"%@ - %@", self.headline, self.linkURL.absoluteString];
+}
+
+/**
+ *  Used for tracking article in Crashalytics
+ *
+ *  @return a dictionary of properties representing this article for Crashalytics tracking
+ */
+- (NSDictionary*)trackingProperties
+{
+    return @{@"Article Headline":self.headline,
+             @"Article Url":self.linkURL.absoluteString,
+             @"Article Description":self.description};
+}
 
 @end
