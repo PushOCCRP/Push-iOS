@@ -23,12 +23,12 @@ PODS:
   - Crashlytics (3.6.0):
     - Fabric (~> 1.6.3)
   - DateTools (1.7.0)
-  - Fabric (1.6.4)
-  - FBSDKCoreKit (4.9.1):
+  - Fabric (1.6.5)
+  - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
-  - FBSDKLoginKit (4.9.1):
+  - FBSDKLoginKit (4.10.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.9.1):
+  - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
@@ -46,7 +46,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - HockeySDK (~> 3.8.5)
+  - HockeySDK
   - Masonry
   - MBProgressHUD (~> 0.9.1)
   - SVPullToRefresh
@@ -61,16 +61,16 @@ SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   DateTools: e24f6e774ee6ac7295db87150068ff7acfab69e5
-  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
-  FBSDKCoreKit: aee20b6d9855f15b618d4fddd1a5ad45f5a4a59d
-  FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
-  FBSDKShareKit: b8c8ef0ed173f9fc1b3c8df384a0202ce53008d4
+  Fabric: 338ffd3c2afcab120638907b4251189de9ad17b3
+  FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
+  FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
+  FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   youtube-ios-player-helper: 8706bb155ffee74fbe5f2f5cf41c2dafe60dc155
 
-PODFILE CHECKSUM: 6300bc3b04d44ebb2cb8f27e21119763dd24d8b2
+PODFILE CHECKSUM: d5eec3a557806273e46a248dfdbedd29051ec42c
 
-COCOAPODS: 1.0.0.beta.2
+COCOAPODS: 1.0.0.beta.3

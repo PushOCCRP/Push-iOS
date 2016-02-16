@@ -24,7 +24,7 @@ func snapshot(name: String, waitForLoadingIndicator: Bool = false) {
     Snapshot.snapshot(name, waitForLoadingIndicator: waitForLoadingIndicator)
 }
 
-class Snapshot: NSObject {
+@objc class Snapshot: NSObject {
 
     class func setupSnapshot(app: XCUIApplication) {
         setLanguage(app)

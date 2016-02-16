@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		5A65E7CBE3E0888A2D523B04 /* libPods-Push.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D35D0B63E1C02262AEF5F5 /* libPods-Push.a */; };
 		9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3910521C638E130061E094 /* AnalyticsManager.m */; };
+		9D51C6151C6CDC8600BF434B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D51C6141C6CDC8600BF434B /* SnapshotHelper.swift */; };
+		9D6123B61C709C740015F49B /* icon 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6123B31C709C740015F49B /* icon 120x120.png */; };
+		9D6123B71C709C740015F49B /* icon 152x152.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6123B41C709C740015F49B /* icon 152x152.png */; };
+		9D6123B81C709C740015F49B /* icon 167x167.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6123B51C709C740015F49B /* icon 167x167.png */; };
+		9D6123BB1C70BB410015F49B /* launch-screen-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6123B91C70BB410015F49B /* launch-screen-logo@2x.png */; };
+		9D6123BC1C70BB410015F49B /* launch-screen-logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6123BA1C70BB410015F49B /* launch-screen-logo@3x.png */; };
 		9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B01C624D2800D537EF /* PlayButtonView.m */; };
 		9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B91C62624100D537EF /* PlayButton.m */; };
 		9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1E91C62756E00D537EF /* PauseButton.m */; };
@@ -66,6 +72,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9D51C5FB1C6CB0F900BF434B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DE4A0F61BE2531D00B69170 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9DE4A0FD1BE2531D00B69170;
+			remoteInfo = Push;
+		};
 		9DE4A1181BE2531F00B69170 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9DE4A0F61BE2531D00B69170 /* Project object */;
@@ -88,6 +101,14 @@
 		6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
 		9D3910511C638E130061E094 /* AnalyticsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsManager.h; sourceTree = "<group>"; };
 		9D3910521C638E130061E094 /* AnalyticsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsManager.m; sourceTree = "<group>"; };
+		9D51C5F61C6CB0F900BF434B /* Meydan TVUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Meydan TVUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D51C6131C6CDC8500BF434B /* PushUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9D51C6141C6CDC8600BF434B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		9D6123B31C709C740015F49B /* icon 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 120x120.png"; sourceTree = "<group>"; };
+		9D6123B41C709C740015F49B /* icon 152x152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 152x152.png"; sourceTree = "<group>"; };
+		9D6123B51C709C740015F49B /* icon 167x167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 167x167.png"; sourceTree = "<group>"; };
+		9D6123B91C70BB410015F49B /* launch-screen-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-screen-logo@2x.png"; sourceTree = "<group>"; };
+		9D6123BA1C70BB410015F49B /* launch-screen-logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-screen-logo@3x.png"; sourceTree = "<group>"; };
 		9D69C1AF1C624D2800D537EF /* PlayButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonView.h; sourceTree = "<group>"; };
 		9D69C1B01C624D2800D537EF /* PlayButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonView.m; sourceTree = "<group>"; };
 		9D69C1B81C62624100D537EF /* PlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButton.h; sourceTree = "<group>"; };
@@ -175,9 +196,17 @@
 		9DFE931C1C5172F400780D78 /* icon-appstore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-appstore.png"; sourceTree = "<group>"; };
 		9DFE931E1C51734A00780D78 /* icon-spotlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-spotlight@2x.png"; sourceTree = "<group>"; };
 		9DFE931F1C51734A00780D78 /* icon-spotlight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-spotlight@3x.png"; sourceTree = "<group>"; };
+		CB9ED4E8FC116D56F6744698 /* libPods-Push-Meydan TVUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Push-Meydan TVUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9D51C5F31C6CB0F900BF434B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DE4A0FB1BE2531D00B69170 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				03D35D0B63E1C02262AEF5F5 /* libPods-Push.a */,
+				CB9ED4E8FC116D56F6744698 /* libPods-Push-Meydan TVUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -416,6 +446,7 @@
 				9DE4A0FE1BE2531E00B69170 /* Push.app */,
 				9DE4A1171BE2531F00B69170 /* PushTests.xctest */,
 				9DE4A1221BE2531F00B69170 /* PushUITests.xctest */,
+				9D51C5F61C6CB0F900BF434B /* Meydan TVUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -462,8 +493,10 @@
 		9DE4A1251BE2531F00B69170 /* PushUITests */ = {
 			isa = PBXGroup;
 			children = (
+				9D51C6141C6CDC8600BF434B /* SnapshotHelper.swift */,
 				9DE4A1261BE2531F00B69170 /* PushUITests.m */,
 				9DE4A1281BE2531F00B69170 /* Info.plist */,
+				9D51C6131C6CDC8500BF434B /* PushUITests-Bridging-Header.h */,
 			);
 			path = PushUITests;
 			sourceTree = "<group>";
@@ -605,6 +638,8 @@
 		9DFE930E1C51651500780D78 /* logo */ = {
 			isa = PBXGroup;
 			children = (
+				9D6123B91C70BB410015F49B /* launch-screen-logo@2x.png */,
+				9D6123BA1C70BB410015F49B /* launch-screen-logo@3x.png */,
 				9DFE930F1C51652B00780D78 /* logo@1x.png */,
 				9DFE93101C51652B00780D78 /* logo@2x.png */,
 				9DFE93111C51652B00780D78 /* logo@3x.png */,
@@ -615,6 +650,9 @@
 		9DFE93151C5172E200780D78 /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				9D6123B31C709C740015F49B /* icon 120x120.png */,
+				9D6123B41C709C740015F49B /* icon 152x152.png */,
+				9D6123B51C709C740015F49B /* icon 167x167.png */,
 				9DFE931E1C51734A00780D78 /* icon-spotlight@2x.png */,
 				9DFE931F1C51734A00780D78 /* icon-spotlight@3x.png */,
 				9DFE931C1C5172F400780D78 /* icon-appstore.png */,
@@ -637,6 +675,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9D51C5F51C6CB0F900BF434B /* Meydan TVUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D51C5FF1C6CB0F900BF434B /* Build configuration list for PBXNativeTarget "Meydan TVUITests" */;
+			buildPhases = (
+				9D51C5F21C6CB0F900BF434B /* Sources */,
+				9D51C5F31C6CB0F900BF434B /* Frameworks */,
+				9D51C5F41C6CB0F900BF434B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9D51C5FC1C6CB0F900BF434B /* PBXTargetDependency */,
+			);
+			name = "Meydan TVUITests";
+			productName = "Meydan TVUITests";
+			productReference = 9D51C5F61C6CB0F900BF434B /* Meydan TVUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		9DE4A0FD1BE2531D00B69170 /* Push */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DE4A12B1BE2531F00B69170 /* Build configuration list for PBXNativeTarget "Push" */;
@@ -701,11 +757,22 @@
 		9DE4A0F61BE2531D00B69170 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = OCCRP;
 				TargetAttributes = {
+					9D51C5F51C6CB0F900BF434B = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 9DE4A0FD1BE2531D00B69170;
+					};
 					9DE4A0FD1BE2531D00B69170 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 9H5K42BU9H;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					9DE4A1161BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
@@ -735,17 +802,27 @@
 				9DE4A0FD1BE2531D00B69170 /* Push */,
 				9DE4A1161BE2531F00B69170 /* PushTests */,
 				9DE4A1211BE2531F00B69170 /* PushUITests */,
+				9D51C5F51C6CB0F900BF434B /* Meydan TVUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9D51C5F41C6CB0F900BF434B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DE4A0FC1BE2531D00B69170 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9DBFF9CF1C50031600ABCD2C /* SecretKeys.plist in Resources */,
+				9D6123B71C709C740015F49B /* icon 152x152.png in Resources */,
 				9DCC79831BF374A900F28F18 /* Podfile in Resources */,
+				9D6123B61C709C740015F49B /* icon 120x120.png in Resources */,
 				9DBFF9D81C501B8400ABCD2C /* play@2x.png in Resources */,
 				9DDBE7051C46E16700D2A7E5 /* LaunchScreen.storyboard in Resources */,
 				9DE4A1451BE2637F00B69170 /* ArticleTableViewCell.xib in Resources */,
@@ -760,6 +837,7 @@
 				9DFE931D1C5172F400780D78 /* icon-appstore.png in Resources */,
 				9DFE93141C51652B00780D78 /* logo@3x.png in Resources */,
 				9DFE93201C51734A00780D78 /* icon-spotlight@2x.png in Resources */,
+				9D6123B81C709C740015F49B /* icon 167x167.png in Resources */,
 				9DBFF9D91C501B8400ABCD2C /* play@3x.png in Resources */,
 				9DFE930A1C51564A00780D78 /* PlayerNavigationBarView.xib in Resources */,
 				9DBFF9E81C50402F00ABCD2C /* Assets.bundle in Resources */,
@@ -769,6 +847,8 @@
 				9DE4A13F1BE260FB00B69170 /* FeaturedArticleTableViewCell.xib in Resources */,
 				9DE4A10E1BE2531E00B69170 /* Assets.xcassets in Resources */,
 				9DBFF9EE1C5048BB00ABCD2C /* PlayerControlBarView.xib in Resources */,
+				9D6123BB1C70BB410015F49B /* launch-screen-logo@2x.png in Resources */,
+				9D6123BC1C70BB410015F49B /* launch-screen-logo@3x.png in Resources */,
 				9DFE93191C5172EF00780D78 /* icon@1x.png in Resources */,
 				9DFE93211C51734A00780D78 /* icon-spotlight@3x.png in Resources */,
 			);
@@ -865,6 +945,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9D51C5F21C6CB0F900BF434B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DE4A0FA1BE2531D00B69170 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -911,12 +998,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DE4A1271BE2531F00B69170 /* PushUITests.m in Sources */,
+				9D51C6151C6CDC8600BF434B /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9D51C5FC1C6CB0F900BF434B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9DE4A0FD1BE2531D00B69170 /* Push */;
+			targetProxy = 9D51C5FB1C6CB0F900BF434B /* PBXContainerItemProxy */;
+		};
 		9DE4A1191BE2531F00B69170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9DE4A0FD1BE2531D00B69170 /* Push */;
@@ -944,6 +1037,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9D51C5FD1C6CB0F900BF434B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				INFOPLIST_FILE = "Meydan TVUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "occrp.Meydan-TVUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Meydan TVUITests/Meydan TVUITests-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_TARGET_NAME = Push;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		9D51C5FE1C6CB0F900BF434B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				INFOPLIST_FILE = "Meydan TVUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "occrp.Meydan-TVUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Meydan TVUITests/Meydan TVUITests-Swift.h";
+				TEST_TARGET_NAME = Push;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		9DE4A1291BE2531F00B69170 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1033,14 +1161,16 @@
 			baseConfigurationReference = 56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				CURRENT_PROJECT_VERSION = 29;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 62;
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "$(PROFILE_UUID)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1049,14 +1179,16 @@
 			baseConfigurationReference = 6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				CURRENT_PROJECT_VERSION = 29;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 62;
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "$(PROFILE_UUID)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1087,10 +1219,13 @@
 		9DE4A1321BE2531F00B69170 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = Push;
 				USES_XCTRUNNER = YES;
 			};
@@ -1099,10 +1234,12 @@
 		9DE4A1331BE2531F00B69170 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				TEST_TARGET_NAME = Push;
 				USES_XCTRUNNER = YES;
 			};
@@ -1111,6 +1248,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9D51C5FF1C6CB0F900BF434B /* Build configuration list for PBXNativeTarget "Meydan TVUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D51C5FD1C6CB0F900BF434B /* Debug */,
+				9D51C5FE1C6CB0F900BF434B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9DE4A0F91BE2531D00B69170 /* Build configuration list for PBXProject "Push" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

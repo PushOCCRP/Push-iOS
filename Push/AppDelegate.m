@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "SettingsManager.h"
 #import "AnalyticsManager.h"
+#import "LanguageManager.h"
 
 @import HockeySDK;
 
@@ -30,7 +31,9 @@
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 
-
+    // Intialize the language manager so everything's set correctly from launch
+    [LanguageManager sharedManager];
+    
     // Override point for customization after application launch.
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     

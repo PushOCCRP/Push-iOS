@@ -136,7 +136,13 @@ static NSString * languageKey = @"push_language_key";
 {
     NSString * language = [[NSUserDefaults standardUserDefaults] objectForKey:languageKey];
     if(!language || language.length < 1){
-        language = self.availableLanguages.firstObject;
+        //Check for the current language
+        NSString * preferredLanguage = [[NSLocale preferredLanguages][0] substringToIndex:2];
+        if([[[self languageDictionary] allKeys] containsObject:preferredLanguage]){
+            language = [self languageDictionary][preferredLanguage];
+        } else {
+            language = self.availableLanguages.firstObject;
+        }
     }
     return language;
 }

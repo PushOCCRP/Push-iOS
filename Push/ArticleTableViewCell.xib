@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="83" id="eqr-CH-HuE"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="This is an incrediably, long, monotonouse headline that is also containing bad spelling. Hi I'm a second Headline!!!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-vA-vaH">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="This is an incrediably, long, monotonouse headline that is also containing bad spelling. Hi I'm a second Headline!!!" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-vA-vaH">
                         <rect key="frame" x="117" y="2" width="342" height="73"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="342" id="UWM-4d-qe2"/>
@@ -37,7 +37,7 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="0wU-cT-0Ek"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
