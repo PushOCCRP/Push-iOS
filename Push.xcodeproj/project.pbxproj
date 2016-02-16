@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		759D9719B4C5EEBCDCF029D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B78C631CA26E450459BEC3F /* libPods.a */; };
+		976A6BF2E443589B2F1A08FF /* libPods-Push.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C5C34FBFF27CFE8D3A6E95A /* libPods-Push.a */; };
 		9DA572CF1BF87FDC00A8C439 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DA572CE1BF87FDC00A8C439 /* logo.png */; };
 		9DC0E14C1BF62B08004A47D4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0E14B1BF62B08004A47D4 /* SearchViewController.m */; };
 		9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC797C1BF3639900F28F18 /* MainViewController.m */; };
@@ -48,9 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B78C631CA26E450459BEC3F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E6CD016E3789A2EEA3DDA4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		40AAA7836813F16CB9C6DB1D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		0926CC56F50AA6626A03ED0B /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
+		0C5C34FBFF27CFE8D3A6E95A /* libPods-Push.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Push.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24F2E853059F89D4FF639296 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
 		9DA572CE1BF87FDC00A8C439 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Assets/logo.png; sourceTree = SOURCE_ROOT; };
 		9DC0E14A1BF62B08004A47D4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9DC0E14B1BF62B08004A47D4 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				759D9719B4C5EEBCDCF029D9 /* libPods.a in Frameworks */,
+				976A6BF2E443589B2F1A08FF /* libPods-Push.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,21 +114,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B861B023F3372455BFA593D /* Pods */ = {
+		63466FA33ECDD9760A844C75 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3E6CD016E3789A2EEA3DDA4D /* Pods.debug.xcconfig */,
-				40AAA7836813F16CB9C6DB1D /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		1D0513828D6208D7877AEC88 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2B78C631CA26E450459BEC3F /* libPods.a */,
+				0C5C34FBFF27CFE8D3A6E95A /* libPods-Push.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A25900A75D52D1022832E5A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0926CC56F50AA6626A03ED0B /* Pods-Push.debug.xcconfig */,
+				24F2E853059F89D4FF639296 /* Pods-Push.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		9DA572CD1BF87FCE00A8C439 /* Assets */ = {
@@ -173,8 +173,8 @@
 				9DE4A11A1BE2531F00B69170 /* PushTests */,
 				9DE4A1251BE2531F00B69170 /* PushUITests */,
 				9DE4A0FF1BE2531E00B69170 /* Products */,
-				0B861B023F3372455BFA593D /* Pods */,
-				1D0513828D6208D7877AEC88 /* Frameworks */,
+				8A25900A75D52D1022832E5A /* Pods */,
+				63466FA33ECDD9760A844C75 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -349,14 +349,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DE4A12B1BE2531F00B69170 /* Build configuration list for PBXNativeTarget "Push" */;
 			buildPhases = (
-				EB19C111332AD187E4E993C3 /* Check Pods Manifest.lock */,
+				768950101BDF38DB7D0BEEDA /* Check Pods Manifest.lock */,
 				9DE4A0FA1BE2531D00B69170 /* Sources */,
 				9DE4A0FB1BE2531D00B69170 /* Frameworks */,
 				9DE4A0FC1BE2531D00B69170 /* Resources */,
-				DE97877FA98C37B3650BBDF6 /* Embed Pods Frameworks */,
-				BB6D2785B53B8FAEF8075A21 /* Copy Pods Resources */,
 				9D3D079B1C258BA300B72A1E /* ShellScript */,
 				9D1A14F81C284249000FD08E /* ShellScript */,
+				85DC56B36EC7922A7ED9D64D /* Embed Pods Frameworks */,
+				5FACE57D1B260651F6C862EF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -478,6 +478,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5FACE57D1B260651F6C862EF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		768950101BDF38DB7D0BEEDA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		85DC56B36EC7922A7ED9D64D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9D1A14F81C284249000FD08E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -503,51 +548,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" e8e3bbc2256c70be95a43e59ef78a0e1b312db75 3419e836dab75c5691486c8ada0fd250102acaf554cf9fa8c5b33e57bed3a3e2";
-		};
-		BB6D2785B53B8FAEF8075A21 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DE97877FA98C37B3650BBDF6 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EB19C111332AD187E4E993C3 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -698,11 +698,11 @@
 		};
 		9DE4A12C1BE2531F00B69170 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E6CD016E3789A2EEA3DDA4D /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 0926CC56F50AA6626A03ED0B /* Pods-Push.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				CURRENT_PROJECT_VERSION = 11;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Journalism Development Network (9H5K42BU9H)";
+				CURRENT_PROJECT_VERSION = 19;
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -714,11 +714,11 @@
 		};
 		9DE4A12D1BE2531F00B69170 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40AAA7836813F16CB9C6DB1D /* Pods.release.xcconfig */;
+			baseConfigurationReference = 24F2E853059F89D4FF639296 /* Pods-Push.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				CURRENT_PROJECT_VERSION = 11;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Journalism Development Network (9H5K42BU9H)";
+				CURRENT_PROJECT_VERSION = 19;
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
