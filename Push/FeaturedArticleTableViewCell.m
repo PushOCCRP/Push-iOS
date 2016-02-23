@@ -24,6 +24,7 @@
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 5.0f;
     
+    //Check for nil here, or we crash hard.
     NSAttributedString * descriptionText = [[NSAttributedString alloc] initWithString:article.descriptionText attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
     
     self.descriptionLabel.attributedText = descriptionText;

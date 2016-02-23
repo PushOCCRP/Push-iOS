@@ -16,5 +16,5 @@
 - (NSArray*)articlesWithCompletionHandler:(void(^)(NSArray * articles))completionHandler
                               failure:(void(^)(NSError *error))failure;
 - (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure;
-
+- (void)reset;
 @end

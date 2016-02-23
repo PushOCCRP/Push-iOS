@@ -21,6 +21,11 @@
     [super viewDidLoad];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self.player stopVideo];
+}
+
 - (void)setupPlayer {
     [self setUpPlayerView];
     [super setupPlayer];

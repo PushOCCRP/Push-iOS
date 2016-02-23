@@ -90,7 +90,7 @@
 - (NSString*)shortDateByline
 {
     NSString * dateString;
-    if(self.publishDate.daysAgo > 1){
+    if(self.publishDate.daysAgo > 1 || ![[LanguageManager sharedManager] dateShouldBeColloquial]){
         NSDateFormatter * formatter = [self formatterForDate:NSDateFormatterShortStyle];
         dateString = [formatter stringFromDate:self.publishDate];
     } else {

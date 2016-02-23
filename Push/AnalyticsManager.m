@@ -192,6 +192,11 @@ static NSString * uuidKey = @"push_analytics_uuid";
 
 }
 
++ (void)logErrorWithErrorDescription:(nonnull NSString *)errorDescription
+{
+    [self logCustomEventWithName:errorDescription customAttributes:nil];
+}
+
 + (void)startTimerForContentViewWithObject:(id)object name:(NSString*)name contentType:(nullable NSString *)contentTypeOrNil
                                contentId:(nullable NSString *)contentIdOrNil
                         customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil

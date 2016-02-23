@@ -68,6 +68,7 @@
 
     self.aboutTextView.attributedText = text;
     self.aboutTextView.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
+    self.aboutTextView.dataDetectorTypes = UIDataDetectorTypeAll;
 }
 
 - (NSData*)dataFromHtmlFile

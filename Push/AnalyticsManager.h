@@ -20,6 +20,8 @@ typedef enum : NSUInteger {
 + (void)logSearchWithQuery:(nullable NSString *)queryOrNil customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;
 + (void)logCustomEventWithName:(nonnull NSString *)name customAttributes:(nullable NSDictionary<NSString *, id> *)attributes;
 
++ (void)logErrorWithErrorDescription:(nonnull NSString *)errorDescription;
+
 + (void)startTimerForContentViewWithObject:(id _Nonnull)object name:(NSString* _Nonnull)name contentType:(nullable NSString *)contentTypeOrNil
                                  contentId:(nullable NSString *)contentIdOrNil
                           customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;

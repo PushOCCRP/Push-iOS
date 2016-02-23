@@ -9,6 +9,7 @@
 #import "PushSyncManager.h"
 #import "SettingsManager.h"
 #import "LanguageManager.h"
+#import "AnalyticsManager.h"
 #import <AFNetworking/AFNetworking.h>
 
 @interface PushSyncManager()
@@ -62,6 +63,7 @@
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [AnalyticsManager logErrorWithErrorDescription:error.localizedDescription];
             failure(error);
         });
     }];
@@ -99,6 +101,12 @@
     
 }
 
+- (void)reset
+{
+    self.articles = nil;
+    [self resetCachedArticles];
+}
+
 -(NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler
 {
     return [super dataTaskWithRequest:request completionHandler:completionHandler];
@@ -122,6 +130,11 @@
     
     NSArray * articles = [NSKeyedUnarchiver unarchiveObjectWithData:articleData];
     return articles;
+}
+
+- (void)resetCachedArticles
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"cached_articles"];
 }
 
 @end

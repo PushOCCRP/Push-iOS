@@ -132,6 +132,21 @@ static NSString * languageKey = @"push_language_key";
     return relativeDate;
 }
 
+- (BOOL)dateShouldBeColloquial
+{
+    NSString * languageShortCode = [self languageShortCode];
+    return [self dateShouldBeColloquialForLanguageShortCode:languageShortCode];
+}
+
+- (BOOL)dateShouldBeColloquialForLanguageShortCode:(NSString*)languageShortCode
+{
+    if([languageShortCode isEqualToString:@"az"]){
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (NSString*)language
 {
     NSString * language = [[NSUserDefaults standardUserDefaults] objectForKey:languageKey];
