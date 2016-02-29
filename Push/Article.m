@@ -26,7 +26,7 @@
 {
     if(self = [super init]) // this needs to be [super initWithCoder:aDecoder] if the superclass implements NSCoding
     {
-        NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
+        NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"%Y%m%d";
 
         self.headline           = [aDecoder decodeObjectForKey:@"headline"];

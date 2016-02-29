@@ -30,7 +30,9 @@
     self.imageView.image = nil;
     
     _article = article;
-    self.headlineLabel.text = article.headline;
+    if(article.headline){
+        self.headlineLabel.text = article.headline;
+    }
     self.dateBylinesLabel.text = article.shortDateByline;
     
     __weak typeof(self) weakSelf = self;
