@@ -43,9 +43,11 @@
     
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    //[self takeDisplayPhotosInApp:app forLanguage:@"Azerbaijani"];
+    [self takeDisplayPhotosInApp:app forLanguage:@"English"];
+    /*
     sleep(5);
     NSString * language = [NSLocale preferredLanguages][0];
+    
     //if([[language substringToIndex:2] isEqualToString:@"en"]){
         [self switchApp:app toLanguage:@"Russian"];
         sleep(3);
@@ -59,7 +61,7 @@
         sleep(10);
         [self takeDisplayPhotosInApp:app forLanguage:@"Russian"];
     //}
-    
+    */
     
 }
 
@@ -74,14 +76,16 @@
         nativeName = @"English";
     }
     
-    [app.navigationBars[@"MainView"].buttons[@"AД"] tap];
-    [app.pickerWheels.element adjustToPickerWheelValue:nativeName];
-    if([app.buttons[@"Выберите язык"] exists]){
-        [app.buttons[@"Выберите язык"] tap];
-    }else if([app.buttons[@"Dil Seçin"] exists]){
-        [app.buttons[@"Dil Seçin"] tap];
-    } else if([app.buttons[@"Choose Language"] exists]){
-        [app.buttons[@"Choose Language"] tap];
+    if([app.navigationBars[@"MainView"].buttons[@"AД"] exists]){
+        [app.navigationBars[@"MainView"].buttons[@"AД"] tap];
+        [app.pickerWheels.element adjustToPickerWheelValue:nativeName];
+        if([app.buttons[@"Выберите язык"] exists]){
+            [app.buttons[@"Выберите язык"] tap];
+        }else if([app.buttons[@"Dil Seçin"] exists]){
+            [app.buttons[@"Dil Seçin"] tap];
+        } else if([app.buttons[@"Choose Language"] exists]){
+            [app.buttons[@"Choose Language"] tap];
+        }
     }
 }
 
@@ -98,6 +102,8 @@
         backButtonText = @"Назад";
     }else if([app.buttons[@"Geri"] exists]){
         backButtonText = @"Geri";
+    }else if([app.buttons[@"Înapoi"] exists]){
+        backButtonText = @"Înapoi";
     }
     [[[[app.navigationBars[@"ArticlePageView"] childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:backButtonText] elementBoundByIndex:0] tap];
 

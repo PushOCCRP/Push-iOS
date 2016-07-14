@@ -25,6 +25,7 @@
 - (NSString*)localizedStringForKey:(NSString *)key value:(NSString *)value withBundle:(NSBundle*)bundle;
 
 - (NSString*)localizedRelativeDate:(NSString*)relativeDate;
+- (NSString*)shortDateFormat;
 - (BOOL)dateShouldBeColloquial;
 - (BOOL)dateShouldBeColloquialForLanguageShortCode:(NSString*)languageShortCode;
 

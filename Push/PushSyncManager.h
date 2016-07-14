@@ -15,6 +15,9 @@
 + (PushSyncManager *)sharedManager;
 - (NSArray*)articlesWithCompletionHandler:(void(^)(NSArray * articles))completionHandler
                               failure:(void(^)(NSError *error))failure;
+
+- (void)articleWithId:(NSString*)articleId withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure;
+
 - (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure;
 - (void)reset;
 @end

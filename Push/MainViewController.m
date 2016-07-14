@@ -19,10 +19,14 @@
 #import "LanguageManager.h"
 #import "LanguagePickerView.h"
 #import "AboutViewController.h"
+#import "NotificationManager.h"
+
+#import "WebSiteViewController.h"
 
 #import "AboutBarButtonView.h"
 
 #import "AnalyticsManager.h"
+#import "PromotionsManager.h"
 
 // These are also set in the respective nibs, so if you change it make sure you change it there too
 static NSString * featuredCellIdentifier = @"FEATURED_ARTICLE_STORY_CELL";
@@ -33,6 +37,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 @property (nonatomic, retain) IBOutlet UITableView * tableView;
 @property (nonatomic, retain) LanguagePickerView * languagePickerView;
+@property (nonatomic, retain) PromotionView * promotionView;
 
 @property (nonatomic, retain) NSArray * articles;
 
@@ -52,6 +57,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [weakSelf loadArticles];
     }];
     
+    [self loadPromotions];
     [self loadInitialArticles];
     
     // TODO: Track the user action that is important for you.
@@ -97,9 +103,14 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     UIBarButtonItem * searchBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonTapped)];
     
     // Add language button
-    UIBarButtonItem * languageBarButton = [[UIBarButtonItem alloc] initWithTitle:@"AД" style:UIBarButtonItemStylePlain target:self action:@selector(languageButtonTapped)];
-    [self.navigationItem setRightBarButtonItems:@[languageBarButton, searchBarButton, aboutBarButton]];
-
+    NSArray * barButtonItems = @[aboutBarButton, searchBarButton];
+    if([LanguageManager sharedManager].availableLanguages.count > 1){
+        UIBarButtonItem * languageBarButton = [[UIBarButtonItem alloc] initWithTitle:@"AД" style:UIBarButtonItemStylePlain target:self action:@selector(languageButtonTapped)];
+        barButtonItems = @[languageBarButton, aboutBarButton, searchBarButton];
+    }
+    
+    [self.navigationItem setRightBarButtonItems:barButtonItems];
+    
     // Set Back button to correct language
     [self setUpBackButton];
 }
@@ -120,6 +131,16 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)setupTableView
 {
+    self.tableView = [[UITableView alloc] init];
+    [self.view addSubview:self.tableView];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ArticleTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:standardCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"FeaturedArticleTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:featuredCellIdentifier];
 }
@@ -143,6 +164,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     }];
     
     if(self.articles){
+        [self.tableView triggerPullToRefresh];
         [self.tableView reloadData];
     } else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -165,6 +187,61 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [self presentViewController:alert animated:YES completion:nil];
         [self.tableView.pullToRefreshView stopAnimating];
     }];
+}
+
+- (void)loadPromotions
+{
+ 
+    if(self.promotionView){
+        [self.promotionView removeFromSuperview];
+        self.promotionView = nil;
+        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.right.equalTo(self.view);
+            make.left.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    }
+ 
+    NSArray * promotions = [PromotionsManager sharedManager].currentlyRunningPromotions;
+    
+    if(promotions.count == 0){
+        return;
+    }
+    
+    PromotionView * promotionView = [[PromotionView alloc] initWithPromotion:promotions[0]];
+    
+    if(!promotionView){
+        return;
+    }
+    
+    self.promotionView = promotionView;
+    
+    self.promotionView.delegate = self;
+    [self.view addSubview:self.promotionView];
+    
+    [self.promotionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.promotionView.mas_bottom);
+        make.right.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
+}
+
+#pragma mark - PromotionViewDelegate
+- (void)didTapOnPromotion:(nonnull Promotion*)promotion
+{
+    NSString * language = [LanguageManager sharedManager].languageShortCode;
+    WebSiteViewController * webSiteController = [[WebSiteViewController alloc] initWithURL:[NSURL URLWithString:promotion.urls[language]]];
+    [self.navigationController presentViewController:webSiteController animated:YES completion:nil];
+//    [self.navigationController pushViewController:webSiteController animated:YES];
 }
 
 #pragma mark - Menu Button Handling
@@ -210,12 +287,19 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     [AnalyticsManager logContentViewWithName:@"Language Chosen" contentType:@"Settings"
                           contentId:language customAttributes:@{@"language":language}];
 
+    NSString * oldLanguageShortCode = [LanguageManager sharedManager].languageShortCode;
+    
     [[LanguageManager sharedManager] setLanguage:language];
+    
+    [[NotificationManager sharedManager] changeLanguage:oldLanguageShortCode
+                                                     to:[LanguageManager sharedManager].languageShortCode];
+    
     [self hideLanguagePicker];
     
     //Reload the view?
     [self setUpBackButton];
     [self loadArticles];
+    [self loadPromotions];
     [self.view setNeedsDisplay];
 }
 

@@ -9,6 +9,7 @@
 //
 
 #import "About.h"
+#import "SettingsManager.h"
 
 
 @implementation About
@@ -24,7 +25,9 @@
 + (void)drawIOval1Canvas
 {
     //// Color Declarations
-    UIColor* strokeColor = [UIColor colorWithRed: 0.638 green: 0.072 blue: 0.126 alpha: 1];
+    UIColor * color = [SettingsManager sharedManager].navigationTextColor;
+    
+    UIColor* strokeColor = color;
 
     //// Group
     {

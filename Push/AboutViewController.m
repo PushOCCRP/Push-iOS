@@ -10,6 +10,7 @@
 #import "AboutViewController.h"
 #import <Masonry/Masonry.h>
 #import "LanguageManager.h"
+#import "SettingsManager.h"
 
 @interface AboutViewController ()
 
@@ -30,6 +31,11 @@
     [AnalyticsManager logContentViewWithName:@"About Page Appeared" contentType:@"Navigation"
                                    contentId:nil customAttributes:nil];
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"About Page Viewed Time" contentType:@"About Page View Time" contentId:nil customAttributes:nil];
+    
+    if([SettingsManager sharedManager].donateUrl != nil){
+        UIBarButtonItem * donateBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:MYLocalizedString(@"Donate", @"Donate") style:UIBarButtonItemStylePlain target:self action:@selector(donateButtonTapped)];
+        self.navigationItem.rightBarButtonItem = donateBarButtonItem;
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -57,17 +63,20 @@
 {
     NSData * htmlAbout = [self dataFromHtmlFile];
     
-    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithData:htmlAbout
+    NSString * html = [[NSString alloc] initWithData:htmlAbout encoding:NSUTF8StringEncoding];
+    
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 7.0f;
+    
+    html = [html stringByAppendingString:[NSString stringWithFormat:@"<style>body{line-height: '%@'; font-family: '%@'; font-size:%fpx;}</style>", @"20px", @"Palatino-Roman", 15.0f]];
+    
+    
+    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding]
                                                                 options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                           NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
                                                      documentAttributes:nil error:nil];
+    [self.aboutTextView setAttributedText:text];
 
-    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 7.0f;
-    [text setAttributes:@{NSParagraphStyleAttributeName:paragraphStyle}  range:NSMakeRange(0, text.length)];
-
-    self.aboutTextView.attributedText = text;
-    self.aboutTextView.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
     self.aboutTextView.dataDetectorTypes = UIDataDetectorTypeAll;
 }
 
@@ -78,6 +87,11 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:aboutTextFileName ofType:@"html"];
     NSData * htmlData = [NSData dataWithContentsOfFile:filePath];
     return  htmlData;
+}
+
+- (void)donateButtonTapped
+{
+    [[UIApplication sharedApplication] openURL:[SettingsManager sharedManager].donateUrl];
 }
 
 @end

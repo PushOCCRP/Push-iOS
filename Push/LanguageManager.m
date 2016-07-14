@@ -7,6 +7,8 @@
 //
 
 #import "LanguageManager.h"
+#import "SettingsManager.h"
+#import "NotificationManager.h"
 #import <DateTools/DateTools.h>
 
 
@@ -64,7 +66,7 @@ static NSString * languageKey = @"push_language_key";
     
     NSString *languageShortCode;
     if(keys.count < 1){
-        languageShortCode = @"en";
+        languageShortCode = [SettingsManager sharedManager].defaultLanguage;
     } else {
         languageShortCode = keys.allObjects[0];
     }
@@ -118,7 +120,10 @@ static NSString * languageKey = @"push_language_key";
 {
     NSDictionary * bylineFormatByLanguage = @{ @"en": @"%%@ %@ %%@",
                                                @"az": @"%%@%@ %%@",
-                                               @"ru": @"%%@%@ %%@" };
+                                               @"ru": @"%%@%@ %%@",
+                                               @"ro": @"%%@%@ %%@",
+                                               @"sr": @"%%@%@ %%@"};
+    
     NSString * localizedString = MYLocalizedString(@"by", @"between the author and date");
     NSString * format = [NSString stringWithFormat:bylineFormatByLanguage[languageShortCode], localizedString];
     return format;
@@ -147,6 +152,17 @@ static NSString * languageKey = @"push_language_key";
     return NO;
 }
 
+- (NSString*)shortDateFormat
+{
+    NSString * languageFormat = @"DD/MM/YYYY";
+    
+    if([self.languageShortCode isEqualToString:@"sr"]){
+         languageFormat = @"DD.MM.YYYY.";
+    }
+    
+    return languageFormat;
+}
+
 - (NSString*)language
 {
     NSString * language = [[NSUserDefaults standardUserDefaults] objectForKey:languageKey];
@@ -170,7 +186,7 @@ static NSString * languageKey = @"push_language_key";
         }
         return NO;
     }];
-
+    
     return keys.allObjects.firstObject;
 }
 
@@ -187,7 +203,9 @@ static NSString * languageKey = @"push_language_key";
         if([localization isEqualToString:@"Base"]){
             continue;
         }
-        [localizationsFullName addObject:languageFullNames[localization]];
+        if([[languageFullNames allKeys] containsObject:localization]){
+            [localizationsFullName addObject:languageFullNames[localization]];
+        }
     }
     
     return [NSArray arrayWithArray:localizationsFullName];
@@ -207,11 +225,25 @@ static NSString * languageKey = @"push_language_key";
 
 - (NSDictionary*)languageDictionary
 {
-    NSDictionary * languageFullNames = @{ @"en": @"English",
-                                          @"az": @"Azerbaijani",
-                                          @"ru": @"Russian" };
-
-    return languageFullNames;
+    NSDictionary * languageFullNames = @{ @"ro": @"Romanian", @"ru": @"Russian", @"en": @"English", @"az" : @"Azerbaijani", @"sr" : @"Serbian" };
+    NSArray * languages = [SettingsManager sharedManager].languages;
+    
+    NSMutableDictionary * languageFullNamesCopy = [NSMutableDictionary dictionaryWithDictionary:languageFullNames];
+    
+    NSArray * knownLanguages = languageFullNames.allKeys;
+    for (NSString * knownLanguage in knownLanguages) {
+        BOOL present = NO;
+        for (NSString * language in languages) {
+            if([knownLanguage isEqualToString:language]){
+                present = YES;
+            }
+        }
+        if (!present) {
+            [languageFullNamesCopy removeObjectForKey:knownLanguage];
+        }
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:languageFullNamesCopy];
 }
 
 - (NSDictionary*)nativeLanguageDictionary

@@ -8,6 +8,7 @@
 
 #import "Article.h"
 #import "LanguageManager.h"
+#import "SettingsManager.h"
 #import <DateTools/DateTools.h>
 
 @interface Article ()
@@ -46,6 +47,10 @@
             self.language = RUSSIAN;
         } else if([language isEqualToString:@"az"]){
             self.language = AZERBAIJANI;
+        } else if([language isEqualToString:@"ro"]){
+            self.language = ROMANIAN;
+        } else if([language isEqualToString:@"sr"]){
+            self.language = SERBIAN;
         }
 
     }
@@ -75,8 +80,12 @@
         self.language = RUSSIAN;
     } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"az"]){
         self.language = AZERBAIJANI;
+    } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"ro"]){
+        self.language = ROMANIAN;
+    } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"sr"]){
+        self.language = SERBIAN;
     }
-    
+
     return self;
 }
 
@@ -103,7 +112,7 @@
 - (NSString*)dateBylineForDateString:(NSString*)dateString
 {
     NSString * dateBylineText;
-    if(self.author && self.author.length > 0){
+    if([SettingsManager sharedManager].shouldShowAuthor && self.author && self.author.length > 0){
         NSString * format = [[LanguageManager sharedManager] bylineFormatForLanguageShortCode:[LanguageManager sharedManager].languageShortCode];
         dateBylineText = [NSString stringWithFormat:format, dateString, self.author];
     } else {
@@ -147,6 +156,8 @@
             [encoder encodeObject:@"ru" forKey:languageKey];
         case AZERBAIJANI:
             [encoder encodeObject:@"az" forKey:languageKey];
+        case ROMANIAN:
+            [encoder encodeObject:@"ro" forKey:languageKey];
         default:
             break;
     }

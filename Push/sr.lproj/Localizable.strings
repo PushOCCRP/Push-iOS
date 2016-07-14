@@ -1,0 +1,70 @@
+/* 
+  Strings-Serbian.strings
+  Push
+
+  Created by Christopher Guess on 1/9/16.
+  Copyright © 2016 OCCRP. All rights reserved.
+*/
+/* Language Name */
+"LanguageName" = "srpski";
+
+/* Connection Error */
+"ConnectionErorr" = "Greška pri konekciji";
+
+/* OK */
+"OK" = "U redu";
+
+/* Back */
+"Back" = "Nazad";
+
+/* Share */
+"Share" = "Podeli";
+
+/* Choose Language */
+"ChooseLanguage" = "Izaberi jezik";
+
+/* Search */
+"Search" = "Pretraga";
+"NoResultsFound" = "Nisu pronađeni rezultati";
+
+/* By */
+"by" = ",";
+
+/* Yesterday */
+"Yesterday" = "Juče";
+
+/* January */
+"January" = "Januar";
+
+/* February */
+"February" = "Februar";
+
+/* March */
+"March" = "Mart";
+
+/* April */
+"April" = "April";
+
+/* May */
+"May" = "Maj";
+
+/* June */
+"June" = "Jun";
+
+/* July */
+"July" = "Jul";
+
+/* August */
+"August" = "Avgust";
+
+/* September */
+"September" = "Septembar";
+
+/* October */
+"October" = "Oktobar";
+
+/* November */
+"November" = "Novembar";
+
+/* December */
+"December" = "Decembar";

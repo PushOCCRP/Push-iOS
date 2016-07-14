@@ -20,6 +20,8 @@
 
 @implementation PushSyncManager
 
+static const NSString * versionNumber = @"1.0";
+
 + (PushSyncManager *)sharedManager {
     static PushSyncManager *_sharedManager = nil;
     
@@ -44,7 +46,8 @@
 - (NSArray*)articlesWithCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
 {
 
-    [self GET:@"articles" parameters:@{@"language":[LanguageManager sharedManager].languageShortCode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    [self GET:@"articles" parameters:@{@"language":[LanguageManager sharedManager].languageShortCode,
+                                       @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         NSDictionary * response = (NSDictionary*)responseObject;
         NSArray * articlesResponse = response[@"results"];
@@ -75,9 +78,51 @@
     return self.articles;
 }
 
+- (void)articleWithId:(NSString*)articleId withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
+{
+    NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
+    
+    //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
+    if([languageShortCode isEqualToString:@"sr"]){
+        languageShortCode = @"rs";
+    }
+    
+    [self GET:@"article" parameters:@{@"id":articleId, @"language":[LanguageManager sharedManager].languageShortCode,
+                                     @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                                         
+                                         NSDictionary * response = (NSDictionary*)responseObject;
+                                         NSArray * articlesResponse = response[@"results"];
+                                         
+                                         NSMutableArray * mutableResponseArray = [NSMutableArray arrayWithCapacity:articlesResponse.count];
+                                         
+                                         for(NSDictionary * articleResponse in articlesResponse){
+                                             Article * article = [Article articleFromDictionary:articleResponse];
+                                             [mutableResponseArray addObject:article];
+                                         }
+                                         
+                                         NSArray * articles = [NSArray arrayWithArray:mutableResponseArray];
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             completionHandler(articles);
+                                         });
+                                     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             failure(error);
+                                         });
+                                     }];
+    
+}
+
 - (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
 {
-    [self GET:@"search" parameters:@{@"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
+    
+    //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
+    if([languageShortCode isEqualToString:@"sr"]){
+        languageShortCode = @"rs";
+    }
+    
+    [self GET:@"search" parameters:@{@"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode,
+                                     @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         NSDictionary * response = (NSDictionary*)responseObject;
         NSArray * articlesResponse = response[@"results"];

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LanguagePickerView.h"
+#import "PromotionView.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, LanguagePickerViewDelegate>
+@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, LanguagePickerViewDelegate, PromotionViewDelegate>
 
 @end

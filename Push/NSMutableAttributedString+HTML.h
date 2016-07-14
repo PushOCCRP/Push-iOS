@@ -19,12 +19,52 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ************************************************/
 
-
 /**
  A category on NSMutableAttributedString to add HTML features for UIKit that normally only available in AppKit
  The OSX documentation is here: https://developer.apple.com/library/mac/documentation/Cocoa/Reference/ApplicationKit/Classes/NSAttributedString_AppKitAdditions/
  */
 #import <Foundation/Foundation.h>
+
+
+/**
+ *  Object representing a HTML element
+ *  This shouldn't be used outside of this class.
+ */
+
+@interface HTMLTag : NSObject
+
+/**
+ *  The type of the tag, "em" in <em>
+ */
+
+@property (nonatomic, retain, readonly) NSString * _Nonnull type;
+
+/**
+ *  Range of opening tag in text
+ */
+
+@property (nonatomic, readonly) NSRange openRange;
+
+/**
+ *  Attributes of tag
+ */
+
+@property (nonatomic, retain, readonly) NSDictionary * _Nullable attributes;
+
+/**
+ *  Range of closing tag in text
+ */
+
+@property (nonatomic) NSRange closingRange;
+
+/**
+ *  Text between the opening and closing tag
+ */
+
+@property (nonatomic, retain) NSString * _Nullable internalText;
+
+@end
+
 
 @interface NSMutableAttributedString (HTML)
 
@@ -59,5 +99,17 @@
  *  @return Returns an initialized object, or nil if the data can’t be decoded.
  */
 - (instancetype _Nullable)initWithHTML:(NSData * _Nonnull)data options:(NSDictionary * _Nullable)options documentAttributes:(NSDictionary<NSString *, id> * _Nullable * _Nullable)dict;
+
+/**
+ *  Parses html string into tag pairs, and figuring out ranges.
+ *  If a tag is not properly nested or closed it just discards it,
+ *  For now, assumes thats it's invalid and ignores it.
+ *
+ *
+ *  @return an array of HTMLTag elements
+ */
+
+- (NSArray*)parseHTMLString;
+- (NSAttributedString*)processHTML;
 
 @end

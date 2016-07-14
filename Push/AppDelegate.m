@@ -11,6 +11,7 @@
 #import "SettingsManager.h"
 #import "AnalyticsManager.h"
 #import "LanguageManager.h"
+#import "NotificationManager.h"
 #import "PushSyncManager.h"
 
 @import HockeySDK;
@@ -27,13 +28,16 @@
     // Start analytics tracking
     [AnalyticsManager setupForAnaylytics:CWGAnalyticsCrashlytics];
    
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[SettingsManager sharedManager].hockeyAppId];
+    //[[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[SettingsManager sharedManager].hockeyAppId];
     // Do some additional configuration if needed here
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+    //[[BITHockeyManager sharedHockeyManager] startManager];
+    //[[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 
     // Intialize the language manager so everything's set correctly from launch
     [LanguageManager sharedManager];
+    
+    // Set up the notifications
+    [NotificationManager sharedManager];
     
     // Override point for customization after application launch.
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
@@ -58,13 +62,15 @@
 
 - (void)formatNavigationBar:(UINavigationBar*)bar
 {
-    bar.barTintColor= [UIColor colorWithRed:254.0f/255.0f green:254.0f/255.0f blue:250.0f/255.0f alpha:1.0f];
-    UIColor * darkColor = [UIColor colorWithRed:180.0f/255.0f green:36.0f/255.0f blue:42.0f/255.0f alpha:1.0f];
+    bar.barTintColor = [SettingsManager sharedManager].navigationBarColor;
+    UIColor * darkColor = [SettingsManager sharedManager].navigationTextColor;
+    //bar.barTintColor= [UIColor colorWithRed:39.0f/255.0f green:39.0f/255.0f blue:39.0f/255.0f alpha:1.0f];
+    //UIColor * darkColor = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
     bar.tintColor = darkColor;
     bar.translucent = NO;
     
     bar.titleTextAttributes = @{NSForegroundColorAttributeName: darkColor};
-    bar.barStyle = UIBarStyleDefault;
+    bar.barStyle = UIBarStyleBlack;
 }
 
 - (void)formatPageIndicatorView {
@@ -105,6 +111,21 @@
     [[NSUserDefaults standardUserDefaults] setValue:@"exited" forKey:@"crashed"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [[NotificationManager sharedManager] didRegisterForNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error
+{
+    NSLog(@"Failed to register for notifications");
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
+{
+    [[NotificationManager sharedManager] didReceiveNotification:userInfo withNavigationController:(UINavigationController*)self.window.rootViewController forApplicationSatate:application.applicationState];
 }
 
 @end

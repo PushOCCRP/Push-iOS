@@ -11,7 +11,9 @@
 typedef enum : NSUInteger {
     ENGLISH,
     RUSSIAN,
-    AZERBAIJANI
+    AZERBAIJANI,
+    ROMANIAN,
+    SERBIAN
 } ArticleLanguage;
 
 @interface Article : NSObject <NSCoding>

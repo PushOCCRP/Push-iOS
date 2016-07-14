@@ -16,7 +16,7 @@
 #import "SettingsManager.h"
 
 #import "NSMutableAttributedString+HTML.h"
-
+#import "NSString+ReverseString.h"
 
 @interface ArticleViewController ()
 
@@ -155,6 +155,7 @@
         make.top.equalTo(self.contentView.mas_top);
         make.left.equalTo(self.contentView.mas_left);
         make.right.equalTo(self.contentView.mas_right);
+        //make.height.equalTo(@400);
         make.height.lessThanOrEqualTo(self.scrollView).multipliedBy(0.5f);
     }];
     
@@ -199,6 +200,19 @@
     __weak typeof(self) weakSelf = self;
     [self.image setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         weakSelf.image.image = image;
+        
+        //Resize the image view's height to make it proportional
+        float viewWidth = weakSelf.view.frame.size.width;
+        float proportion = viewWidth / image.size.width;
+        float height = image.size.height * proportion;
+        
+        [weakSelf.image mas_remakeConstraints:^(MASConstraintMaker * make) {
+            make.top.equalTo(weakSelf.contentView.mas_top);
+            make.left.equalTo(weakSelf.contentView.mas_left);
+            make.right.equalTo(weakSelf.contentView.mas_right);
+            make.height.equalTo([NSNumber numberWithFloat:height]);
+        }];
+        
     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
         NSLog(@"Error loading image: %@", error.localizedDescription);
     }];
@@ -241,14 +255,63 @@
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 7.0f;
     
-    NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
-                                                      initWithHTML:[self.article.body dataUsingEncoding:NSUTF8StringEncoding]
-                                                      baseURL:[SettingsManager sharedManager].cmsBaseUrl
-                                                      documentAttributes:nil];
+    NSString * html = [self.article.body stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: '%@'; font-size:%fpx;}</style>", @"Palatino-Roman", 17.0f]];
     
-    [bodyAttributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, bodyAttributedText.string.length)];
+    NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
+                                                      initWithHTML:[html dataUsingEncoding:NSUTF8StringEncoding]
+                                                      baseURL:[SettingsManager sharedManager].cmsBaseUrl
+                                                       documentAttributes:nil];
+    
     self.body.attributedText = bodyAttributedText;
-    self.body.font = [UIFont fontWithName:@"Palatino-Roman" size:17.0f];
+
+    [bodyAttributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, bodyAttributedText.string.length)];
+
+    self.body.attributedText = bodyAttributedText;    
+}
+
+// Wrote this without test from memory. There's a 10% chance it works
+- (NSArray*)imageLocationsInText:(NSString*)text
+{
+    // Find all strings ^&^&
+    // Find the nearest new line before the location
+    // Unless it's at the start of the string, in which case do the one afterwards
+    // return an array of the new line location
+    
+    NSMutableArray * ranges = [NSMutableArray array];
+    
+    NSString * compareRange = @"^&^&";
+    NSRange range = [text rangeOfString:compareRange];
+    NSUInteger indexOfLastImageString = 0;
+    
+    while (range.length != 0){
+        
+        // Before we add the range we actually want to find the blank space before it
+        // I'm not sure, so this assumes that all distances and locations are relative to the substrings
+        if(ranges.count > 1){
+            // Get a reversed string so we can use some helpers
+            // We want it to be from the previous range
+            NSRange previousRange = [[ranges lastObject] rangeValue];
+            NSString * reversedString = [[text substringWithRange:NSMakeRange(previousRange.location + previousRange.length, range.location - previousRange.length)] reverse];
+        
+            // This might work... depends on how line breaks are handled
+            // Here we get the range of the previous newlines
+            // It's reversed, so the string we're checking for is too
+            NSRange reversedRangeOfNewLine = [reversedString rangeOfString:@"n\\"];
+        
+            // Subtract it here
+            range.location -= reversedRangeOfNewLine.location;
+        } else {
+            range.location += [[text substringWithRange:NSMakeRange(range.location, text.length - range.location)] rangeOfString:@"\n"].location;
+        }
+        
+        [ranges addObject:[NSValue valueWithRange:range]];
+        
+        NSUInteger newStart = range.location + range.length;
+        range = [text rangeOfString:compareRange options:0 range:NSMakeRange(newStart, text.length - newStart)];
+        indexOfLastImageString = newStart;
+    }
+    
+    return [NSArray arrayWithArray:ranges];
 }
 
 - (void)didReceiveMemoryWarning

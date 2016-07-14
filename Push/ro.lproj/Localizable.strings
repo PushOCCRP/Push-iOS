@@ -1,0 +1,75 @@
+/* 
+  Strings-Russian.strings
+  Push
+
+  Created by Christopher Guess on 1/9/16.
+  Copyright © 2016 OCCRP. All rights reserved.
+*/
+
+/* Language Name */
+"LanguageName" = "Română";
+
+/* Connection Error */
+"ConnectionErorr" = "Eroare de conectare";
+
+/* OK */
+"OK" = "OK";
+
+/* Back */
+"Back" = "Înapoi";
+
+/* Share */
+"Share" = "Distribuie";
+
+/* Choose Language */
+"ChooseLanguage" = "Alege limba";
+
+/* Search */
+"Search" = "Căutare";
+
+/* No Results Found */
+"NoResultsFound" = "Nu a fost găsit niciun rezultat";
+
+/* By */
+"by" = ",";
+
+/* Yesterday */
+"Yesterday" = "Ieri";
+
+/* January */
+"January" = "ianuarie";
+
+/* February */
+"February" = "Februarie";
+
+/* March */
+"March" = "Martie";
+
+/* April */
+"April" = "Aprilie";
+
+/* May */
+"May" = "Mai";
+
+/* June */
+"June" = "Iunie";
+
+/* July */
+"July" = "Iulie";
+
+/* August */
+"August" = "August";
+
+/* September */
+"September" = "Septembrie";
+
+/* October */
+"October" = "Octombrie";
+
+/* November */
+"November" = "Noiembrie";
+
+/* December */
+"December" = "Decembrie";
+
+

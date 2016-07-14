@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -18,19 +18,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="launch-screen-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="OM3-8a-h8f">
-                                <rect key="frame" x="125" y="248" width="351" height="104"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-background-color.png" translatesAutoresizingMaskIntoConstraints="NO" id="ISy-cO-g9M">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-screen-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="OM3-8a-h8f">
+                                <rect key="frame" x="182" y="182" width="236" height="236"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="OM3-8a-h8f" secondAttribute="height" multiplier="27:8" id="Kwf-IG-zke"/>
+                                    <constraint firstAttribute="width" secondItem="OM3-8a-h8f" secondAttribute="height" multiplier="1:1" id="Z09-yd-m9i"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="OM3-8a-h8f" secondAttribute="trailing" constant="104" id="1rT-RJ-8Ga"/>
-                            <constraint firstItem="OM3-8a-h8f" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="2Xc-aG-3GK"/>
-                            <constraint firstItem="OM3-8a-h8f" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="50" id="HmL-Xo-R9W"/>
-                            <constraint firstItem="OM3-8a-h8f" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Wi5-Mx-dtI"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ISy-cO-g9M" secondAttribute="bottom" id="0QI-Uq-YrO"/>
+                            <constraint firstItem="OM3-8a-h8f" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Eef-Oa-gu1"/>
+                            <constraint firstItem="ISy-cO-g9M" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="OTP-gi-HqT"/>
+                            <constraint firstItem="ISy-cO-g9M" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="d8f-cZ-2lD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ISy-cO-g9M" secondAttribute="trailing" constant="-20" id="sjd-2W-PvI"/>
+                            <constraint firstItem="OM3-8a-h8f" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="xDb-fX-nBD"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,6 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-screen-logo.png" width="749" height="222"/>
+        <image name="launch-background-color.png" width="400" height="400"/>
+        <image name="launch-screen-logo.png" width="236" height="236"/>
     </resources>
 </document>
