@@ -55,3 +55,7 @@ fastlane/screenshots/*
 fastlane/Appfile
 fastlane/Fastfile
 fastlane/report.xml
+
+app-store-icon.png
+launch-background-color@3x.png
+launch-screen-logo@3x.png
