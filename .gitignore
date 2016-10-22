@@ -26,7 +26,7 @@ xcuserdata
 *.xcuserstate
 *.xcscmblueprint
 *.xcscheme
-*.mobileprovision
+**/*.mobileprovision
 
 ## Obj-C/Swift specific
 *.hmap
@@ -40,11 +40,15 @@ xcuserdata
 #
 Pods/
 
-icon*.png
-logo*.png
-about_text*
-Assets.xcassets/AppIcons.appiconset/*
+**/icon*.png
+**/logo*.png
+**/about_text*
+Push/Assets.xcassets/AppIcons.appiconset/*
 
 .DS_Store
 Push.app.dSYM.zip
-*.mobileprovision
+
+fastlane/screenshots/*
+fastlane/Appfile
+fastlane/Fastfile
+fastlane/report.xml
