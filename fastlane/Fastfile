@@ -1,0 +1,163 @@
+# Customise this file, documentation can be found here:
+# https://github.com/KrauseFx/fastlane/tree/master/docs
+# All available actions: https://github.com/KrauseFx/fastlane/blob/master/docs/Actions.md
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# By default, fastlane will send which actions are used
+# No personal data is shared, more information on https://github.com/fastlane/enhancer
+# Uncomment the following line to opt out
+# opt_out_usage
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "1.48.0"
+
+default_platform :ios
+
+
+platform :ios do
+  before_all do |lane, options|
+    if(lane != :offline)
+      cocoapods 
+      
+        increment_build_number()
+      
+    end
+
+    # xctool # run the tests of your app
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    snapshot
+  end
+  
+  desc "Adds devices"
+  lane :add_devices do
+    register_devices(
+        devices: {
+            "Paul Radu" => "8d1e5d1eba61f2d0794c8868ae0ea8cc14d07eab"
+        }
+    )
+  end
+
+  desc "Used to test the generator"
+  lane :gen_test do |options|
+    cert(
+      username: 'cguess@icfj.org',
+    )
+    sigh(
+      adhoc: true,
+      force: true,
+      username: "cguess@icfj.org",
+      app_identifier: "com.occrp.rise"
+    )
+    
+    # use the UID of the newly created provisioning profile
+    ENV["PROFILE_UUID"] = lane_context[SharedValues::SIGH_UDID]
+
+    gym(
+      use_legacy_build_api: true,
+      clean: true,
+      scheme: 'Push',
+    )
+  end
+
+  desc "Used to test the generator when offline"
+  lane :offline do |options|
+    # use the UID of the newly created provisioning profile
+    ENV["PROFILE_UUID"] = lane_context[SharedValues::SIGH_UDID]
+
+    gym(
+      use_legacy_build_api: true,
+      clean: true,
+      scheme: 'Push',
+    )
+  end
+
+  desc "Submit a new Beta Build to HockeyApp"
+  desc "This will also make sure the profile is up to date"
+  lane :beta do |options|
+    cert(
+      username: 'cguess@icfj.org',
+    )
+    sigh(
+      adhoc: true,
+      force: true,
+      username: "cguess@icfj.org",
+      app_identifier: "com.occrp.rise"
+    )
+    
+    # use the UID of the newly created provisioning profile
+    ENV["PROFILE_UUID"] = lane_context[SharedValues::SIGH_UDID]
+
+    gym(
+      use_legacy_build_api: true,
+      clean: true,
+      scheme: 'Push',
+      
+    ) # Build your app - more options available
+    hockey(
+      api_token: "5e6b858b240b43a7938de3d7397d4045",
+      notes: options[:notes],
+      #public_identifier: "5e1c7f0b67b4472c8590cb292a77ba25"
+    )
+    #pilot
+
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :deploy do
+    increment_version_number(version_number:'')
+    #ensure_no_debug_code(text: "NSLog")
+    cert(
+      username: 'cguess@icfj.org',
+    )
+    #snapshot
+    sigh(
+	force: true,
+    	username: "cguess@icfj.org",
+    	app_identifier: "com.occrp.rise",
+    )
+    gym(
+        scheme: "Push",
+	      use_legacy_build_api: true,
+	      clean: true
+    )
+    deliver(
+    	force: true,
+    	username: "cguess@icfj.org",
+    )
+    #frameit
+  end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+    
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+
+# More information about multiple platforms in fastlane: https://github.com/KrauseFx/fastlane/blob/master/docs/Platforms.md
+# All available actions: https://github.com/KrauseFx/fastlane/blob/master/docs/Actions.md
