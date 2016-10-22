@@ -28,6 +28,11 @@
 "Search" = "Axtar";
 "NoResultsFound" = "Heç bir nəticə tapılmadı";
 
+/* News Alert */
+"NewsAlert" = "Xəbər var";
+"Read" = "Oxu";
+"Cancel" = "Imtina et";
+
 /* By */
 "by" = ",";
 

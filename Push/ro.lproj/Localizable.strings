@@ -30,6 +30,11 @@
 /* No Results Found */
 "NoResultsFound" = "Nu a fost găsit niciun rezultat";
 
+/* News Alert */
+"NewsAlert" = "News Alert";
+"Read" = "Citește";
+"Cancel" = "Anulează";
+
 /* By */
 "by" = ",";
 

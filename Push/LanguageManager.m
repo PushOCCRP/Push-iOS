@@ -60,6 +60,13 @@ static NSString * languageKey = @"push_language_key";
         keys = [NSSet setWithObjects:self.availableLanguages.firstObject, nil];
     }
     
+    // Some languages use different writing systems, specifically Serbian, which defaults
+    // to Cyrillic on iOS, but Latin is more standard when you're actually in Serbia.
+    
+    NSMutableSet * mutableKeys = [NSMutableSet setWithSet:keys];
+    [mutableKeys removeObject:@"sr"];
+    [mutableKeys addObject:@"sr_Latn"];
+    
     [[NSUserDefaults standardUserDefaults] setObject:keys.allObjects
                                               forKey:@"AppleLanguages"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -68,7 +75,7 @@ static NSString * languageKey = @"push_language_key";
     if(keys.count < 1){
         languageShortCode = [SettingsManager sharedManager].defaultLanguage;
     } else {
-        languageShortCode = keys.allObjects[0];
+        languageShortCode = mutableKeys.allObjects[0];
     }
     
     
@@ -122,7 +129,8 @@ static NSString * languageKey = @"push_language_key";
                                                @"az": @"%%@%@ %%@",
                                                @"ru": @"%%@%@ %%@",
                                                @"ro": @"%%@%@ %%@",
-                                               @"sr": @"%%@%@ %%@"};
+                                               @"sr": @"%%@%@ %%@",
+                                               @"bg": @"%%@%@ %%@"};
     
     NSString * localizedString = MYLocalizedString(@"by", @"between the author and date");
     NSString * format = [NSString stringWithFormat:bylineFormatByLanguage[languageShortCode], localizedString];
@@ -216,7 +224,7 @@ static NSString * languageKey = @"push_language_key";
     NSDictionary * languages = [self languageDictionary];
     NSMutableArray * mutableLangugages = [NSMutableArray array];
     
-    for(NSString * key in languages.allKeys){
+    for(NSString * key in [languages.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]){
         [mutableLangugages addObject:[self localizedStringForKey:@"LanguageName" value:@"nil" forLanguageShortCode:key]];
     }
     
@@ -225,7 +233,7 @@ static NSString * languageKey = @"push_language_key";
 
 - (NSDictionary*)languageDictionary
 {
-    NSDictionary * languageFullNames = @{ @"ro": @"Romanian", @"ru": @"Russian", @"en": @"English", @"az" : @"Azerbaijani", @"sr" : @"Serbian" };
+    NSDictionary * languageFullNames = @{ @"ro": @"Romanian", @"ru": @"Russian", @"bg" : @"Bulgarian", @"en": @"English", @"az" : @"Azerbaijani", @"sr" : @"Serbian" };
     NSArray * languages = [SettingsManager sharedManager].languages;
     
     NSMutableDictionary * languageFullNamesCopy = [NSMutableDictionary dictionaryWithDictionary:languageFullNames];

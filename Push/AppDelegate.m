@@ -56,6 +56,14 @@
     
     [self setWindow:window];
 
+    
+    NSMutableAttributedString *attrStringFromHtml = [[NSMutableAttributedString alloc]
+                                                     initWithData: [@"<span>html enabled</span>" dataUsingEncoding:NSUnicodeStringEncoding
+                                                                                              allowLossyConversion:NO]
+                                                     options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType}
+                                                     documentAttributes:nil error:nil];
+    NSLog(@"%@",[attrStringFromHtml string]);
+
 
     return YES;
 }

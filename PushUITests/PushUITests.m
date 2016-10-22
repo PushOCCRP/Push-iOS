@@ -44,6 +44,7 @@
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     [self takeDisplayPhotosInApp:app forLanguage:@"English"];
+    [self takeDisplayPhotosInApp:app forLanguage:@"Serbian"];
     /*
     sleep(5);
     NSString * language = [NSLocale preferredLanguages][0];
@@ -74,6 +75,10 @@
         nativeName = @"Azərbaycanlı";
     }else if([language isEqualToString:@"English"]){
         nativeName = @"English";
+    }else if([language isEqualToString:@"Serbian"]){
+        nativeName = @"srpski";
+    }else if([language isEqualToString:@"Bulgarian"]){
+        nativeName = @"български";
     }
     
     if([app.navigationBars[@"MainView"].buttons[@"AД"] exists]){
@@ -85,14 +90,20 @@
             [app.buttons[@"Dil Seçin"] tap];
         } else if([app.buttons[@"Choose Language"] exists]){
             [app.buttons[@"Choose Language"] tap];
+        } else if([app.buttons[@"Izaberi jezik"] exists]){
+            [app.buttons[@"Izaberi jezik"] tap];
+        } else if([app.buttons[@"Избери език"] exists]){
+            [app.buttons[@"Избери език"] tap];
         }
     }
 }
 
 - (void)takeDisplayPhotosInApp:(XCUIApplication*)app forLanguage:(NSString*)language
 {
+    [self switchApp:app toLanguage:language];
+    sleep(30);
     [Snapshot snapshot:[NSString stringWithFormat:@"%@-01ArticleList", language] waitForLoadingIndicator:YES];
-    [[app.tables.element.cells elementBoundByIndex:1] tap];
+    [[app.tables.element.cells elementBoundByIndex:2] tap];
     [Snapshot snapshot:[NSString stringWithFormat:@"%@-02ArticleView", language] waitForLoadingIndicator:YES];
     
     NSString * backButtonText = nil;
@@ -104,7 +115,12 @@
         backButtonText = @"Geri";
     }else if([app.buttons[@"Înapoi"] exists]){
         backButtonText = @"Înapoi";
+    }else if([app.buttons[@"Nazad"] exists]){
+        backButtonText = @"Nazad";
+    }else if([app.buttons[@"Назад"] exists]){
+        backButtonText = @"Назад";
     }
+    
     [[[[app.navigationBars[@"ArticlePageView"] childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:backButtonText] elementBoundByIndex:0] tap];
 
 }

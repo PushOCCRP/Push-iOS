@@ -3,28 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>OCCRP</string>
+	<string>Rise Project</string>
 	<key>short-name</key>
-	<string>OCCRP</string>
+	<string>Rise</string>
 	<key>uniqush</key>
-	<string>occrp</string>
+	<string>rise</string>
 	<key>languages</key>
-	<string>["en"]</string>
+	<string>["ro"]</string>
 	<key>default-language</key>
-	<string>en</string>
+	<string>ro</string>
 	<key>icon-large</key>
-	<string>logo-occrp.png</string>
+	<string>logo-rise-project.png</string>
 	<key>icon-small</key>
-	<string>icon-small.png</string>
+	<string></string>
 	<key>icon-background-color</key>
 	<string>#000000</string>
 	<key>launch-background-color</key>
-	<string>#FFFFFF</string>
+	<string>#000000</string>
 	<key>navigation-bar-color</key>
-	<string>#90031F</string>
+	<string>#000000</string>
 	<key>navigation-text-color</key>
 	<string>#FFFFFF</string>
 	<key>show-author</key>
-	<string>true</string>
+	<string>false</string>
 </dict>
 </plist>

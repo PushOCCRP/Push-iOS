@@ -1,0 +1,76 @@
+/*
+ Strings-English.strings
+ Push
+ 
+ Created by Christopher Guess on 1/9/16.
+ Copyright © 2016 OCCRP. All rights reserved.
+ */
+
+/* Language Name */
+"LanguageName" = "български";
+
+/* Connection Error */
+"ConnectionErorr" = "Грешка при свързването";
+
+/* OK */
+"OK" = "OK";
+
+/* Back */
+"Back" = "Назад";
+
+/* Share */
+"Share" = "Сподели";
+
+/* Choose Language */
+"ChooseLanguage" = "Избери език";
+
+/* Search */
+"Search" = "Search";
+"NoResultsFound" = "Не са намерени резултати";
+
+/* News Alert */
+"NewsAlert" = "Нова статия";
+"Read" = "Прочети";
+"Cancel" = "Затвори";
+
+/* By */
+"by" = "от";
+
+/* Yesterday */
+"Yesterday" = "Вчера";
+
+/* January */
+"January" = "Януари";
+
+/* February */
+"February" = "Февруари";
+
+/* March */
+"March" = "Март";
+
+/* April */
+"April" = "Април";
+
+/* May */
+"May" = "Май";
+
+/* June */
+"June" = "Юни";
+
+/* July */
+"July" = "Юли";
+
+/* August */
+"August" = "Август";
+
+/* September */
+"September" = "Септември";
+
+/* October */
+"October" = "Октомври";
+
+/* November */
+"November" = "Ноември";
+
+/* December */
+"December" = "Декември";

@@ -30,12 +30,17 @@
 		9D56AF4C1D10C22000892C87 /* Promotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D56AF4B1D10C22000892C87 /* Promotion.m */; };
 		9D56AF501D10C4B900892C87 /* PromotionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D56AF4F1D10C4B900892C87 /* PromotionsManager.m */; };
 		9D56AF671D10CA6800892C87 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D56AF651D10CA5000892C87 /* libresolv.tbd */; };
+		9D5A23091DB7B5CE00B21AC6 /* ArticleTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A23081DB7B5CE00B21AC6 /* ArticleTableViewHeader.m */; };
+		9D5A230D1DB8E72E00B21AC6 /* HorizontalRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A230C1DB8E72E00B21AC6 /* HorizontalRule.m */; };
+		9D5A23121DB8EB1100B21AC6 /* SectionSplit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A23111DB8EB1100B21AC6 /* SectionSplit.m */; };
+		9D5A23161DB8FCC900B21AC6 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A23151DB8FCC900B21AC6 /* SectionViewController.m */; };
 		9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B01C624D2800D537EF /* PlayButtonView.m */; };
 		9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B91C62624100D537EF /* PlayButton.m */; };
 		9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1E91C62756E00D537EF /* PauseButton.m */; };
 		9D69C1ED1C62758400D537EF /* PauseButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1EC1C62758400D537EF /* PauseButtonView.m */; };
 		9D81DA921CC52C3D002B424E /* about_text-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 9D81DA911CC52C3D002B424E /* about_text-en.html */; };
 		9D8D33371C610C5E0053FE3E /* NSMutableAttributedString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D33361C610C5E0053FE3E /* NSMutableAttributedString+HTML.m */; };
+		9D9147E21D67549E0089FD03 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D9147E11D67549E0089FD03 /* Constants.m */; };
 		9D9D346D1D170B6600300529 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D9D346C1D170B6600300529 /* NotificationManager.m */; };
 		9DAC1DF41C57048E00126A83 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC1DF31C57048E00126A83 /* AboutViewController.m */; };
 		9DAC1DF91C57097200126A83 /* about_text-ro.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DAC1DF61C57097200126A83 /* about_text-ro.html */; };
@@ -52,6 +57,7 @@
 		9DBFF9EC1C50489600ABCD2C /* PlayerControlBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBFF9EB1C50489600ABCD2C /* PlayerControlBarView.m */; };
 		9DBFF9EE1C5048BB00ABCD2C /* PlayerControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9ED1C5048BB00ABCD2C /* PlayerControlBarView.xib */; };
 		9DC0E14C1BF62B08004A47D4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0E14B1BF62B08004A47D4 /* SearchViewController.m */; };
+		9DC1057E1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC1057D1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m */; };
 		9DC7FE131D10D4AF007204C4 /* promotions.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9DC7FE121D10D4AF007204C4 /* promotions.yml */; };
 		9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC797C1BF3639900F28F18 /* MainViewController.m */; };
 		9DCC797F1BF3639900F28F18 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC797D1BF3639900F28F18 /* MainViewController.xib */; };
@@ -64,6 +70,7 @@
 		9DD418041C46E342000D6DC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DD418021C46E342000D6DC8 /* Localizable.strings */; };
 		9DD4180B1C46F131000D6DC8 /* LanguagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4180A1C46F131000D6DC8 /* LanguagePickerView.m */; };
 		9DDBE7051C46E16700D2A7E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DDBE7041C46E16700D2A7E5 /* LaunchScreen.storyboard */; };
+		9DE0EE171D3C04310061BEA1 /* about_text-bg.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DE0EE161D3C04310061BEA1 /* about_text-bg.html */; };
 		9DE4A1031BE2531E00B69170 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1021BE2531E00B69170 /* main.m */; };
 		9DE4A1061BE2531E00B69170 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1051BE2531E00B69170 /* AppDelegate.m */; };
 		9DE4A10E1BE2531E00B69170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE4A10D1BE2531E00B69170 /* Assets.xcassets */; };
@@ -142,6 +149,14 @@
 		9D56AF4E1D10C4B900892C87 /* PromotionsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromotionsManager.h; sourceTree = "<group>"; };
 		9D56AF4F1D10C4B900892C87 /* PromotionsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromotionsManager.m; sourceTree = "<group>"; };
 		9D56AF651D10CA5000892C87 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		9D5A23071DB7B5CE00B21AC6 /* ArticleTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleTableViewHeader.h; sourceTree = "<group>"; };
+		9D5A23081DB7B5CE00B21AC6 /* ArticleTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTableViewHeader.m; sourceTree = "<group>"; };
+		9D5A230B1DB8E72E00B21AC6 /* HorizontalRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalRule.h; sourceTree = "<group>"; };
+		9D5A230C1DB8E72E00B21AC6 /* HorizontalRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalRule.m; sourceTree = "<group>"; };
+		9D5A23101DB8EB1100B21AC6 /* SectionSplit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionSplit.h; sourceTree = "<group>"; };
+		9D5A23111DB8EB1100B21AC6 /* SectionSplit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionSplit.m; sourceTree = "<group>"; };
+		9D5A23141DB8FCC900B21AC6 /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
+		9D5A23151DB8FCC900B21AC6 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
 		9D69C1AF1C624D2800D537EF /* PlayButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonView.h; sourceTree = "<group>"; };
 		9D69C1B01C624D2800D537EF /* PlayButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonView.m; sourceTree = "<group>"; };
 		9D69C1B81C62624100D537EF /* PlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButton.h; sourceTree = "<group>"; };
@@ -153,6 +168,8 @@
 		9D81DA911CC52C3D002B424E /* about_text-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "about_text-en.html"; sourceTree = "<group>"; };
 		9D8D33351C610C5E0053FE3E /* NSMutableAttributedString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+HTML.h"; sourceTree = "<group>"; };
 		9D8D33361C610C5E0053FE3E /* NSMutableAttributedString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+HTML.m"; sourceTree = "<group>"; };
+		9D9147E01D67549E0089FD03 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		9D9147E11D67549E0089FD03 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		9D9D346B1D170B6600300529 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
 		9D9D346C1D170B6600300529 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
 		9DAC1DF21C57048E00126A83 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -178,6 +195,8 @@
 		9DBFF9ED1C5048BB00ABCD2C /* PlayerControlBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerControlBarView.xib; sourceTree = "<group>"; };
 		9DC0E14A1BF62B08004A47D4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9DC0E14B1BF62B08004A47D4 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		9DC1057C1D54F59800D5D441 /* NSURL+URLWithNonLatinString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+URLWithNonLatinString.h"; sourceTree = "<group>"; };
+		9DC1057D1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URLWithNonLatinString.m"; sourceTree = "<group>"; };
 		9DC7FE121D10D4AF007204C4 /* promotions.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = promotions.yml; path = Assets/promotions.yml; sourceTree = SOURCE_ROOT; };
 		9DCC797B1BF3639900F28F18 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9DCC797C1BF3639900F28F18 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -197,6 +216,8 @@
 		9DD418091C46F131000D6DC8 /* LanguagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagePickerView.h; sourceTree = "<group>"; };
 		9DD4180A1C46F131000D6DC8 /* LanguagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagePickerView.m; sourceTree = "<group>"; };
 		9DDBE7041C46E16700D2A7E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9DE0EE151D3BFE7F0061BEA1 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9DE0EE161D3C04310061BEA1 /* about_text-bg.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "about_text-bg.html"; path = "Assets/About Html Files/about_text-bg.html"; sourceTree = SOURCE_ROOT; };
 		9DE4A0FE1BE2531E00B69170 /* Push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Push.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE4A1021BE2531E00B69170 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9DE4A1041BE2531E00B69170 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -336,6 +357,51 @@
 			name = PromotionsManager;
 			sourceTree = "<group>";
 		};
+		9D5A23061DB7B58C00B21AC6 /* ArticleTableViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				9D5A23071DB7B5CE00B21AC6 /* ArticleTableViewHeader.h */,
+				9D5A23081DB7B5CE00B21AC6 /* ArticleTableViewHeader.m */,
+			);
+			name = ArticleTableViewHeader;
+			sourceTree = "<group>";
+		};
+		9D5A230A1DB8E71D00B21AC6 /* Decorations */ = {
+			isa = PBXGroup;
+			children = (
+				9D5A230F1DB8EAF800B21AC6 /* Section Split */,
+				9D5A230E1DB8EAF100B21AC6 /* Horizontal Rule */,
+			);
+			name = Decorations;
+			sourceTree = "<group>";
+		};
+		9D5A230E1DB8EAF100B21AC6 /* Horizontal Rule */ = {
+			isa = PBXGroup;
+			children = (
+				9D5A230B1DB8E72E00B21AC6 /* HorizontalRule.h */,
+				9D5A230C1DB8E72E00B21AC6 /* HorizontalRule.m */,
+			);
+			name = "Horizontal Rule";
+			sourceTree = "<group>";
+		};
+		9D5A230F1DB8EAF800B21AC6 /* Section Split */ = {
+			isa = PBXGroup;
+			children = (
+				9D5A23101DB8EB1100B21AC6 /* SectionSplit.h */,
+				9D5A23111DB8EB1100B21AC6 /* SectionSplit.m */,
+			);
+			name = "Section Split";
+			sourceTree = "<group>";
+		};
+		9D5A23131DB8FCA500B21AC6 /* Section View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9D5A23141DB8FCC900B21AC6 /* SectionViewController.h */,
+				9D5A23151DB8FCC900B21AC6 /* SectionViewController.m */,
+			);
+			name = "Section View Controller";
+			sourceTree = "<group>";
+		};
 		9D69C1A81C624C8100D537EF /* Play */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +427,7 @@
 		9D8D332F1C5FABEE0053FE3E /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				9DC1057B1D54F58400D5D441 /* NSURL + URLWithNonLatinString */,
 				9D8D33341C610C3D0053FE3E /* NSAttributedString + HTML */,
 			);
 			name = Categories;
@@ -373,6 +440,15 @@
 				9D8D33361C610C5E0053FE3E /* NSMutableAttributedString+HTML.m */,
 			);
 			name = "NSAttributedString + HTML";
+			sourceTree = "<group>";
+		};
+		9D9147E31D6754A20089FD03 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				9D9147E01D67549E0089FD03 /* Constants.h */,
+				9D9147E11D67549E0089FD03 /* Constants.m */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 		9D9D346A1D170B3C00300529 /* NotificationManager */ = {
@@ -407,6 +483,7 @@
 		9DAC1DF51C57093300126A83 /* About Html Files */ = {
 			isa = PBXGroup;
 			children = (
+				9DE0EE161D3C04310061BEA1 /* about_text-bg.html */,
 				9DCCCDE91D21C3BB008D9DC7 /* about_text-ru.html */,
 				9DCCCDE71D21C3B6008D9DC7 /* about_text-az.html */,
 				9D81DA911CC52C3D002B424E /* about_text-en.html */,
@@ -496,6 +573,15 @@
 			name = "Search View Controller";
 			sourceTree = "<group>";
 		};
+		9DC1057B1D54F58400D5D441 /* NSURL + URLWithNonLatinString */ = {
+			isa = PBXGroup;
+			children = (
+				9DC1057C1D54F59800D5D441 /* NSURL+URLWithNonLatinString.h */,
+				9DC1057D1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m */,
+			);
+			name = "NSURL + URLWithNonLatinString";
+			sourceTree = "<group>";
+		};
 		9DCC79841BF375C000F28F18 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,6 +665,7 @@
 				9DE4A1021BE2531E00B69170 /* main.m */,
 				9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */,
 				9D4CDB371CB3BD2200432B24 /* CustomizedSettings.plist */,
+				9D9147E31D6754A20089FD03 /* Constants */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -606,6 +693,7 @@
 		9DE4A1341BE257E800B69170 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9D5A23131DB8FCA500B21AC6 /* Section View Controller */,
 				9D4054BE1D10BBFA00361CBE /* Web Site View Controller */,
 				9DAC1DF11C57047900126A83 /* About View Controller */,
 				9DBFF9DF1C50282300ABCD2C /* Video Player View Controller */,
@@ -630,6 +718,7 @@
 		9DE4A1361BE2580C00B69170 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9D5A230A1DB8E71D00B21AC6 /* Decorations */,
 				9D56AF451D10C19500892C87 /* Promotion */,
 				9DAC1E031C57720900126A83 /* Icons */,
 				9DD418081C46F10F000D6DC8 /* Language Picker */,
@@ -658,6 +747,7 @@
 		9DE4A1391BE2582F00B69170 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9D5A23061DB7B58C00B21AC6 /* ArticleTableViewHeader */,
 				9DE4A1401BE2635800B69170 /* ArticleTableViewCell */,
 				9DE4A13A1BE2583A00B69170 /* FeaturedArticleTableViewCells */,
 			);
@@ -899,6 +989,7 @@
 				az,
 				ro,
 				sr,
+				bg,
 			);
 			mainGroup = 9DE4A0F51BE2531D00B69170;
 			productRefGroup = 9DE4A0FF1BE2531E00B69170 /* Products */;
@@ -959,6 +1050,7 @@
 				9DFE93211C51734A00780D78 /* icon-spotlight@3x.png in Resources */,
 				9D47E6C21C85D6B300FC7944 /* icon@1x.png in Resources */,
 				9D55509F1CA89B940010BFF5 /* logo@2x.png in Resources */,
+				9DE0EE171D3C04310061BEA1 /* about_text-bg.html in Resources */,
 				9D47E6BC1C85D61E00FC7944 /* icon 120x120.png in Resources */,
 				9D47E6C31C85D6B300FC7944 /* icon@2x.png in Resources */,
 			);
@@ -1068,6 +1160,7 @@
 			files = (
 				9D8D33371C610C5E0053FE3E /* NSMutableAttributedString+HTML.m in Sources */,
 				9D56AF4C1D10C22000892C87 /* Promotion.m in Sources */,
+				9D5A23161DB8FCC900B21AC6 /* SectionViewController.m in Sources */,
 				9D4054C11D10BC2C00361CBE /* WebSiteViewController.m in Sources */,
 				9DAC1DF41C57048E00126A83 /* AboutViewController.m in Sources */,
 				9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */,
@@ -1079,6 +1172,8 @@
 				9DE4A13D1BE260BD00B69170 /* FeaturedArticleTableViewCell.m in Sources */,
 				9DC0E14C1BF62B08004A47D4 /* SearchViewController.m in Sources */,
 				9DCC798D1BF393B600F28F18 /* ArticleViewController.m in Sources */,
+				9D5A23121DB8EB1100B21AC6 /* SectionSplit.m in Sources */,
+				9D5A230D1DB8E72E00B21AC6 /* HorizontalRule.m in Sources */,
 				9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */,
 				9DE4A14A1BE2668200B69170 /* Article.m in Sources */,
 				9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */,
@@ -1086,11 +1181,14 @@
 				9D69C1ED1C62758400D537EF /* PauseButtonView.m in Sources */,
 				9D9D346D1D170B6600300529 /* NotificationManager.m in Sources */,
 				9DCC79891BF3764200F28F18 /* PushSyncManager.m in Sources */,
+				9DC1057E1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m in Sources */,
 				9DAC1E0A1C5772F800126A83 /* AboutBarButtonView.m in Sources */,
 				9D56AF501D10C4B900892C87 /* PromotionsManager.m in Sources */,
 				9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */,
 				9DBFF9DE1C50270C00ABCD2C /* YouTubePlayerViewController.m in Sources */,
+				9D9147E21D67549E0089FD03 /* Constants.m in Sources */,
 				9DFE930D1C51565A00780D78 /* PlayerNavigationBarView.m in Sources */,
+				9D5A23091DB7B5CE00B21AC6 /* ArticleTableViewHeader.m in Sources */,
 				9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */,
 				9DBFF9D31C50069800ABCD2C /* SettingsManager.m in Sources */,
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
@@ -1148,6 +1246,7 @@
 				9DD418071C46E35D000D6DC8 /* az */,
 				9DF86A941C85D9E30074F22B /* ro */,
 				9DF88ED91D08D3C600F87C23 /* sr */,
+				9DE0EE151D3BFE7F0061BEA1 /* bg */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1280,7 +1379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
@@ -1307,7 +1406,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.rise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "$(PROFILE_UDID)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1320,7 +1419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
@@ -1347,7 +1446,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.rise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "$(PROFILE_UDID)";
 				TARGETED_DEVICE_FAMILY = 1;

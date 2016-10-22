@@ -21,10 +21,12 @@ typedef enum : NSUInteger {
 @property (nonatomic, retain) NSString * headline;
 @property (nonatomic, retain) NSString * descriptionText;
 @property (nonatomic, retain) NSString * body;
+@property (nonatomic, retain) NSAttributedString * bodyHTML;
 @property (nonatomic, retain) NSArray * images;
 @property (nonatomic, retain) NSArray * videos;
 @property (nonatomic, retain) NSDate * publishDate;
 @property (nonatomic, retain) NSString * author;
+@property (nonatomic, retain) NSString * category;
 @property (nonatomic, assign) ArticleLanguage language;
 @property (nonatomic, retain) NSURL * linkURL;
 
@@ -33,6 +35,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) NSDictionary * trackingProperties;
 
 + (instancetype)articleFromDictionary:(NSDictionary *)jsonDictionary;
++ (instancetype)articleFromDictionary:(NSDictionary *)jsonDictionary andCategory:(NSString*)category;
 - (instancetype)initWithDictionary:(NSDictionary *)jsonDictionary;
+- (instancetype)initWithDictionary:(NSDictionary *)jsonDictionary andCategory:(NSString*)category;
 
 @end

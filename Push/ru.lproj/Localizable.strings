@@ -28,6 +28,11 @@
 "Search" = "Поиск";
 "NoResultsFound" = "Поиск не найден";
 
+/* News Alert */
+"NewsAlert" = "Новости";
+"Read" = "Читать";
+"Cancel" = "Отмена";
+
 /* By */
 "by" = ",";
 

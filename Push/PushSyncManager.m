@@ -14,13 +14,13 @@
 
 @interface PushSyncManager()
 
-@property (nonatomic, retain) NSArray * articles;
+@property (nonatomic, retain) id articles;
 
 @end
 
 @implementation PushSyncManager
 
-static const NSString * versionNumber = @"1.0";
+static const NSString * versionNumber = @"1.1";
 
 + (PushSyncManager *)sharedManager {
     static PushSyncManager *_sharedManager = nil;
@@ -43,42 +43,27 @@ static const NSString * versionNumber = @"1.0";
 // Returns the current cached array, and then does another call.
 // The caller should show the current array and then handle the call back with new articles
 // If the return is nil there is nothing stored and the call will still be made.
-- (NSArray*)articlesWithCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
+- (NSArray*)articlesWithCompletionHandler:(void(^)(id articles))completionHandler failure:(void(^)(NSError *error))failure
 {
 
     [self GET:@"articles" parameters:@{@"language":[LanguageManager sharedManager].languageShortCode,
-                                       @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                                       @"v":versionNumber, @"categories":@"true"} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
-        NSDictionary * response = (NSDictionary*)responseObject;
-        NSArray * articlesResponse = response[@"results"];
-        
-        NSMutableArray * mutableResponseArray = [NSMutableArray arrayWithCapacity:articlesResponse.count];
-        
-        for(NSDictionary * articleResponse in articlesResponse){
-            Article * article = [Article articleFromDictionary:articleResponse];
-            [mutableResponseArray addObject:article];
-        }
-        
-        NSArray * articles = [NSArray arrayWithArray:mutableResponseArray];
-        [self cacheArticles:articles];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler(articles);
-        });
+                                           [self handleResponse:responseObject completionHandler:completionHandler];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [AnalyticsManager logErrorWithErrorDescription:error.localizedDescription];
-            failure(error);
-        });
+        [self handleError:error failure:failure];
     }];
     
-    if(!self.articles || self.articles.count == 0){
+    
+    if(!self.articles || ([self.articles respondsToSelector:@selector(count)] && [self.articles count] == 0) ||
+       ([self.articles respondsToSelector:@selector(allKeys)] && [[self.articles allKeys] count] == 0)){
         self.articles = [self getCachedArticles];
     }
     
     return self.articles;
 }
 
-- (void)articleWithId:(NSString*)articleId withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
+- (void)articleWithId:(NSString*)articleId withCompletionHandler:(void(^)(id articles))completionHandler failure:(void(^)(NSError *error))failure
 {
     NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
     
@@ -90,29 +75,15 @@ static const NSString * versionNumber = @"1.0";
     [self GET:@"article" parameters:@{@"id":articleId, @"language":[LanguageManager sharedManager].languageShortCode,
                                      @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
                                          
-                                         NSDictionary * response = (NSDictionary*)responseObject;
-                                         NSArray * articlesResponse = response[@"results"];
+                                         [self handleResponse:responseObject completionHandler:completionHandler];
                                          
-                                         NSMutableArray * mutableResponseArray = [NSMutableArray arrayWithCapacity:articlesResponse.count];
-                                         
-                                         for(NSDictionary * articleResponse in articlesResponse){
-                                             Article * article = [Article articleFromDictionary:articleResponse];
-                                             [mutableResponseArray addObject:article];
-                                         }
-                                         
-                                         NSArray * articles = [NSArray arrayWithArray:mutableResponseArray];
-                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                             completionHandler(articles);
-                                         });
                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                             failure(error);
-                                         });
+                                         [self handleError:error failure:failure];
                                      }];
     
 }
 
-- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure
+- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(id articles))completionHandler failure:(void(^)(NSError *error))failure
 {
     NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
     
@@ -123,8 +94,21 @@ static const NSString * versionNumber = @"1.0";
     
     [self GET:@"search" parameters:@{@"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode,
                                      @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        
-        NSDictionary * response = (NSDictionary*)responseObject;
+                                         
+                                         [self handleResponse:responseObject completionHandler:completionHandler];
+                                         
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self handleError:error failure:failure];
+    }];
+}
+
+- (void)handleResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler
+{
+    NSDictionary * response = (NSDictionary*)responseObject;
+
+    /* we want to handle both categories and consolidated returns */
+    
+    if(![response.allKeys containsObject:@"categories"]){
         NSArray * articlesResponse = response[@"results"];
         
         NSMutableArray * mutableResponseArray = [NSMutableArray arrayWithCapacity:articlesResponse.count];
@@ -138,12 +122,34 @@ static const NSString * versionNumber = @"1.0";
         dispatch_async(dispatch_get_main_queue(), ^{
             completionHandler(articles);
         });
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } else {
+        NSMutableDictionary * mutableCategoriesResponseDictionary = [NSMutableDictionary dictionary];
+        for(NSString * category in response[@"categories"]){
+            NSArray * articles = response[@"results"][category];
+            
+            NSMutableArray * mutableResponseArray = [NSMutableArray array];
+            for(NSDictionary * articleResponse in articles){
+                Article * article = [Article articleFromDictionary:articleResponse andCategory:category];
+                [mutableResponseArray addObject:article];
+            }
+            
+            mutableCategoriesResponseDictionary[category] = mutableResponseArray;
+        }
+        
+        NSDictionary * categories = [NSDictionary dictionaryWithDictionary:mutableCategoriesResponseDictionary];
         dispatch_async(dispatch_get_main_queue(), ^{
-            failure(error);
+            completionHandler(categories);
         });
-    }];
+    }
     
+}
+
+- (void)handleError:(NSError*)error failure:(void(^)(NSError *error))failure
+{
+    [AnalyticsManager logErrorWithErrorDescription:error.localizedDescription];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        failure(error);
+    });
 }
 
 - (void)reset
@@ -157,23 +163,30 @@ static const NSString * versionNumber = @"1.0";
     return [super dataTaskWithRequest:request completionHandler:completionHandler];
 }
 
-- (void)cacheArticles:(NSArray*)articles
+// Pass in either NSArray or NSDictionary
+- (void)cacheArticles:(id)articles
 {
+    NSParameterAssert([articles class] == NSClassFromString(@"NSArray") || [articles class] == NSClassFromString(@"NSDictionary"));
+    
     self.articles = articles;
+    
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:articles] forKey:@"cached_articles"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
 // Returns nill if the key doesn't exist.
-- (NSArray*)getCachedArticles
+- (id)getCachedArticles
 {
     NSData * articleData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cached_articles"];
     if(!articleData){
         return nil;
     }
     
-    NSArray * articles = [NSKeyedUnarchiver unarchiveObjectWithData:articleData];
+    id articles = [NSKeyedUnarchiver unarchiveObjectWithData:articleData];
+    
+    NSParameterAssert([articles class] == NSClassFromString(@"NSArray") || [articles class] == NSClassFromString(@"NSDictionary"));
+
     return articles;
 }
 
@@ -181,5 +194,6 @@ static const NSString * versionNumber = @"1.0";
 {
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"cached_articles"];
 }
+
 
 @end

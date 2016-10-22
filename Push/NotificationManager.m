@@ -13,13 +13,18 @@
 #import <AFNetworking/AFHTTPSessionManager.h>
 
 #import "ArticleViewController.h"
+//#import "LiveVideoViewController.h"
 
 #import "Article.h"
 
 //ew
 // Always set this to true before generating and pushing...
 // I know, for a fact, I'm going to screw that up at some point
-#define SANDBOX @"false"
+#ifdef DEBUG
+    #define SANDBOX @"true"
+#else
+    #define SANDBOX @"false"
+#endif
 
 @interface NotificationManager()
 
@@ -62,13 +67,15 @@
 
 - (void)registerForNotifications
 {
-    UIUserNotificationType types = (UIUserNotificationType) (UIUserNotificationTypeSound | UIUserNotificationTypeAlert);
+    #if !(TARGET_IPHONE_SIMULATOR)
+        UIUserNotificationType types = (UIUserNotificationType) (UIUserNotificationTypeSound | UIUserNotificationTypeAlert);
     
-    UIUserNotificationSettings * mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-    
-    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+        UIUserNotificationSettings * mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
 
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    #endif
 }
 
 - (void)didRegisterForNotificationsWithDeviceToken:(NSData*)devToken
@@ -162,17 +169,24 @@
         } failure:^(NSError *error) {
             NSLog(@"Error fetching article: %@", error.localizedDescription);
         }];
+    } else if([[userInfo allKeys] containsObject:@"facebook_live_id"]){
+        if (state == UIApplicationStateActive){
+            [self showAlertForFacebookLiveWithNavigationController:navController];
+        } else {
+            [self showFacebookLiveVideoViewControllerWithNavigationController:navController];
+        }
+
     }
 }
 
 - (void)showAlertForArticle:(Article*)article withNavigationController:(UINavigationController*)navController
 {
-    UIAlertController * alertcontroller = [UIAlertController alertControllerWithTitle:@"News Alert" message:article.headline preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertController * alertcontroller = [UIAlertController alertControllerWithTitle:[[LanguageManager sharedManager] localizedStringForKey:@"NewsAlert" value:@"Header of news alert dialog"] message:article.headline preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:[[LanguageManager sharedManager] localizedStringForKey:@"Cancel" value:@"Cancel button of news alert dialog"] style:UIAlertActionStyleCancel handler:nil];
     
     [alertcontroller addAction:cancelAction];
     
-    UIAlertAction * readAction = [UIAlertAction actionWithTitle:@"Read" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * readAction = [UIAlertAction actionWithTitle:[[LanguageManager sharedManager] localizedStringForKey:@"Read" value:@"Read article button of news alert dialog"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self showArticle:article withNavigationController:navController];
     }];
     
@@ -189,6 +203,30 @@
     });
 }
 
+- (void)showAlertForFacebookLiveWithNavigationController:(UINavigationController*)navController
+{
+    UIAlertController * alertcontroller = [UIAlertController alertControllerWithTitle:[[LanguageManager sharedManager] localizedStringForKey:@"FacebookLiveAlert" value:@"Facebook live alert notification"] message:@"We're live on Facebook Live, click here to watch" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:[[LanguageManager sharedManager] localizedStringForKey:@"Cancel" value:@"Cancel button of news alert dialog"] style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertcontroller addAction:cancelAction];
+    
+    UIAlertAction * readAction = [UIAlertAction actionWithTitle:[[LanguageManager sharedManager] localizedStringForKey:@"Watch" value:@"View Facebook Live"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showFacebookLiveVideoViewControllerWithNavigationController:navController];
+    }];
+    
+    [alertcontroller addAction:readAction];
+    
+    [navController presentViewController:alertcontroller animated:YES completion:nil];
+}
+
+- (void)showFacebookLiveVideoViewControllerWithNavigationController:(UINavigationController*)navController
+{
+//    LiveVideoViewController * liveVideoViewController = [[LiveVideoViewController alloc] init];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [navController pushViewController:liveVideoViewController animated:YES];
+//    });
+
+}
 
 - (NSString*)identifierForInstallWithLanguage:(NSString*)languageShortCode
 {

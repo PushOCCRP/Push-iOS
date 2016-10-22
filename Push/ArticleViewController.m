@@ -1,4 +1,4 @@
-//
+ //
 //  ArticleViewController.m
 //  Push
 //
@@ -10,6 +10,8 @@
 
 #import "ArticleViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import <AFNetworking/AFImageDownloader.h>
+
 #import <Masonry/Masonry.h>
 #import "LanguageManager.h"
 #import "YouTubePlayerViewController.h"
@@ -17,6 +19,12 @@
 
 #import "NSMutableAttributedString+HTML.h"
 #import "NSString+ReverseString.h"
+#import "NSURL+URLWithNonLatinString.h"
+
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "ArticleTableViewHeader.h"
+
+#import "Constants.h"
 
 @interface ArticleViewController ()
 
@@ -26,13 +34,18 @@
 @property (nonatomic, retain) UILabel * date;
 @property (nonatomic, retain) UILabel * headline;
 @property (nonatomic, retain) UITextView * body;
+@property (nonatomic, retain) ArticleTableViewHeader * category;
 
 @property (nonatomic, retain) UIScrollView * scrollView;
 @property (nonatomic, retain) UIView * contentView;
 
+@property (nonatomic, retain) NSMutableDictionary * imageLocations;
+
 @end
 
 @implementation ArticleViewController
+
+static NSString * imageGravestoneMarker = @"&&&&";
 
 - (instancetype)initWithArticle:(Article*)article
 {
@@ -52,14 +65,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+    
+    self.imageLocations = [NSMutableDictionary dictionary];
+    
     [self setShareButton];
     [self setupScrollView];
-    [self setupContentView];
-    [self setContraints];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self setupContentView];
+    [self setContraints];
+
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article Viewed Time" contentType:@"Article View Time"
                                                contentId:self.article.description customAttributes:self.article.trackingProperties];
     [AnalyticsManager startTimerForContentViewWithObject:self name:self.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];
@@ -67,12 +85,18 @@
     [AnalyticsManager logContentViewWithName:@"Article List Appeared" contentType:@"Navigation"
                           contentId:self.article.description customAttributes:self.article.trackingProperties];
     [AnalyticsManager logContentViewWithName:self.article.headline contentType:@"Article View" contentId:nil customAttributes:nil];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article Viewed Time"];
     [AnalyticsManager endTimerForContentViewWithObject:self andName:self.article.headline];
+    
+    @try {
+        [self.article removeObserver:self forKeyPath:NSStringFromSelector(@selector(bodyHTML))];
+    }
+    @catch (NSException * __unused exception) {}
 }
 
 - (void)setShareButton {
@@ -87,7 +111,7 @@
 
 - (void)setupScrollView {
     self.scrollView = [[UIScrollView alloc] init];
-    
+    self.scrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker * make) {
@@ -97,8 +121,17 @@
 
 - (void)setupContentView {
     
+    if(self.contentView){
+        return;
+    }
+    
     //Create the content views
     self.contentView = [[UIView alloc] init];
+    
+    if (self.article.category){
+        self.category = [[ArticleTableViewHeader alloc] initWithTop:YES];
+        self.category.categoryName = self.article.category;
+    }
     
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, self.contentView.frame.size.height)];
     self.image.clipsToBounds = YES;
@@ -126,6 +159,9 @@
     self.body.dataDetectorTypes = UIDataDetectorTypeLink;
     
     // Add the content views to the main view
+    if(self.category){
+        [self.contentView addSubview:self.category];
+    }
     [self.contentView addSubview:self.image];
     [self.contentView addSubview:self.videoPlayerButton];
     [self.contentView addSubview:self.caption];
@@ -144,15 +180,28 @@
     
     // Set the stack up. This is pretty basic stuff
     UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
-
+    
     [self.contentView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.edges.equalTo(self.scrollView);
         make.width.equalTo(self.scrollView);
         make.bottom.equalTo(self.body.mas_bottom).with.offset(80.0f);
     }];
     
+    if(self.category){
+        [self.category mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top);
+            make.left.equalTo(self.contentView.mas_left);
+            make.right.equalTo(self.contentView.mas_right);
+            make.height.equalTo(@42);
+        }];
+    }
     [self.image mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.top.equalTo(self.contentView.mas_top);
+        if(self.category){
+            make.top.equalTo(self.category.mas_bottom);
+        } else {
+            make.top.equalTo(self.contentView.mas_top);
+        }
+        
         make.left.equalTo(self.contentView.mas_left);
         make.right.equalTo(self.contentView.mas_right);
         //make.height.equalTo(@400);
@@ -174,6 +223,7 @@
         make.top.equalTo(self.caption.mas_bottom).with.offset(padding.top);
         make.left.equalTo(self.date.superview.mas_left).with.offset(padding.left);
         make.right.equalTo(self.date.superview.mas_right).with.offset(padding.right);
+        //TODO: Should set height here base on the length of the byline and the width of the screen
     }];
     
     [self.headline mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -193,29 +243,51 @@
 
 - (void)setViewsForArticle {
     
-    //Load image from web if the cache doesn't exist (this is handled in UIImageView+AFNetworking
-    NSURL * imageURL = [NSURL URLWithString:self.article.images.firstObject[@"url"]];
-    [self.image setImageWithURL:imageURL];
+    if(self.category){
+        self.category.categoryName = self.article.category;
+    }
     
-    __weak typeof(self) weakSelf = self;
-    [self.image setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-        weakSelf.image.image = image;
+    //Load image from web if the cache doesn't exist (this is handled in UIImageView+AFNetworking
+    
+    if(self.article.images.count > 0){
+        NSURL * imageURL = [NSURL URLWithNonLatinString:self.article.images[0][@"url"]];
+        [self.image setImageWithURL:imageURL];
         
-        //Resize the image view's height to make it proportional
-        float viewWidth = weakSelf.view.frame.size.width;
-        float proportion = viewWidth / image.size.width;
-        float height = image.size.height * proportion;
-        
-        [weakSelf.image mas_remakeConstraints:^(MASConstraintMaker * make) {
-            make.top.equalTo(weakSelf.contentView.mas_top);
-            make.left.equalTo(weakSelf.contentView.mas_left);
-            make.right.equalTo(weakSelf.contentView.mas_right);
-            make.height.equalTo([NSNumber numberWithFloat:height]);
+        __weak typeof(self) weakSelf = self;
+        [self.image setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+            
+            weakSelf.image.image = image;
+            
+            //Resize the image view's height to make it proportional
+            float viewWidth = weakSelf.view.frame.size.width;
+            float proportion = viewWidth / image.size.width;
+            float height = image.size.height * proportion;
+            
+            [weakSelf.image mas_remakeConstraints:^(MASConstraintMaker * make) {
+                if(weakSelf.category){
+                    make.top.equalTo(weakSelf.category.mas_bottom);
+                } else {
+                    make.top.equalTo(weakSelf.contentView.mas_top);
+                }
+                
+                make.left.equalTo(weakSelf.contentView.mas_left);
+                make.right.equalTo(weakSelf.contentView.mas_right);
+                make.height.equalTo([NSNumber numberWithFloat:height]);
+            }];
+            
+        } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+            NSLog(@"Error loading image: %@", error.localizedDescription);
         }];
         
-    } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-        NSLog(@"Error loading image: %@", error.localizedDescription);
-    }];
+        //Set image caption, hide if there is none.
+        if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
+            self.caption.text = [self.article.images[0] valueForKey:@"caption"];
+            self.caption.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
+        } else {
+            self.caption.hidden = YES;
+        }
+
+    }
     
     //Hide the video button if there is no video
     if(self.article.videos.count < 1){
@@ -227,7 +299,12 @@
         // When the image loads everything resizes correctly
         if(self.image.frame.size.height == 0){
             [self.image mas_remakeConstraints:^(MASConstraintMaker * make) {
-                make.top.equalTo(self.contentView.mas_top);
+                if(self.category){
+                    make.top.equalTo(self.category.mas_bottom);
+                } else {
+                    make.top.equalTo(self.contentView.mas_top);
+                }
+
                 make.left.equalTo(self.contentView.mas_left);
                 make.right.equalTo(self.contentView.mas_right);
                 make.height.equalTo(self.videoPlayerButton.mas_height).valueOffset(@50);
@@ -235,84 +312,50 @@
         }
     }
     
-    //Set image caption, hide if there is none.
-    if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
-        self.caption.text = [self.article.images[0] valueForKey:@"caption"];
-        self.caption.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
-    } else {
-        self.caption.hidden = YES;
-    }
-    
     //Set date
     self.date.text = self.article.dateByline;
     self.date.font = [UIFont fontWithName:@"TrebuchetMS" size:13.0f];
+    self.date.numberOfLines = 0;
     
     //Set the headline
     self.headline.text = self.article.headline;
     self.headline.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
     
+    if(self.article.bodyHTML == nil){
+        [self.article addObserver:self forKeyPath:NSStringFromSelector(@selector(bodyHTML)) options:0 context:nil];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.tag = 1000;
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Loading";
+    } else {
+        [self processBodyText];
+    }
+    //self.body.textColor = [UIColor blackColor];
+}
+
+- (void)processBodyText
+{
     //Set the body using html for the formatting
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 7.0f;
     
-    NSString * html = [self.article.body stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: '%@'; font-size:%fpx;}</style>", @"Palatino-Roman", 17.0f]];
+    NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.article.bodyHTML];
     
-    NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
-                                                      initWithHTML:[html dataUsingEncoding:NSUTF8StringEncoding]
-                                                      baseURL:[SettingsManager sharedManager].cmsBaseUrl
-                                                       documentAttributes:nil];
-    
-    self.body.attributedText = bodyAttributedText;
-
     [bodyAttributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, bodyAttributedText.string.length)];
-
-    self.body.attributedText = bodyAttributedText;    
+    
+    //bodyAttributedText = [[NSMutableAttributedString alloc] initWithAttributedString:[self addImagePlaceholderToAttributedString:bodyAttributedText]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.body.attributedText = bodyAttributedText;
+    });
 }
 
-// Wrote this without test from memory. There's a 10% chance it works
-- (NSArray*)imageLocationsInText:(NSString*)text
+- (void)reloadImagesInBody:(NSString*)imageURL
 {
-    // Find all strings ^&^&
-    // Find the nearest new line before the location
-    // Unless it's at the start of the string, in which case do the one afterwards
-    // return an array of the new line location
     
-    NSMutableArray * ranges = [NSMutableArray array];
-    
-    NSString * compareRange = @"^&^&";
-    NSRange range = [text rangeOfString:compareRange];
-    NSUInteger indexOfLastImageString = 0;
-    
-    while (range.length != 0){
-        
-        // Before we add the range we actually want to find the blank space before it
-        // I'm not sure, so this assumes that all distances and locations are relative to the substrings
-        if(ranges.count > 1){
-            // Get a reversed string so we can use some helpers
-            // We want it to be from the previous range
-            NSRange previousRange = [[ranges lastObject] rangeValue];
-            NSString * reversedString = [[text substringWithRange:NSMakeRange(previousRange.location + previousRange.length, range.location - previousRange.length)] reverse];
-        
-            // This might work... depends on how line breaks are handled
-            // Here we get the range of the previous newlines
-            // It's reversed, so the string we're checking for is too
-            NSRange reversedRangeOfNewLine = [reversedString rangeOfString:@"n\\"];
-        
-            // Subtract it here
-            range.location -= reversedRangeOfNewLine.location;
-        } else {
-            range.location += [[text substringWithRange:NSMakeRange(range.location, text.length - range.location)] rangeOfString:@"\n"].location;
-        }
-        
-        [ranges addObject:[NSValue valueWithRange:range]];
-        
-        NSUInteger newStart = range.location + range.length;
-        range = [text rangeOfString:compareRange options:0 range:NSMakeRange(newStart, text.length - newStart)];
-        indexOfLastImageString = newStart;
-    }
-    
-    return [NSArray arrayWithArray:ranges];
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -342,6 +385,18 @@
 }
 
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if(object == self.article && [keyPath isEqualToString:NSStringFromSelector(@selector(bodyHTML))]){
+        [self processBodyText];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [(MBProgressHUD*)[self.view viewWithTag:1000] hide:YES];
+        });
+    }
+}
 
 
 #pragma mark - UITextViewDelegate

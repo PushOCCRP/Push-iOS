@@ -4,7 +4,7 @@ target "Push" do
     pod 'AFNetworking'
     pod 'Masonry'
     pod 'SVPullToRefresh'
-    pod 'MBProgressHUD', '~> 0.9.1'
+    pod 'MBProgressHUD'
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
@@ -15,4 +15,5 @@ target "Push" do
     #pod 'DateTools', :git => 'https://github.com/PushOCCRP/DateTools.git', :commit => 'f50ae33def9b8b50a5fbf9e3dadcbf19796f3f35'
     pod 'DateTools', :path => '~/Repositories/DateTools'
     pod 'YAML-Framework'
+    pod 'HTMLKit', '~> 0.9'
 end

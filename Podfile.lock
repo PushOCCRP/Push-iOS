@@ -33,6 +33,7 @@ PODS:
   - HockeySDK (4.0.1):
     - HockeySDK/AllFeaturesLib (= 4.0.1)
   - HockeySDK/AllFeaturesLib (4.0.1)
+  - HTMLKit (0.9.2)
   - LibYAML (0.1.4)
   - Masonry (1.0.1)
   - MBProgressHUD (0.9.2)
@@ -50,8 +51,9 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - HockeySDK
+  - HTMLKit (~> 0.9)
   - Masonry
-  - MBProgressHUD (~> 0.9.1)
+  - MBProgressHUD
   - SVPullToRefresh
   - YAML-Framework
   - youtube-ios-player-helper (~> 0.1.5)
@@ -70,6 +72,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 03f68a8d48c2c8bb81d7eb8097973d483543e1f6
   FBSDKShareKit: df1491f064cffc8ebcc3fc8b71be94cc190c728e
   HockeySDK: 1b69a82782f6a3d4a1c0b1f04dca4bca83fc8c82
+  HTMLKit: f977f12d414b8a433a45b98c9795e337ddcf003f
   LibYAML: 3af2c5adf3a40dff936d087aa6a77edc10036bc5
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -77,6 +80,6 @@ SPEC CHECKSUMS:
   YAML-Framework: 6fe698e19d39d778829f5937e39d1e6bc12afd7b
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 7bc500c6e32384fc76839027778669dd6a7e90c1
+PODFILE CHECKSUM: 4d96af05807041cae1eeb98676bf18fb2b6c4872
 
 COCOAPODS: 1.0.1

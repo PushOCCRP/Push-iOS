@@ -13,11 +13,15 @@
 @interface PushSyncManager : AFHTTPSessionManager
 
 + (PushSyncManager *)sharedManager;
-- (NSArray*)articlesWithCompletionHandler:(void(^)(NSArray * articles))completionHandler
+
+// completion handler will always return either an NSArray or NSDictionary
+- (NSArray*)articlesWithCompletionHandler:(void(^)(id articles))completionHandler
                               failure:(void(^)(NSError *error))failure;
 
-- (void)articleWithId:(NSString*)articleId withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure;
+// The completion handler will always return an NSArray
+- (void)articleWithId:(NSString*)articleId withCompletionHandler:(void(^)(id articles))completionHandler failure:(void(^)(NSError *error))failure;
 
-- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(NSArray * articles))completionHandler failure:(void(^)(NSError *error))failure;
+// The completion handler will always return an NSArray
+- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(id articles))completionHandler failure:(void(^)(NSError *error))failure;
 - (void)reset;
 @end

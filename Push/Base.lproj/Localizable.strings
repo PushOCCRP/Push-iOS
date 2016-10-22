@@ -28,6 +28,11 @@
 "Search" = "Search";
 "NoResultsFound" = "No Results Found";
 
+/* News Alert */
+"NewsAlert" = "News Alert";
+"Read" = "Read";
+"Cancel" = "Cancel";
+
 /* By */
 "by" = "by";
 

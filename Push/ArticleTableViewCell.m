@@ -8,6 +8,7 @@
 
 #import "ArticleTableViewCell.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "NSURL+URLWithNonLatinString.h"
 
 @interface ArticleTableViewCell ()
  
@@ -27,7 +28,7 @@
 - (void)setArticle:(Article *)article
 {
     self.headlineLabel.text = @"";
-    self.imageView.image = nil;
+    self.articleImageView.image = nil;
     
     _article = article;
     if(article.headline){
@@ -36,7 +37,8 @@
     self.dateBylinesLabel.text = article.shortDateByline;
     
     __weak typeof(self) weakSelf = self;
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:article.images.firstObject[@"url"]]];
+    
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithNonLatinString:article.images.firstObject[@"url"]]];
     [self.imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         weakSelf.articleImageView.image = image;
     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {

@@ -22,6 +22,8 @@
 #import "NotificationManager.h"
 
 #import "WebSiteViewController.h"
+#import "ArticleTableViewHeader.h"
+#import "SectionViewController.h"
 
 #import "AboutBarButtonView.h"
 
@@ -39,7 +41,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 @property (nonatomic, retain) LanguagePickerView * languagePickerView;
 @property (nonatomic, retain) PromotionView * promotionView;
 
-@property (nonatomic, retain) NSArray * articles;
+@property (nonatomic, retain) id articles;
 
 @end
 
@@ -132,10 +134,13 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)setupTableView
 {
     self.tableView = [[UITableView alloc] init];
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
     [self.view addSubview:self.tableView];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -343,26 +348,60 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     // Dispose of any resources that can be recreated.
 }
 
-// UITableViewDelegate
+#pragma mark - UITableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 100.0f;
     if(indexPath.row == 0){
+        if(indexPath.section == 0){
+            height = 42.0f;
+        } else {
+            height = 48.0f;
+        }
+    }else if(indexPath.row == 1){
         height = 434.0f;
     }
 
     return height;
 }
 
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
     
-    ArticlePageViewController * articlePageViewController = [[ArticlePageViewController alloc] initWithArticles:self.articles];
+    NSArray * articles;
     
-    Article * article = self.articles[indexPath.row];
+    if([self.articles respondsToSelector:@selector(allKeys)]){
+        NSMutableArray * mutableArticles = [NSMutableArray array];
+        for(NSString * sectionName in [self.articles allKeys]){
+            [mutableArticles addObjectsFromArray:self.articles[sectionName]];
+        }
+        articles = [NSArray arrayWithArray:mutableArticles];
+    } else {
+        articles = self.articles;
+    }
+    
+    // If they tap on the section header
+    if(indexPath.row == 0){
+        SectionViewController * sectionViewController = [[SectionViewController alloc] initWithSectionTitle:[self.articles allKeys][indexPath.section] andArticles:articles];
+        [self.navigationController pushViewController:sectionViewController animated:YES];
+        return;
+    }
 
+    
+    ArticlePageViewController * articlePageViewController = [[ArticlePageViewController alloc] initWithArticles:articles];
+    
+    Article * article;
+    if([self.articles respondsToSelector:@selector(allKeys)]){
+        article = self.articles[[self.articles allKeys][indexPath.section]][indexPath.row - 1];
+    } else{
+        article = self.articles[indexPath.row];
+    }
+    
     ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:article];
     [articlePageViewController setViewControllers:@[articleViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
@@ -373,27 +412,66 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     [self.navigationController pushViewController:articlePageViewController animated:YES];
 }
 
-// UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     ArticleTableViewCell * cell;
     
-    if(indexPath.row == 0){
-        cell = [tableView dequeueReusableCellWithIdentifier:featuredCellIdentifier];
+    if([self.articles respondsToSelector:@selector(allKeys)]){
+        
+        if(indexPath.row == 0){
+            ArticleTableViewHeader * header = [[ArticleTableViewHeader alloc] initWithTop:(indexPath.section == 0)];
+            header.categoryName = [self.articles allKeys][indexPath.section];
+            UITableViewCell * cell = [[UITableViewCell alloc] init];
+            cell.backgroundView = header;
+            return cell;
+        } else {
+            NSString * sectionName = [self.articles allKeys][indexPath.section];
+            NSArray * articles = self.articles[sectionName];
+            
+            if(indexPath.row == 1){
+                cell = [tableView dequeueReusableCellWithIdentifier:featuredCellIdentifier];
+            } else {
+                cell = [tableView dequeueReusableCellWithIdentifier:standardCellIdentifier];
+            }
+            
+            cell.article = articles[indexPath.row - 1];
+        }
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:standardCellIdentifier];
+        if(indexPath.row == 0){
+            cell = [tableView dequeueReusableCellWithIdentifier:featuredCellIdentifier];
+        } else {
+            cell = [tableView dequeueReusableCellWithIdentifier:standardCellIdentifier];
+        }
+        
+        cell.article = self.articles[indexPath.row];
     }
-    
-    cell.article = self.articles[indexPath.row];
+
+    [cell setNeedsDisplay];
     return cell;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if([self.articles respondsToSelector:@selector(allKeys)]){
+        return [self.articles allKeys].count;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Random number for testing
-    return self.articles.count;
+    if([self.articles respondsToSelector:@selector(allKeys)]){
+        NSDictionary * articles = (NSDictionary*)self.articles;
+        return [articles[articles.allKeys[section]] count] + 1;
+    } else {
+        return [self.articles count];
+    }
 }
 
 @end
