@@ -13,6 +13,10 @@
 		9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3910521C638E130061E094 /* AnalyticsManager.m */; };
 		9D4054C11D10BC2C00361CBE /* WebSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4054C01D10BC2C00361CBE /* WebSiteViewController.m */; };
 		9D4054C31D10BCE100361CBE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4054C21D10BCE100361CBE /* WebKit.framework */; };
+		9D4327CF1DBB6DCA00A6FEB2 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4327CE1DBB6DCA00A6FEB2 /* SectionViewController.m */; };
+		9D4327D41DBB6DF500A6FEB2 /* ArticleTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4327D31DBB6DF500A6FEB2 /* ArticleTableViewHeader.m */; };
+		9D4327D81DBB6E1300A6FEB2 /* HorizontalRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4327D71DBB6E1300A6FEB2 /* HorizontalRule.m */; };
+		9D4327DC1DBB6E2B00A6FEB2 /* SectionSplit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4327DB1DBB6E2B00A6FEB2 /* SectionSplit.m */; };
 		9D4679BF1CC525AE00EA3233 /* launch-background-color@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D4679BE1CC525AE00EA3233 /* launch-background-color@3x.png */; };
 		9D47E6B81C85D1BC00FC7944 /* launch-screen-logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D47E6B71C85D1BC00FC7944 /* launch-screen-logo@3x.png */; };
 		9D47E6BC1C85D61E00FC7944 /* icon 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D47E6B91C85D61E00FC7944 /* icon 120x120.png */; };
@@ -30,10 +34,6 @@
 		9D56AF4C1D10C22000892C87 /* Promotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D56AF4B1D10C22000892C87 /* Promotion.m */; };
 		9D56AF501D10C4B900892C87 /* PromotionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D56AF4F1D10C4B900892C87 /* PromotionsManager.m */; };
 		9D56AF671D10CA6800892C87 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D56AF651D10CA5000892C87 /* libresolv.tbd */; };
-		9D5A23091DB7B5CE00B21AC6 /* ArticleTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A23081DB7B5CE00B21AC6 /* ArticleTableViewHeader.m */; };
-		9D5A230D1DB8E72E00B21AC6 /* HorizontalRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A230C1DB8E72E00B21AC6 /* HorizontalRule.m */; };
-		9D5A23121DB8EB1100B21AC6 /* SectionSplit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A23111DB8EB1100B21AC6 /* SectionSplit.m */; };
-		9D5A23161DB8FCC900B21AC6 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A23151DB8FCC900B21AC6 /* SectionViewController.m */; };
 		9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B01C624D2800D537EF /* PlayButtonView.m */; };
 		9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B91C62624100D537EF /* PlayButton.m */; };
 		9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1E91C62756E00D537EF /* PauseButton.m */; };
@@ -127,6 +127,14 @@
 		9D4054BF1D10BC2C00361CBE /* WebSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSiteViewController.h; sourceTree = "<group>"; };
 		9D4054C01D10BC2C00361CBE /* WebSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSiteViewController.m; sourceTree = "<group>"; };
 		9D4054C21D10BCE100361CBE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9D4327CD1DBB6DCA00A6FEB2 /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
+		9D4327CE1DBB6DCA00A6FEB2 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
+		9D4327D21DBB6DF500A6FEB2 /* ArticleTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleTableViewHeader.h; sourceTree = "<group>"; };
+		9D4327D31DBB6DF500A6FEB2 /* ArticleTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTableViewHeader.m; sourceTree = "<group>"; };
+		9D4327D61DBB6E1300A6FEB2 /* HorizontalRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalRule.h; sourceTree = "<group>"; };
+		9D4327D71DBB6E1300A6FEB2 /* HorizontalRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalRule.m; sourceTree = "<group>"; };
+		9D4327DA1DBB6E2B00A6FEB2 /* SectionSplit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionSplit.h; sourceTree = "<group>"; };
+		9D4327DB1DBB6E2B00A6FEB2 /* SectionSplit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionSplit.m; sourceTree = "<group>"; };
 		9D4679BE1CC525AE00EA3233 /* launch-background-color@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-background-color@3x.png"; sourceTree = "<group>"; };
 		9D47E6B71C85D1BC00FC7944 /* launch-screen-logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-screen-logo@3x.png"; sourceTree = "<group>"; };
 		9D47E6B91C85D61E00FC7944 /* icon 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 120x120.png"; sourceTree = "<group>"; };
@@ -149,14 +157,6 @@
 		9D56AF4E1D10C4B900892C87 /* PromotionsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromotionsManager.h; sourceTree = "<group>"; };
 		9D56AF4F1D10C4B900892C87 /* PromotionsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromotionsManager.m; sourceTree = "<group>"; };
 		9D56AF651D10CA5000892C87 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		9D5A23071DB7B5CE00B21AC6 /* ArticleTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleTableViewHeader.h; sourceTree = "<group>"; };
-		9D5A23081DB7B5CE00B21AC6 /* ArticleTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTableViewHeader.m; sourceTree = "<group>"; };
-		9D5A230B1DB8E72E00B21AC6 /* HorizontalRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalRule.h; sourceTree = "<group>"; };
-		9D5A230C1DB8E72E00B21AC6 /* HorizontalRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalRule.m; sourceTree = "<group>"; };
-		9D5A23101DB8EB1100B21AC6 /* SectionSplit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionSplit.h; sourceTree = "<group>"; };
-		9D5A23111DB8EB1100B21AC6 /* SectionSplit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionSplit.m; sourceTree = "<group>"; };
-		9D5A23141DB8FCC900B21AC6 /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
-		9D5A23151DB8FCC900B21AC6 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
 		9D69C1AF1C624D2800D537EF /* PlayButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonView.h; sourceTree = "<group>"; };
 		9D69C1B01C624D2800D537EF /* PlayButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonView.m; sourceTree = "<group>"; };
 		9D69C1B81C62624100D537EF /* PlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButton.h; sourceTree = "<group>"; };
@@ -320,6 +320,51 @@
 			name = "Web Site View Controller";
 			sourceTree = "<group>";
 		};
+		9D4327CC1DBB6DA700A6FEB2 /* Section View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9D4327CD1DBB6DCA00A6FEB2 /* SectionViewController.h */,
+				9D4327CE1DBB6DCA00A6FEB2 /* SectionViewController.m */,
+			);
+			name = "Section View Controller";
+			sourceTree = "<group>";
+		};
+		9D4327D01DBB6DCE00A6FEB2 /* Decorations */ = {
+			isa = PBXGroup;
+			children = (
+				9D4327D91DBB6E2000A6FEB2 /* Section Split */,
+				9D4327D51DBB6E0600A6FEB2 /* Horizontal Rule */,
+			);
+			name = Decorations;
+			sourceTree = "<group>";
+		};
+		9D4327D11DBB6DE400A6FEB2 /* ArticleTableViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				9D4327D21DBB6DF500A6FEB2 /* ArticleTableViewHeader.h */,
+				9D4327D31DBB6DF500A6FEB2 /* ArticleTableViewHeader.m */,
+			);
+			name = ArticleTableViewHeader;
+			sourceTree = "<group>";
+		};
+		9D4327D51DBB6E0600A6FEB2 /* Horizontal Rule */ = {
+			isa = PBXGroup;
+			children = (
+				9D4327D61DBB6E1300A6FEB2 /* HorizontalRule.h */,
+				9D4327D71DBB6E1300A6FEB2 /* HorizontalRule.m */,
+			);
+			name = "Horizontal Rule";
+			sourceTree = "<group>";
+		};
+		9D4327D91DBB6E2000A6FEB2 /* Section Split */ = {
+			isa = PBXGroup;
+			children = (
+				9D4327DA1DBB6E2B00A6FEB2 /* SectionSplit.h */,
+				9D4327DB1DBB6E2B00A6FEB2 /* SectionSplit.m */,
+			);
+			name = "Section Split";
+			sourceTree = "<group>";
+		};
 		9D4679C01CC525B900EA3233 /* backgrounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,51 +400,6 @@
 				9D56AF4F1D10C4B900892C87 /* PromotionsManager.m */,
 			);
 			name = PromotionsManager;
-			sourceTree = "<group>";
-		};
-		9D5A23061DB7B58C00B21AC6 /* ArticleTableViewHeader */ = {
-			isa = PBXGroup;
-			children = (
-				9D5A23071DB7B5CE00B21AC6 /* ArticleTableViewHeader.h */,
-				9D5A23081DB7B5CE00B21AC6 /* ArticleTableViewHeader.m */,
-			);
-			name = ArticleTableViewHeader;
-			sourceTree = "<group>";
-		};
-		9D5A230A1DB8E71D00B21AC6 /* Decorations */ = {
-			isa = PBXGroup;
-			children = (
-				9D5A230F1DB8EAF800B21AC6 /* Section Split */,
-				9D5A230E1DB8EAF100B21AC6 /* Horizontal Rule */,
-			);
-			name = Decorations;
-			sourceTree = "<group>";
-		};
-		9D5A230E1DB8EAF100B21AC6 /* Horizontal Rule */ = {
-			isa = PBXGroup;
-			children = (
-				9D5A230B1DB8E72E00B21AC6 /* HorizontalRule.h */,
-				9D5A230C1DB8E72E00B21AC6 /* HorizontalRule.m */,
-			);
-			name = "Horizontal Rule";
-			sourceTree = "<group>";
-		};
-		9D5A230F1DB8EAF800B21AC6 /* Section Split */ = {
-			isa = PBXGroup;
-			children = (
-				9D5A23101DB8EB1100B21AC6 /* SectionSplit.h */,
-				9D5A23111DB8EB1100B21AC6 /* SectionSplit.m */,
-			);
-			name = "Section Split";
-			sourceTree = "<group>";
-		};
-		9D5A23131DB8FCA500B21AC6 /* Section View Controller */ = {
-			isa = PBXGroup;
-			children = (
-				9D5A23141DB8FCC900B21AC6 /* SectionViewController.h */,
-				9D5A23151DB8FCC900B21AC6 /* SectionViewController.m */,
-			);
-			name = "Section View Controller";
 			sourceTree = "<group>";
 		};
 		9D69C1A81C624C8100D537EF /* Play */ = {
@@ -693,7 +693,7 @@
 		9DE4A1341BE257E800B69170 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9D5A23131DB8FCA500B21AC6 /* Section View Controller */,
+				9D4327CC1DBB6DA700A6FEB2 /* Section View Controller */,
 				9D4054BE1D10BBFA00361CBE /* Web Site View Controller */,
 				9DAC1DF11C57047900126A83 /* About View Controller */,
 				9DBFF9DF1C50282300ABCD2C /* Video Player View Controller */,
@@ -718,7 +718,7 @@
 		9DE4A1361BE2580C00B69170 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9D5A230A1DB8E71D00B21AC6 /* Decorations */,
+				9D4327D01DBB6DCE00A6FEB2 /* Decorations */,
 				9D56AF451D10C19500892C87 /* Promotion */,
 				9DAC1E031C57720900126A83 /* Icons */,
 				9DD418081C46F10F000D6DC8 /* Language Picker */,
@@ -747,7 +747,7 @@
 		9DE4A1391BE2582F00B69170 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
-				9D5A23061DB7B58C00B21AC6 /* ArticleTableViewHeader */,
+				9D4327D11DBB6DE400A6FEB2 /* ArticleTableViewHeader */,
 				9DE4A1401BE2635800B69170 /* ArticleTableViewCell */,
 				9DE4A13A1BE2583A00B69170 /* FeaturedArticleTableViewCells */,
 			);
@@ -1160,22 +1160,22 @@
 			files = (
 				9D8D33371C610C5E0053FE3E /* NSMutableAttributedString+HTML.m in Sources */,
 				9D56AF4C1D10C22000892C87 /* Promotion.m in Sources */,
-				9D5A23161DB8FCC900B21AC6 /* SectionViewController.m in Sources */,
 				9D4054C11D10BC2C00361CBE /* WebSiteViewController.m in Sources */,
 				9DAC1DF41C57048E00126A83 /* AboutViewController.m in Sources */,
+				9D4327CF1DBB6DCA00A6FEB2 /* SectionViewController.m in Sources */,
 				9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */,
 				9D56AF481D10C1C600892C87 /* PromotionView.m in Sources */,
 				9DBFF9E21C50283900ABCD2C /* VideoPlayerViewController.m in Sources */,
 				9DD4180B1C46F131000D6DC8 /* LanguagePickerView.m in Sources */,
 				9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */,
+				9D4327DC1DBB6E2B00A6FEB2 /* SectionSplit.m in Sources */,
 				9DE4A1501BE2691C00B69170 /* ArticlePageViewController.m in Sources */,
 				9DE4A13D1BE260BD00B69170 /* FeaturedArticleTableViewCell.m in Sources */,
 				9DC0E14C1BF62B08004A47D4 /* SearchViewController.m in Sources */,
 				9DCC798D1BF393B600F28F18 /* ArticleViewController.m in Sources */,
-				9D5A23121DB8EB1100B21AC6 /* SectionSplit.m in Sources */,
-				9D5A230D1DB8E72E00B21AC6 /* HorizontalRule.m in Sources */,
 				9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */,
 				9DE4A14A1BE2668200B69170 /* Article.m in Sources */,
+				9D4327D81DBB6E1300A6FEB2 /* HorizontalRule.m in Sources */,
 				9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */,
 				9DE4A1061BE2531E00B69170 /* AppDelegate.m in Sources */,
 				9D69C1ED1C62758400D537EF /* PauseButtonView.m in Sources */,
@@ -1188,10 +1188,10 @@
 				9DBFF9DE1C50270C00ABCD2C /* YouTubePlayerViewController.m in Sources */,
 				9D9147E21D67549E0089FD03 /* Constants.m in Sources */,
 				9DFE930D1C51565A00780D78 /* PlayerNavigationBarView.m in Sources */,
-				9D5A23091DB7B5CE00B21AC6 /* ArticleTableViewHeader.m in Sources */,
 				9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */,
 				9DBFF9D31C50069800ABCD2C /* SettingsManager.m in Sources */,
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
+				9D4327D41DBB6DF500A6FEB2 /* ArticleTableViewHeader.m in Sources */,
 				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
 				9DAC1E221C57882E00126A83 /* About.m in Sources */,
 				9DE4A1031BE2531E00B69170 /* main.m in Sources */,
@@ -1379,7 +1379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
@@ -1406,7 +1406,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.rise;
+				PRODUCT_BUNDLE_IDENTIFIER =  com.occrp.rise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "$(PROFILE_UDID)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1419,7 +1419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",

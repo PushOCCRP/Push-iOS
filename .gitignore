@@ -46,7 +46,6 @@ Podfile.lock
 
 **/icon*.png
 **/logo*.png
-**/about_text*
 Push/Assets.xcassets/AppIcons.appiconset/*
 
 **/.DS_Store
