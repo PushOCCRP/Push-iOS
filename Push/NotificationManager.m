@@ -87,6 +87,11 @@
     [self registerWithPushServer:devToken];
 }
 
+- (void)didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Error registering for notifications: %@", error.localizedDescription);
+}
+
 - (void)registerWithPushServer:(NSData*)devToken
 {
     NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;

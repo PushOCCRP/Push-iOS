@@ -216,6 +216,7 @@
 		9DD418091C46F131000D6DC8 /* LanguagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagePickerView.h; sourceTree = "<group>"; };
 		9DD4180A1C46F131000D6DC8 /* LanguagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagePickerView.m; sourceTree = "<group>"; };
 		9DDBE7041C46E16700D2A7E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9DE08F461DCFCC020052DB2C /* Push.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Push.entitlements; sourceTree = "<group>"; };
 		9DE0EE151D3BFE7F0061BEA1 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9DE0EE161D3C04310061BEA1 /* about_text-bg.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "about_text-bg.html"; path = "Assets/About Html Files/about_text-bg.html"; sourceTree = SOURCE_ROOT; };
 		9DE4A0FE1BE2531E00B69170 /* Push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Push.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -640,6 +641,7 @@
 		9DE4A1001BE2531E00B69170 /* Push */ = {
 			isa = PBXGroup;
 			children = (
+				9DE08F461DCFCC020052DB2C /* Push.entitlements */,
 				9D8D332F1C5FABEE0053FE3E /* Categories */,
 				9DCC79841BF375C000F28F18 /* Managers */,
 				9DE4A1461BE2666400B69170 /* Models */,
@@ -1306,8 +1308,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Guess (KKJ83K478S)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: cguess@icfj.org (K6MFQ7QY5S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cguess@icfj.org (K6MFQ7QY5S)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1351,8 +1353,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Guess (KKJ83K478S)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: cguess@icfj.org (K6MFQ7QY5S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cguess@icfj.org (K6MFQ7QY5S)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1378,6 +1380,7 @@
 			baseConfigurationReference = 56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 8;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1406,7 +1409,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER =  com.occrp.rise;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.rise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "$(PROFILE_UDID)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1418,6 +1421,7 @@
 			baseConfigurationReference = 6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 8;
 				FRAMEWORK_SEARCH_PATHS = (

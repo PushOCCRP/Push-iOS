@@ -46,7 +46,7 @@ Podfile.lock
 
 **/icon*.png
 **/logo*.png
-Push/Assets.xcassets/AppIcons.appiconset/*
+Push/Assets.xcassets/AppIcon.appiconset/*
 
 **/.DS_Store
 Push.app.dSYM.zip
@@ -55,6 +55,7 @@ fastlane/screenshots/*
 fastlane/Appfile
 fastlane/Fastfile
 fastlane/report.xml
+fastlane/report
 
 app-store-icon.png
 launch-background-color@3x.png

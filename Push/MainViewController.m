@@ -371,7 +371,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
+    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:NO];
     
     NSArray * articles;
     
@@ -387,7 +387,9 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     // If they tap on the section header
     if(indexPath.row == 0){
-        SectionViewController * sectionViewController = [[SectionViewController alloc] initWithSectionTitle:[self.articles allKeys][indexPath.section] andArticles:articles];
+        
+        ArticleTableViewHeader * cell = (ArticleTableViewHeader*)[self tableView:tableView cellForRowAtIndexPath:indexPath].backgroundView;
+        SectionViewController * sectionViewController = [[SectionViewController alloc] initWithSectionTitle:[self.articles allKeys][indexPath.section] andArticles:self.articles[cell.categoryName]];
         [self.navigationController pushViewController:sectionViewController animated:YES];
         return;
     }
@@ -410,6 +412,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     
     [self.navigationController pushViewController:articlePageViewController animated:YES];
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -468,7 +471,12 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     // Random number for testing
     if([self.articles respondsToSelector:@selector(allKeys)]){
         NSDictionary * articles = (NSDictionary*)self.articles;
-        return [articles[articles.allKeys[section]] count] + 1;
+        long count = [articles[articles.allKeys[section]] count];
+        if(count > 5){
+            return 5 + 1;
+        } else {
+            return count + 1;
+        }
     } else {
         return [self.articles count];
     }

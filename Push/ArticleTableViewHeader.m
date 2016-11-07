@@ -74,7 +74,7 @@
 - (void)setCategoryName:(NSString *)categoryName
 {
     _categoryName = categoryName;
-    self.categoryNameLabel.text = categoryName;
+    self.categoryNameLabel.text = [categoryName capitalizedString];
 }
 
 /*
