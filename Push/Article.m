@@ -225,7 +225,6 @@
         
         NSTextAttachment * imageAttachment = [[NSTextAttachment alloc] init];
         imageAttachment.image = [UIImage imageNamed:@"launch-screen-logo@3x.png"];
-        //imageAttachment.bounds = CGRectMake(imageAttachment.bounds.origin.x, imageAttachment.bounds.origin.y, [UIScreen mainScreen].bounds.size.width, imageAttachment.bounds.size.height);
         imageAttachment.bounds = CGRectMake(imageAttachment.bounds.origin.x, imageAttachment.bounds.origin.y, [UIScreen mainScreen].bounds.size.width, imageAttachment.bounds.size.height);
         
         NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:imageAttachment];
@@ -236,10 +235,14 @@
     }
     
     NSAttributedString * newAttributedString = [[NSAttributedString alloc] initWithAttributedString:mutableAttributedString];
-    index = 1;
+    index = 0;
     for(NSTextCheckingResult * checkingResult in imageGravestones){
-        [self loadImage:self.images[index][@"url"] intoAttributedText:newAttributedString];
-        index++;
+        if(index < self.images.count){
+            [self loadImage:self.images[index][@"url"] intoAttributedText:newAttributedString];
+            index++;
+        } else {
+            break;
+        }
     }
     
     return newAttributedString;

@@ -185,7 +185,11 @@ static const NSString * versionNumber = @"1.1";
     
     id articles = [NSKeyedUnarchiver unarchiveObjectWithData:articleData];
     
-    NSParameterAssert([articles class] == NSClassFromString(@"NSArray") || [articles class] == NSClassFromString(@"NSDictionary"));
+    @try {
+        NSParameterAssert([articles class] == NSClassFromString(@"NSArray") || [articles class] == NSClassFromString(@"NSDictionary"));
+    } @catch (NSException *exception) {
+        return nil;
+    }
 
     return articles;
 }

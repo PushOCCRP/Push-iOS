@@ -23,7 +23,10 @@ default_platform :ios
 
 platform :ios do
   before_all do |lane, options|
-    if(lane != :offline)
+
+    clear_derived_data
+
+    if(lane != :offline && lane != :add_devices)
       cocoapods 
       
         increment_build_number()
@@ -56,7 +59,7 @@ platform :ios do
       adhoc: true,
       force: true,
       username: "cguess@icfj.org",
-      app_identifier: "com.occrp.rise"
+      app_identifier: "com.occrp.kavshirebi"
     )
     
     # use the UID of the newly created provisioning profile
@@ -91,7 +94,7 @@ platform :ios do
       adhoc: true,
       force: true,
       username: "cguess@icfj.org",
-      app_identifier: "com.occrp.rise"
+      app_identifier: "com.occrp.kavshirebi"
     )
     
     # use the UID of the newly created provisioning profile
@@ -125,21 +128,21 @@ platform :ios do
     sigh(
 	force: true,
     	username: "cguess@icfj.org",
-    	app_identifier: "com.occrp.rise",
+    	app_identifier: "com.occrp.kavshirebi",
     )
     gym(
         scheme: "Push",
 	      use_legacy_build_api: true,
-	      clean: true
+	      clean: true,
+        include_symbols: true,
+        include_bitcode: true,
     )
     deliver(
     	force: true,
     	username: "cguess@icfj.org",
     )
-    #frameit
-  end
 
-  # You can define as many lanes as you want
+  end
 
   after_all do |lane|
     # This block is called, only if the executed lane was successful

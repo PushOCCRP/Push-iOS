@@ -3,25 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Rise Project</string>
+	<string>Kavshirebi</string>
 	<key>short-name</key>
-	<string>Rise</string>
+	<string>Kavshirebi</string>
 	<key>uniqush</key>
-	<string>rise</string>
+	<string>risemd</string>
 	<key>languages</key>
-	<string>["ro"]</string>
+	<string>["ge"]</string>
 	<key>default-language</key>
-	<string>ro</string>
+	<string>ge</string>
 	<key>icon-large</key>
-	<string>logo-rise-project.png</string>
+	<string>logo-rise.png</string>
 	<key>icon-small</key>
-	<string></string>
+	<string>icon-small.png</string>
 	<key>icon-background-color</key>
 	<string>#000000</string>
 	<key>launch-background-color</key>
-	<string>#000000</string>
+	<string>#272727</string>
 	<key>navigation-bar-color</key>
-	<string>#000000</string>
+	<string>#333333</string>
 	<key>navigation-text-color</key>
 	<string>#FFFFFF</string>
 	<key>show-author</key>

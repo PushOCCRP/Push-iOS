@@ -353,16 +353,21 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 100.0f;
-    if(indexPath.row == 0){
-        if(indexPath.section == 0){
-            height = 42.0f;
-        } else {
-            height = 48.0f;
+    
+    if([self.articles respondsToSelector:@selector(allKeys)]){
+        if(indexPath.row == 0){
+            if(indexPath.section == 0){
+                height = 42.0f;
+            } else {
+                height = 48.0f;
+            }
+        }else if(indexPath.row == 1){
+            height = 434.0f;
         }
-    }else if(indexPath.row == 1){
+    }else if(indexPath.row == 0){
         height = 434.0f;
     }
-
+    
     return height;
 }
 
@@ -386,7 +391,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     }
     
     // If they tap on the section header
-    if(indexPath.row == 0){
+    if(indexPath.row == 0 && [self.articles respondsToSelector:@selector(allKeys)]){
         
         ArticleTableViewHeader * cell = (ArticleTableViewHeader*)[self tableView:tableView cellForRowAtIndexPath:indexPath].backgroundView;
         SectionViewController * sectionViewController = [[SectionViewController alloc] initWithSectionTitle:[self.articles allKeys][indexPath.section] andArticles:self.articles[cell.categoryName]];
