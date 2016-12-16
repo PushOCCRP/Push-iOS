@@ -249,8 +249,15 @@ static NSString * imageGravestoneMarker = @"&&&&";
     
     //Load image from web if the cache doesn't exist (this is handled in UIImageView+AFNetworking
     
-    if(self.article.images.count > 0){
-        NSURL * imageURL = [NSURL URLWithNonLatinString:self.article.images[0][@"url"]];
+    if(self.article.headerImage || self.article.images.count > 0){
+        NSString * headerImageURL;
+        if(self.article.headerImage){
+            headerImageURL = self.article.headerImage[@"url"];
+        } else {
+            headerImageURL = self.article.images.firstObject[@"url"];
+        }
+
+        NSURL * imageURL = [NSURL URLWithNonLatinString:headerImageURL];
         [self.image setImageWithURL:imageURL];
         
         __weak typeof(self) weakSelf = self;
@@ -280,8 +287,15 @@ static NSString * imageGravestoneMarker = @"&&&&";
         }];
         
         //Set image caption, hide if there is none.
-        if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
-            self.caption.text = [self.article.images[0] valueForKey:@"caption"];
+        NSString * headerImageCaption;
+        if(self.article.headerImage && [[self.article.headerImage allKeys] containsObject:@"caption"]){
+            headerImageCaption = self.article.headerImage[@"caption"];
+        } else if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
+            headerImageCaption = self.article.images.firstObject[@"caption"];
+        }
+        
+        if(headerImageCaption){
+            self.caption.text = headerImageCaption;
             self.caption.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
         } else {
             self.caption.hidden = YES;
@@ -321,6 +335,9 @@ static NSString * imageGravestoneMarker = @"&&&&";
     self.headline.text = self.article.headline;
     self.headline.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
     
+    // This is a fun little trick.
+    // In case the article text isn't fully parsed, we add this class as an observer on the article
+    // The article's bodyHTML isn't set until it's finished parsing, when it is, we keep going.
     if(self.article.bodyHTML == nil){
         [self.article addObserver:self forKeyPath:NSStringFromSelector(@selector(bodyHTML)) options:0 context:nil];
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -385,6 +402,8 @@ static NSString * imageGravestoneMarker = @"&&&&";
 }
 
 
+
+// Observer to watch until the body text is fully formatted into HTML
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change

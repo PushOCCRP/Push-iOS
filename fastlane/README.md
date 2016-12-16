@@ -11,11 +11,21 @@ sudo gem install fastlane
 fastlane ios test
 ```
 Runs all the tests
+### ios create
+```
+fastlane ios create
+```
+Creates App
 ### ios add_devices
 ```
 fastlane ios add_devices
 ```
 Adds devices
+### ios bootstrap
+```
+fastlane ios bootstrap
+```
+Creates development and stuff
 ### ios gen_test
 ```
 fastlane ios gen_test

@@ -130,7 +130,8 @@ static NSString * languageKey = @"push_language_key";
                                                @"ru": @"%%@%@ %%@",
                                                @"ro": @"%%@%@ %%@",
                                                @"sr": @"%%@%@ %%@",
-                                               @"bg": @"%%@%@ %%@"};
+                                               @"bg": @"%%@%@ %%@",
+                                               @"ka": @"%%@%@ %%@"};
     
     NSString * localizedString = MYLocalizedString(@"by", @"between the author and date");
     NSString * format = [NSString stringWithFormat:bylineFormatByLanguage[languageShortCode], localizedString];
@@ -176,9 +177,14 @@ static NSString * languageKey = @"push_language_key";
     NSString * language = [[NSUserDefaults standardUserDefaults] objectForKey:languageKey];
     if(!language || language.length < 1){
         //Check for the current language
-        NSString * preferredLanguage = [[NSLocale preferredLanguages][0] substringToIndex:2];
-        if([[[self languageDictionary] allKeys] containsObject:preferredLanguage]){
-            language = [self languageDictionary][preferredLanguage];
+        NSArray * preferredLanguages = [NSLocale preferredLanguages];
+        if(preferredLanguages.count > 0){
+            NSString * preferredLanguage = [[NSLocale preferredLanguages][0] substringToIndex:2];
+            if([[[self languageDictionary] allKeys] containsObject:preferredLanguage]){
+                language = [self languageDictionary][preferredLanguage];
+            } else {
+                language = self.availableLanguages.firstObject;
+            }
         } else {
             language = self.availableLanguages.firstObject;
         }
@@ -194,6 +200,11 @@ static NSString * languageKey = @"push_language_key";
         }
         return NO;
     }];
+    
+    NSString * languageShortCode = keys.allObjects.firstObject;
+    if(languageShortCode == nil){
+        languageShortCode = @"";
+    }
     
     return keys.allObjects.firstObject;
 }
@@ -233,7 +244,7 @@ static NSString * languageKey = @"push_language_key";
 
 - (NSDictionary*)languageDictionary
 {
-    NSDictionary * languageFullNames = @{ @"ro": @"Romanian", @"ru": @"Russian", @"bg" : @"Bulgarian", @"en": @"English", @"az" : @"Azerbaijani", @"sr" : @"Serbian" };
+    NSDictionary * languageFullNames = @{ @"ro": @"Romanian", @"ru": @"Russian", @"bg" : @"Bulgarian", @"en": @"English", @"az" : @"Azerbaijani", @"sr" : @"Serbian", @"ka" : @"Georgian", @"bs" : @"Bosnian"};
     NSArray * languages = [SettingsManager sharedManager].languages;
     
     NSMutableDictionary * languageFullNamesCopy = [NSMutableDictionary dictionaryWithDictionary:languageFullNames];

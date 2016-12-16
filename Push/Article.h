@@ -13,7 +13,9 @@ typedef enum : NSUInteger {
     RUSSIAN,
     AZERBAIJANI,
     ROMANIAN,
-    SERBIAN
+    SERBIAN,
+    GEORGIAN,
+    BOSNIAN
 } ArticleLanguage;
 
 @interface Article : NSObject <NSCoding>
@@ -22,6 +24,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, retain) NSString * descriptionText;
 @property (nonatomic, retain) NSString * body;
 @property (nonatomic, retain) NSAttributedString * bodyHTML;
+@property (nonatomic, retain) NSDictionary * headerImage;
 @property (nonatomic, retain) NSArray * images;
 @property (nonatomic, retain) NSArray * videos;
 @property (nonatomic, retain) NSDate * publishDate;

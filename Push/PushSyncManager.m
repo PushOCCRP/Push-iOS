@@ -124,7 +124,8 @@ static const NSString * versionNumber = @"1.1";
         });
     } else {
         NSMutableDictionary * mutableCategoriesResponseDictionary = [NSMutableDictionary dictionary];
-        for(NSString * category in response[@"categories"]){
+        NSArray * categoriesArray = response[@"categories"];
+        for(NSString * category in categoriesArray){
             NSArray * articles = response[@"results"][category];
             
             NSMutableArray * mutableResponseArray = [NSMutableArray array];
@@ -135,6 +136,8 @@ static const NSString * versionNumber = @"1.1";
             
             mutableCategoriesResponseDictionary[category] = mutableResponseArray;
         }
+        
+        mutableCategoriesResponseDictionary[@"categories_order"] = categoriesArray;
         
         NSDictionary * categories = [NSDictionary dictionaryWithDictionary:mutableCategoriesResponseDictionary];
         dispatch_async(dispatch_get_main_queue(), ^{

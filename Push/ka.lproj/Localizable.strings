@@ -1,0 +1,76 @@
+/* 
+  Strings-Georgian.strings
+  Push
+
+  Created by Christopher Guess on 1/9/16.
+  Copyright © 2016 OCCRP. All rights reserved.
+*/
+
+/* Language Name */
+"LanguageName" = "ქართული";
+
+/* Connection Error */
+"ConnectionErorr" = "შეცდომა დაკავშირებისას";
+
+/* OK */
+"OK" = "ოკ";
+
+/* Back */
+"Back" = "უკან";
+
+/* Share */
+"Share" = "გაზიარება";
+
+/* Choose Language */
+"ChooseLanguage" = "აირჩიე ენა";
+
+/* Search */
+"Search" = "ძებნა";
+"NoResultsFound" = "შედეგი არ მოიძებნა";
+
+/* News Alert */
+"NewsAlert" = "ახალი შეტყობინება";
+"Read" = "წაკითხვა";
+"Cancel" = "გამორთვა";
+
+/* By */
+"by" = "by";
+
+/* Yesterday */
+"Yesterday" = "გუშინ";
+
+/* January */
+"January" = "იანვარი";
+
+/* February */
+"February" = "თებერვალი";
+
+/* March */
+"March" = "მარტი";
+
+/* April */
+"April" = "აპრილი";
+
+/* May */
+"May" = "მაისი";
+
+/* June */
+"June" = "ივნისი";
+
+/* July */
+"July" = "ივლისი";
+
+/* August */
+"August" = "აგვისტო";
+
+/* September */
+"September" = "სექტემბერი";
+
+/* October */
+"October" = "ოქტომბერი";
+
+/* November */
+"November" = "ნოემბერი";
+
+/* December */
+"December" = "დეკემბერი";

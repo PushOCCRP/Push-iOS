@@ -32,8 +32,6 @@
     
     self.descriptionLabel.font = [UIFont fontWithName:@"Palatino-Roman" size:16.0f];
     self.headlineLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
-    
-    
 }
 
 @end

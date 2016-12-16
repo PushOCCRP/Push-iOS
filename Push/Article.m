@@ -51,6 +51,7 @@
         self.headline           = [aDecoder decodeObjectForKey:@"headline"];
         self.descriptionText    = [aDecoder decodeObjectForKey:@"description"];
         self.body               = [aDecoder decodeObjectForKey:@"body"];
+        self.headerImage        = [aDecoder decodeObjectForKey:@"header_image"];
         self.images             = [aDecoder decodeObjectForKey:@"images"];
         self.videos             = [aDecoder decodeObjectForKey:@"videos"];
         self.author             = [aDecoder decodeObjectForKey:@"author"];
@@ -70,6 +71,10 @@
             self.language = ROMANIAN;
         } else if([language isEqualToString:@"sr"]){
             self.language = SERBIAN;
+        } else if([language isEqualToString:@"bs"]){
+            self.language = BOSNIAN;
+        }else if([language isEqualToString:@"ka"]){
+            self.language = GEORGIAN;
         }
 
     }
@@ -91,10 +96,19 @@
     self.headline           = jsonDictionary[@"headline"];
     self.descriptionText    = jsonDictionary[@"description"];
     self.body               = jsonDictionary[@"body"];
+    self.headerImage        = jsonDictionary[@"header_image"];
     self.images             = jsonDictionary[@"images"];
     self.videos             = jsonDictionary[@"videos"];
     self.author             = jsonDictionary[@"author"];
     self.publishDate        = [formatter dateFromString:jsonDictionary[@"publish_date"]];
+    
+    // For backwards compatibility the first image in the self.images array may also be the header
+    // If that's the case, we want to remove it
+    if((self.images.count > 0 && self.headerImage) && [self.images[0][@"url"] isEqualToString:self.headerImage[@"url"]]) {
+        NSMutableArray * mutableImages = [NSMutableArray arrayWithArray:self.images];
+        [mutableImages removeObjectAtIndex:0];
+        self.images = [NSArray arrayWithArray:mutableImages];
+    }
     
     NSURL * url;
     if(jsonDictionary[@"url"] != nil){
@@ -117,6 +131,10 @@
         self.language = ROMANIAN;
     } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"sr"]){
         self.language = SERBIAN;
+    } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"bs"]){
+        self.language = BOSNIAN;
+    } else if([[language substringWithRange:NSMakeRange(0, 2)] isEqualToString:@"ka"]){
+        self.language = GEORGIAN;
     }
 
     return self;
@@ -218,8 +236,19 @@
     
     // Reversed so that as we change stuff it doesn't mess with the numbering
     // Wow, this is a mess, please pretty please comment me
+    
+    // Let's try commenting this...
+    // We start at the end so that as we change we don't have to take into account how stuff changed up stream
     imageGravestones = [[imageGravestones reverseObjectEnumerator] allObjects];
+    
+    // If the headerImage is start start at 0, if isn't start at 1
+    
     int index = 1;
+    if(self.headerImage){
+        index = 0;
+    }
+
+    // Go through each of the results
     for(NSTextCheckingResult * checkingResult in imageGravestones){
         NSRange range = checkingResult.range;
         
@@ -230,7 +259,6 @@
         NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:imageAttachment];
         [mutableAttributedString replaceCharactersInRange:range withAttributedString:attrStringWithImage];
         
-        
         index++;
     }
     
@@ -238,7 +266,8 @@
     index = 0;
     for(NSTextCheckingResult * checkingResult in imageGravestones){
         if(index < self.images.count){
-            [self loadImage:self.images[index][@"url"] intoAttributedText:newAttributedString];
+            NSString * url = self.images[index][@"url"];
+            [self loadImage:url intoAttributedText:newAttributedString];
             index++;
         } else {
             break;
@@ -276,6 +305,11 @@
         }
         
         __block int indexOfAttribute = 1;
+        // If the headerImage is start start at 0, if isn't start at 1
+        if(self.headerImage){
+            indexOfAttribute = 0;
+        }
+
         [attributedText enumerateAttribute:NSAttachmentAttributeName
                                              inRange:NSMakeRange(0, [attributedText length])
                                              options:0
@@ -329,7 +363,18 @@
 
 }
 
-
+- (void)setHeaderImage:(NSDictionary *)headerImage
+{
+    if(!headerImage){
+        return;
+    }
+ 
+    _headerImage = headerImage;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self preloadImage:headerImage[@"url"]];
+    });
+}
 
 - (void)setImages:(NSArray *)images
 {
@@ -337,7 +382,7 @@
     
     for(NSDictionary * image in images){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            //[self preloadImage:image[@"url"]];
+            [self preloadImage:image[@"url"]];
         });
     }
 }
@@ -438,6 +483,7 @@
     [encoder encodeObject:self.headline forKey:@"headline"];
     [encoder encodeObject:self.descriptionText forKey:@"description"];
     [encoder encodeObject:self.body forKey:@"body"];
+    [encoder encodeObject:self.headerImage forKey:@"header_image"];
     [encoder encodeObject:self.images forKey:@"images"];
     [encoder encodeObject:self.videos forKey:@"videos"];
     [encoder encodeObject:self.author forKey:@"author"];

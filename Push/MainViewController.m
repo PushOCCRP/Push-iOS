@@ -382,7 +382,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     if([self.articles respondsToSelector:@selector(allKeys)]){
         NSMutableArray * mutableArticles = [NSMutableArray array];
-        for(NSString * sectionName in [self.articles allKeys]){
+        for(NSString * sectionName in self.articles[@"categories_order"]){
             [mutableArticles addObjectsFromArray:self.articles[sectionName]];
         }
         articles = [NSArray arrayWithArray:mutableArticles];
@@ -394,7 +394,10 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     if(indexPath.row == 0 && [self.articles respondsToSelector:@selector(allKeys)]){
         
         ArticleTableViewHeader * cell = (ArticleTableViewHeader*)[self tableView:tableView cellForRowAtIndexPath:indexPath].backgroundView;
-        SectionViewController * sectionViewController = [[SectionViewController alloc] initWithSectionTitle:[self.articles allKeys][indexPath.section] andArticles:self.articles[cell.categoryName]];
+        SectionViewController * sectionViewController = [[SectionViewController alloc]
+                                                         initWithSectionTitle:self.articles[@"categories_order"][indexPath.section]
+                                                         andArticles:self.articles[cell.categoryName]];
+        
         [self.navigationController pushViewController:sectionViewController animated:YES];
         return;
     }
@@ -404,7 +407,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     Article * article;
     if([self.articles respondsToSelector:@selector(allKeys)]){
-        article = self.articles[[self.articles allKeys][indexPath.section]][indexPath.row - 1];
+        article = self.articles[self.articles[@"categories_order"][indexPath.section]][indexPath.row - 1];
     } else{
         article = self.articles[indexPath.row];
     }
@@ -431,12 +434,12 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         
         if(indexPath.row == 0){
             ArticleTableViewHeader * header = [[ArticleTableViewHeader alloc] initWithTop:(indexPath.section == 0)];
-            header.categoryName = [self.articles allKeys][indexPath.section];
+            header.categoryName = self.articles[@"categories_order"][indexPath.section];
             UITableViewCell * cell = [[UITableViewCell alloc] init];
             cell.backgroundView = header;
             return cell;
         } else {
-            NSString * sectionName = [self.articles allKeys][indexPath.section];
+            NSString * sectionName = self.articles[@"categories_order"][indexPath.section];
             NSArray * articles = self.articles[sectionName];
             
             if(indexPath.row == 1){
@@ -465,7 +468,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if([self.articles respondsToSelector:@selector(allKeys)]){
-        return [self.articles allKeys].count;
+        return [self.articles allKeys].count - 1;
     } else {
         return 1;
     }
@@ -476,7 +479,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     // Random number for testing
     if([self.articles respondsToSelector:@selector(allKeys)]){
         NSDictionary * articles = (NSDictionary*)self.articles;
-        long count = [articles[articles.allKeys[section]] count];
+        long count = [articles[self.articles[@"categories_order"][section]] count];
         if(count > 5){
             return 5 + 1;
         } else {

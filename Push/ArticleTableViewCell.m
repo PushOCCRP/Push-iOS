@@ -38,7 +38,14 @@
     
     __weak typeof(self) weakSelf = self;
     
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithNonLatinString:article.images.firstObject[@"url"]]];
+    NSString * headerImageURL;
+    if(article.headerImage){
+        headerImageURL = article.headerImage[@"url"];
+    } else {
+        headerImageURL = article.images.firstObject[@"url"];
+    }
+    
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithNonLatinString:headerImageURL]];
     [self.imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         weakSelf.articleImageView.image = image;
     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {

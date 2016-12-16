@@ -41,6 +41,7 @@
 		9D81DA921CC52C3D002B424E /* about_text-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 9D81DA911CC52C3D002B424E /* about_text-en.html */; };
 		9D8D33371C610C5E0053FE3E /* NSMutableAttributedString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D33361C610C5E0053FE3E /* NSMutableAttributedString+HTML.m */; };
 		9D9147E21D67549E0089FD03 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D9147E11D67549E0089FD03 /* Constants.m */; };
+		9D9319961E0436F10020787B /* about_text-ru.html in Resources */ = {isa = PBXBuildFile; fileRef = 9D9319951E0436F10020787B /* about_text-ru.html */; };
 		9D9D346D1D170B6600300529 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D9D346C1D170B6600300529 /* NotificationManager.m */; };
 		9DAC1DF41C57048E00126A83 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC1DF31C57048E00126A83 /* AboutViewController.m */; };
 		9DAC1DF91C57097200126A83 /* about_text-ro.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DAC1DF61C57097200126A83 /* about_text-ro.html */; };
@@ -66,7 +67,6 @@
 		9DCC798D1BF393B600F28F18 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC798B1BF393B600F28F18 /* ArticleViewController.m */; };
 		9DCC798E1BF393B600F28F18 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC798C1BF393B600F28F18 /* ArticleViewController.xib */; };
 		9DCCCDE81D21C3B6008D9DC7 /* about_text-az.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DCCCDE71D21C3B6008D9DC7 /* about_text-az.html */; };
-		9DCCCDEA1D21C3BB008D9DC7 /* about_text-ru.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DCCCDE91D21C3BB008D9DC7 /* about_text-ru.html */; };
 		9DD418041C46E342000D6DC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DD418021C46E342000D6DC8 /* Localizable.strings */; };
 		9DD4180B1C46F131000D6DC8 /* LanguagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4180A1C46F131000D6DC8 /* LanguagePickerView.m */; };
 		9DDBE7051C46E16700D2A7E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DDBE7041C46E16700D2A7E5 /* LaunchScreen.storyboard */; };
@@ -92,13 +92,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9D51C5FB1C6CB0F900BF434B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9DE4A0F61BE2531D00B69170 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9DE4A0FD1BE2531D00B69170;
-			remoteInfo = Push;
-		};
 		9DE4A1181BE2531F00B69170 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9DE4A0F61BE2531D00B69170 /* Project object */;
@@ -144,7 +137,6 @@
 		9D47E6C01C85D6B300FC7944 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		9D47E6C11C85D6B300FC7944 /* icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@3x.png"; sourceTree = "<group>"; };
 		9D4CDB371CB3BD2200432B24 /* CustomizedSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CustomizedSettings.plist; sourceTree = "<group>"; };
-		9D51C5F61C6CB0F900BF434B /* Meydan TVUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Meydan TVUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D51C6131C6CDC8500BF434B /* PushUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		9D51C6141C6CDC8600BF434B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		9D55509B1CA89B940010BFF5 /* logo@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@1x.png"; sourceTree = "<group>"; };
@@ -170,6 +162,8 @@
 		9D8D33361C610C5E0053FE3E /* NSMutableAttributedString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+HTML.m"; sourceTree = "<group>"; };
 		9D9147E01D67549E0089FD03 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		9D9147E11D67549E0089FD03 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		9D9319951E0436F10020787B /* about_text-ru.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "about_text-ru.html"; sourceTree = "<group>"; };
+		9D98A4421DFE13BC0097DF06 /* Push.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Push.entitlements; sourceTree = "<group>"; };
 		9D9D346B1D170B6600300529 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
 		9D9D346C1D170B6600300529 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
 		9DAC1DF21C57048E00126A83 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -208,7 +202,6 @@
 		9DCC798B1BF393B600F28F18 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
 		9DCC798C1BF393B600F28F18 /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
 		9DCCCDE71D21C3B6008D9DC7 /* about_text-az.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "about_text-az.html"; sourceTree = "<group>"; };
-		9DCCCDE91D21C3BB008D9DC7 /* about_text-ru.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "about_text-ru.html"; sourceTree = "<group>"; };
 		9DD418031C46E342000D6DC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9DD418051C46E348000D6DC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9DD418061C46E351000D6DC8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -255,13 +248,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9D51C5F31C6CB0F900BF434B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9DE4A0FB1BE2531D00B69170 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -484,7 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				9DE0EE161D3C04310061BEA1 /* about_text-bg.html */,
-				9DCCCDE91D21C3BB008D9DC7 /* about_text-ru.html */,
+				9D9319951E0436F10020787B /* about_text-ru.html */,
 				9DCCCDE71D21C3B6008D9DC7 /* about_text-az.html */,
 				9D81DA911CC52C3D002B424E /* about_text-en.html */,
 				9DAC1DF61C57097200126A83 /* about_text-ro.html */,
@@ -632,7 +618,6 @@
 				9DE4A0FE1BE2531E00B69170 /* Push.app */,
 				9DE4A1171BE2531F00B69170 /* PushTests.xctest */,
 				9DE4A1221BE2531F00B69170 /* PushUITests.xctest */,
-				9D51C5F61C6CB0F900BF434B /* Meydan TVUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -640,6 +625,7 @@
 		9DE4A1001BE2531E00B69170 /* Push */ = {
 			isa = PBXGroup;
 			children = (
+				9D98A4421DFE13BC0097DF06 /* Push.entitlements */,
 				9D8D332F1C5FABEE0053FE3E /* Categories */,
 				9DCC79841BF375C000F28F18 /* Managers */,
 				9DE4A1461BE2666400B69170 /* Models */,
@@ -869,24 +855,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9D51C5F51C6CB0F900BF434B /* Meydan TVUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9D51C5FF1C6CB0F900BF434B /* Build configuration list for PBXNativeTarget "Meydan TVUITests" */;
-			buildPhases = (
-				9D51C5F21C6CB0F900BF434B /* Sources */,
-				9D51C5F31C6CB0F900BF434B /* Frameworks */,
-				9D51C5F41C6CB0F900BF434B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9D51C5FC1C6CB0F900BF434B /* PBXTargetDependency */,
-			);
-			name = "Meydan TVUITests";
-			productName = "Meydan TVUITests";
-			productReference = 9D51C5F61C6CB0F900BF434B /* Meydan TVUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		9DE4A0FD1BE2531D00B69170 /* Push */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DE4A12B1BE2531F00B69170 /* Build configuration list for PBXNativeTarget "Push" */;
@@ -955,17 +923,10 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = OCCRP;
 				TargetAttributes = {
-					9D51C5F51C6CB0F900BF434B = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 9DE4A0FD1BE2531D00B69170;
-					};
 					9DE4A0FD1BE2531D00B69170 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 9H5K42BU9H;
-<<<<<<< HEAD
 						ProvisioningStyle = Manual;
-=======
->>>>>>> fe2f977d31077b847b8a3b2a5cff6aac5196b263
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -978,6 +939,7 @@
 					};
 					9DE4A1211BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 				};
@@ -1003,19 +965,11 @@
 				9DE4A0FD1BE2531D00B69170 /* Push */,
 				9DE4A1161BE2531F00B69170 /* PushTests */,
 				9DE4A1211BE2531F00B69170 /* PushUITests */,
-				9D51C5F51C6CB0F900BF434B /* Meydan TVUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9D51C5F41C6CB0F900BF434B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9DE4A0FC1BE2531D00B69170 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1040,10 +994,10 @@
 				9DFE93201C51734A00780D78 /* icon-spotlight@2x.png in Resources */,
 				9DBFF9D91C501B8400ABCD2C /* play@3x.png in Resources */,
 				9DFE930A1C51564A00780D78 /* PlayerNavigationBarView.xib in Resources */,
-				9DCCCDEA1D21C3BB008D9DC7 /* about_text-ru.html in Resources */,
 				9DCCCDE81D21C3B6008D9DC7 /* about_text-az.html in Resources */,
 				9DBFF9E81C50402F00ABCD2C /* Assets.bundle in Resources */,
 				9DCC797F1BF3639900F28F18 /* MainViewController.xib in Resources */,
+				9D9319961E0436F10020787B /* about_text-ru.html in Resources */,
 				9D81DA921CC52C3D002B424E /* about_text-en.html in Resources */,
 				9DE4A13F1BE260FB00B69170 /* FeaturedArticleTableViewCell.xib in Resources */,
 				9D47E6C41C85D6B300FC7944 /* icon@3x.png in Resources */,
@@ -1089,7 +1043,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		193F46389468D314BDA47253 /* [CP] Embed Pods Frameworks */ = {
@@ -1151,13 +1105,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9D51C5F21C6CB0F900BF434B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9DE4A0FA1BE2531D00B69170 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1223,11 +1170,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9D51C5FC1C6CB0F900BF434B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9DE4A0FD1BE2531D00B69170 /* Push */;
-			targetProxy = 9D51C5FB1C6CB0F900BF434B /* PBXContainerItemProxy */;
-		};
 		9DE4A1191BE2531F00B69170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9DE4A0FD1BE2531D00B69170 /* Push */;
@@ -1258,41 +1200,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		9D51C5FD1C6CB0F900BF434B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = YES;
-				INFOPLIST_FILE = "Meydan TVUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "occrp.Meydan-TVUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Meydan TVUITests/Meydan TVUITests-Swift.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_TARGET_NAME = Push;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		9D51C5FE1C6CB0F900BF434B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = YES;
-				INFOPLIST_FILE = "Meydan TVUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "occrp.Meydan-TVUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Meydan TVUITests/Meydan TVUITests-Swift.h";
-				TEST_TARGET_NAME = Push;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 		9DE4A1291BE2531F00B69170 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1310,13 +1217,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-=======
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Guess (KKJ83K478S)";
->>>>>>> fe2f977d31077b847b8a3b2a5cff6aac5196b263
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1360,13 +1262,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-=======
-				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Guess (KKJ83K478S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Guess (KKJ83K478S)";
->>>>>>> fe2f977d31077b847b8a3b2a5cff6aac5196b263
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1392,13 +1289,10 @@
 			baseConfigurationReference = 56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9H5K42BU9H;
-=======
-				CURRENT_PROJECT_VERSION = 7;
->>>>>>> fe2f977d31077b847b8a3b2a5cff6aac5196b263
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
@@ -1425,16 +1319,10 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.kavshirebi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.cin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4005866c-e15b-4f8e-99c8-6673f0c300ff";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.kavshirebi Development";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER =  com.occrp.kavshirebi;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "$(PROFILE_UDID)";
->>>>>>> fe2f977d31077b847b8a3b2a5cff6aac5196b263
+				PROVISIONING_PROFILE = "b2c26e44-7e35-469d-9176-e8e4a769bb22";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1444,13 +1332,10 @@
 			baseConfigurationReference = 6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9H5K42BU9H;
-=======
-				CURRENT_PROJECT_VERSION = 7;
->>>>>>> fe2f977d31077b847b8a3b2a5cff6aac5196b263
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
@@ -1477,16 +1362,10 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.kavshirebi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.cin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a7ff1f9d-b2b3-4db4-a3bc-8db2387f2bc2";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.kavshirebi AppStore";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.rise;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "$(PROFILE_UDID)";
->>>>>>> fe2f977d31077b847b8a3b2a5cff6aac5196b263
+				PROVISIONING_PROFILE = "b2c26e44-7e35-469d-9176-e8e4a769bb22";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1499,6 +1378,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2c26e44-7e35-469d-9176-e8e4a769bb22";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1511,6 +1391,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2c26e44-7e35-469d-9176-e8e4a769bb22";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1523,8 +1404,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2c26e44-7e35-469d-9176-e8e4a769bb22";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;
 				USES_XCTRUNNER = YES;
 			};
@@ -1538,7 +1421,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2c26e44-7e35-469d-9176-e8e4a769bb22";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;
 				USES_XCTRUNNER = YES;
 			};
@@ -1547,15 +1432,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9D51C5FF1C6CB0F900BF434B /* Build configuration list for PBXNativeTarget "Meydan TVUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9D51C5FD1C6CB0F900BF434B /* Debug */,
-				9D51C5FE1C6CB0F900BF434B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9DE4A0F91BE2531D00B69170 /* Build configuration list for PBXProject "Push" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1596,4 +1472,3 @@
 	};
 	rootObject = 9DE4A0F61BE2531D00B69170 /* Project object */;
 }
-
