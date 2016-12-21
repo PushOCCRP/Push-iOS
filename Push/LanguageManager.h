@@ -6,7 +6,7 @@
 //  Copyright © 2016 OCCRP. All rights reserved.
 //
 
-#define MYLocalizedString(key, comment) [[LanguageManager sharedManager] localizedStringForKey:(key) value:(comment)]
+#define MYLocalizedString(key, comment) [[LanguageManager sharedManager] localizedStringForKey:(key) value:(comment) forLanguageShortCode:[[LanguageManager sharedManager] languageShortCode]]
 
 #import <Foundation/Foundation.h>
 

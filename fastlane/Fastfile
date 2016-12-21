@@ -28,7 +28,7 @@ platform :ios do
     if(lane != :offline && lane != :add_devices && lane != :create)
       #cocoapods 
       
-        increment_build_number()
+        increment_build_number(build_number:'1')
       
     end
 
@@ -41,6 +41,8 @@ platform :ios do
   end
   
   desc "Creates App"
+
+
 
   lane :create do
     produce(
@@ -113,7 +115,7 @@ platform :ios do
     )
 
     gym(
-      use_legacy_build_api: true,
+      #use_legacy_build_api: true,
       clean: true,
       scheme: 'Push',
     )
@@ -125,7 +127,7 @@ platform :ios do
     ENV["PROFILE_UUID"] = lane_context[SharedValues::SIGH_UDID]
 
     gym(
-      use_legacy_build_api: true,
+      #use_legacy_build_api: true,
       clean: true,
       scheme: 'Push',
     )
@@ -150,7 +152,7 @@ platform :ios do
     )
 
     gym(
-      use_legacy_build_api: true,
+      #use_legacy_build_api: true,
       clean: true,
       scheme: 'Push',
       
@@ -170,7 +172,7 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :deploy do
-    increment_version_number(version_number:'')
+    increment_version_number(version_number:'1.0')
     #ensure_no_debug_code(text: "NSLog")
     cert(
       username: 'cguess@icfj.org',
@@ -187,7 +189,7 @@ platform :ios do
 
     gym(
         scheme: "Push",
-	      use_legacy_build_api: true,
+	      #use_legacy_build_api: true,
 	      clean: true,
         include_symbols: true,
         include_bitcode: true,

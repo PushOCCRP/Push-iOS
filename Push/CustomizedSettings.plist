@@ -9,7 +9,7 @@
 	<key>uniqush</key>
 	<string>cin</string>
 	<key>languages</key>
-	<string>["bs"]</string>
+	<string>["bs", "en"]</string>
 	<key>default-language</key>
 	<string>bs</string>
 	<key>icon-large</key>
@@ -19,9 +19,9 @@
 	<key>icon-background-color</key>
 	<string>#1d40a1</string>
 	<key>launch-background-color</key>
-	<string>#000000</string>
+	<string>#FFFFFF</string>
 	<key>navigation-bar-color</key>
-	<string>#000000</string>
+	<string>#FFFFFF</string>
 	<key>navigation-text-color</key>
 	<string>#1d40a1</string>
 	<key>show-author</key>

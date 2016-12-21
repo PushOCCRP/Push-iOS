@@ -12,7 +12,9 @@
 
 languages([
 
-"bs"
+"bs",
+
+"en"
 
 ])
 

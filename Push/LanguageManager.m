@@ -131,7 +131,8 @@ static NSString * languageKey = @"push_language_key";
                                                @"ro": @"%%@%@ %%@",
                                                @"sr": @"%%@%@ %%@",
                                                @"bg": @"%%@%@ %%@",
-                                               @"ka": @"%%@%@ %%@"};
+                                               @"ka": @"%%@%@ %%@",
+                                               @"bs": @"%%@%@ %%@"};
     
     NSString * localizedString = MYLocalizedString(@"by", @"between the author and date");
     NSString * format = [NSString stringWithFormat:bylineFormatByLanguage[languageShortCode], localizedString];
@@ -206,7 +207,7 @@ static NSString * languageKey = @"push_language_key";
         languageShortCode = @"";
     }
     
-    return keys.allObjects.firstObject;
+    return languageShortCode;
 }
 
 
@@ -236,7 +237,7 @@ static NSString * languageKey = @"push_language_key";
     NSMutableArray * mutableLangugages = [NSMutableArray array];
     
     for(NSString * key in [languages.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]){
-        [mutableLangugages addObject:[self localizedStringForKey:@"LanguageName" value:@"nil" forLanguageShortCode:key]];
+        [mutableLangugages addObject:[[self localizedStringForKey:@"LanguageName" value:@"nil" forLanguageShortCode:key] capitalizedString]];
     }
     
     return [NSArray arrayWithArray:mutableLangugages];
