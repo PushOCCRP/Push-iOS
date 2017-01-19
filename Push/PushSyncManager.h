@@ -9,19 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "Article.h"
+#import "TorManager.h"
 
-@interface PushSyncManager : AFHTTPSessionManager
+@interface PushSyncManager : AFHTTPSessionManager <TorManagerDelegate>
+
+typedef void(^CompletionBlock)(id articles);
+typedef void(^FailureBlock)(NSError *error);
 
 + (PushSyncManager *)sharedManager;
 
 // completion handler will always return either an NSArray or NSDictionary
-- (NSArray*)articlesWithCompletionHandler:(void(^)(id articles))completionHandler
-                              failure:(void(^)(NSError *error))failure;
+- (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 
 // The completion handler will always return an NSArray
-- (void)articleWithId:(NSString*)articleId withCompletionHandler:(void(^)(id articles))completionHandler failure:(void(^)(NSError *error))failure;
+- (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 
 // The completion handler will always return an NSArray
-- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(void(^)(id articles))completionHandler failure:(void(^)(NSError *error))failure;
+- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 - (void)reset;
 @end

@@ -118,6 +118,14 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
             });
         }
     } failure:^(NSError *error) {
+        if(error.code == 1200){
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"Fixing Network Issue";
+            hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+            return;
+        }
+        
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:MYLocalizedString(@"ConnectionError", @"Connection Error") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:MYLocalizedString(@"OK", @"Assertive yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         

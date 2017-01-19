@@ -7,7 +7,8 @@
 //
 
 #import "PromotionsManager.h"
-#import <YAML-Framework/YAMLSerialization.h>
+
+#import <YAML/YAMLSerialization.h>
 #import "Promotion.h"
 
 @interface PromotionsManager()

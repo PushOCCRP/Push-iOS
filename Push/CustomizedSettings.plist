@@ -3,28 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Centar za istraživačko novinarstvo</string>
+	<string>Meydan TV</string>
 	<key>short-name</key>
-	<string>CIN</string>
+	<string>Meydan</string>
 	<key>uniqush</key>
-	<string>cin</string>
+	<string>meydan</string>
 	<key>languages</key>
-	<string>["bs", "en"]</string>
+	<string>["az", "ru", "en"]</string>
 	<key>default-language</key>
-	<string>bs</string>
+	<string>az</string>
 	<key>icon-large</key>
-	<string>logo-cin.png</string>
+	<string>logo-meydan.png</string>
 	<key>icon-small</key>
-	<string></string>
+	<string>icon-small.png</string>
 	<key>icon-background-color</key>
-	<string>#1d40a1</string>
+	<string>#FFFFFF</string>
 	<key>launch-background-color</key>
 	<string>#FFFFFF</string>
 	<key>navigation-bar-color</key>
-	<string>#FFFFFF</string>
+	<string>#f5f5f5</string>
 	<key>navigation-text-color</key>
-	<string>#1d40a1</string>
+	<string>#d42f33</string>
 	<key>show-author</key>
-	<string>false</string>
+	<string>true</string>
 </dict>
 </plist>

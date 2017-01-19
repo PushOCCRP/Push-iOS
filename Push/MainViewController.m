@@ -60,7 +60,6 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     }];
     
     [self loadPromotions];
-    [self loadInitialArticles];
     
     // TODO: Track the user action that is important for you.
     [AnalyticsManager logContentViewWithName:@"Article List" contentType:nil contentId:nil customAttributes:nil];
@@ -69,6 +68,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)viewDidAppear:(BOOL)animated
 {
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
+    [self loadInitialArticles];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -159,6 +159,15 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [self.tableView.pullToRefreshView stopAnimating];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } failure:^(NSError *error) {
+        if(error.code == 1200){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MBProgressHUD * hud = [MBProgressHUD HUDForView:self.view];
+                hud.labelText = @"Fixing Network Issue";
+                hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+            });
+            return;
+        }
+        
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:MYLocalizedString(@"ConnectionError", @"Connection Error") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:MYLocalizedString(@"OK", @"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         
@@ -185,6 +194,15 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
     } failure:^(NSError *error) {
+        if(error.code == 1200){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MBProgressHUD * hud = [MBProgressHUD HUDForView:self.view];
+                hud.labelText = @"Fixing Network Issue";
+                hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+            });
+            return;
+        }
+        
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:MYLocalizedString(@"ConnectionError", @"Connection Error") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         
