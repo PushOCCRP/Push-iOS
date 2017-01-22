@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0B05CC1D129885001D3B2F /* QuartzCore.framework */; };
 		9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0B05D51D12A524001D3B2F /* ClickIndicator.m */; };
+		9D2C1DC21E341DFE000414B9 /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F76675AE8561F0669359878D /* Pods_Push.framework */; };
+		9D2C1DC31E341DFE000414B9 /* Pods_Push.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F76675AE8561F0669359878D /* Pods_Push.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3910521C638E130061E094 /* AnalyticsManager.m */; };
 		9D4054C11D10BC2C00361CBE /* WebSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4054C01D10BC2C00361CBE /* WebSiteViewController.m */; };
 		9D4054C31D10BCE100361CBE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4054C21D10BCE100361CBE /* WebKit.framework */; };
@@ -84,6 +86,8 @@
 		9DE4A14A1BE2668200B69170 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1491BE2668200B69170 /* Article.m */; };
 		9DE4A1501BE2691C00B69170 /* ArticlePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A14F1BE2691C00B69170 /* ArticlePageViewController.m */; };
 		9DE593711E31758D008FEDA1 /* YAML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE593701E31758D008FEDA1 /* YAML.framework */; };
+		9DE593751E317965008FEDA1 /* TorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE593741E317965008FEDA1 /* TorManager.m */; };
+		9DE593781E31797C008FEDA1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE593771E31797C008FEDA1 /* Reachability.m */; };
 		9DF88EDB1D08D45F00F87C23 /* about_text-sr.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DF88EDA1D08D45F00F87C23 /* about_text-sr.html */; };
 		9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9B0F21C41198F00EA3BFA /* LanguageManager.m */; };
 		9DFE930A1C51564A00780D78 /* PlayerNavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFE93091C51564A00780D78 /* PlayerNavigationBarView.xib */; };
@@ -110,6 +114,30 @@
 			remoteInfo = Push;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9D2C1DCD1E341DFF000414B9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9D2C1DC31E341DFE000414B9 /* Pods_Push.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D2C1DCE1E341DFF000414B9 /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +267,10 @@
 		9DE4A14E1BE2691C00B69170 /* ArticlePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlePageViewController.h; sourceTree = "<group>"; };
 		9DE4A14F1BE2691C00B69170 /* ArticlePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlePageViewController.m; sourceTree = "<group>"; };
 		9DE593701E31758D008FEDA1 /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = "YAML.framework/build/Debug-iphoneos/YAML.framework"; sourceTree = "<group>"; };
+		9DE593731E317965008FEDA1 /* TorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorManager.h; sourceTree = "<group>"; };
+		9DE593741E317965008FEDA1 /* TorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorManager.m; sourceTree = "<group>"; };
+		9DE593761E31797C008FEDA1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		9DE593771E31797C008FEDA1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		9DF86A941C85D9E30074F22B /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9DF88ED91D08D3C600F87C23 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9DF88EDA1D08D45F00F87C23 /* about_text-sr.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "about_text-sr.html"; sourceTree = "<group>"; };
@@ -260,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DE593711E31758D008FEDA1 /* YAML.framework in Frameworks */,
+				9D2C1DC21E341DFE000414B9 /* Pods_Push.framework in Frameworks */,
 				9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */,
 				9D56AF671D10CA6800892C87 /* libresolv.tbd in Frameworks */,
 				9D4054C31D10BCE100361CBE /* WebKit.framework in Frameworks */,
@@ -582,6 +615,7 @@
 		9DCC79841BF375C000F28F18 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				9DE593721E31794F008FEDA1 /* TorManager */,
 				9D9D346A1D170B3C00300529 /* NotificationManager */,
 				9D56AF4D1D10C4A500892C87 /* PromotionsManager */,
 				9D3910501C638DFB0061E094 /* AnalyticsManager */,
@@ -808,6 +842,25 @@
 			name = "Article Page View Controller";
 			sourceTree = "<group>";
 		};
+		9DE593721E31794F008FEDA1 /* TorManager */ = {
+			isa = PBXGroup;
+			children = (
+				9DE593791E317984008FEDA1 /* Reachability */,
+				9DE593731E317965008FEDA1 /* TorManager.h */,
+				9DE593741E317965008FEDA1 /* TorManager.m */,
+			);
+			name = TorManager;
+			sourceTree = "<group>";
+		};
+		9DE593791E317984008FEDA1 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				9DE593761E31797C008FEDA1 /* Reachability.h */,
+				9DE593771E31797C008FEDA1 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		9DF9B0F01C41196A00EA3BFA /* LanguageManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -876,8 +929,10 @@
 				9DE4A0FC1BE2531D00B69170 /* Resources */,
 				9D3D079B1C258BA300B72A1E /* ShellScript */,
 				9D1A14F81C284249000FD08E /* ShellScript */,
-				193F46389468D314BDA47253 /* [CP] Embed Pods Frameworks */,
 				E13974A53222D1E6BDDEE6E5 /* [CP] Copy Pods Resources */,
+				9D2C1DCD1E341DFF000414B9 /* Embed Frameworks */,
+				9D2C1DCE1E341DFF000414B9 /* Embed PlugIns */,
+				EBC5EDA5C720960E46172992 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -931,7 +986,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = OCCRP;
 				TargetAttributes = {
 					9DE4A0FD1BE2531D00B69170 = {
@@ -939,8 +994,17 @@
 						DevelopmentTeam = 9H5K42BU9H;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 0;
 							};
 						};
 					};
@@ -1060,21 +1124,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		193F46389468D314BDA47253 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9D1A14F81C284249000FD08E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1116,6 +1165,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EBC5EDA5C720960E46172992 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1146,6 +1210,7 @@
 				9D69C1ED1C62758400D537EF /* PauseButtonView.m in Sources */,
 				9D9D346D1D170B6600300529 /* NotificationManager.m in Sources */,
 				9DCC79891BF3764200F28F18 /* PushSyncManager.m in Sources */,
+				9DE593751E317965008FEDA1 /* TorManager.m in Sources */,
 				9DC1057E1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m in Sources */,
 				9DAC1E0A1C5772F800126A83 /* AboutBarButtonView.m in Sources */,
 				9D56AF501D10C4B900892C87 /* PromotionsManager.m in Sources */,
@@ -1156,6 +1221,7 @@
 				9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */,
 				9DBFF9D31C50069800ABCD2C /* SettingsManager.m in Sources */,
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
+				9DE593781E31797C008FEDA1 /* Reachability.m in Sources */,
 				9D4327D41DBB6DF500A6FEB2 /* ArticleTableViewHeader.m in Sources */,
 				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
 				9DAC1E221C57882E00126A83 /* About.m in Sources */,
@@ -1228,8 +1294,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1273,8 +1341,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1294,6 +1364,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1306,8 +1377,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
@@ -1337,8 +1409,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2a51ca9-6a96-46db-81b6-f43ffff7c6e3";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.meydan Development";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1350,8 +1422,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
@@ -1381,8 +1454,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2a51ca9-6a96-46db-81b6-f43ffff7c6e3";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.meydan Development";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1395,7 +1468,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2a51ca9-6a96-46db-81b6-f43ffff7c6e3";
+				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1408,7 +1481,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2a51ca9-6a96-46db-81b6-f43ffff7c6e3";
+				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1421,7 +1494,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2a51ca9-6a96-46db-81b6-f43ffff7c6e3";
+				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1438,7 +1511,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2a51ca9-6a96-46db-81b6-f43ffff7c6e3";
+				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;

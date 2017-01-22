@@ -2,6 +2,14 @@ platform :ios, '9.0'
 
 use_frameworks!
 
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ENABLE_BITCODE'] = 'NO'
+        end
+    end
+end
+
 target "Push" do
     pod 'AFNetworking'
     pod 'Masonry'
@@ -18,4 +26,7 @@ target "Push" do
     pod 'DateTools', :path => '~/Repositories/DateTools'
     pod 'HTMLKit', '~> 0.9'
     pod 'CPAProxy', :git => 'https://github.com/ursachec/CPAProxy.git'
+    #pod 'CPAProxy', :path => '~/Repositories/Push/CPAProxy'
+    pod 'YAML-Framework'
 end
+

@@ -34,7 +34,10 @@ typedef enum : NSUInteger {
 struct Request {
 };
 
-@interface PushSyncManager()
+
+@interface PushSyncManager() {
+    BOOL _unreachable;
+}
 
 @property (nonatomic, retain) id articles;
 @property (nonatomic, retain) NSOperationQueue * priorityQueue;
@@ -43,8 +46,8 @@ struct Request {
 
 @property (nonatomic, retain) NSMutableArray * torRequests;
 
-@property (nonatomic, assign) BOOL unreachable;
-
+@property (atomic, assign) BOOL unreachable;
+@property (atomic, assign) BOOL startingUp;
 
 // Checks if the service is reachable
 - (BOOL)checkInternetReachability;
@@ -94,6 +97,7 @@ dispatch_semaphore_t _sem;
     if(self) {
         self.torRequests = [NSMutableArray array];
         self.unreachable = true;
+        self.startingUp = true;
     }
     
     return self;
@@ -324,23 +328,55 @@ dispatch_semaphore_t _sem;
 {
     // We only care if this fails.
     // TODO: Change this to a heartbeat
+    self.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    
     [self GET:@"articles" parameters:nil
       progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+          NSLog(@"Host is reachable, not using TOR.");
           self.unreachable = false;
+          self.startingUp = false;
       }
       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-          [[TorManager sharedManager] startTorSessionWithSession:self];
-          NSLog(@"%i", (unsigned long)[TorManager sharedManager].status);
+          NSLog(@"Host is not reachable so we're going to start a TOR session.");
+          self.startingUp = false;
+          //[[TorManager sharedManager] startTorSessionWithSession:self];
+          //NSLog(@"%lu", (unsigned long)[TorManager sharedManager].status);
     }];
     
 }
+//
+//- (BOOL)unreachable
+//{
+//    BOOL ret = nil;
+//    @synchronized (self)
+//    {
+//        if(_unreachable){
+//            // I wonder how terrible of an idea this is?
+//            while(self.startingUp){
+//                [NSThread sleepForTimeInterval:5.0f];
+//            }
+//        }
+//        
+//        ret = _unreachable;
+//    }
+//    
+//    return ret;
+//}
+//
+//- (void)setUnreachable:(BOOL)unreachable
+//{
+//    @synchronized (self) {
+//        _unreachable = unreachable;
+//    }
+//}
 
 #pragma mark - TorSessionDelegate
 - (void)didCreateTorSession:(NSURLSession*)session
 {
     self.session = session;
     self.unreachable = false;
-    
+    self.startingUp = false;
+
     for(TempRequest * request in self.torRequests){
         switch (request.type) {
             case PushSyncArticles:

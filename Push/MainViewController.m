@@ -164,6 +164,8 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
                 MBProgressHUD * hud = [MBProgressHUD HUDForView:self.view];
                 hud.labelText = @"Fixing Network Issue";
                 hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+                hud.progress = 0.45f;
+
             });
             return;
         }
@@ -199,6 +201,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
                 MBProgressHUD * hud = [MBProgressHUD HUDForView:self.view];
                 hud.labelText = @"Fixing Network Issue";
                 hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+                hud.progress = 0.45f;
             });
             return;
         }
