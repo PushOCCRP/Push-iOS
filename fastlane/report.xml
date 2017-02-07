@@ -2,50 +2,45 @@
 <testsuites>
   <testsuite name="fastlane.lanes">
     
+    
+    
       
-      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000689">
+      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000538">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000349">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000409">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: clear_derived_data" time="0.316211">
+      <testcase classname="fastlane.lanes" name="2: clear_derived_data" time="0.86013">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: increment_build_number" time="7.187995">
+      <testcase classname="fastlane.lanes" name="3: increment_build_number" time="4.246881">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: cert" time="10.66483">
+      <testcase classname="fastlane.lanes" name="4: cert" time="8.741907">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: sigh" time="18.598801">
+      <testcase classname="fastlane.lanes" name="5: sigh" time="13.353102">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: update_project_provisioning" time="0.303217">
+      <testcase classname="fastlane.lanes" name="6: update_project_provisioning" time="0.588726">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: gym" time="126.960317">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="8: pilot" time="415.595049">
-        
-          <failure message="/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/actions/actions_helper.rb:48:in `execute_action'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/runner.rb:212:in `block in execute_action'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/runner.rb:211:in `chdir'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/runner.rb:211:in `execute_action'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/runner.rb:133:in `trigger_action_by_name'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/fast_file.rb:146:in `method_missing'&#10;Fastfile:165:in `block (2 levels) in parsing_binding'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/lane_manager.rb:52:in `cruise_lane'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/command_line_handler.rb:30:in `handle'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/commands_generator.rb:96:in `block (2 levels) in run'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/commander-4.4.2/lib/commander/command.rb:178:in `call'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/commander-4.4.2/lib/commander/command.rb:153:in `run'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/commander-4.4.2/lib/commander/runner.rb:446:in `run_active_command'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:38:in `run!'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/commander-4.4.2/lib/commander/delegates.rb:15:in `run!'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/commands_generator.rb:293:in `run'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/commands_generator.rb:36:in `start'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/fastlane/lib/fastlane/cli_tools_distributor.rb:59:in `take_off'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/fastlane-2.1.3/bin/fastlane:5:in `&lt;top (required)&gt;'&#10;/Users/christopher/.rbenv/versions/2.3.3/bin/fastlane:22:in `load'&#10;/Users/christopher/.rbenv/versions/2.3.3/bin/fastlane:22:in `&lt;top (required)&gt;'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/cli/exec.rb:74:in `load'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/cli/exec.rb:74:in `kernel_load'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/cli/exec.rb:27:in `run'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/cli.rb:332:in `exec'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/cli.rb:20:in `dispatch'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/cli.rb:11:in `start'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/exe/bundle:34:in `block in &lt;top (required)&gt;'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/lib/bundler/friendly_errors.rb:100:in `with_friendly_errors'&#10;/Users/christopher/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/bundler-1.13.6/exe/bundle:26:in `&lt;top (required)&gt;'&#10;/Users/christopher/.rbenv/versions/2.3.3/bin/bundle:22:in `load'&#10;/Users/christopher/.rbenv/versions/2.3.3/bin/bundle:22:in `&lt;main&gt;'&#10;&#10;You cannot start testing without any tester. Please add tester(s) first and try again." />
+      <testcase classname="fastlane.lanes" name="7: gym" time="111.845715">
         
       </testcase>
     

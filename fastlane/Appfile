@@ -1,4 +1,4 @@
-app_identifier "com.occrp.cin" # The bundle identifier of your app
+app_identifier "com.occrp.krik" # The bundle identifier of your app
 apple_id "cguess@icfj.org" # Your Apple email address
 #team_id "9H5K42BU9H"
 

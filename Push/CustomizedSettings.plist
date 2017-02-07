@@ -3,27 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Centar za istraživačko novinarstvo</string>
+	<string>KRIK</string>
 	<key>short-name</key>
-	<string>CIN</string>
+	<string>KRIK</string>
 	<key>uniqush</key>
-	<string>cin</string>
+	<string>krik</string>
 	<key>languages</key>
-	<string>["bs", "en"]</string>
+	<string>["en", "sr"]</string>
 	<key>default-language</key>
-	<string>bs</string>
+	<string>sr</string>
 	<key>icon-large</key>
-	<string>logo-cin.png</string>
+	<string>logo-krik.png</string>
 	<key>icon-small</key>
 	<string></string>
 	<key>icon-background-color</key>
-	<string>#1d40a1</string>
+	<string>#000000</string>
 	<key>launch-background-color</key>
 	<string>#FFFFFF</string>
 	<key>navigation-bar-color</key>
 	<string>#FFFFFF</string>
 	<key>navigation-text-color</key>
-	<string>#1d40a1</string>
+	<string>#262425</string>
 	<key>show-author</key>
 	<string>false</string>
 </dict>

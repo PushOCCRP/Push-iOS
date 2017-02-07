@@ -155,9 +155,9 @@ static NSString * languageKey = @"push_language_key";
 
 - (BOOL)dateShouldBeColloquialForLanguageShortCode:(NSString*)languageShortCode
 {
-    if([languageShortCode isEqualToString:@"az"]){
-        return YES;
-    }
+//    if([languageShortCode isEqualToString:@"az"]){
+//        return YES;
+//    }
     
     return NO;
 }

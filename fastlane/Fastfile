@@ -28,7 +28,7 @@ platform :ios do
     if(lane != :offline && lane != :add_devices && lane != :create)
       #cocoapods 
       
-        increment_build_number(build_number:'1')
+        increment_build_number()
       
     end
 
@@ -47,8 +47,8 @@ platform :ios do
   lane :create do
     produce(
       username: "cguess@icfj.org",
-      app_identifier: "com.occrp.cin",
-      app_name: "Centar za istraživačko novinarstvo",
+      app_identifier: "com.occrp.krik",
+      app_name: "KRIK",
       language: "English"
     )
   end
@@ -71,9 +71,9 @@ platform :ios do
 
     produce(
       username: "cguess@icfj.org",
-      app_identifier: "com.occrp.cin",
+      app_identifier: "com.occrp.krik",
       company_name: "Journalism Development Network",
-      app_name: "Centar za istraživačko novinarstvo",
+      app_name: "KRIK",
       language: "English"
     )
 
@@ -81,7 +81,7 @@ platform :ios do
       development: true,
       force: true,
       username: "cguess@icfj.org",
-      app_identifier: "com.occrp.cin"
+      app_identifier: "com.occrp.krik"
     )
 
 
@@ -105,7 +105,7 @@ platform :ios do
       adhoc: true,
       force: true,
       username: "cguess@icfj.org",
-      app_identifier: "com.occrp.cin"
+      app_identifier: "com.occrp.krik"
     )
     
     # use the UID of the newly created provisioning profile
@@ -142,7 +142,7 @@ platform :ios do
     sigh(
       force: true,
       username: "cguess@icfj.org",
-      app_identifier: "com.occrp.cin"
+      app_identifier: "com.occrp.krik"
     )
     
     # use the UID of the newly created provisioning profile
@@ -172,7 +172,7 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :deploy do
-    increment_version_number(version_number:'1.0')
+    increment_version_number(version_number:'')
     #ensure_no_debug_code(text: "NSLog")
     cert(
       username: 'cguess@icfj.org',
@@ -181,7 +181,7 @@ platform :ios do
     sigh(
 	    force: true,
     	username: "cguess@icfj.org",
-    	app_identifier: "com.occrp.cin",
+    	app_identifier: "com.occrp.krik",
     )
 
     update_project_provisioning(
