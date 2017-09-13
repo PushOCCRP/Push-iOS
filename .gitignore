@@ -60,3 +60,11 @@ fastlane/report
 app-store-icon.png
 launch-background-color@3x.png
 launch-screen-logo@3x.png
+
+*.pem
+*.pkey
+Push/Push/SecretKeys.plist
+Gemfile.lock
+.ruby-version
+Push/Push/CustomizedSettings.plist
+Push/Push/Info.plist

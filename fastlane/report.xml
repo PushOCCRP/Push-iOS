@@ -5,42 +5,57 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.018015">
+      <testcase classname="fastlane.lanes" name="00: Verifying required fastlane version" time="0.001826">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000345">
+      <testcase classname="fastlane.lanes" name="01: default_platform" time="0.001764">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: clear_derived_data" time="0.005838">
+      <testcase classname="fastlane.lanes" name="02: clear_derived_data" time="0.603749">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: increment_build_number" time="2.170497">
+      <testcase classname="fastlane.lanes" name="03: automatic_code_signing" time="0.357569">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: cert" time="5.867782">
+      <testcase classname="fastlane.lanes" name="04: increment_build_number" time="5.604922">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: produce" time="5.006092">
+      <testcase classname="fastlane.lanes" name="05: cert" time="6.134876">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: sigh" time="11.005456">
+      <testcase classname="fastlane.lanes" name="06: sigh" time="12.425188">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: update_project_provisioning" time="0.334227">
+      <testcase classname="fastlane.lanes" name="07: update_project_provisioning" time="0.380287">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: gym" time="156.638116">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: deliver" time="83.723336">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: automatic_code_signing" time="0.29475">
         
       </testcase>
     

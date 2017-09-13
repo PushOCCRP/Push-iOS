@@ -14,9 +14,6 @@
 #import "NotificationManager.h"
 #import "PushSyncManager.h"
 
-@import HockeySDK;
-
-
 @interface AppDelegate ()
 
 @end
@@ -38,6 +35,8 @@
     
     // Set up the notifications
     [NotificationManager sharedManager];
+    
+    [PushSyncManager sharedManager];
     
     // Override point for customization after application launch.
     CGRect screenBounds = [[UIScreen mainScreen] bounds];

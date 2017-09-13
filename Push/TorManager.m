@@ -7,11 +7,11 @@
 //
 
 #import "TorManager.h"
-//#include <CPAProxy/CPAProxy.h>
+#include <CPAProxy/CPAProxy.h>
 
 @interface TorManager()
 
-//@property (nonatomic, retain) CPAProxyManager * cpaProxyManager;
+@property (nonatomic, retain) CPAProxyManager * cpaProxyManager;
 
 @end
 
@@ -49,7 +49,7 @@
 - (void)startTorWithAFHTTPSessionManager:(AFHTTPSessionManager<TorManagerDelegate>*)sessionManager
 {
     self.status = TorManagerStarting;
-    /*
+    
     // Get resource paths for the torrc and geoip files from the main bundle
     NSURL *cpaProxyBundleURL = [[NSBundle bundleForClass:[CPAProxyManager class]] URLForResource:@"CPAProxy" withExtension:@"bundle"];
     NSBundle *cpaProxyBundle = [NSBundle bundleWithURL:cpaProxyBundleURL];
@@ -80,7 +80,7 @@
         // ... do something to notify user of tor's initialization progress ...
         NSLog(@"%li %@", (long)progress, summaryString);
     }];
-     */
+    
 }
 
 - (void)handleCPAProxySetupWithSOCKSHost:(NSString *)SOCKSHost SOCKSPort:(NSUInteger)SOCKSPort

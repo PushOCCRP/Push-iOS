@@ -26,6 +26,7 @@
 #import "SectionViewController.h"
 
 #import "AboutBarButtonView.h"
+#import "LanguageButtonView.h"
 
 #import "AnalyticsManager.h"
 #import "PromotionsManager.h"
@@ -39,6 +40,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 @property (nonatomic, retain) IBOutlet UITableView * tableView;
 @property (nonatomic, retain) LanguagePickerView * languagePickerView;
+@property (nonatomic, retain) UIView * languagePickerFadedBackground;
 @property (nonatomic, retain) PromotionView * promotionView;
 
 @property (nonatomic, retain) id articles;
@@ -107,7 +109,8 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     // Add language button
     NSArray * barButtonItems = @[aboutBarButton, searchBarButton];
     if([LanguageManager sharedManager].availableLanguages.count > 1){
-        UIBarButtonItem * languageBarButton = [[UIBarButtonItem alloc] initWithTitle:@"AД" style:UIBarButtonItemStylePlain target:self action:@selector(languageButtonTapped)];
+        LanguageButtonView * languageButtonView = [[LanguageButtonView alloc] initWithTarget:self andSelector:@selector(languageButtonTapped)];
+        UIBarButtonItem * languageBarButton = [[UIBarButtonItem alloc] initWithCustomView:languageButtonView];
         barButtonItems = @[languageBarButton, aboutBarButton, searchBarButton];
     }
     
@@ -179,10 +182,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    if(self.articles){
-        [self.tableView triggerPullToRefresh];
-        [self.tableView reloadData];
-    } else {
+    if([self.tableView numberOfRowsInSection:0] < 1){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
 
@@ -324,7 +324,12 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     //Reload the view?
     [self setUpBackButton];
-    [self loadArticles];
+    // Triggering this reloads the articles with the new language.
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    // This handles the clearing up of the HUD properly.
+    [self loadInitialArticles];
     [self loadPromotions];
     [self.view setNeedsDisplay];
 }
@@ -335,14 +340,27 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         return;
     }
     
+    self.languagePickerFadedBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
+    self.languagePickerFadedBackground.backgroundColor = [UIColor blackColor];
+    self.languagePickerFadedBackground.alpha = 0.0f;
+    
+    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(languagePickerBackgroundTapped:)];
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [self.languagePickerFadedBackground addGestureRecognizer:tapRecognizer];
+    
     self.languagePickerView = [[LanguagePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 200.0f)];
     self.languagePickerView.delegate = self;
     
+    [self.view addSubview:self.languagePickerFadedBackground];
     [self.view addSubview:self.languagePickerView];
     [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.languagePickerView.frame;
         frame.origin.y = self.view.frame.size.height - frame.size.height;
         self.languagePickerView.frame = frame;
+        
+        self.languagePickerFadedBackground.alpha = 0.5;
     }];
 }
 
@@ -356,11 +374,22 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         CGRect frame = self.languagePickerView.frame;
         frame.origin.y = self.view.frame.size.height;
         self.languagePickerView.frame = frame;
+        self.languagePickerFadedBackground.alpha = 0.0f;
     } completion:^(BOOL finished) {
         [self.languagePickerView removeFromSuperview];
         self.languagePickerView = nil;
+        
+        [self.languagePickerFadedBackground removeFromSuperview];
+        self.languagePickerFadedBackground = nil;
     }];
 
+}
+
+- (void)languagePickerBackgroundTapped:(UITapGestureRecognizer*)recognizer
+{
+    if(recognizer.state == UIGestureRecognizerStateEnded){
+        [self hideLanguagePicker];
+    }
 }
 
 

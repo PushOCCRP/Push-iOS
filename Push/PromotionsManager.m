@@ -8,7 +8,7 @@
 
 #import "PromotionsManager.h"
 
-#import <YAML/YAMLSerialization.h>
+//#import <YAML/YAMLSerialization.h>
 #import "Promotion.h"
 
 @interface PromotionsManager()
@@ -36,17 +36,17 @@
 {
     self = [super init];
     if(self){
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"promotions" ofType:@"yml"];
-        NSData * ymlData = [NSData dataWithContentsOfFile:filePath];
+        //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"promotions" ofType:@"yml"];
+        //NSData * ymlData = [NSData dataWithContentsOfFile:filePath];
 
-        NSArray * parsedPromotions = [YAMLSerialization objectsWithYAMLData:ymlData options:kYAMLReadOptionStringScalars error:nil];
+        //NSArray * parsedPromotions = [YAMLSerialization objectsWithYAMLData:ymlData options:kYAMLReadOptionStringScalars error:nil];
         
         NSMutableArray * mutablePromotions = [NSMutableArray array];
-        for(NSDictionary * parsedPromotion in parsedPromotions) {
+        /*for(NSDictionary * parsedPromotion in parsedPromotions) {
             Promotion * promotion = [[Promotion alloc] initWihDictionary:parsedPromotion];
             [mutablePromotions addObject:promotion];
         }
-        
+        */
         self.promotions = mutablePromotions;
     }
     

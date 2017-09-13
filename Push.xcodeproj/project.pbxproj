@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C14B15610A0B331C11653E8 /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */; };
 		9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0B05CC1D129885001D3B2F /* QuartzCore.framework */; };
 		9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0B05D51D12A524001D3B2F /* ClickIndicator.m */; };
-		9D2C1DC21E341DFE000414B9 /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F76675AE8561F0669359878D /* Pods_Push.framework */; };
-		9D2C1DC31E341DFE000414B9 /* Pods_Push.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F76675AE8561F0669359878D /* Pods_Push.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D3240811F58B635004600FF /* LanguageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D32407E1F58B635004600FF /* LanguageButton.m */; };
+		9D3240821F58B635004600FF /* LanguageButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3240801F58B635004600FF /* LanguageButtonView.m */; };
 		9D3910531C638E130061E094 /* AnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3910521C638E130061E094 /* AnalyticsManager.m */; };
 		9D4054C11D10BC2C00361CBE /* WebSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4054C01D10BC2C00361CBE /* WebSiteViewController.m */; };
 		9D4054C31D10BCE100361CBE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4054C21D10BCE100361CBE /* WebKit.framework */; };
@@ -85,7 +86,6 @@
 		9DE4A1451BE2637F00B69170 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DE4A1431BE2637F00B69170 /* ArticleTableViewCell.xib */; };
 		9DE4A14A1BE2668200B69170 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A1491BE2668200B69170 /* Article.m */; };
 		9DE4A1501BE2691C00B69170 /* ArticlePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4A14F1BE2691C00B69170 /* ArticlePageViewController.m */; };
-		9DE593711E31758D008FEDA1 /* YAML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE593701E31758D008FEDA1 /* YAML.framework */; };
 		9DE593751E317965008FEDA1 /* TorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE593741E317965008FEDA1 /* TorManager.m */; };
 		9DE593781E31797C008FEDA1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE593771E31797C008FEDA1 /* Reachability.m */; };
 		9DF88EDB1D08D45F00F87C23 /* about_text-sr.html in Resources */ = {isa = PBXBuildFile; fileRef = 9DF88EDA1D08D45F00F87C23 /* about_text-sr.html */; };
@@ -95,7 +95,6 @@
 		9DFE931D1C5172F400780D78 /* icon-appstore.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFE931C1C5172F400780D78 /* icon-appstore.png */; };
 		9DFE93201C51734A00780D78 /* icon-spotlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFE931E1C51734A00780D78 /* icon-spotlight@2x.png */; };
 		9DFE93211C51734A00780D78 /* icon-spotlight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFE931F1C51734A00780D78 /* icon-spotlight@3x.png */; };
-		E4495D995891CFC9A510B5CA /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F76675AE8561F0669359878D /* Pods_Push.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,17 +115,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9D2C1DCD1E341DFF000414B9 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9D2C1DC31E341DFE000414B9 /* Pods_Push.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9D2C1DCE1E341DFF000414B9 /* Embed PlugIns */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -140,11 +128,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
 		6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
 		9D0B05CC1D129885001D3B2F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9D0B05D41D12A524001D3B2F /* ClickIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickIndicator.h; sourceTree = "<group>"; };
 		9D0B05D51D12A524001D3B2F /* ClickIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickIndicator.m; sourceTree = "<group>"; };
+		9D32407D1F58B635004600FF /* LanguageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageButton.h; sourceTree = "<group>"; };
+		9D32407E1F58B635004600FF /* LanguageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageButton.m; sourceTree = "<group>"; };
+		9D32407F1F58B635004600FF /* LanguageButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageButtonView.h; sourceTree = "<group>"; };
+		9D3240801F58B635004600FF /* LanguageButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageButtonView.m; sourceTree = "<group>"; };
 		9D3910511C638E130061E094 /* AnalyticsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsManager.h; sourceTree = "<group>"; };
 		9D3910521C638E130061E094 /* AnalyticsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsManager.m; sourceTree = "<group>"; };
 		9D4054BF1D10BC2C00361CBE /* WebSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSiteViewController.h; sourceTree = "<group>"; };
@@ -266,7 +259,6 @@
 		9DE4A1491BE2668200B69170 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		9DE4A14E1BE2691C00B69170 /* ArticlePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlePageViewController.h; sourceTree = "<group>"; };
 		9DE4A14F1BE2691C00B69170 /* ArticlePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlePageViewController.m; sourceTree = "<group>"; };
-		9DE593701E31758D008FEDA1 /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = "YAML.framework/build/Debug-iphoneos/YAML.framework"; sourceTree = "<group>"; };
 		9DE593731E317965008FEDA1 /* TorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorManager.h; sourceTree = "<group>"; };
 		9DE593741E317965008FEDA1 /* TorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorManager.m; sourceTree = "<group>"; };
 		9DE593761E31797C008FEDA1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -283,7 +275,6 @@
 		9DFE931E1C51734A00780D78 /* icon-spotlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-spotlight@2x.png"; sourceTree = "<group>"; };
 		9DFE931F1C51734A00780D78 /* icon-spotlight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-spotlight@3x.png"; sourceTree = "<group>"; };
 		CB9ED4E8FC116D56F6744698 /* libPods-Push-Meydan TVUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Push-Meydan TVUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F76675AE8561F0669359878D /* Pods_Push.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,12 +282,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DE593711E31758D008FEDA1 /* YAML.framework in Frameworks */,
-				9D2C1DC21E341DFE000414B9 /* Pods_Push.framework in Frameworks */,
 				9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */,
 				9D56AF671D10CA6800892C87 /* libresolv.tbd in Frameworks */,
 				9D4054C31D10BCE100361CBE /* WebKit.framework in Frameworks */,
-				E4495D995891CFC9A510B5CA /* Pods_Push.framework in Frameworks */,
+				3C14B15610A0B331C11653E8 /* Pods_Push.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,14 +309,24 @@
 		0CE2CCDDC3CF3F4E2087961E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9DE593701E31758D008FEDA1 /* YAML.framework */,
 				9D0B05CC1D129885001D3B2F /* QuartzCore.framework */,
 				9D56AF651D10CA5000892C87 /* libresolv.tbd */,
 				9D4054C21D10BCE100361CBE /* WebKit.framework */,
 				CB9ED4E8FC116D56F6744698 /* libPods-Push-Meydan TVUITests.a */,
-				F76675AE8561F0669359878D /* Pods_Push.framework */,
+				35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D32407C1F58B62B004600FF /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				9D32407D1F58B635004600FF /* LanguageButton.h */,
+				9D32407E1F58B635004600FF /* LanguageButton.m */,
+				9D32407F1F58B635004600FF /* LanguageButtonView.h */,
+				9D3240801F58B635004600FF /* LanguageButtonView.m */,
+			);
+			name = Language;
 			sourceTree = "<group>";
 		};
 		9D3910501C638DFB0061E094 /* AnalyticsManager */ = {
@@ -526,6 +525,7 @@
 		9DAC1E031C57720900126A83 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9D32407C1F58B62B004600FF /* Language */,
 				9D69C1E71C62753A00D537EF /* Pause */,
 				9D69C1A81C624C8100D537EF /* Play */,
 				9DAC1E041C57720F00126A83 /* About */,
@@ -927,10 +927,8 @@
 				9DE4A0FA1BE2531D00B69170 /* Sources */,
 				9DE4A0FB1BE2531D00B69170 /* Frameworks */,
 				9DE4A0FC1BE2531D00B69170 /* Resources */,
-				9D3D079B1C258BA300B72A1E /* ShellScript */,
 				9D1A14F81C284249000FD08E /* ShellScript */,
 				E13974A53222D1E6BDDEE6E5 /* [CP] Copy Pods Resources */,
-				9D2C1DCD1E341DFF000414B9 /* Embed Frameworks */,
 				9D2C1DCE1E341DFF000414B9 /* Embed PlugIns */,
 				EBC5EDA5C720960E46172992 /* [CP] Embed Pods Frameworks */,
 			);
@@ -992,7 +990,7 @@
 					9DE4A0FD1BE2531D00B69170 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 9H5K42BU9H;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1010,11 +1008,13 @@
 					};
 					9DE4A1161BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 					9DE4A1211BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 				};
@@ -1032,6 +1032,7 @@
 				sr,
 				bg,
 				bs,
+				English,
 			);
 			mainGroup = 9DE4A0F51BE2531D00B69170;
 			productRefGroup = 9DE4A0FF1BE2531E00B69170 /* Products */;
@@ -1121,7 +1122,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9D1A14F81C284249000FD08E /* ShellScript */ = {
@@ -1136,19 +1137,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
-		};
-		9D3D079B1C258BA300B72A1E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" e8e3bbc2256c70be95a43e59ef78a0e1b312db75 3419e836dab75c5691486c8ada0fd250102acaf554cf9fa8c5b33e57bed3a3e2";
 		};
 		E13974A53222D1E6BDDEE6E5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1213,6 +1201,7 @@
 				9DE593751E317965008FEDA1 /* TorManager.m in Sources */,
 				9DC1057E1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m in Sources */,
 				9DAC1E0A1C5772F800126A83 /* AboutBarButtonView.m in Sources */,
+				9D3240811F58B635004600FF /* LanguageButton.m in Sources */,
 				9D56AF501D10C4B900892C87 /* PromotionsManager.m in Sources */,
 				9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */,
 				9DBFF9DE1C50270C00ABCD2C /* YouTubePlayerViewController.m in Sources */,
@@ -1226,6 +1215,7 @@
 				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
 				9DAC1E221C57882E00126A83 /* About.m in Sources */,
 				9DE4A1031BE2531E00B69170 /* main.m in Sources */,
+				9D3240821F58B635004600FF /* LanguageButtonView.m in Sources */,
 				9DBFF9EC1C50489600ABCD2C /* PlayerControlBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1376,14 +1366,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 9;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
-					"$(PROJECT_DIR)/YAML.framework/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1409,9 +1399,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.meydan Development";
+				PROVISIONING_PROFILE = "085f7787-5354-4b25-9162-0ba9a5dc6011";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.meydan AdHoc 1489420690";
 				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1422,13 +1413,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Push",
-					"$(PROJECT_DIR)/YAML.framework/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1454,9 +1445,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.meydan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.meydan Development";
+				PROVISIONING_PROFILE = "085f7787-5354-4b25-9162-0ba9a5dc6011";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.meydan AppStore 1495215862";
 				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -1468,7 +1460,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
+				PROVISIONING_PROFILE = "085f7787-5354-4b25-9162-0ba9a5dc6011";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1481,7 +1473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
+				PROVISIONING_PROFILE = "085f7787-5354-4b25-9162-0ba9a5dc6011";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1494,7 +1486,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
+				PROVISIONING_PROFILE = "085f7787-5354-4b25-9162-0ba9a5dc6011";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1511,7 +1503,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89c59f71-10c5-4a94-9959-b23e489b8a65";
+				PROVISIONING_PROFILE = "085f7787-5354-4b25-9162-0ba9a5dc6011";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;

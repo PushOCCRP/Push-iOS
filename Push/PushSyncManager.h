@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "Article.h"
-//#import "TorManager.h"
+#import "TorManager.h"
 
-//@interface PushSyncManager : AFHTTPSessionManager <TorManagerDelegate>
-@interface PushSyncManager : AFHTTPSessionManager
+@interface PushSyncManager : AFHTTPSessionManager <TorManagerDelegate>
+//@interface PushSyncManager : AFHTTPSessionManager
 
 typedef void(^CompletionBlock)(id articles);
 typedef void(^FailureBlock)(NSError *error);

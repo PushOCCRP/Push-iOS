@@ -8,8 +8,8 @@
 
 #import "AnalyticsManager.h"
 #import "LanguageManager.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 
 @interface AnalyticsManagerViewTimeEventTracker : NSObject
 
@@ -23,6 +23,8 @@
 @end
 
 @implementation AnalyticsManagerViewTimeEventTracker
+
+static NSString * installationUUIDKeyName = @"INSTALLATION_UUID";
 
 - (instancetype)initWithObject:(id)object name:(NSString*)name contentType:(nullable NSString *)contentTypeOrNil
                      contentId:(nullable NSString *)contentIdOrNil
@@ -112,7 +114,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
     
     switch (analyticsType) {
         case CWGAnalyticsCrashlytics:
-            [Fabric with:@[[Crashlytics class]]];
+            //[Fabric with:@[[Crashlytics class]]];
             break;
         case CWGAnalyticsGoogle:
             // Not implemented
@@ -135,7 +137,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
     
     switch ([AnalyticsManager analyticsType]) {
         case CWGAnalyticsCrashlytics:
-            [[Crashlytics sharedInstance] setUserIdentifier:uuid];
+            //[[Crashlytics sharedInstance] setUserIdentifier:uuid];
             break;
         case CWGAnalyticsGoogle:
             // Not implemented
@@ -152,7 +154,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
 {
     switch ([AnalyticsManager analyticsType]) {
         case CWGAnalyticsCrashlytics:
-            [Answers logContentViewWithName:name contentType:contentIdOrNil contentId:contentIdOrNil customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
+            //[Answers logContentViewWithName:name contentType:contentIdOrNil contentId:contentIdOrNil customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
             break;
         case CWGAnalyticsGoogle:
             // Not implemented
@@ -166,7 +168,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
 {
     switch ([AnalyticsManager analyticsType]) {
         case CWGAnalyticsCrashlytics:
-            [Answers logSearchWithQuery:queryOrNil customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
+            //[Answers logSearchWithQuery:queryOrNil customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
             break;
         case CWGAnalyticsGoogle:
             // Not implemented
@@ -181,7 +183,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
 {
     switch ([AnalyticsManager analyticsType]) {
         case CWGAnalyticsCrashlytics:
-            [Answers logCustomEventWithName:name customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
+            //[Answers logCustomEventWithName:name customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
             break;
         case CWGAnalyticsGoogle:
             // Not implemented
@@ -264,6 +266,17 @@ static NSString * uuidKey = @"push_analytics_uuid";
     [mutableAttributes setObject:[LanguageManager sharedManager].language forKey:@"Language"];
     
     return [NSDictionary dictionaryWithDictionary:mutableAttributes];
+}
+
++ (NSUUID*)installationUUID
+{
+    NSUUID * uuid = [[NSUserDefaults standardUserDefaults] valueForKey:installationUUIDKeyName];
+    if(!uuid){
+        uuid = [NSUUID UUID];
+        [[NSUserDefaults standardUserDefaults] setObject:[uuid UUIDString] forKey:installationUUIDKeyName];
+    }
+    
+    return uuid;
 }
 
 @end

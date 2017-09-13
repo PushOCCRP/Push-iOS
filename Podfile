@@ -20,7 +20,7 @@ target "Push" do
     pod 'FBSDKShareKit'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'HockeySDK'
+    #pod 'HockeySDK'
     pod 'youtube-ios-player-helper', '~> 0.1.5'
     #pod 'DateTools', :git => 'https://github.com/PushOCCRP/DateTools.git', :commit => 'f50ae33def9b8b50a5fbf9e3dadcbf19796f3f35'
     pod 'DateTools', :path => '~/Repositories/DateTools'

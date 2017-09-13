@@ -108,11 +108,12 @@ dispatch_semaphore_t _sem;
 // If the return is nil there is nothing stored and the call will still be made.
 - (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 {
-
+    [self waitForStartup];
+    
     if(self.unreachable == true){
         [self informCallerThatProxyIsSpinningUpWithType:PushSyncArticles Completion:completionHandler failure:failure requestParameters:nil];
     } else {
-        [self GET:@"articles" parameters:@{@"language":[LanguageManager sharedManager].languageShortCode,
+        [self GET:@"articles" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
                                            @"v":versionNumber, @"categories":@"true"} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             
                                                [self handleResponse:responseObject completionHandler:completionHandler];
@@ -131,6 +132,8 @@ dispatch_semaphore_t _sem;
 
 - (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 {
+    [self waitForStartup];
+
     NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
     
     //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
@@ -142,7 +145,7 @@ dispatch_semaphore_t _sem;
         [self informCallerThatProxyIsSpinningUpWithType:PushSyncArticle Completion:completionHandler failure:failure requestParameters:@{@"article_id": articleId}];
     } else {
 
-        [self GET:@"article" parameters:@{@"id":articleId, @"language":[LanguageManager sharedManager].languageShortCode,
+        [self GET:@"article" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"id":articleId, @"language":[LanguageManager sharedManager].languageShortCode,
                                          @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
                                              
                                              [self handleResponse:responseObject completionHandler:completionHandler];
@@ -155,6 +158,8 @@ dispatch_semaphore_t _sem;
 
 - (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 {
+    [self waitForStartup];
+
     NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
     
     //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
@@ -165,7 +170,7 @@ dispatch_semaphore_t _sem;
     if(self.unreachable == true){
         [self informCallerThatProxyIsSpinningUpWithType:PushSyncSearch Completion:completionHandler failure:failure requestParameters:@{@"search_terms": searchTerms}];
     } else {
-        [self GET:@"search" parameters:@{@"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode,
+        [self GET:@"search" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode,
                                          @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
                                              
                                              [self handleResponse:responseObject completionHandler:completionHandler];
@@ -329,6 +334,7 @@ dispatch_semaphore_t _sem;
     // We only care if this fails.
     // TODO: Change this to a heartbeat
     self.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    self.requestSerializer.timeoutInterval = 10.0f;
     
     [self GET:@"articles" parameters:nil
       progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -339,36 +345,12 @@ dispatch_semaphore_t _sem;
       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
           NSLog(@"Host is not reachable so we're going to start a TOR session.");
           self.startingUp = false;
-          //[[TorManager sharedManager] startTorSessionWithSession:self];
-          //NSLog(@"%lu", (unsigned long)[TorManager sharedManager].status);
+          [[TorManager sharedManager] startTorSessionWithSession:self];
+          NSLog(@"%lu", (unsigned long)[TorManager sharedManager].status);
+          
     }];
-    
+    self.requestSerializer.timeoutInterval = 60.0f;
 }
-//
-//- (BOOL)unreachable
-//{
-//    BOOL ret = nil;
-//    @synchronized (self)
-//    {
-//        if(_unreachable){
-//            // I wonder how terrible of an idea this is?
-//            while(self.startingUp){
-//                [NSThread sleepForTimeInterval:5.0f];
-//            }
-//        }
-//        
-//        ret = _unreachable;
-//    }
-//    
-//    return ret;
-//}
-//
-//- (void)setUnreachable:(BOOL)unreachable
-//{
-//    @synchronized (self) {
-//        _unreachable = unreachable;
-//    }
-//}
 
 #pragma mark - TorSessionDelegate
 - (void)didCreateTorSession:(NSURLSession*)session
@@ -412,6 +394,15 @@ dispatch_semaphore_t _sem;
 - (NSString*)baseHost
 {
     return [SettingsManager sharedManager].pushUrl;
+}
+
+- (void)waitForStartup
+{
+    int count = 0;
+    while(self.startingUp == true){
+        NSLog(@"Sleeping %i", count++);
+        sleep(1);
+    }
 }
 
 @end

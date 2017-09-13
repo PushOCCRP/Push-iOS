@@ -27,4 +27,6 @@ typedef enum : NSUInteger {
                           customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;
 + (void)endTimerForContentViewWithObject:(id _Nonnull)object andName:(NSString* _Nonnull)name;
 
++ (NSUUID*)installationUUID;
+
 @end

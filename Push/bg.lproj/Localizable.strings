@@ -36,6 +36,15 @@
 "Read" = "Прочети";
 "Cancel" = "Затвори";
 
+/* Pull to refresh..." */
+"Pull to refresh..." = "Pull to refresh...";
+
+/* "Release to refresh..." */
+"Release to refresh..." = "Release to refresh...";
+
+/* "Loading..." */
+"Loading..." = "Loading...";
+
 /* By */
 "by" = "от";
 

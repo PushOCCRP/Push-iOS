@@ -24,6 +24,10 @@ platform :ios do
   before_all do |lane, options|
 
     clear_derived_data
+    disable_automatic_code_signing(path: "Push.xcodeproj")
+    project_path="../Push.xcodeproj"
+
+    
 
     if(lane != :offline && lane != :add_devices && lane != :create)
       #cocoapods 
@@ -46,7 +50,7 @@ platform :ios do
 
   lane :create do
     produce(
-      username: "cguess@icfj.org",
+      username: "guessc@missouri.edu",
       app_identifier: "com.occrp.meydan",
       app_name: "Meydan TV",
       language: "Russian,English"
@@ -65,12 +69,12 @@ platform :ios do
   desc "Creates development and stuff"
   lane :bootstrap do |options|
     cert(
-      username: 'cguess@icfj.org',
+      username: 'guessc@missouri.edu',
       development: true
     )
 
     produce(
-      username: "cguess@icfj.org",
+      username: "guessc@missouri.edu",
       app_identifier: "com.occrp.meydan",
       company_name: "Journalism Development Network",
       app_name: "Meydan TV",
@@ -80,7 +84,7 @@ platform :ios do
     sigh(
       development: true,
       force: true,
-      username: "cguess@icfj.org",
+      username: "guessc@missouri.edu",
       app_identifier: "com.occrp.meydan"
     )
 
@@ -98,13 +102,13 @@ platform :ios do
   desc "Used to test the generator"
   lane :gen_test do |options|
     cert(
-      username: 'cguess@icfj.org',
+      username: 'guessc@missouri.edu',
     )
 
     sigh(
       adhoc: true,
       force: true,
-      username: "cguess@icfj.org",
+      username: "guessc@missouri.edu",
       app_identifier: "com.occrp.meydan"
     )
     
@@ -115,7 +119,7 @@ platform :ios do
     )
 
     gym(
-      #use_legacy_build_api: true,
+      export_method: "development",
       clean: true,
       scheme: 'Push',
     )
@@ -127,7 +131,7 @@ platform :ios do
     ENV["PROFILE_UUID"] = lane_context[SharedValues::SIGH_UDID]
 
     gym(
-      #use_legacy_build_api: true,
+      export_method: "development",
       clean: true,
       scheme: 'Push',
     )
@@ -137,11 +141,11 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do |options|
     cert(
-      username: 'cguess@icfj.org',
+      username: 'guessc@missouri.edu',
     )
     sigh(
       force: true,
-      username: "cguess@icfj.org",
+      username: "guessc@missouri.edu",
       app_identifier: "com.occrp.meydan"
     )
     
@@ -149,14 +153,18 @@ platform :ios do
     ENV["PROFILE_UUID"] = lane_context[SharedValues::SIGH_UDID]
 
     update_project_provisioning(
+        xcodeproj: 'build_files/ios/project/Push.xcodeproj',
+        target_filter: '.*',
+        build_configuration: '.*'
     )
 
     gym(
-      #use_legacy_build_api: true,
+      export_method: "ad-hoc",
       clean: true,
       scheme: 'Push',
       
     ) # Build your app - more options available
+
     #hockey(
     #  api_token: "5e6b858b240b43a7938de3d7397d4045",
     #  notes: options[:notes],
@@ -172,15 +180,14 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :deploy do
-    increment_version_number(version_number:'')
     #ensure_no_debug_code(text: "NSLog")
     cert(
-      username: 'cguess@icfj.org',
+      username: 'guessc@missouri.edu',
     )
     #snapshot
     sigh(
 	    force: true,
-    	username: "cguess@icfj.org",
+    	username: "guessc@missouri.edu",
     	app_identifier: "com.occrp.meydan",
     )
 
@@ -189,19 +196,21 @@ platform :ios do
 
     gym(
         scheme: "Push",
-	      #use_legacy_build_api: true,
+        export_method: "app-store",
 	      clean: true,
         include_symbols: true,
         include_bitcode: true,
     )
     deliver(
     	force: true,
-    	username: "cguess@icfj.org",
+    	username: "guessc@missouri.edu",
     )
 
   end
 
   after_all do |lane|
+    enable_automatic_code_signing(path: "Push.xcodeproj")
+
     # This block is called, only if the executed lane was successful
     
     # slack(
@@ -210,6 +219,8 @@ platform :ios do
   end
 
   error do |lane, exception|
+    enable_automatic_code_signing(path: "Push.xcodeproj")
+
     # slack(
     #   message: exception.message,
     #   success: false
