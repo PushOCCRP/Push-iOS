@@ -149,10 +149,31 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineSpacing = 7.0f;
+        paragraphStyle.paragraphSpacing = 5.0f;
+        paragraphStyle.paragraphSpacingBefore = 5.0f;
         
         NSString * html = [_body stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: '%@'; font-size:%fpx;}</style>", @"Palatino-Roman", 17.0f]];
         
-        html = [html stringByReplacingOccurrencesOfString:@"</p>\n\n<p>" withString:@"</p><br /><p>"];
+        html = [html stringByReplacingOccurrencesOfString:@"</p>\n\n<p>" withString:@"</p><br /><br /><p>"];
+        // For Android you need two breaks to make a proper space. On iOS that adds double blanks.
+        html = [html stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"<br />\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<br><br>" withString:@"<br />\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<br><br />" withString:@"<br />\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<br /><br>" withString:@"<br />\n"];
+        
+        html = [html stringByReplacingOccurrencesOfString:@"<h1>" withString:@"<br /><br /><h1>"];
+        html = [html stringByReplacingOccurrencesOfString:@"<\\h1>" withString:@"<\\h1>\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<h2>" withString:@"<br /><br /><h2>"];
+        html = [html stringByReplacingOccurrencesOfString:@"<\\h2>" withString:@"<\\h2>\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<h3>" withString:@"<br /><br /><h3>"];
+        html = [html stringByReplacingOccurrencesOfString:@"<\\h3>" withString:@"<\\h3>\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<h4>" withString:@"<br /><br /><h4>"];
+        html = [html stringByReplacingOccurrencesOfString:@"<\\h4>" withString:@"<\\h4>\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<h5>" withString:@"<br /><br /><h5>"];
+        html = [html stringByReplacingOccurrencesOfString:@"<\\h5>" withString:@"<\\h5>\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<h6>" withString:@"<br /><br /><h6>"];
+        html = [html stringByReplacingOccurrencesOfString:@"<\\h6>" withString:@"<\\h6>\n"];
+        
         html = [self addGravestonesForImages:html];
         
         NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
@@ -449,7 +470,7 @@
 - (NSString*)dateBylineForDateString:(NSString*)dateString
 {
     NSString * dateBylineText;
-    if([SettingsManager sharedManager].shouldShowAuthor && self.author && self.author.length > 0){
+    if([SettingsManager sharedManager].shouldShowAuthor && self.author.class != [NSNull class] && self.author.length > 0){
         NSString * format = [[LanguageManager sharedManager] bylineFormatForLanguageShortCode:[LanguageManager sharedManager].languageShortCode];
         dateBylineText = [NSString stringWithFormat:format, dateString, self.author];
     } else {

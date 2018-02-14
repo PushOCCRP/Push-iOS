@@ -149,6 +149,22 @@
     }
 }
 
+- (BOOL)loginRequired
+{
+    
+    NSString * loginRequired;
+    
+    if([self.settingsDictionary.allKeys containsObject:@"login-required"]) {
+        loginRequired = [self.settingsDictionary[@"login-required"] lowercaseString];
+        
+        if([loginRequired isEqualToString:@"true"]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 // Borrowed from http://stackoverflow.com/a/12397366
 // Assumes input like "#00FF00" (#RRGGBB).
 - (UIColor *)colorFromHexString:(NSString *)hexString {

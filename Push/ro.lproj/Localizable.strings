@@ -12,6 +12,18 @@
 /* Connection Error */
 "ConnectionErorr" = "Eroare de conectare";
 
+/* Email Address */
+"Email Address" = "Email Address";
+
+/* Login */
+"Login" = "Login";
+
+/* Password */
+"Password" = "Password";
+
+/* Please login with your subscriber's account to access the content. */
+"Please Login Explainer" = "Please login with your subscriber's account to access the content.";
+
 /* OK */
 "OK" = "OK";
 

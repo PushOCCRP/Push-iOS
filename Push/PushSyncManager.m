@@ -14,10 +14,14 @@
 #include "Reachability.h"
 
 typedef enum : NSUInteger {
+    PushSyncLogin,
     PushSyncArticles,
     PushSyncArticle,
     PushSyncSearch,
 } PushSyncRequestType;
+
+NSString *const PushSyncLoginErrorDomain = @"LoginError";
+NSString *const PushSyncConnectionErrorDomain = @"ConnectionError";
 
 @interface TempRequest : NSObject
 
@@ -49,12 +53,16 @@ struct Request {
 @property (atomic, assign) BOOL unreachable;
 @property (atomic, assign) BOOL startingUp;
 
+
+
 // Checks if the service is reachable
 - (BOOL)checkInternetReachability;
 
 @end
 
 @implementation PushSyncManager
+
+@synthesize isLoggedIn = _isLoggedIn;
 
 static const NSString * versionNumber = @"1.1";
 
@@ -77,22 +85,8 @@ dispatch_semaphore_t _sem;
     return _sharedManager;
 }
 
-//+ (PushSyncManager *)sharedManager:(NSURLSessionConfiguration*)configuration {
-//    static PushSyncManager *_sharedManager = nil;
-//    
-//    //We only want to create one singleton object, so do that with GCD
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        //Set up the singleton class
-//        _sharedManager = [[PushSyncManager alloc] initWithSessionConfiguration:configuration];
-//    });
-//    
-//    return _sharedManager;
-//}
-
 - (instancetype)init
 {
-    
     self = [super initWithBaseURL:self.baseURL];
     if(self) {
         self.torRequests = [NSMutableArray array];
@@ -103,28 +97,106 @@ dispatch_semaphore_t _sem;
     return self;
 }
 
+- (BOOL)isLoggedIn {
+    if([SettingsManager sharedManager].loginRequired){
+        return _isLoggedIn;
+    }
+    return false;
+}
+
+// When using this the CompletionBlock will always return nil if sucessfully logged in. It will return error for everything else
+- (void)loginWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure {
+    __weak typeof(self) weakSelf = self;
+
+    [self waitForStartupWithCompletionHandler:^{
+        [weakSelf handleLoginResponse:@{} completionHandler:completionHandler];
+    }];
+    
+
+/*
+    if(self.unreachable == true){
+        dispatch_async(self.completionQueue, ^{
+            //[weakSelf waitForStartup];
+            [weakSelf informCallerThatProxyIsSpinningUpWithType:PushSyncLogin Completion:completionHandler failure:failure requestParameters:nil];
+        });
+        
+    } else {
+        dispatch_async(self.completionQueue, ^{
+            //[weakSelf waitForStartup];
+            [weakSelf POST:@"login.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
+                                                        @"v":versionNumber} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                                                            if([[responseObject allKeys] containsObject:@"error"]){
+                                                                NSError * localizedError = [[NSError alloc]
+                                                                                            initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
+                                                                                            code:2001
+                                                                                            userInfo:@{
+                                                                                                       NSLocalizedDescriptionKey: MYLocalizedString(@"WrongUserNameOrPassword", @"Wrong User Name or Password")
+                                                                                                       }
+                                                                                            ];
+                                                                
+                                                                [weakSelf handleError:localizedError failure:failure];
+                                                                return;
+                                                            }
+                                                            
+                                                            [weakSelf handleResponse:responseObject completionHandler:completionHandler];
+                                                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                            NSError * localizedError = [[NSError alloc]
+                                                                                        initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
+                                                                                        code:2000
+                                                                                        userInfo:@{
+                                                                                                   NSLocalizedDescriptionKey: MYLocalizedString(@"ConnectionError", @"Connection Error")
+                                                                                                   }
+                                                                                        ];
+
+                                                            [weakSelf handleError:localizedError failure:failure];
+                                                        }];
+        });
+    }
+ */
+}
+
+- (void)logout {
+    // We'll clear out everything stored while logged in, for now just set the variable.
+    _isLoggedIn = false;
+}
+
+
 // Returns the current cached array, and then does another call.
 // The caller should show the current array and then handle the call back with new articles
 // If the return is nil there is nothing stored and the call will still be made.
 - (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 {
-    [self waitForStartup];
-    
-    if(self.unreachable == true){
-        [self informCallerThatProxyIsSpinningUpWithType:PushSyncArticles Completion:completionHandler failure:failure requestParameters:nil];
-    } else {
-        [self GET:@"articles" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
-                                           @"v":versionNumber, @"categories":@"true"} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    __weak typeof(self) weakSelf = self;
+
+    [self waitForStartupWithCompletionHandler:^{
+        if(self.unreachable == true){
+            dispatch_async(self.completionQueue, ^{
+                //[weakSelf waitForStartup];
+                [weakSelf informCallerThatProxyIsSpinningUpWithType:PushSyncArticles Completion:completionHandler failure:failure requestParameters:nil];
+            });
             
-                                               [self handleResponse:responseObject completionHandler:completionHandler];
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self handleError:error failure:failure];
-        }];
-    }
+        } else {
+            dispatch_async(self.completionQueue, ^{
+                //[weakSelf waitForStartup];
+                [weakSelf GET:@"articles.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
+                                                            @"v":versionNumber, @"categories":@"true"} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                                                                
+                                                                [weakSelf handleResponse:responseObject completionHandler:completionHandler];
+                                                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                                [weakSelf handleError:error failure:failure];
+                                                            }];
+            });
+        }
+        
+    }];
     
     if(!self.articles || ([self.articles respondsToSelector:@selector(count)] && [self.articles count] == 0) ||
        ([self.articles respondsToSelector:@selector(allKeys)] && [[self.articles allKeys] count] == 0)){
         self.articles = [self getCachedArticles];
+    }
+    
+    if(self.articles == nil){
+        NSLog(@"Articles are not cached");
     }
     
     return self.articles;
@@ -132,54 +204,62 @@ dispatch_semaphore_t _sem;
 
 - (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 {
-    [self waitForStartup];
+    [self waitForStartupWithCompletionHandler:^{
+        NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
+        
+        //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
+        if([languageShortCode isEqualToString:@"sr"]){
+            languageShortCode = @"rs";
+        }
+        
+        if(self.unreachable == true){
+            [self informCallerThatProxyIsSpinningUpWithType:PushSyncArticle Completion:completionHandler failure:failure requestParameters:@{@"article_id": articleId}];
+        } else {
+            
+            [self GET:@"article.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"id":articleId, @"language":[LanguageManager sharedManager].languageShortCode,
+                                                   @"v":versionNumber} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                                                       
+                                                       [self handleResponse:responseObject completionHandler:completionHandler];
+                                                       
+                                                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                       [self handleError:error failure:failure];
+                                                   }];
+        }
 
-    NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
-    
-    //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
-    if([languageShortCode isEqualToString:@"sr"]){
-        languageShortCode = @"rs";
-    }
-    
-    if(self.unreachable == true){
-        [self informCallerThatProxyIsSpinningUpWithType:PushSyncArticle Completion:completionHandler failure:failure requestParameters:@{@"article_id": articleId}];
-    } else {
-
-        [self GET:@"article" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"id":articleId, @"language":[LanguageManager sharedManager].languageShortCode,
-                                         @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                                             
-                                             [self handleResponse:responseObject completionHandler:completionHandler];
-                                             
-                                         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                             [self handleError:error failure:failure];
-                                         }];
-    }
+    }];
 }
 
 - (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 {
-    [self waitForStartup];
-
-    NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
-    
-    //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
-    if([languageShortCode isEqualToString:@"sr"]){
-        languageShortCode = @"rs";
-    }
-    
-    if(self.unreachable == true){
-        [self informCallerThatProxyIsSpinningUpWithType:PushSyncSearch Completion:completionHandler failure:failure requestParameters:@{@"search_terms": searchTerms}];
-    } else {
-        [self GET:@"search" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode,
-                                         @"v":versionNumber} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                                             
-                                             [self handleResponse:responseObject completionHandler:completionHandler];
-                                             
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self handleError:error failure:failure];
-        }];
-    }
+    [self waitForStartupWithCompletionHandler:^{
+        NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
+        
+        //iOS uses 'sr' for Serbian, the rest of the world uses 'rs', so switch it here
+        if([languageShortCode isEqualToString:@"sr"]){
+            languageShortCode = @"rs";
+        }
+        
+        if(self.unreachable == true){
+            [self informCallerThatProxyIsSpinningUpWithType:PushSyncSearch Completion:completionHandler failure:failure requestParameters:@{@"search_terms": searchTerms}];
+        } else {
+            [self GET:@"search.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode,
+                                                  @"v":versionNumber} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                                                      
+                                                      [self handleResponse:responseObject completionHandler:completionHandler];
+                                                      
+                                                  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                      [self handleError:error failure:failure];
+                                                  }];
+        }
+    }];
 }
+
+- (void)handleLoginResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler
+{
+    _isLoggedIn = YES;
+    completionHandler(nil);
+}
+
 
 - (void)handleResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler
 {
@@ -198,6 +278,8 @@ dispatch_semaphore_t _sem;
         }
         
         NSArray * articles = [NSArray arrayWithArray:mutableResponseArray];
+        [self cacheArticles:articles];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             completionHandler(articles);
         });
@@ -219,6 +301,9 @@ dispatch_semaphore_t _sem;
         mutableCategoriesResponseDictionary[@"categories_order"] = categoriesArray;
         
         NSDictionary * categories = [NSDictionary dictionaryWithDictionary:mutableCategoriesResponseDictionary];
+        
+        [self cacheArticles:categories];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             completionHandler(categories);
         });
@@ -267,7 +352,8 @@ dispatch_semaphore_t _sem;
 // Pass in either NSArray or NSDictionary
 - (void)cacheArticles:(id)articles
 {
-    NSParameterAssert([articles class] == NSClassFromString(@"NSArray") || [articles class] == NSClassFromString(@"NSDictionary"));
+    //NSParameterAssert([articles class] == NSClassFromString(@"NSArray") || [articles class] == NSClassFromString(@"NSDictionary"));
+    NSParameterAssert([articles isKindOfClass:[NSArray class]] || [articles isKindOfClass:[NSDictionary class]]);
     
     self.articles = articles;
     
@@ -317,12 +403,14 @@ dispatch_semaphore_t _sem;
 {
     // Check this first
     //+ (instancetype)reachabilityForInternetConnection;
+    self.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
 
     Reachability *hostReachability = [Reachability reachabilityWithHostName:self.baseHost];
     if(hostReachability.currentReachabilityStatus != NotReachable){
         [self checkIfHostIsBlocked:self.baseHost];
     } else {
         self.unreachable = false;
+        self.startingUp = false;
     }
     
     return true;
@@ -333,10 +421,9 @@ dispatch_semaphore_t _sem;
 {
     // We only care if this fails.
     // TODO: Change this to a heartbeat
-    self.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     self.requestSerializer.timeoutInterval = 10.0f;
     
-    [self GET:@"articles" parameters:nil
+    [self GET:@"heartbeat.json" parameters:nil
       progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
           NSLog(@"Host is reachable, not using TOR.");
           self.unreachable = false;
@@ -396,13 +483,18 @@ dispatch_semaphore_t _sem;
     return [SettingsManager sharedManager].pushUrl;
 }
 
-- (void)waitForStartup
+- (void)waitForStartupWithCompletionHandler:(void(^)())completionHandler
 {
-    int count = 0;
-    while(self.startingUp == true){
-        NSLog(@"Sleeping %i", count++);
-        sleep(1);
-    }
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        int count = 0;
+        
+        while(self.startingUp == true){
+            NSLog(@"Sleeping %i", count++);
+            sleep(1);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), completionHandler);
+    });
 }
 
 @end

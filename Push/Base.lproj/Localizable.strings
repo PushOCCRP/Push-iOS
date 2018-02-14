@@ -12,6 +12,24 @@
 /* Connection Error */
 "ConnectionErorr" = "Connection Error";
 
+/* Login Error */
+"LoginError" = "Login Error";
+
+/* Wrong User Name or Password */
+"WrongUserNameOrPassword" = "Wrong User Name or Password.";
+
+/* Email Address */
+"EmailAddress" = "Email Address";
+
+/* Login */
+"Login" = "Login";
+
+/* Password */
+"Password" = "Password";
+
+/* Please login with your subscriber's account to access the content. */
+"PleaseLoginExplainer" = "Please login with your subscriber's account to access the content.";
+
 /* OK */
 "OK" = "OK";
 

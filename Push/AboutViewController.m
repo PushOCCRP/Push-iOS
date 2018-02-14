@@ -91,7 +91,7 @@
 
 - (void)donateButtonTapped
 {
-    [[UIApplication sharedApplication] openURL:[SettingsManager sharedManager].donateUrl];
+    [[UIApplication sharedApplication] openURL:[SettingsManager sharedManager].donateUrl options:@{} completionHandler:nil];
 }
 
 @end

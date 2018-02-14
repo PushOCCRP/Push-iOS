@@ -159,6 +159,13 @@
 - (void)didReceiveNotification:(nonnull NSDictionary *)userInfo withNavigationController:(UINavigationController*)navController forApplicationSatate:(UIApplicationState)state
 {
     NSLog(@"%@", userInfo);
+    
+    if([[userInfo allKeys] containsObject:@"language"]){
+        if(![userInfo[@"language"] isEqualToString:[LanguageManager sharedManager].languageShortCode]){
+            return;
+        }
+    }
+    
     if([[userInfo allKeys] containsObject:@"article_id"]){
         
         [[PushSyncManager sharedManager] articleWithId:userInfo[@"article_id"] withCompletionHandler:^(NSArray *articles) {

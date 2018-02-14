@@ -109,7 +109,7 @@
  *  @return an array of HTMLTag elements
  */
 
-- (NSArray*)parseHTMLString;
-- (NSAttributedString*)processHTML;
+- (nullable NSArray *)parseHTMLString;
+- (nullable NSAttributedString *) processHTML;
 
 @end

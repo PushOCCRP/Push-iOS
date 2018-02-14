@@ -24,12 +24,14 @@
 #import "WebSiteViewController.h"
 #import "ArticleTableViewHeader.h"
 #import "SectionViewController.h"
+#import "LoginViewController.h"
 
 #import "AboutBarButtonView.h"
 #import "LanguageButtonView.h"
 
 #import "AnalyticsManager.h"
 #import "PromotionsManager.h"
+#import "SettingsManager.h"
 
 // These are also set in the respective nibs, so if you change it make sure you change it there too
 static NSString * featuredCellIdentifier = @"FEATURED_ARTICLE_STORY_CELL";
@@ -69,6 +71,12 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    if([SettingsManager sharedManager].loginRequired && ![PushSyncManager sharedManager].isLoggedIn){
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginViewController animated:YES];
+        return;
+    }
+    
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
     [self loadInitialArticles];
 }
@@ -165,10 +173,9 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         if(error.code == 1200){
             dispatch_async(dispatch_get_main_queue(), ^{
                 MBProgressHUD * hud = [MBProgressHUD HUDForView:self.view];
-                hud.labelText = @"Fixing Network Issue";
-                hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+                hud.label.text = @"Fixing Network Issue";
+                hud.detailsLabel.text = @"One moment while we attempt to fix our connection...";
                 hud.progress = 0.45f;
-
             });
             return;
         }
@@ -190,7 +197,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 
 - (void)loadArticles
 {
-    [[PushSyncManager sharedManager] articlesWithCompletionHandler:^(NSArray *articles) {
+    self.articles = [[PushSyncManager sharedManager] articlesWithCompletionHandler:^(NSArray *articles) {
         NSLog(@"%@", articles);
         self.articles = articles;
         [self.tableView reloadData];
@@ -199,8 +206,8 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         if(error.code == 1200){
             dispatch_async(dispatch_get_main_queue(), ^{
                 MBProgressHUD * hud = [MBProgressHUD HUDForView:self.view];
-                hud.labelText = @"Fixing Network Issue";
-                hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+                hud.label.text = @"Fixing Network Issue";
+                hud.detailsLabel.text = @"One moment while we attempt to fix our connection...";
                 hud.progress = 0.45f;
             });
             return;
@@ -213,6 +220,10 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [self presentViewController:alert animated:YES completion:nil];
         [self.tableView.pullToRefreshView stopAnimating];
     }];
+    
+    if(self.articles != nil){
+        [self.tableView reloadData];
+    }
 }
 
 - (void)loadPromotions
@@ -480,6 +491,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     ArticleTableViewCell * cell;
     
+    // If the articles are seperated by Categories it will be a dictionary here.
     if([self.articles respondsToSelector:@selector(allKeys)]){
         
         if(indexPath.row == 0){
@@ -501,6 +513,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
             cell.article = articles[indexPath.row - 1];
         }
     } else {
+        // This is the path if there are no categories
         if(indexPath.row == 0){
             cell = [tableView dequeueReusableCellWithIdentifier:featuredCellIdentifier];
         } else {

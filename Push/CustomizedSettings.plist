@@ -3,27 +3,29 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Meydan TV</string>
+	<string>The Columbia Missourian</string>
 	<key>short-name</key>
-	<string>Meydan</string>
+	<string>Missourian</string>
 	<key>uniqush</key>
-	<string>meydan</string>
+	<string>missourian</string>
 	<key>languages</key>
-	<string>["az", "ru", "en"]</string>
+	<string>[&quot;en&quot;]</string>
 	<key>default-language</key>
-	<string>az</string>
+	<string>en</string>
 	<key>icon-large</key>
-	<string>logo-meydan.png</string>
+	<string>logo-missourian.png</string>
 	<key>icon-small</key>
-	<string>icon-small.png</string>
+	<string></string>
 	<key>icon-background-color</key>
-	<string>#FFFFFF</string>
+	<string>#17479e</string>
 	<key>launch-background-color</key>
-	<string>#FFFFFF</string>
+	<string>#17479e</string>
 	<key>navigation-bar-color</key>
-	<string>#f5f5f5</string>
+	<string>#17479e</string>
 	<key>navigation-text-color</key>
-	<string>#d42f33</string>
+	<string>#FFFFFF</string>
+	<key>login-required</key>
+	<string>true</string>
 	<key>show-author</key>
 	<string>true</string>
 </dict>

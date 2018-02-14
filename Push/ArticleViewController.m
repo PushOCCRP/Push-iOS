@@ -31,6 +31,7 @@
 @property (nonatomic, retain) UIImageView * image;
 @property (nonatomic, retain) UIButton * videoPlayerButton;
 @property (nonatomic, retain) UILabel * caption;
+@property (nonatomic, retain) UILabel * photoByline;
 @property (nonatomic, retain) UILabel * date;
 @property (nonatomic, retain) UILabel * headline;
 @property (nonatomic, retain) UITextView * body;
@@ -141,7 +142,11 @@ static NSString * imageGravestoneMarker = @"&&&&";
     self.videoPlayerButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.videoPlayerButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     [self.videoPlayerButton addTarget:self action:@selector(videoButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        
+    
+    self.photoByline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
+    self.photoByline.numberOfLines = 1;
+    self.caption.lineBreakMode = NSLineBreakByWordWrapping;
+    
     self.caption = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
     self.caption.numberOfLines = 3;
     self.caption.lineBreakMode = NSLineBreakByWordWrapping;
@@ -164,6 +169,7 @@ static NSString * imageGravestoneMarker = @"&&&&";
     }
     [self.contentView addSubview:self.image];
     [self.contentView addSubview:self.videoPlayerButton];
+    [self.contentView addSubview:self.photoByline];
     [self.contentView addSubview:self.caption];
     [self.contentView addSubview:self.date];
     [self.contentView addSubview:self.headline];
@@ -212,9 +218,15 @@ static NSString * imageGravestoneMarker = @"&&&&";
         make.centerX.equalTo(self.image.mas_centerX);
         make.centerY.equalTo(self.image.mas_centerY);
     }];
+
+    [self.photoByline mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.image.mas_bottom).with.offset(padding.top);
+        make.left.equalTo(self.photoByline.superview.mas_left).with.offset(padding.left);
+        make.right.equalTo(self.photoByline.superview.mas_right).with.offset(-padding.right);
+    }];
     
     [self.caption mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.image.mas_bottom).with.offset(padding.top);
+        make.top.equalTo(self.photoByline.mas_bottom).with.offset(padding.top);
         make.left.equalTo(self.caption.superview.mas_left).with.offset(padding.left);
         make.right.equalTo(self.caption.superview.mas_right).with.offset(-padding.right);
     }];
@@ -288,15 +300,30 @@ static NSString * imageGravestoneMarker = @"&&&&";
         
         //Set image caption, hide if there is none.
         NSString * headerImageCaption;
+        NSString * headerImageByline;
         if(self.article.headerImage && [[self.article.headerImage allKeys] containsObject:@"caption"]){
             headerImageCaption = self.article.headerImage[@"caption"];
+            if([[self.article.images.firstObject allKeys] containsObject:@"caption"]){
+                headerImageByline = self.article.images.firstObject[@"byline"];
+            }
         } else if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
             headerImageCaption = self.article.images.firstObject[@"caption"];
+            if([[self.article.images.firstObject allKeys] containsObject:@"caption"]){
+                headerImageByline = self.article.images.firstObject[@"byline"];
+            }
         }
         
         if(headerImageCaption){
             self.caption.text = headerImageCaption;
             self.caption.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
+        } else {
+            self.caption.hidden = YES;
+        }
+        
+        if(headerImageByline){
+            self.photoByline.text = headerImageByline;
+            self.photoByline.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
+            self.photoByline.textAlignment = NSTextAlignmentRight;
         } else {
             self.caption.hidden = YES;
         }
@@ -371,7 +398,6 @@ static NSString * imageGravestoneMarker = @"&&&&";
 {
     
 }
-
 
 
 - (void)didReceiveMemoryWarning

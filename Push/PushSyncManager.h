@@ -11,13 +11,21 @@
 #import "Article.h"
 #import "TorManager.h"
 
+extern NSString *const PushSyncLoginErrorDomain;
+extern NSString *const PushSyncConnectionErrorDomain;
+
 @interface PushSyncManager : AFHTTPSessionManager <TorManagerDelegate>
 //@interface PushSyncManager : AFHTTPSessionManager
 
 typedef void(^CompletionBlock)(id articles);
 typedef void(^FailureBlock)(NSError *error);
 
+@property (nonatomic, readonly) BOOL isLoggedIn;
+
 + (PushSyncManager *)sharedManager;
+
+// Completion handler will return nil if login is sucessful. Failure will return in all other cases
+- (void)loginWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 
 // completion handler will always return either an NSArray or NSDictionary
 - (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;

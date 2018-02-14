@@ -1,4 +1,4 @@
-app_identifier "com.occrp.meydan" # The bundle identifier of your app
+app_identifier "com.pushapp.missourian" # The bundle identifier of your app
 apple_id "guessc@missouri.edu" # Your Apple email address
 #team_id "9H5K42BU9H"
 

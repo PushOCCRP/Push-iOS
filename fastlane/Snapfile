@@ -12,10 +12,6 @@
 
 languages([
 
-"az",
-
-"ru",
-
 "en"
 
 ])

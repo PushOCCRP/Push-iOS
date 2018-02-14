@@ -51,9 +51,9 @@ platform :ios do
   lane :create do
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.occrp.meydan",
-      app_name: "Meydan TV",
-      language: "Russian,English"
+      app_identifier: "com.pushapp.missourian",
+      app_name: "The Columbia Missourian",
+      language: "English"
     )
   end
 
@@ -75,17 +75,17 @@ platform :ios do
 
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.occrp.meydan",
-      company_name: "Journalism Development Network",
-      app_name: "Meydan TV",
-      language: "Russian,English"
+      app_identifier: "com.pushapp.missourian",
+      company_name: "The Columbia Missourian",
+      app_name: "The Columbia Missourian",
+      language: "English"
     )
 
     sigh(
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.occrp.meydan"
+      app_identifier: "com.pushapp.missourian"
     )
 
 
@@ -109,7 +109,7 @@ platform :ios do
       adhoc: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.occrp.meydan"
+      app_identifier: "com.pushapp.missourian"
     )
     
     # use the UID of the newly created provisioning profile
@@ -146,7 +146,7 @@ platform :ios do
     sigh(
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.occrp.meydan"
+      app_identifier: "com.pushapp.missourian"
     )
     
     # use the UID of the newly created provisioning profile
@@ -166,9 +166,9 @@ platform :ios do
     ) # Build your app - more options available
 
     #hockey(
-    #  api_token: "5e6b858b240b43a7938de3d7397d4045",
+    #  api_token: "0b69fda8a2124bc3bbf699b5c03b18ac",
     #  notes: options[:notes],
-    #  #public_identifier: "5e1c7f0b67b4472c8590cb292a77ba25"
+    #  #public_identifier: "0dce3b5dc14d4f0889881da636cead08"
     #)
     pilot(
       changelog: options[:notes]
@@ -180,6 +180,7 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :deploy do
+    increment_version_number(version_number:'')
     #ensure_no_debug_code(text: "NSLog")
     cert(
       username: 'guessc@missouri.edu',
@@ -188,7 +189,7 @@ platform :ios do
     sigh(
 	    force: true,
     	username: "guessc@missouri.edu",
-    	app_identifier: "com.occrp.meydan",
+    	app_identifier: "com.pushapp.missourian",
     )
 
     update_project_provisioning(
