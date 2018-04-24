@@ -105,15 +105,14 @@ dispatch_semaphore_t _sem;
 }
 
 // When using this the CompletionBlock will always return nil if sucessfully logged in. It will return error for everything else
-- (void)loginWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure {
+- (void)loginWithUsername:(NSString*)username password:(NSString*)password completionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure {
     __weak typeof(self) weakSelf = self;
 
-    [self waitForStartupWithCompletionHandler:^{
-        [weakSelf handleLoginResponse:@{} completionHandler:completionHandler];
-    }];
-    
+//    [self waitForStartupWithCompletionHandler:^{
+//        [weakSelf handleLoginResponse:@{} completionHandler:completionHandler];
+//    }];
+//
 
-/*
     if(self.unreachable == true){
         dispatch_async(self.completionQueue, ^{
             //[weakSelf waitForStartup];
@@ -123,22 +122,23 @@ dispatch_semaphore_t _sem;
     } else {
         dispatch_async(self.completionQueue, ^{
             //[weakSelf waitForStartup];
-            [weakSelf POST:@"login.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
+            [weakSelf POST:@"authenticate" parameters:@{@"username": username, @"password": password, @"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
                                                         @"v":versionNumber} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                                                            if([[responseObject allKeys] containsObject:@"error"]){
-                                                                NSError * localizedError = [[NSError alloc]
-                                                                                            initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
-                                                                                            code:2001
-                                                                                            userInfo:@{
-                                                                                                       NSLocalizedDescriptionKey: MYLocalizedString(@"WrongUserNameOrPassword", @"Wrong User Name or Password")
-                                                                                                       }
-                                                                                            ];
-                                                                
-                                                                [weakSelf handleError:localizedError failure:failure];
+                                                            if([[responseObject allKeys] containsObject:@"code"] && [[responseObject objectForKey:@"code"] isEqualToString:@"1"]){
+                                                                _isLoggedIn = YES;
+                                                                [weakSelf handleResponse:responseObject completionHandler:completionHandler];
                                                                 return;
                                                             }
                                                             
-                                                            [weakSelf handleResponse:responseObject completionHandler:completionHandler];
+                                                            NSError * localizedError = [[NSError alloc]
+                                                                                        initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
+                                                                                        code:2001
+                                                                                        userInfo:@{
+                                                                                                   NSLocalizedDescriptionKey: MYLocalizedString(@"WrongUserNameOrPassword", @"Wrong User Name or Password")
+                                                                                                   }
+                                                                                        ];
+                                                            [weakSelf handleError:localizedError failure:failure];
+                                                            return;
                                                         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                                             NSError * localizedError = [[NSError alloc]
                                                                                         initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
@@ -152,7 +152,7 @@ dispatch_semaphore_t _sem;
                                                         }];
         });
     }
- */
+
 }
 
 - (void)logout {

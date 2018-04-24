@@ -9,7 +9,7 @@
 	<key>uniqush</key>
 	<string>missourian</string>
 	<key>languages</key>
-	<string>[&quot;en&quot;]</string>
+	<string>["en"]</string>
 	<key>default-language</key>
 	<string>en</string>
 	<key>icon-large</key>
@@ -24,8 +24,6 @@
 	<string>#17479e</string>
 	<key>navigation-text-color</key>
 	<string>#FFFFFF</string>
-	<key>login-required</key>
-	<string>true</string>
 	<key>show-author</key>
 	<string>true</string>
 </dict>

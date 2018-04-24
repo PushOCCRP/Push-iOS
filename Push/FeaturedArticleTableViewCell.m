@@ -34,4 +34,10 @@
     self.headlineLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:25.0f];
 }
 
+- (void)drawViews:(BOOL)showImage
+{
+    return;
+}
+
+
 @end

@@ -259,7 +259,7 @@ typedef enum : NSUInteger {
 - (IBAction)loginButtonTapped:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [PushSyncManager.sharedManager loginWithCompletionHandler:^(id articles) {
+    [PushSyncManager.sharedManager loginWithUsername:self.loginTextField.text password:self.passwordTextField.text completionHandler:^(id articles) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self.navigationController popToRootViewControllerAnimated:YES];

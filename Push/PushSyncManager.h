@@ -25,7 +25,7 @@ typedef void(^FailureBlock)(NSError *error);
 + (PushSyncManager *)sharedManager;
 
 // Completion handler will return nil if login is sucessful. Failure will return in all other cases
-- (void)loginWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (void)loginWithUsername:(NSString*)username password:(NSString*)password completionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
 
 // completion handler will always return either an NSArray or NSDictionary
 - (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;

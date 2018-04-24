@@ -51,7 +51,9 @@ platform :ios do
   lane :create do
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.pushapp.missourian",
+      app_identifier: "com.columbiamissouria.pushapp",
+      company_name: "The Columbia Missourian",
+      itc_team_name: "The Columbia Missourian",
       app_name: "The Columbia Missourian",
       language: "English"
     )
@@ -61,7 +63,7 @@ platform :ios do
   lane :add_devices do
     register_devices(
         devices: {
-            "Christopher Guess" => "b725c07c5e9799a9f824d544abc2534d9d317884"
+            
         }
     )
   end
@@ -70,13 +72,15 @@ platform :ios do
   lane :bootstrap do |options|
     cert(
       username: 'guessc@missouri.edu',
+      team_id: '9H5K42BU9H',
       development: true
     )
 
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.pushapp.missourian",
+      app_identifier: "com.columbiamissouria.pushapp",
       company_name: "The Columbia Missourian",
+      itc_team_name: "The Columbia Missourian",
       app_name: "The Columbia Missourian",
       language: "English"
     )
@@ -85,7 +89,8 @@ platform :ios do
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.pushapp.missourian"
+      app_identifier: "com.columbiamissouria.pushapp",
+      team_id: '9H5K42BU9H',
     )
 
 
@@ -102,14 +107,18 @@ platform :ios do
   desc "Used to test the generator"
   lane :gen_test do |options|
     cert(
+      development: true,
       username: 'guessc@missouri.edu',
+      team_id: '9H5K42BU9H',
     )
 
     sigh(
-      adhoc: true,
+      development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.pushapp.missourian"
+      app_identifier: "com.columbiamissouria.pushapp",
+      team_id: '9H5K42BU9H',
+
     )
     
     # use the UID of the newly created provisioning profile
@@ -142,35 +151,25 @@ platform :ios do
   lane :beta do |options|
     cert(
       username: 'guessc@missouri.edu',
+      team_id: '9H5K42BU9H',
     )
     sigh(
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.pushapp.missourian"
+      app_identifier: "com.columbiamissouria.pushapp",
+      team_id: '9H5K42BU9H',
     )
     
     # use the UID of the newly created provisioning profile
     ENV["PROFILE_UUID"] = lane_context[SharedValues::SIGH_UDID]
 
-    update_project_provisioning(
-        xcodeproj: 'build_files/ios/project/Push.xcodeproj',
-        target_filter: '.*',
-        build_configuration: '.*'
-    )
+    build_app(scheme: "Push", 
+              include_bitcode: true,
+              )
 
-    gym(
-      export_method: "ad-hoc",
-      clean: true,
-      scheme: 'Push',
-      
-    ) # Build your app - more options available
+    sync_code_signing(type: "appstore")    # see code signing guide for more information
 
-    #hockey(
-    #  api_token: "0b69fda8a2124bc3bbf699b5c03b18ac",
-    #  notes: options[:notes],
-    #  #public_identifier: "0dce3b5dc14d4f0889881da636cead08"
-    #)
-    pilot(
+    upload_to_testflight(
       changelog: options[:notes]
     )
 
@@ -184,12 +183,14 @@ platform :ios do
     #ensure_no_debug_code(text: "NSLog")
     cert(
       username: 'guessc@missouri.edu',
+      team_id: '9H5K42BU9H',
     )
     #snapshot
     sigh(
 	    force: true,
     	username: "guessc@missouri.edu",
-    	app_identifier: "com.pushapp.missourian",
+    	app_identifier: "com.columbiamissouria.pushapp",
+      team_id: '9H5K42BU9H',
     )
 
     update_project_provisioning(

@@ -51,7 +51,7 @@
         if(top){
             make.height.equalTo(@1);
         } else {
-            make.height.equalTo(@10);
+            make.height.equalTo(@5 );
         }
     }];
     

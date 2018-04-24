@@ -54,8 +54,12 @@
     self.aboutTextView.editable = NO;
     
     [self.view addSubview:self.aboutTextView];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self.aboutTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.view).offset(10);
+        make.right.equalTo(self.view).offset(-10);
+        make.bottom.equalTo(self.view).offset(0);
     }];
 }
 
@@ -68,7 +72,7 @@
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 7.0f;
     
-    html = [html stringByAppendingString:[NSString stringWithFormat:@"<style>body{line-height: '%@'; font-family: '%@'; font-size:%fpx;}</style>", @"20px", @"Palatino-Roman", 15.0f]];
+    html = [html stringByAppendingString:[NSString stringWithFormat:@"<style>body{line-height: '%@'; font-family: '%@'; font-size:%fpx;}</style>", @"20px", @"Palatino-Roman", 20.0f]];
     
     
     NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding]
