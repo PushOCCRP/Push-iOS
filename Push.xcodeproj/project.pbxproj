@@ -1021,13 +1021,13 @@
 					};
 					9DE4A1161BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
+						DevelopmentTeam = VLM8EUM4PH;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 					9DE4A1211BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
+						DevelopmentTeam = VLM8EUM4PH;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
@@ -1415,7 +1415,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.columbiamissourian.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.columbianmissourian.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1463,7 +1463,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.columbiamissourian.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.columbianmissourian.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1477,13 +1477,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = VLM8EUM4PH;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.columbiamissouria.pushapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.columbianmissourian.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dcb6db89-8c2c-473e-90cb-d0064ae00343";
-				PROVISIONING_PROFILE_SPECIFIER = "com.columbiamissouria.pushapp Development";
+				PROVISIONING_PROFILE = "c651ad43-0106-4ffb-98b1-91216c43f504";
+				PROVISIONING_PROFILE_SPECIFIER = "com.columbianmissourian.mobile Development";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1493,13 +1493,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = VLM8EUM4PH;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dcb6db89-8c2c-473e-90cb-d0064ae00343";
-				PROVISIONING_PROFILE_SPECIFIER = "com.columbiamissouria.pushapp Development";
+				PROVISIONING_PROFILE = "c651ad43-0106-4ffb-98b1-91216c43f504";
+				PROVISIONING_PROFILE_SPECIFIER = "com.columbianmissourian.mobile Development";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1509,13 +1509,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = VLM8EUM4PH;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dcb6db89-8c2c-473e-90cb-d0064ae00343";
-				PROVISIONING_PROFILE_SPECIFIER = "com.columbiamissouria.pushapp Development";
+				PROVISIONING_PROFILE = "c651ad43-0106-4ffb-98b1-91216c43f504";
+				PROVISIONING_PROFILE_SPECIFIER = "com.columbianmissourian.mobile Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1529,13 +1529,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = VLM8EUM4PH;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dcb6db89-8c2c-473e-90cb-d0064ae00343";
-				PROVISIONING_PROFILE_SPECIFIER = "com.columbiamissouria.pushapp Development";
+				PROVISIONING_PROFILE = "c651ad43-0106-4ffb-98b1-91216c43f504";
+				PROVISIONING_PROFILE_SPECIFIER = "com.columbianmissourian.mobile Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;

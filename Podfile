@@ -28,5 +28,6 @@ target "Push" do
     pod 'CPAProxy', :git => 'https://github.com/ursachec/CPAProxy.git'
     #pod 'CPAProxy', :path => '~/Repositories/Push/CPAProxy'
     pod 'YAML-Framework'
+    pod '1PasswordExtension', '~> 1.8.5'
 end
 

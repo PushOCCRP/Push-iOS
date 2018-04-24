@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>The Columbia Missourian</string>
+	<string>Missourian</string>
 	<key>short-name</key>
 	<string>Missourian</string>
 	<key>uniqush</key>
@@ -25,6 +25,8 @@
 	<key>navigation-text-color</key>
 	<string>#FFFFFF</string>
 	<key>show-author</key>
+	<string>true</string>
+	<key>login-required</key>
 	<string>true</string>
 </dict>
 </plist>

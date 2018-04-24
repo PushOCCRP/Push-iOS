@@ -11,6 +11,7 @@
 #import <Masonry/Masonry.h>
 #import "LanguageManager.h"
 #import "SettingsManager.h"
+#import "PushSyncManager.h"
 
 @interface AboutViewController ()
 
@@ -26,16 +27,27 @@
     [self loadAboutText];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableArray * rightBarButtonItems = [NSMutableArray array];
+    if([SettingsManager sharedManager].donateUrl != nil){
+        UIBarButtonItem * donateBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:MYLocalizedString(@"Donate", @"Donate") style:UIBarButtonItemStylePlain target:self action:@selector(donateButtonTapped)];
+        [rightBarButtonItems addObject:donateBarButtonItem];
+    }
+    
+    if([SettingsManager sharedManager].loginRequired != nil){
+        UIBarButtonItem * loginBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:MYLocalizedString(@"Logout", @"Logout") style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTapped)];
+        [rightBarButtonItems addObject:loginBarButtonItem];
+    }
+    
+    self.navigationItem.rightBarButtonItems = rightBarButtonItems;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [AnalyticsManager logContentViewWithName:@"About Page Appeared" contentType:@"Navigation"
                                    contentId:nil customAttributes:nil];
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"About Page Viewed Time" contentType:@"About Page View Time" contentId:nil customAttributes:nil];
-    
-    if([SettingsManager sharedManager].donateUrl != nil){
-        UIBarButtonItem * donateBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:MYLocalizedString(@"Donate", @"Donate") style:UIBarButtonItemStylePlain target:self action:@selector(donateButtonTapped)];
-        self.navigationItem.rightBarButtonItem = donateBarButtonItem;
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -96,6 +108,12 @@
 - (void)donateButtonTapped
 {
     [[UIApplication sharedApplication] openURL:[SettingsManager sharedManager].donateUrl options:@{} completionHandler:nil];
+}
+
+- (void)logoutButtonTapped
+{
+    [[PushSyncManager sharedManager] logout];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

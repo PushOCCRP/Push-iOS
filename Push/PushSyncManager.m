@@ -99,10 +99,20 @@ dispatch_semaphore_t _sem;
 
 - (BOOL)isLoggedIn {
     if([SettingsManager sharedManager].loginRequired){
-        return _isLoggedIn;
+        return [self isLoggedInSaved];
     }
     return false;
 }
+
+- (void)saveLoggedInStatus:(BOOL)loggedIn {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:loggedIn] forKey:@"is_logged_in"];
+}
+
+- (BOOL)isLoggedInSaved {
+    NSNumber * loggedIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"is_logged_in"];
+    return  loggedIn.boolValue;
+}
+
 
 // When using this the CompletionBlock will always return nil if sucessfully logged in. It will return error for everything else
 - (void)loginWithUsername:(NSString*)username password:(NSString*)password completionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure {
@@ -126,7 +136,7 @@ dispatch_semaphore_t _sem;
                                                         @"v":versionNumber} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
                                                             if([[responseObject allKeys] containsObject:@"code"] && [[responseObject objectForKey:@"code"] isEqualToString:@"1"]){
                                                                 _isLoggedIn = YES;
-                                                                [weakSelf handleResponse:responseObject completionHandler:completionHandler];
+                                                                [weakSelf handleLoginResponse:responseObject completionHandler:completionHandler];
                                                                 return;
                                                             }
                                                             
@@ -157,7 +167,7 @@ dispatch_semaphore_t _sem;
 
 - (void)logout {
     // We'll clear out everything stored while logged in, for now just set the variable.
-    _isLoggedIn = false;
+    [self saveLoggedInStatus:NO];
 }
 
 
@@ -256,7 +266,7 @@ dispatch_semaphore_t _sem;
 
 - (void)handleLoginResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler
 {
-    _isLoggedIn = YES;
+    [self saveLoggedInStatus:YES];
     completionHandler(nil);
 }
 

@@ -148,7 +148,7 @@ static NSString * imageGravestoneMarker = @"&&&&";
     self.caption.lineBreakMode = NSLineBreakByWordWrapping;
     
     self.caption = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
-    self.caption.numberOfLines = 3;
+    self.caption.numberOfLines = 0;
     self.caption.lineBreakMode = NSLineBreakByWordWrapping;
     
     self.date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
@@ -325,7 +325,7 @@ static NSString * imageGravestoneMarker = @"&&&&";
             self.photoByline.font = [UIFont fontWithName:@"Palatino-Roman" size:15.0f];
             self.photoByline.textAlignment = NSTextAlignmentRight;
         } else {
-            self.caption.hidden = YES;
+            self.photoByline.hidden = YES;
         }
 
     }

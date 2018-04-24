@@ -18,6 +18,9 @@
 /* Login */
 "Login" = "Login";
 
+/* Logout */
+"Logout" = "Logout";
+
 /* Password */
 "Password" = "Password";
 

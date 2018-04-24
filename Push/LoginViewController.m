@@ -13,6 +13,7 @@
 #import "SettingsManager.h"
 #import "PushSyncManager.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <OnePasswordExtension/OnePasswordExtension.h>
 
 #pragma mark - InsetTextField
 @interface InsetTextField : UITextField
@@ -69,6 +70,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, retain) UIScrollView * scrollView;
 
+@property (nonatomic, retain) UIImageView * logoImageView;
+
 @property (nonatomic, retain) UILabel * loginLabel;
 @property (nonatomic, retain) UILabel * passwordLabel;
 
@@ -76,6 +79,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, retain) InsetTextField * passwordTextField;
 
 @property (nonatomic, retain) UIButton * loginButton;
+@property (nonatomic, retain) UIButton * passwordManagerButton;
 
 @property (nonatomic, retain) NSMutableArray * listeners;
 
@@ -87,6 +91,9 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupViews];
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.title = [SettingsManager sharedManager].name;
+    [self.passwordManagerButton setHidden:![[OnePasswordExtension sharedExtension] isAppExtensionAvailable]];
     self.listeners = [NSMutableArray arrayWithCapacity:2];
 }
 
@@ -158,6 +165,8 @@ typedef enum : NSUInteger {
         make.width.equalTo(self.scrollView);
     }];
     
+    self.logoImageView = [[UIImageView alloc] init];
+    
     UILabel * explainerLabel = [[UILabel alloc] init];
     
     self.loginLabel = [[UILabel alloc] init];
@@ -167,6 +176,7 @@ typedef enum : NSUInteger {
     self.passwordTextField = [[InsetTextField alloc] init];
     
     self.loginButton = [[UIButton alloc] init];
+    self.passwordManagerButton = [[UIButton alloc] init];
     
     self.loginTextField.delegate = self;
     self.loginTextField.tag = TextFieldLogin;
@@ -174,13 +184,29 @@ typedef enum : NSUInteger {
     self.passwordTextField.tag = TextFieldPassword;
     
     [self.loginButton addTarget:self action:@selector(loginButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.passwordManagerButton addTarget:self action:@selector(findLoginFromGenericPassword:) forControlEvents:UIControlEventTouchUpInside];
     
+    [contentView addSubview:self.logoImageView];
     [contentView addSubview:explainerLabel];
     [contentView addSubview:self.loginLabel];
     [contentView addSubview:self.loginTextField];
     [contentView addSubview:self.passwordLabel];
     [contentView addSubview:self.passwordTextField];
     [contentView addSubview:self.loginButton];
+    [contentView addSubview:self.passwordManagerButton];
+    
+    self.logoImageView.image = [UIImage imageNamed:@"icon-appstore"];
+    
+    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(contentView.self.mas_safeAreaLayoutGuideTop).offset(20);
+        } else {
+            make.top.equalTo(contentView.self.mas_top).offset(20);
+        }
+        make.centerX.equalTo(self.view);
+        make.width.equalTo(@100);
+        make.height.equalTo(@100);
+    }];
     
     explainerLabel.text = MYLocalizedString(@"Please Login Explainer", @"Please login with your subscriber's account to access the content.");
     explainerLabel.textColor = [UIColor whiteColor];
@@ -188,11 +214,7 @@ typedef enum : NSUInteger {
     explainerLabel.numberOfLines = 0;
     explainerLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [explainerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (@available(iOS 11.0, *)) {
-            make.top.equalTo(contentView.self.mas_safeAreaLayoutGuideTop).offset(20);
-        } else {
-            make.top.equalTo(contentView.self.mas_top).offset(20);
-        }
+        make.top.equalTo(self.logoImageView.mas_bottom).offset(20);
         make.left.equalTo(contentView.mas_left).offset(20);
         make.right.equalTo(contentView.mas_right).offset(-20);
     }];
@@ -211,6 +233,9 @@ typedef enum : NSUInteger {
     self.loginTextField.insets = UIEdgeInsetsMake(0, 10, 0, 10);
     self.loginTextField.keyboardType = UIKeyboardTypeEmailAddress;
     self.loginTextField.placeholder = MYLocalizedString(@"Email Address", @"Email Address");
+    if (@available(iOS 11, *)) {
+        self.loginTextField.textContentType = UITextContentTypeEmailAddress;
+    }
     [self.loginTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.loginLabel.mas_bottom).offset(10);
         make.left.equalTo(self.loginLabel.mas_left);
@@ -229,6 +254,9 @@ typedef enum : NSUInteger {
 
     self.passwordTextField.backgroundColor = [SettingsManager sharedManager].navigationTextColor;
     self.passwordTextField.placeholder = MYLocalizedString(@"Password", @"Password");
+    if (@available(iOS 11, *)) {
+        self.passwordTextField.textContentType = UITextContentTypePassword;
+    }
     self.passwordTextField.layer.cornerRadius = 5.0;
     self.passwordTextField.insets = UIEdgeInsetsMake(0, 10, 0, 10);
     [self.passwordTextField setSecureTextEntry:YES];
@@ -246,6 +274,20 @@ typedef enum : NSUInteger {
         make.top.equalTo(self.passwordTextField.mas_bottom).offset(20);
         make.height.equalTo(@50);
         make.centerX.equalTo(contentView);
+    }];
+    
+    [self.passwordManagerButton setImage:[UIImage imageNamed:@"onepassword-extension-light"] forState:UIControlStateNormal];
+    
+    NSBundle * onePasswordBundle = [NSBundle bundleForClass:[OnePasswordExtension class]];
+    NSString * newPath = [NSString stringWithFormat:@"%@/OnePasswordExtensionResources.bundle", [onePasswordBundle bundlePath]];
+    onePasswordBundle = [NSBundle bundleWithPath:newPath];
+    UIImage * passwordImage = [UIImage imageNamed:@"onepassword-button-light" inBundle:onePasswordBundle compatibleWithTraitCollection:nil];
+    [self.passwordManagerButton setImage:passwordImage forState:UIControlStateNormal];
+    [self.passwordManagerButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.loginButton.mas_top);
+        make.bottom.equalTo(self.loginButton.mas_bottom);
+        make.left.equalTo(self.loginButton.mas_right).offset(40);
+        make.width.equalTo(@40);
     }];
     
     UIView * spacerView = [[UIView alloc] init];
@@ -276,6 +318,22 @@ typedef enum : NSUInteger {
             [self presentViewController:alert animated:YES completion:nil];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
+    }];
+}
+
+- (IBAction)findLoginFromGenericPassword:(id)sender {
+    __weak typeof (self) miniMe = self;
+    [[OnePasswordExtension sharedExtension] findLoginForURLString:[SettingsManager sharedManager].cmsBaseUrl.absoluteString forViewController:self sender:sender completion:^(NSDictionary *loginDict, NSError *error) {
+        if (!loginDict) {
+            if (error.code != AppExtensionErrorCodeCancelledByUser) {
+                NSLog(@"Error invoking GenericPassword App Extension for find login: %@", error);
+            }
+            return;
+        }
+        
+        __strong typeof(self) strongMe = miniMe;
+        strongMe.loginTextField.text = loginDict[AppExtensionUsernameKey];
+        strongMe.passwordTextField.text = loginDict[AppExtensionPasswordKey];
     }];
 }
 

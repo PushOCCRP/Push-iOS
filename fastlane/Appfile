@@ -1,6 +1,6 @@
-app_identifier "com.columbiamissouria.pushapp" # The bundle identifier of your app
+app_identifier "com.columbianmissourian.mobile" # The bundle identifier of your app
 apple_id "guessc@missouri.edu" # Your Apple email address
-#team_id "9H5K42BU9H"
+#team_id "VLM8EUM4PH"
 
 # You can uncomment any of the lines below and add your own
 # team selection in case you're in multiple teams

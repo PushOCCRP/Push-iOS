@@ -51,10 +51,10 @@ platform :ios do
   lane :create do
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissouria.pushapp",
+      app_identifier: "com.columbianmissourian.mobile",
       company_name: "The Columbia Missourian",
       itc_team_name: "The Columbia Missourian",
-      app_name: "The Columbia Missourian",
+      app_name: "Missourian",
       language: "English"
     )
   end
@@ -72,16 +72,16 @@ platform :ios do
   lane :bootstrap do |options|
     cert(
       username: 'guessc@missouri.edu',
-      team_id: '9H5K42BU9H',
+      team_id: 'VLM8EUM4PH',
       development: true
     )
 
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissouria.pushapp",
+      app_identifier: "com.columbianmissourian.mobile",
       company_name: "The Columbia Missourian",
       itc_team_name: "The Columbia Missourian",
-      app_name: "The Columbia Missourian",
+      app_name: "Missourian",
       language: "English"
     )
 
@@ -89,8 +89,8 @@ platform :ios do
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissouria.pushapp",
-      team_id: '9H5K42BU9H',
+      app_identifier: "com.columbianmissourian.mobile",
+      team_id: 'VLM8EUM4PH',
     )
 
 
@@ -109,15 +109,15 @@ platform :ios do
     cert(
       development: true,
       username: 'guessc@missouri.edu',
-      team_id: '9H5K42BU9H',
+      team_id: 'VLM8EUM4PH',
     )
 
     sigh(
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissouria.pushapp",
-      team_id: '9H5K42BU9H',
+      app_identifier: "com.columbianmissourian.mobile",
+      team_id: 'VLM8EUM4PH',
 
     )
     
@@ -151,13 +151,13 @@ platform :ios do
   lane :beta do |options|
     cert(
       username: 'guessc@missouri.edu',
-      team_id: '9H5K42BU9H',
+      team_id: 'VLM8EUM4PH',
     )
     sigh(
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissouria.pushapp",
-      team_id: '9H5K42BU9H',
+      app_identifier: "com.columbianmissourian.mobile",
+      team_id: 'VLM8EUM4PH',
     )
     
     # use the UID of the newly created provisioning profile
@@ -183,14 +183,14 @@ platform :ios do
     #ensure_no_debug_code(text: "NSLog")
     cert(
       username: 'guessc@missouri.edu',
-      team_id: '9H5K42BU9H',
+      team_id: 'VLM8EUM4PH',
     )
     #snapshot
     sigh(
 	    force: true,
     	username: "guessc@missouri.edu",
-    	app_identifier: "com.columbiamissouria.pushapp",
-      team_id: '9H5K42BU9H',
+    	app_identifier: "com.columbianmissourian.mobile",
+      team_id: 'VLM8EUM4PH',
     )
 
     update_project_provisioning(

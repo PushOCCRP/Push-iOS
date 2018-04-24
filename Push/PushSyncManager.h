@@ -26,6 +26,7 @@ typedef void(^FailureBlock)(NSError *error);
 
 // Completion handler will return nil if login is sucessful. Failure will return in all other cases
 - (void)loginWithUsername:(NSString*)username password:(NSString*)password completionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (void)logout;
 
 // completion handler will always return either an NSArray or NSDictionary
 - (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
