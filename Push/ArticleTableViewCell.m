@@ -67,25 +67,25 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [_articleImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self).offset(10);
-            make.bottom.equalTo(self).offset(-10);
+            make.top.equalTo(self.contentView).offset(10);
+            make.bottom.equalTo(self.contentView).offset(-10);
             make.width.equalTo(@99);
-            make.left.equalTo(self.mas_left).offset(10);
+            make.left.equalTo(self.contentView.mas_left).offset(10);
         }];
         
         if(showImage){
             _articleImageView.hidden = NO;
             [_headlineLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.mas_top).with.offset(10);
+                make.top.equalTo(self.contentView.mas_top).with.offset(10);
                 make.left.equalTo(_articleImageView.mas_right).with.offset(10);
-                make.right.equalTo(self.mas_right).with.offset(-10);
+                make.right.equalTo(self.contentView.mas_right).with.offset(-10);
                 make.height.equalTo(@73);
             }];
         } else {
             [_headlineLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.mas_top).with.offset(10);
-                make.left.equalTo(self.mas_left).with.offset(10);
-                make.right.equalTo(self.mas_right).with.offset(-10);
+                make.top.equalTo(self.contentView.mas_top).with.offset(10);
+                make.left.equalTo(self.contentView.mas_left).with.offset(10);
+                make.right.equalTo(self.contentView.mas_right).with.offset(-10);
                 make.height.equalTo(@73);
             }];
             _articleImageView.hidden = YES;

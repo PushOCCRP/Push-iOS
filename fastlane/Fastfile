@@ -51,7 +51,7 @@ platform :ios do
   lane :create do
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbianmissourian.mobile",
+      app_identifier: "com.columbiamissourian.mobile",
       company_name: "The Columbia Missourian",
       itc_team_name: "The Columbia Missourian",
       app_name: "Missourian",
@@ -78,7 +78,7 @@ platform :ios do
 
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbianmissourian.mobile",
+      app_identifier: "com.columbiamissourian.mobile",
       company_name: "The Columbia Missourian",
       itc_team_name: "The Columbia Missourian",
       app_name: "Missourian",
@@ -89,7 +89,7 @@ platform :ios do
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbianmissourian.mobile",
+      app_identifier: "com.columbiamissourian.mobile",
       team_id: 'VLM8EUM4PH',
     )
 
@@ -116,7 +116,7 @@ platform :ios do
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbianmissourian.mobile",
+      app_identifier: "com.columbiamissourian.mobile",
       team_id: 'VLM8EUM4PH',
 
     )
@@ -156,7 +156,7 @@ platform :ios do
     sigh(
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbianmissourian.mobile",
+      app_identifier: "com.columbiamissourian.mobile",
       team_id: 'VLM8EUM4PH',
     )
     
@@ -189,7 +189,7 @@ platform :ios do
     sigh(
 	    force: true,
     	username: "guessc@missouri.edu",
-    	app_identifier: "com.columbianmissourian.mobile",
+    	app_identifier: "com.columbiamissourian.mobile",
       team_id: 'VLM8EUM4PH',
     )
 

@@ -57,8 +57,8 @@
     
     [self.categoryNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topView.mas_bottom).offset(8.0f);
-        make.left.equalTo(self).offset(20.0f);
-        make.right.equalTo(self).offset(20.0f);
+        make.left.equalTo(self.mas_leftMargin).offset(20.0f);
+        make.right.equalTo(self.mas_rightMargin).offset(20.0f);
     }];
     
     [horizontalRuleBottom mas_makeConstraints:^(MASConstraintMaker *make) {

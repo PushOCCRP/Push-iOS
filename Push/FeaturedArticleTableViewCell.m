@@ -36,7 +36,30 @@
 
 - (void)drawViews:(BOOL)showImage
 {
-    return;
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        [self.headlineLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.articleImageView.mas_bottom).with.offset(10);
+            make.left.equalTo(self.contentView.mas_left).with.offset(10);
+            make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+            //make.height.equalTo(@73);
+        }];
+        
+        [self.descriptionLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.headlineLabel.mas_bottom).offset(10);
+            make.left.equalTo(self.headlineLabel);
+            make.right.equalTo(self.headlineLabel);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.dateBylinesLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.descriptionLabel.mas_bottom).with.offset(10);
+            make.right.equalTo(self.headlineLabel);
+            make.left.equalTo(self.headlineLabel);
+            make.width.equalTo(self.headlineLabel.mas_width);
+            make.height.equalTo(@30);
+        }];
+    });
 }
 
 

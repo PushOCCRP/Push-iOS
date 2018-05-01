@@ -28,6 +28,7 @@ NSString *const PushSyncConnectionErrorDomain = @"ConnectionError";
 @property (nonatomic, assign) PushSyncRequestType type;
 @property (nonatomic, copy) CompletionBlock completionHandler;
 @property (nonatomic, copy) FailureBlock failureBlock;
+@property (nonatomic, copy) LoggedOutBlock loggedOutBlock;
 @property (nonatomic, readwrite) NSDictionary * requestParameters;
 
 @end
@@ -52,8 +53,8 @@ struct Request {
 
 @property (atomic, assign) BOOL unreachable;
 @property (atomic, assign) BOOL startingUp;
-
-
+@property (nonatomic, readwrite) NSString * apiKey;
+@property (nonatomic, readwrite) NSString * username;
 
 // Checks if the service is reachable
 - (BOOL)checkInternetReachability;
@@ -104,13 +105,33 @@ dispatch_semaphore_t _sem;
     return false;
 }
 
-- (void)saveLoggedInStatus:(BOOL)loggedIn {
+- (void)saveLoggedInStatus:(BOOL)loggedIn username:(NSString*)username apiKey:(NSString*)apiKey {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:loggedIn] forKey:@"is_logged_in"];
+    self.apiKey = apiKey;
+    self.username = username;
 }
 
 - (BOOL)isLoggedInSaved {
     NSNumber * loggedIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"is_logged_in"];
     return  loggedIn.boolValue;
+}
+
+- (NSString*)apiKey {
+    NSString * apiKey = [[NSUserDefaults standardUserDefaults] objectForKey:@"apiKey"];
+    return  apiKey;
+}
+
+- (void)setApiKey:(NSString *)apiKey {
+    [[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:@"apiKey"];
+}
+
+- (NSString*)username {
+    NSString * username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    return username;
+}
+
+- (void)setUsername:(NSString *)username {
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
 }
 
 
@@ -126,40 +147,53 @@ dispatch_semaphore_t _sem;
     if(self.unreachable == true){
         dispatch_async(self.completionQueue, ^{
             //[weakSelf waitForStartup];
-            [weakSelf informCallerThatProxyIsSpinningUpWithType:PushSyncLogin Completion:completionHandler failure:failure requestParameters:nil];
+            [weakSelf informCallerThatProxyIsSpinningUpWithType:PushSyncLogin
+                                                     completion:completionHandler
+                                                        failure:failure
+                                                      loggedOut:nil
+                                              requestParameters:nil];
         });
         
     } else {
         dispatch_async(self.completionQueue, ^{
             //[weakSelf waitForStartup];
-            [weakSelf POST:@"authenticate" parameters:@{@"username": username, @"password": password, @"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
-                                                        @"v":versionNumber} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                                                            if([[responseObject allKeys] containsObject:@"code"] && [[responseObject objectForKey:@"code"] isEqualToString:@"1"]){
-                                                                _isLoggedIn = YES;
-                                                                [weakSelf handleLoginResponse:responseObject completionHandler:completionHandler];
-                                                                return;
-                                                            }
-                                                            
-                                                            NSError * localizedError = [[NSError alloc]
-                                                                                        initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
-                                                                                        code:2001
-                                                                                        userInfo:@{
-                                                                                                   NSLocalizedDescriptionKey: MYLocalizedString(@"WrongUserNameOrPassword", @"Wrong User Name or Password")
-                                                                                                   }
-                                                                                        ];
-                                                            [weakSelf handleError:localizedError failure:failure];
-                                                            return;
-                                                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                            NSError * localizedError = [[NSError alloc]
-                                                                                        initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
-                                                                                        code:2000
-                                                                                        userInfo:@{
-                                                                                                   NSLocalizedDescriptionKey: MYLocalizedString(@"ConnectionError", @"Connection Error")
-                                                                                                   }
-                                                                                        ];
+            NSDictionary * parameters = @{@"username": username,
+                                          @"password": password,
+                                          @"installation_uuid": [AnalyticsManager installationUUID],
+                                          @"language":[LanguageManager sharedManager].languageShortCode,
+                                          @"v":versionNumber};
+            
+            [weakSelf POST:@"authenticate"
+                parameters:parameters
+                  progress: nil
+                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                       if([[responseObject allKeys] containsObject:@"code"] && [[responseObject objectForKey:@"code"] isEqualToString:@"1"]){
+                           _isLoggedIn = YES;
+                           [weakSelf handleLoginResponse:responseObject completionHandler:completionHandler];
+                           return;
+                       }
 
-                                                            [weakSelf handleError:localizedError failure:failure];
-                                                        }];
+                       NSError * localizedError = [[NSError alloc]
+                                                initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
+                                                code:2001
+                                                userInfo:@{
+                                                       NSLocalizedDescriptionKey: MYLocalizedString(@"WrongUserNameOrPassword", @"Wrong User Name or Password")
+                                                       }
+                                            ];
+                       [weakSelf handleError:localizedError failure:failure];
+                       return;
+                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                        NSError * localizedError = [[NSError alloc]
+                                            initWithDomain:MYLocalizedString(PushSyncLoginErrorDomain, nil)
+                                            code:2000
+                                            userInfo:@{
+                                                       NSLocalizedDescriptionKey: MYLocalizedString(@"ConnectionError", @"Connection Error")
+                                                       }
+                                            ];
+
+                        [weakSelf handleError:localizedError failure:failure];
+                    }
+             ];
         });
     }
 
@@ -167,14 +201,14 @@ dispatch_semaphore_t _sem;
 
 - (void)logout {
     // We'll clear out everything stored while logged in, for now just set the variable.
-    [self saveLoggedInStatus:NO];
+    [self saveLoggedInStatus:NO username:nil apiKey:nil];
 }
 
 
 // Returns the current cached array, and then does another call.
 // The caller should show the current array and then handle the call back with new articles
 // If the return is nil there is nothing stored and the call will still be made.
-- (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
 {
     __weak typeof(self) weakSelf = self;
 
@@ -182,19 +216,35 @@ dispatch_semaphore_t _sem;
         if(self.unreachable == true){
             dispatch_async(self.completionQueue, ^{
                 //[weakSelf waitForStartup];
-                [weakSelf informCallerThatProxyIsSpinningUpWithType:PushSyncArticles Completion:completionHandler failure:failure requestParameters:nil];
+                NSMutableDictionary * parameters = [NSMutableDictionary dictionary];
+                if([SettingsManager sharedManager].loginRequired) {
+                    parameters[@"api_key"] = [self apiKey];
+                }
+
+                [weakSelf informCallerThatProxyIsSpinningUpWithType:PushSyncArticles
+                                                         completion:completionHandler
+                                                            failure:failure
+                                                          loggedOut:loggedOut
+                                                  requestParameters:parameters];
             });
             
         } else {
             dispatch_async(self.completionQueue, ^{
                 //[weakSelf waitForStartup];
-                [weakSelf GET:@"articles.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"language":[LanguageManager sharedManager].languageShortCode,
-                                                            @"v":versionNumber, @"categories":@"true"} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                                                                
-                                                                [weakSelf handleResponse:responseObject completionHandler:completionHandler];
-                                                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                                [weakSelf handleError:error failure:failure];
-                                                            }];
+                NSMutableDictionary * parameters = [NSMutableDictionary
+                                                    dictionaryWithDictionary:@{@"installation_uuid": [AnalyticsManager installationUUID],
+                                                    @"language":[LanguageManager sharedManager].languageShortCode,
+                                                    @"v":versionNumber,
+                                                    @"categories":@"true"}];
+                if([SettingsManager sharedManager].loginRequired) {
+                    parameters[@"api_key"] = [self apiKey];
+                }
+
+                [weakSelf GET:@"articles.json" parameters:parameters progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                    [weakSelf handleResponse:responseObject completionHandler:completionHandler loggedOut:loggedOut];
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    [weakSelf handleError:error failure:failure];
+                }];
             });
         }
         
@@ -212,7 +262,7 @@ dispatch_semaphore_t _sem;
     return self.articles;
 }
 
-- (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
 {
     [self waitForStartupWithCompletionHandler:^{
         NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
@@ -223,23 +273,40 @@ dispatch_semaphore_t _sem;
         }
         
         if(self.unreachable == true){
-            [self informCallerThatProxyIsSpinningUpWithType:PushSyncArticle Completion:completionHandler failure:failure requestParameters:@{@"article_id": articleId}];
-        } else {
+            NSMutableDictionary * parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"article_id": articleId}];
             
-            [self GET:@"article.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"id":articleId, @"language":[LanguageManager sharedManager].languageShortCode,
-                                                   @"v":versionNumber} progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                                                       
-                                                       [self handleResponse:responseObject completionHandler:completionHandler];
-                                                       
-                                                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                       [self handleError:error failure:failure];
-                                                   }];
+            if([SettingsManager sharedManager].loginRequired) {
+                parameters[@"api_key"] = [self apiKey];
+            }
+
+            [self informCallerThatProxyIsSpinningUpWithType:PushSyncArticle
+                                                 completion:completionHandler
+                                                    failure:failure
+                                                  loggedOut:loggedOut
+                                          requestParameters:parameters];
+            
+        } else {
+            NSMutableDictionary * parameters = [NSMutableDictionary
+                                                dictionaryWithDictionary:@{
+                                                                           @"installation_uuid": [AnalyticsManager installationUUID],
+                                                                           @"id":articleId,
+                                                                           @"language":[LanguageManager sharedManager].languageShortCode,
+                                                                           @"v":versionNumber}];
+            if([SettingsManager sharedManager].loginRequired) {
+                parameters[@"api_key"] = [self apiKey];
+            }
+            
+            [self GET:@"article.json" parameters:parameters progress: nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                [self handleResponse:responseObject completionHandler:completionHandler loggedOut:loggedOut];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self handleError:error failure:failure];
+            }];
         }
 
     }];
 }
 
-- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
 {
     [self waitForStartupWithCompletionHandler:^{
         NSString * languageShortCode = [LanguageManager sharedManager].languageShortCode;
@@ -250,33 +317,58 @@ dispatch_semaphore_t _sem;
         }
         
         if(self.unreachable == true){
-            [self informCallerThatProxyIsSpinningUpWithType:PushSyncSearch Completion:completionHandler failure:failure requestParameters:@{@"search_terms": searchTerms}];
+            NSMutableDictionary * parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"search_terms": searchTerms}];
+            
+            if([SettingsManager sharedManager].loginRequired) {
+                parameters[@"api_key"] = [self apiKey];
+            }
+
+            [self informCallerThatProxyIsSpinningUpWithType:PushSyncSearch
+                                                 completion:completionHandler
+                                                    failure:failure
+                                                  loggedOut:loggedOut
+                                          requestParameters:parameters];
         } else {
-            [self GET:@"search.json" parameters:@{@"installation_uuid": [AnalyticsManager installationUUID], @"q":searchTerms, @"language":[LanguageManager sharedManager].languageShortCode,
-                                                  @"v":versionNumber} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                                                      
-                                                      [self handleResponse:responseObject completionHandler:completionHandler];
-                                                      
-                                                  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                      [self handleError:error failure:failure];
-                                                  }];
+            NSMutableDictionary * parameters = [NSMutableDictionary
+                                                dictionaryWithDictionary:@{
+                                                                           @"installation_uuid": [AnalyticsManager installationUUID],
+                                                                           @"q":searchTerms,
+                                                                           @"language":[LanguageManager sharedManager].languageShortCode,
+                                                                           @"v":versionNumber}];
+            if([SettingsManager sharedManager].loginRequired) {
+                parameters[@"api_key"] = [self apiKey];
+            }
+                                                
+            [self GET:@"search.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                [self handleResponse:responseObject completionHandler:completionHandler loggedOut:loggedOut];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self handleError:error failure:failure];
+            }];
         }
     }];
 }
 
 - (void)handleLoginResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler
 {
-    [self saveLoggedInStatus:YES];
+    [self saveLoggedInStatus:YES username:responseObject[@"username"] apiKey:responseObject[@"api_key"]];
     completionHandler(nil);
 }
 
 
-- (void)handleResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler
+- (void)handleResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler loggedOut:(LoggedOutBlock)loggedOutHandler
 {
     NSDictionary * response = (NSDictionary*)responseObject;
 
-    /* we want to handle both categories and consolidated returns */
+    // Check if authentication was wrong. This could mean there was a hard reset on the server.
+    // In which case we just delete everything and reset the app.
+    if([SettingsManager sharedManager].loginRequired) {
+        if([response.allKeys containsObject:@"code"] && [response[@"code"] isEqual:@0]){
+            [self logout];
+            loggedOutHandler();
+        }
+    }
     
+    /* we want to handle both categories and consolidated returns */
     if(![response.allKeys containsObject:@"categories"]){
         NSArray * articlesResponse = response[@"results"];
         
@@ -333,13 +425,17 @@ dispatch_semaphore_t _sem;
 // is spinning up in the backend. The completion and failure handlers are held so
 // they can be called again. Which ever class is responding to this should use the
 // UI to let people know what's going on.
-- (void)informCallerThatProxyIsSpinningUpWithType:(PushSyncRequestType)type Completion:(CompletionBlock)completionHandler
-                                          failure:(FailureBlock)failureHandler requestParameters:(NSDictionary*)requestParameters
+- (void)informCallerThatProxyIsSpinningUpWithType:(PushSyncRequestType)type
+                                       completion:(CompletionBlock)completionHandler
+                                          failure:(FailureBlock)failureHandler
+                                        loggedOut:(LoggedOutBlock)loggedOutHandler
+                                requestParameters:(NSDictionary*)requestParameters
 {
     TempRequest * request = [[TempRequest alloc] init];
     request.type = type;
     request.completionHandler = completionHandler;
     request.failureBlock = failureHandler;
+    request.loggedOutBlock = loggedOutHandler;
     request.requestParameters = requestParameters;
     
     [self.torRequests addObject:request];
@@ -459,12 +555,12 @@ dispatch_semaphore_t _sem;
     for(TempRequest * request in self.torRequests){
         switch (request.type) {
             case PushSyncArticles:
-                [self articlesWithCompletionHandler:request.completionHandler failure:request.failureBlock];
+                [self articlesWithCompletionHandler:request.completionHandler failure:request.failureBlock loggedOut:request.loggedOutBlock];
                 break;
             case PushSyncArticle:
-                [self articleWithId:request.requestParameters[@"article_id"] withCompletionHandler:request.completionHandler failure:request.failureBlock];
+                [self articleWithId:request.requestParameters[@"article_id"] withCompletionHandler:request.completionHandler failure:request.failureBlock loggedOut:request.loggedOutBlock];
             case PushSyncSearch:
-                [self searchForTerm:request.requestParameters[@"search_terms"] withCompletionHandler:request.completionHandler failure:request.failureBlock];
+                [self searchForTerm:request.requestParameters[@"search_terms"] withCompletionHandler:request.completionHandler failure:request.failureBlock loggedOut:request.loggedOutBlock];
             default:
                 break;
         }

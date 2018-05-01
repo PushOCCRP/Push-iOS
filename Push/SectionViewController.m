@@ -19,6 +19,7 @@
 // These are also set in the respective nibs, so if you change it make sure you change it there too
 static NSString * featuredCellIdentifier = @"FEATURED_ARTICLE_STORY_CELL";
 static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
+static int contentWidth = 700;
 
 @interface SectionViewController ()
 
@@ -126,6 +127,21 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     
     cell.article = articles[indexPath.row];
     
+    if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular){
+        int margin = (tableView.frame.size.width - contentWidth) / 2;
+        [cell.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(cell);
+            make.bottom.equalTo(cell);
+            make.left.equalTo(cell).offset(margin);
+            make.right.equalTo(cell).offset(-margin);
+            make.width.equalTo([NSNumber numberWithInteger:contentWidth]);
+        }];
+    } else {
+        [cell.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(cell);
+        }];
+    }
+
     [cell setNeedsDisplay];
     return cell;
 }

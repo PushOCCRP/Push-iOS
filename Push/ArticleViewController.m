@@ -39,6 +39,7 @@
 
 @property (nonatomic, retain) UIScrollView * scrollView;
 @property (nonatomic, retain) UIView * contentView;
+@property (nonatomic, retain) UIBarButtonItem * shareBarButtonItem;
 
 @property (nonatomic, retain) NSMutableDictionary * imageLocations;
 
@@ -47,6 +48,7 @@
 @implementation ArticleViewController
 
 static NSString * imageGravestoneMarker = @"&&&&";
+static int contentWidth = 700;
 
 - (instancetype)initWithArticle:(Article*)article
 {
@@ -101,13 +103,13 @@ static NSString * imageGravestoneMarker = @"&&&&";
 }
 
 - (void)setShareButton {
-    UIBarButtonItem * shareBarButtonItem = [[UIBarButtonItem alloc]
+    self.shareBarButtonItem = [[UIBarButtonItem alloc]
                                             initWithTitle:@"Share"
                                             style:UIBarButtonItemStylePlain
                                             target:self
                                             action:@selector(shareButtonTapped)];
     
-    self.navigationItem.rightBarButtonItem = shareBarButtonItem;
+    self.navigationItem.rightBarButtonItem = self.shareBarButtonItem;
 }
 
 - (void)setupScrollView {
@@ -187,10 +189,20 @@ static NSString * imageGravestoneMarker = @"&&&&";
     // Set the stack up. This is pretty basic stuff
     UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.edges.equalTo(self.scrollView);
-        make.width.equalTo(self.scrollView);
-        make.bottom.equalTo(self.body.mas_bottom).with.offset(80.0f);
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker * make) {
+        float topOffset = 0.0;
+        if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular){
+            make.width.equalTo([NSNumber numberWithInteger:contentWidth]);
+            topOffset = 20.0f;
+        } else {
+            make.width.equalTo(self.scrollView);
+        }
+
+        make.top.equalTo(self.scrollView).offset(topOffset);
+        make.left.equalTo(self.scrollView);
+        make.right.equalTo(self.scrollView);
+        
+        make.bottom.equalTo(self.scrollView);
     }];
     
     if(self.category){
@@ -249,8 +261,24 @@ static NSString * imageGravestoneMarker = @"&&&&";
         make.left.equalTo(self.body.superview.mas_left).with.offset(padding.left);
         make.right.equalTo(self.body.superview.mas_right).with.offset(-padding.right);
         make.bottom.equalTo(self.body.superview.mas_bottom);
-        make.width.equalTo(self.scrollView).with.sizeOffset(CGSizeMake(-20.0f, 0.0f));
+        make.width.equalTo(self.contentView).with.sizeOffset(CGSizeMake(-20.0f, 0.0f));
     }];
+}
+
+- (void)viewDidLayoutSubviews {
+    if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular){
+        int margin = (self.scrollView.frame.size.width - contentWidth) / 2;
+        UIEdgeInsets scrollViewInsets = self.scrollView.contentInset;
+        scrollViewInsets.left = margin;
+        scrollViewInsets.right = margin;
+
+        [self.scrollView setContentInset:scrollViewInsets];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [self setContraints];
 }
 
 - (void)setViewsForArticle {
@@ -370,7 +398,7 @@ static NSString * imageGravestoneMarker = @"&&&&";
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.tag = 1000;
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Loading";
+        hud.label.text = @"Loading";
     } else {
         [self processBodyText];
     }
@@ -409,6 +437,12 @@ static NSString * imageGravestoneMarker = @"&&&&";
 - (void)shareButtonTapped
 {
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[self.article.headline, self.article.linkURL] applicationActivities:nil];
+    activityVC.title = @"Share";
+    // For some reason the barbuttonitem will not work, instead it crashes.
+    // So let's fake it for iPads.
+    activityVC.popoverPresentationController.sourceView = self.view;
+    activityVC.popoverPresentationController.sourceRect = CGRectMake(self.view.frame.size.width, 0, self.navigationController.navigationBar.frame.size.height+10, 20);
+    [activityVC.popoverPresentationController setPermittedArrowDirections:UIPopoverArrowDirectionUp];
     
     [self presentViewController:activityVC animated:YES completion:nil];
 }

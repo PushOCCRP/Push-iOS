@@ -36,7 +36,7 @@
 // These are also set in the respective nibs, so if you change it make sure you change it there too
 static NSString * featuredCellIdentifier = @"FEATURED_ARTICLE_STORY_CELL";
 static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
-
+static int contentWidth = 700;
 
 @interface MainViewController ()
 
@@ -48,8 +48,12 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 @property (nonatomic, retain) id articles;
 
 @end
-
 @implementation MainViewController
+
+- (void)setArticles:(id)articles
+{
+    _articles = articles;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,8 +76,7 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)viewDidAppear:(BOOL)animated
 {
     if([SettingsManager sharedManager].loginRequired && ![PushSyncManager sharedManager].isLoggedIn){
-        LoginViewController * loginViewController = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:loginViewController animated:YES];
+        [self showLoginViewController];
         return;
     }
     
@@ -84,6 +87,13 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article List Timer"];
+}
+
+- (void)showLoginViewController
+{
+    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:loginViewController animated:YES];
+    return;
 }
 
 - (void)setupNavigationBar
@@ -152,14 +162,28 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
     self.tableView.dataSource = self;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ArticleTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:standardCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"FeaturedArticleTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:featuredCellIdentifier];
 }
+
+- (void)viewDidLayoutSubviews {
+
+    [super viewDidLayoutSubviews];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    while ([self.tableView dequeueReusableCellWithIdentifier:@"ArticleTableViewCell"]) {}
+    while ([self.tableView dequeueReusableCellWithIdentifier:@"FeaturedArticleTableViewCell"]) {}
+    [self.tableView reloadData];
+}
+
 
 - (void)loadInitialArticles
 {
@@ -187,6 +211,10 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [self presentViewController:alert animated:YES completion:nil];
         [self.tableView.pullToRefreshView stopAnimating];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    } loggedOut:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showLoginViewController];
+        });
     }];
     
     if([self.tableView numberOfRowsInSection:0] < 1){
@@ -219,6 +247,8 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
         [self.tableView.pullToRefreshView stopAnimating];
+    } loggedOut:^{
+        [self showLoginViewController];
     }];
     
     if(self.articles != nil){
@@ -523,6 +553,21 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         cell.article = self.articles[indexPath.row];
     }
 
+    if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular){
+        int margin = (tableView.frame.size.width - contentWidth) / 2;
+        [cell.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(cell);
+            make.bottom.equalTo(cell);
+            make.left.equalTo(cell).offset(margin);
+            make.right.equalTo(cell).offset(-margin);
+            make.width.equalTo([NSNumber numberWithInteger:contentWidth]);
+        }];
+    } else {
+        [cell.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(cell);
+        }];
+    }
+    
     [cell setNeedsDisplay];
     return cell;
 }

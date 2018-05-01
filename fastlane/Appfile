@@ -1,4 +1,4 @@
-app_identifier "com.columbianmissourian.mobile" # The bundle identifier of your app
+app_identifier "com.columbiamissourian.mobile" # The bundle identifier of your app
 apple_id "guessc@missouri.edu" # Your Apple email address
 #team_id "VLM8EUM4PH"
 

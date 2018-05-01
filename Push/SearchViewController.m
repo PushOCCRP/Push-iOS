@@ -17,6 +17,7 @@
 #import "LanguageManager.h"
 
 static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
+static int contentWidth = 700;
 
 @interface SearchViewController ()
 
@@ -132,6 +133,10 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    } loggedOut:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        });
     }];
 }
 
@@ -161,6 +166,23 @@ static NSString * standardCellIdentifier = @"ARTICLE_STORY_CELL";
 {
     ArticleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:standardCellIdentifier];
     cell.article = self.articles[indexPath.row];
+    
+    if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular){
+        int margin = (tableView.frame.size.width - contentWidth) / 2;
+        [cell.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(cell);
+            make.bottom.equalTo(cell);
+            make.left.equalTo(cell).offset(margin);
+            make.right.equalTo(cell).offset(-margin);
+            make.width.equalTo([NSNumber numberWithInteger:contentWidth]);
+        }];
+    } else {
+        [cell.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(cell);
+        }];
+    }
+
+    
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

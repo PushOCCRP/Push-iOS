@@ -19,6 +19,7 @@ extern NSString *const PushSyncConnectionErrorDomain;
 
 typedef void(^CompletionBlock)(id articles);
 typedef void(^FailureBlock)(NSError *error);
+typedef void(^LoggedOutBlock)();
 
 @property (nonatomic, readonly) BOOL isLoggedIn;
 
@@ -29,12 +30,12 @@ typedef void(^FailureBlock)(NSError *error);
 - (void)logout;
 
 // completion handler will always return either an NSArray or NSDictionary
-- (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
 
 // The completion handler will always return an NSArray
-- (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
 
 // The completion handler will always return an NSArray
-- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure;
+- (void)searchForTerm:(NSString*)searchTerms withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
 - (void)reset;
 @end

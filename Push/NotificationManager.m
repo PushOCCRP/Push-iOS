@@ -20,6 +20,13 @@
 //ew
 // Always set this to true before generating and pushing...
 // I know, for a fact, I'm going to screw that up at some point
+// OK, for future reference so I don't waste another 1.5 days when I forget:
+// Apple will only send sandboxed push notifications to devices that are being installed via XCode
+// If you try to register to production from debugging and then push it will just silently delete
+// itself from the Uniqush project. You have to install via TestFlight or the AppStore, then the
+// production push notifications get sent.
+//
+// For the fifth time you waste a day figuring this out remember this, idiot.
 #ifdef DEBUG
     #define SANDBOX @"true"
 #else
@@ -180,7 +187,7 @@
 
         } failure:^(NSError *error) {
             NSLog(@"Error fetching article: %@", error.localizedDescription);
-        }];
+        } loggedOut:nil];
     } else if([[userInfo allKeys] containsObject:@"facebook_live_id"]){
         if (state == UIApplicationStateActive){
             [self showAlertForFacebookLiveWithNavigationController:navController];
