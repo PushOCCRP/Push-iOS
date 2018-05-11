@@ -620,7 +620,7 @@
     BOOL scanStatus = [scanner scanUpToCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"<"]
                                               intoString: nil];
     NSUInteger startIndex = scanner.scanLocation;
-    NSUInteger endIndex;
+    NSUInteger endIndex = 0;
     // If the scanner finds a '<' keep going
     if(scanner.scanLocation < html.length) {
         // We need to find the closing tag '>'

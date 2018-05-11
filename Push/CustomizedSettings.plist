@@ -3,30 +3,30 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Missourian</string>
+	<string>OCCRP</string>
 	<key>short-name</key>
-	<string>Missourian</string>
+	<string>OCCRP</string>
 	<key>uniqush</key>
-	<string>missourian</string>
+	<string>occrp</string>
 	<key>languages</key>
 	<string>["en"]</string>
 	<key>default-language</key>
 	<string>en</string>
 	<key>icon-large</key>
-	<string>logo-missourian.png</string>
+	<string>logo-occrp.png</string>
 	<key>icon-small</key>
-	<string></string>
+	<string>icon-small.png</string>
 	<key>icon-background-color</key>
-	<string>#17479e</string>
+	<string>#000000</string>
 	<key>launch-background-color</key>
-	<string>#17479e</string>
+	<string>#FFFFFF</string>
 	<key>navigation-bar-color</key>
-	<string>#17479e</string>
+	<string>#90031F</string>
 	<key>navigation-text-color</key>
 	<string>#FFFFFF</string>
 	<key>show-author</key>
 	<string>true</string>
 	<key>login-required</key>
-	<string>true</string>
+	<string>false</string>
 </dict>
 </plist>

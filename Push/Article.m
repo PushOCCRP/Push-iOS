@@ -175,6 +175,10 @@
         html = [html stringByReplacingOccurrencesOfString:@"<\\h6>" withString:@"<\\h6>\n"];
         
         html = [self addGravestonesForImages:html];
+        html = [html stringByReplacingOccurrencesOfString:@"<br />\n</p><br />\n<p></p><br>" withString:@"</p><br />\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<br>\n</p><br>\n<p></p><br>" withString:@"</p><br />\n"];
+        html = [html stringByReplacingOccurrencesOfString:@"<br>\n<p></p><br>" withString:@"<br />\n"];
+
         
         NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
                                                           initWithHTML:[html dataUsingEncoding:NSUTF8StringEncoding]
@@ -194,12 +198,28 @@
     
     // Reversed so that as we change stuff it doesn't mess with the numbering
     imageLocations = [[imageLocations reverseObjectEnumerator] allObjects];
+    
     NSString * imageGravestoneMarker = kImageGravestone;
     NSMutableString * mutableHtml = [NSMutableString stringWithString:html];
     for(NSValue * rangeValue in imageLocations) {
         NSRange range = [rangeValue rangeValue];
+        if(!self.headerImage && rangeValue == imageLocations.lastObject){
+            [mutableHtml replaceCharactersInRange:range withString:@""];
+            continue;
+        }
+        
         [mutableHtml insertString:imageGravestoneMarker atIndex:range.location];
         [mutableHtml insertString:@"<br />" atIndex:range.location];
+        
+        NSUInteger imageIndex = [imageLocations indexOfObject:rangeValue];
+        if(!self.headerImage){
+            imageIndex++;
+        }
+        
+        NSString * caption = self.images[imageIndex][@"caption"];
+        caption = [NSString stringWithFormat:@" <br><small>%@</small>", caption];
+        [mutableHtml insertString:caption atIndex:range.location + kImageGravestone.length + 6];
+        
     }
     html = [NSString stringWithString:mutableHtml];
     
@@ -283,18 +303,26 @@
         index++;
     }
     
-    NSAttributedString * newAttributedString = [[NSAttributedString alloc] initWithAttributedString:mutableAttributedString];
-    index = 0;
+    // If the headerImage is start start at 0, if isn't start at 1
+    // I was dumb before, this is now the right way to do it.
+    index = 1;
+    if(self.headerImage){
+        index = 0;
+    }
+
     for(NSTextCheckingResult * checkingResult in imageGravestones){
         if(index < self.images.count){
             NSString * url = self.images[index][@"url"];
-            [self loadImage:url intoAttributedText:newAttributedString];
+
+            [self loadImage:url intoAttributedText:mutableAttributedString];
+            
             index++;
         } else {
             break;
         }
     }
     
+    NSAttributedString * newAttributedString = [[NSAttributedString alloc] initWithAttributedString:mutableAttributedString];
     return newAttributedString;
 }
 
@@ -331,14 +359,19 @@
             indexOfAttribute = 0;
         }
 
+        // Going through every attribute in the text, including bolds etc.
         [attributedText enumerateAttribute:NSAttachmentAttributeName
                                              inRange:NSMakeRange(0, [attributedText length])
-                                             options:0
+                                             options:NSAttributedStringEnumerationReverse
                                           usingBlock:^(id value, NSRange range, BOOL *stop)
          {
              if ([value isKindOfClass:[NSTextAttachment class]]) {
+                 // If the element is in the right range of the element we just loaded
                  if(indexOfImage == indexOfAttribute){
+                     // Do a cast
                      NSTextAttachment *attachment = (NSTextAttachment *)value;
+                     
+                     // If the attachment has an image
                      if ([attachment image]){
                          // We should use intrinsic here, but if you're flipping fast it doesn't work for some reason
                          // float scale = self.body.intrinsicContentSize.width / responseObject.size.width;
@@ -351,8 +384,11 @@
                              [self.body.layoutManager invalidateDisplayForCharacterRange:NSMakeRange(0, self.body.attributedText.length)];
                          });
                          */
+                         
+                         // Set the image to object that we've responded to
                          attachment.image = responseObject;
 
+                         // Set the body test
                          self.bodyHTML = attributedText;
                          *stop = YES;
                      }

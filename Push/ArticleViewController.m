@@ -76,11 +76,28 @@ static int contentWidth = 700;
     [self setupScrollView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //Resize the image view's height to make it proportional
+    float viewWidth = self.navigationController.view.window.frame.size.width;
+    float proportion = viewWidth / self.image.image.size.width;
+    
+    if(self.image.image){
+        float height = self.image.image.size.height * proportion;
+        
+        [self.image mas_updateConstraints:^(MASConstraintMaker * make) {
+            make.height.equalTo([NSNumber numberWithFloat:height]);
+        }];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self setupContentView];
     [self setContraints];
-
+    
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article Viewed Time" contentType:@"Article View Time"
                                                contentId:self.article.description customAttributes:self.article.trackingProperties];
     [AnalyticsManager startTimerForContentViewWithObject:self name:self.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];
@@ -88,11 +105,11 @@ static int contentWidth = 700;
     [AnalyticsManager logContentViewWithName:@"Article List Appeared" contentType:@"Navigation"
                           contentId:self.article.description customAttributes:self.article.trackingProperties];
     [AnalyticsManager logContentViewWithName:self.article.headline contentType:@"Article View" contentId:nil customAttributes:nil];
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article Viewed Time"];
     [AnalyticsManager endTimerForContentViewWithObject:self andName:self.article.headline];
     
@@ -472,7 +489,7 @@ static int contentWidth = 700;
     if(object == self.article && [keyPath isEqualToString:NSStringFromSelector(@selector(bodyHTML))]){
         [self processBodyText];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [(MBProgressHUD*)[self.view viewWithTag:1000] hide:YES];
+            [(MBProgressHUD*)[self.view viewWithTag:1000] hideAnimated:YES];
         });
     }
 }

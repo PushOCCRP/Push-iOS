@@ -24,7 +24,7 @@ platform :ios do
   before_all do |lane, options|
 
     clear_derived_data
-    disable_automatic_code_signing(path: "Push.xcodeproj")
+    # disable_automatic_code_signing(path: "Push.xcodeproj")
     project_path="../Push.xcodeproj"
 
     
@@ -32,7 +32,7 @@ platform :ios do
     if(lane != :offline && lane != :add_devices && lane != :create)
       #cocoapods 
       
-        increment_build_number()
+        increment_build_number(build_number:'1')
       
     end
 
@@ -51,10 +51,10 @@ platform :ios do
   lane :create do
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissourian.mobile",
-      company_name: "The Columbia Missourian",
-      itc_team_name: "The Columbia Missourian",
-      app_name: "Missourian",
+      app_identifier: "com.occrp.push",
+      company_name: "Journalism Development Network",
+      itc_team_name: "Journalism Development Network",
+      app_name: "OCCRP",
       language: "English"
     )
   end
@@ -72,16 +72,16 @@ platform :ios do
   lane :bootstrap do |options|
     cert(
       username: 'guessc@missouri.edu',
-      team_id: 'VLM8EUM4PH',
+      team_id: '9H5K42BU9H',
       development: true
     )
 
     produce(
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissourian.mobile",
-      company_name: "The Columbia Missourian",
-      itc_team_name: "The Columbia Missourian",
-      app_name: "Missourian",
+      app_identifier: "com.occrp.push",
+      company_name: "Journalism Development Network",
+      itc_team_name: "Journalism Development Network",
+      app_name: "OCCRP",
       language: "English"
     )
 
@@ -89,8 +89,8 @@ platform :ios do
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissourian.mobile",
-      team_id: 'VLM8EUM4PH',
+      app_identifier: "com.occrp.push",
+      team_id: '9H5K42BU9H',
     )
 
 
@@ -109,15 +109,15 @@ platform :ios do
     cert(
       development: true,
       username: 'guessc@missouri.edu',
-      team_id: 'VLM8EUM4PH',
+      team_id: '9H5K42BU9H',
     )
 
     sigh(
       development: true,
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissourian.mobile",
-      team_id: 'VLM8EUM4PH',
+      app_identifier: "com.occrp.push",
+      team_id: '9H5K42BU9H',
 
     )
     
@@ -151,13 +151,13 @@ platform :ios do
   lane :beta do |options|
     cert(
       username: 'guessc@missouri.edu',
-      team_id: 'VLM8EUM4PH',
+      team_id: '9H5K42BU9H',
     )
     sigh(
       force: true,
       username: "guessc@missouri.edu",
-      app_identifier: "com.columbiamissourian.mobile",
-      team_id: 'VLM8EUM4PH',
+      app_identifier: "com.occrp.push",
+      team_id: '9H5K42BU9H',
     )
     
     # use the UID of the newly created provisioning profile
@@ -179,39 +179,54 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :deploy do
-    increment_version_number(version_number:'')
+    # disable_automatic_code_signing(path: "Push.xcodeproj")
+
+    increment_version_number(version_number:'1.0')
     #ensure_no_debug_code(text: "NSLog")
     cert(
+      development: false,
       username: 'guessc@missouri.edu',
-      team_id: 'VLM8EUM4PH',
+      team_id: '9H5K42BU9H',
     )
+    
     #snapshot
     sigh(
 	    force: true,
+      cert_id: "#{lane_context[SharedValues::CERT_CERTIFICATE_ID]}",
     	username: "guessc@missouri.edu",
-    	app_identifier: "com.columbiamissourian.mobile",
-      team_id: 'VLM8EUM4PH',
+    	app_identifier: "com.occrp.push",
+      team_id: '9H5K42BU9H',
     )
 
-    update_project_provisioning(
-    )
+    # update_project_provisioning(
+    #   xcodeproj: "Push.xcodeproj",
+    #   build_configuration: "Release",
+    # )
 
     gym(
+        configuration:"Release",
         scheme: "Push",
         export_method: "app-store",
 	      clean: true,
         include_symbols: true,
         include_bitcode: true,
+        export_options: {
+          provisioningProfiles: { 
+            "com.occrp.push" => "#{lane_context[SharedValues::SIGH_NAME]}",
+          }
+        }
     )
+
     deliver(
     	force: true,
     	username: "guessc@missouri.edu",
+      
     )
 
   end
 
   after_all do |lane|
-    enable_automatic_code_signing(path: "Push.xcodeproj")
+    # enable_automatic_code_signing(path: "Push.xcodeproj")
 
     # This block is called, only if the executed lane was successful
     
@@ -221,7 +236,7 @@ platform :ios do
   end
 
   error do |lane, exception|
-    enable_automatic_code_signing(path: "Push.xcodeproj")
+    # enable_automatic_code_signing(path: "Push.xcodeproj")
 
     # slack(
     #   message: exception.message,

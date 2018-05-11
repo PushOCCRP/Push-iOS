@@ -135,4 +135,10 @@
     [[NotificationManager sharedManager] didReceiveNotification:userInfo withNavigationController:(UINavigationController*)self.window.rootViewController forApplicationSatate:application.applicationState];
 }
 
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [[NotificationManager sharedManager] didReceiveNotification:userInfo withNavigationController:(UINavigationController*)self.window.rootViewController forApplicationSatate:application.applicationState];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
 @end

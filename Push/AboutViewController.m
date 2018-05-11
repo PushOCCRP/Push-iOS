@@ -21,6 +21,8 @@
 
 @implementation AboutViewController
 
+static int contentWidth = 700;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViews];
@@ -35,12 +37,13 @@
         [rightBarButtonItems addObject:donateBarButtonItem];
     }
     
-    if([SettingsManager sharedManager].loginRequired != nil){
+    if([SettingsManager sharedManager].loginRequired != NO){
         UIBarButtonItem * loginBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:MYLocalizedString(@"Logout", @"Logout") style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTapped)];
         [rightBarButtonItems addObject:loginBarButtonItem];
     }
     
     self.navigationItem.rightBarButtonItems = rightBarButtonItems;
+    self.navigationItem.title = @"About";
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -70,9 +73,25 @@
     
     [self.aboutTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).offset(10);
-        make.right.equalTo(self.view).offset(-10);
+
+        if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular){
+            make.width.equalTo([NSNumber numberWithInteger:contentWidth]);
+        } else {
+            make.right.equalTo(self.view).offset(-10);
+        }
         make.bottom.equalTo(self.view).offset(0);
     }];
+}
+
+- (void)viewDidLayoutSubviews {
+    if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular){
+        int margin = (self.aboutTextView.frame.size.width - contentWidth) / 2;
+        UIEdgeInsets scrollViewInsets = self.aboutTextView.contentInset;
+        scrollViewInsets.left = margin;
+        scrollViewInsets.right = margin;
+        
+        [self.aboutTextView setContentInset:scrollViewInsets];
+    }
 }
 
 - (void)loadAboutText

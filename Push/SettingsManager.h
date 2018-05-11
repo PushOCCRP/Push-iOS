@@ -27,7 +27,7 @@
 // Default is to show author
 @property (nonatomic, readonly) BOOL shouldShowAuthor;
 // Default is false
-@property (nonatomic, readonly) BOOL loginRequired;
+@property (nonatomic, assign) BOOL loginRequired;
 
 @property (nonatomic, readonly) NSString * pushUrl;
 @property (nonatomic, readonly) NSString * hockeyAppId;

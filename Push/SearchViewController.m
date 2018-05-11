@@ -112,7 +112,7 @@ static int contentWidth = 700;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 [hud setMode:MBProgressHUDModeText];
-                [hud setLabelText:MYLocalizedString(@"NoResultsFound", @"No search results found")];
+                hud.label.text = MYLocalizedString(@"NoResultsFound", @"No search results found");
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                 });
@@ -122,8 +122,8 @@ static int contentWidth = 700;
         if(error.code == 1200){
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"Fixing Network Issue";
-            hud.detailsLabelText = @"One moment while we attempt to fix our connection...";
+            hud.label.text = @"Fixing Network Issue";
+            hud.detailsLabel.text = @"One moment while we attempt to fix our connection...";
             return;
         }
         
