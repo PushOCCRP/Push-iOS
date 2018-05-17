@@ -1002,7 +1002,7 @@
 				TargetAttributes = {
 					9DE4A0FD1BE2531D00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
+						DevelopmentTeam = V2725667MU;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1021,13 +1021,13 @@
 					};
 					9DE4A1161BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
+						DevelopmentTeam = V2725667MU;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 					9DE4A1211BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
+						DevelopmentTeam = V2725667MU;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
@@ -1386,7 +1386,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = V2725667MU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1415,7 +1415,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oystereyepublishing.route40;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1434,7 +1434,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = V2725667MU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1463,7 +1463,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oystereyepublishing.route40;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1477,13 +1477,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = V2725667MU;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oystereyepublishing.route40;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9419fcab-4a7e-4a09-93a1-dbb9d821db20";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1526074318";
+				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
+				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1493,13 +1493,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = V2725667MU;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9419fcab-4a7e-4a09-93a1-dbb9d821db20";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1526074318";
+				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
+				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1509,13 +1509,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = V2725667MU;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9419fcab-4a7e-4a09-93a1-dbb9d821db20";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1526074318";
+				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
+				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1529,13 +1529,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = V2725667MU;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9419fcab-4a7e-4a09-93a1-dbb9d821db20";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1526074318";
+				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
+				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;
