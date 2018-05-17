@@ -68,3 +68,8 @@ Gemfile.lock
 .ruby-version
 Push/Push/CustomizedSettings.plist
 Push/Push/Info.plist
+Push/SecretKeys.plist
+Push/CustomizedSettings.plist
+Push/Info.plist
+
+Push/about_text-*
