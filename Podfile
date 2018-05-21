@@ -25,8 +25,8 @@ target "Push" do
     pod 'DateTools', :git => 'https://github.com/PushOCCRP/DateTools.git'#, :commit => 'f50ae33def9b8b50a5fbf9e3dadcbf19796f3f35'
     #pod 'DateTools', :path => '~/Repositories/DateTools'
     pod 'HTMLKit', '~> 0.9'
-    pod 'CPAProxy', :git => 'https://github.com/ursachec/CPAProxy.git'
-    #pod 'CPAProxy', :path => '~/Repositories/Push/CPAProxy'
+    #pod 'CPAProxy', :git => 'https://github.com/ursachec/CPAProxy.git'
+    pod 'CPAProxy', :path => '../CPAProxy'
     pod 'YAML-Framework'
     pod '1PasswordExtension', '~> 1.8.5'
 end
