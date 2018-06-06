@@ -188,7 +188,6 @@ static int contentWidth = 700;
 - (void)loadInitialArticles
 {
     self.articles = [[PushSyncManager sharedManager] articlesWithCompletionHandler:^(NSArray *articles) {
-        NSLog(@"%@", articles);
         self.articles = articles;
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];

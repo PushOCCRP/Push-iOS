@@ -12,6 +12,7 @@
 #import "AnalyticsManager.h"
 #import <AFNetworking/AFNetworking.h>
 #include "Reachability.h"
+#import <Realm/Realm.h>
 
 typedef enum : NSUInteger {
     PushSyncLogin,
@@ -208,7 +209,7 @@ dispatch_semaphore_t _sem;
 // Returns the current cached array, and then does another call.
 // The caller should show the current array and then handle the call back with new articles
 // If the return is nil there is nothing stored and the call will still be made.
-- (NSArray*)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
+- (RLMResults *)articlesWithCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
 {
     __weak typeof(self) weakSelf = self;
 
@@ -250,16 +251,17 @@ dispatch_semaphore_t _sem;
         
     }];
     
-    if(!self.articles || ([self.articles respondsToSelector:@selector(count)] && [self.articles count] == 0) ||
-       ([self.articles respondsToSelector:@selector(allKeys)] && [[self.articles allKeys] count] == 0)){
-        self.articles = [self getCachedArticles];
-    }
+//    if(!self.articles || ([self.articles respondsToSelector:@selector(count)] && [self.articles count] == 0) ||
+//       ([self.articles respondsToSelector:@selector(allKeys)] && [[self.articles allKeys] count] == 0)){
+//        self.articles = [self getCachedArticles];
+//    }
     
-    if(self.articles == nil){
+    RLMResults * articles = [Article allObjects];
+    if(articles.count == 0){
         NSLog(@"Articles are not cached");
     }
     
-    return self.articles;
+    return articles;
 }
 
 - (void)articleWithId:(NSString*)articleId withCompletionHandler:(CompletionBlock)completionHandler failure:(FailureBlock)failure loggedOut:(LoggedOutBlock)loggedOut;
@@ -340,7 +342,7 @@ dispatch_semaphore_t _sem;
             }
                                                 
             [self GET:@"search.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                [self handleResponse:responseObject completionHandler:completionHandler loggedOut:loggedOut];
+                [self handleSearchResponse:responseObject completionHandler:completionHandler loggedOut:loggedOut];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self handleError:error failure:failure];
             }];
@@ -354,36 +356,34 @@ dispatch_semaphore_t _sem;
     completionHandler(nil);
 }
 
+- (void)handleSearchResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler loggedOut:(LoggedOutBlock)loggedOutHandler
+{
+    [self verifyLoginStatusForResponse:responseObject loggedOut:loggedOutHandler];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        completionHandler([self articlesForResponse:responseObject[@"results"]]);
+    });
+}
 
 - (void)handleResponse:(NSDictionary*)responseObject completionHandler:(void(^)(NSObject * articles))completionHandler loggedOut:(LoggedOutBlock)loggedOutHandler
 {
     NSDictionary * response = (NSDictionary*)responseObject;
-
-    // Check if authentication was wrong. This could mean there was a hard reset on the server.
-    // In which case we just delete everything and reset the app.
-    if([SettingsManager sharedManager].loginRequired) {
-        if([response.allKeys containsObject:@"code"] && [response[@"code"] isEqual:@0]){
-            [self logout];
-            loggedOutHandler();
-        }
-    }
+    [self verifyLoginStatusForResponse:responseObject loggedOut:loggedOutHandler];
     
     /* we want to handle both categories and consolidated returns */
     if(![response.allKeys containsObject:@"categories"]){
-        NSArray * articlesResponse = response[@"results"];
+        NSArray * articles = [self articlesForResponse:response[@"results"]];
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        NSError * error;
+        [realm transactionWithBlock:^{
+            for(Article * article in articles){
+                [realm addOrUpdateObject:article];
+            }
+        } error:&error ];
         
-        NSMutableArray * mutableResponseArray = [NSMutableArray arrayWithCapacity:articlesResponse.count];
-        
-        for(NSDictionary * articleResponse in articlesResponse){
-            Article * article = [Article articleFromDictionary:articleResponse];
-            [mutableResponseArray addObject:article];
-        }
-        
-        NSArray * articles = [NSArray arrayWithArray:mutableResponseArray];
-        [self cacheArticles:articles];
+        [realm refresh];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler(articles);
+            completionHandler([Article allObjects]);
         });
     } else {
         NSMutableDictionary * mutableCategoriesResponseDictionary = [NSMutableDictionary dictionary];
@@ -442,6 +442,29 @@ dispatch_semaphore_t _sem;
 
     NSError * error = [NSError errorWithDomain:NSNetServicesErrorDomain code:1200 userInfo:nil];
     request.failureBlock(error);
+}
+
+- (void)verifyLoginStatusForResponse:(NSDictionary*)response loggedOut:(LoggedOutBlock)loggedOutHandler {
+    // Check if authentication was wrong. This could mean there was a hard reset on the server.
+    // In which case we just delete everything and reset the app.
+    if([SettingsManager sharedManager].loginRequired) {
+        if([response.allKeys containsObject:@"code"] && [response[@"code"] isEqual:@0]){
+            [self logout];
+            loggedOutHandler();
+        }
+    }
+}
+
+- (NSArray*)articlesForResponse:(NSArray*)response {
+    NSMutableArray * mutableResponseArray = [NSMutableArray arrayWithCapacity:response.count];
+    
+    for(NSDictionary * articleResponse in response){
+        Article * article = [Article articleFromDictionary:articleResponse];
+        [mutableResponseArray addObject:article];
+    }
+    
+    NSArray * articles = [NSArray arrayWithArray:mutableResponseArray];
+    return articles;
 }
 
 - (void)reset

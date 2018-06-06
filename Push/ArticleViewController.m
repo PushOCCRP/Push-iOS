@@ -346,15 +346,15 @@ static int contentWidth = 700;
         //Set image caption, hide if there is none.
         NSString * headerImageCaption;
         NSString * headerImageByline;
-        if(self.article.headerImage && [[self.article.headerImage allKeys] containsObject:@"caption"]){
-            headerImageCaption = self.article.headerImage[@"caption"];
-            if([[self.article.images.firstObject allKeys] containsObject:@"caption"]){
+        if(self.article.headerImage && self.article.headerImage.caption){
+            headerImageCaption = self.article.headerImage.caption;
+            if(self.article.images.firstObject.caption){
                 headerImageByline = self.article.images.firstObject[@"byline"];
             }
-        } else if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
-            headerImageCaption = self.article.images.firstObject[@"caption"];
-            if([[self.article.images.firstObject allKeys] containsObject:@"caption"]){
-                headerImageByline = self.article.images.firstObject[@"byline"];
+        } else if(self.article.images.count > 0 && self.article.images[0].caption){
+            headerImageCaption = self.article.images.firstObject.caption;
+            if(self.article.images.firstObject.caption){
+                headerImageByline = self.article.images.firstObject.byline;
             }
         }
         
@@ -469,7 +469,7 @@ static int contentWidth = 700;
     [AnalyticsManager logContentViewWithName:@"Video Button Tapped" contentType:@"Navigation"
                                    contentId:self.article.description customAttributes:self.article.trackingProperties];
 
-    YouTubePlayerViewController * youTubePlayerViewController = [[YouTubePlayerViewController alloc] initWithVideoId:self.article.videos.firstObject[@"youtube_id"]];
+    YouTubePlayerViewController * youTubePlayerViewController = [[YouTubePlayerViewController alloc] initWithVideoId:self.article.videos.firstObject.youtubeId];
     youTubePlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     youTubePlayerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
