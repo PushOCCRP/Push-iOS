@@ -256,7 +256,7 @@ dispatch_semaphore_t _sem;
 //        self.articles = [self getCachedArticles];
 //    }
     
-    RLMResults * articles = [Article allObjects];
+    RLMResults * articles = [[Article allObjects] sortedResultsUsingKeyPath:@"publishDate" ascending:NO];
     if(articles.count == 0){
         NSLog(@"Articles are not cached");
     }
@@ -383,7 +383,7 @@ dispatch_semaphore_t _sem;
         [realm refresh];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler([Article allObjects]);
+            completionHandler([[Article allObjects] sortedResultsUsingKeyPath:@"publishDate" ascending:NO]);
         });
     } else {
         NSMutableDictionary * mutableCategoriesResponseDictionary = [NSMutableDictionary dictionary];

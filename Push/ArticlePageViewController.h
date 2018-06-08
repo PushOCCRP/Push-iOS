@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Realm/Realm.h>
 
 @interface ArticlePageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
-@property (nonatomic, retain) NSArray * articles;
+@property (nonatomic, retain) RLMArray * articles;
 
-- (instancetype)initWithArticles:(NSArray *)articles;
+- (instancetype)initWithArticles:(RLMArray *)articles;
 
 @end
