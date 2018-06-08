@@ -55,6 +55,16 @@ static int contentWidth = 700;
     self = [super init];
     if(self){
         self.article = article;
+        
+        self.view.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+        
+        self.imageLocations = [NSMutableDictionary dictionary];
+        
+        [self setShareButton];
+        [self setupScrollView];
+        [self setupContentView];
+        
+
     }
     
     return self;
@@ -68,34 +78,33 @@ static int contentWidth = 700;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
     
-    self.imageLocations = [NSMutableDictionary dictionary];
-    
-    [self setShareButton];
-    [self setupScrollView];
+    [self.view layoutIfNeeded];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //Resize the image view's height to make it proportional
-    float viewWidth = self.navigationController.view.window.frame.size.width;
-    float proportion = viewWidth / self.image.image.size.width;
-    
-    if(self.image.image){
-        float height = self.image.image.size.height * proportion;
-        
-        [self.image mas_updateConstraints:^(MASConstraintMaker * make) {
-            make.height.equalTo([NSNumber numberWithFloat:height]);
-        }];
-    }
+
+//    //Resize the image view's height to make it proportional
+//    float viewWidth = self.navigationController.view.window.frame.size.width;
+//    float proportion = viewWidth / self.image.image.size.width;
+//
+//    if(self.image.image){
+//        float height = self.image.image.size.height * proportion;
+//
+//        [self.image mas_updateConstraints:^(MASConstraintMaker * make) {
+//            make.height.equalTo([NSNumber numberWithFloat:height]);
+//        }];
+//    }
+    // Set all the data to views for the article
+    [self setViewsForArticle];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self setupContentView];
     [self setContraints];
     
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article Viewed Time" contentType:@"Article View Time"
@@ -194,9 +203,6 @@ static int contentWidth = 700;
     [self.contentView addSubview:self.headline];
     [self.contentView addSubview:self.body];
     
-    // Set all the data to views for the article
-    [self setViewsForArticle];
-    
     // Make it scroll
     [self.scrollView addSubview:self.contentView];
 }
@@ -291,6 +297,19 @@ static int contentWidth = 700;
 
         [self.scrollView setContentInset:scrollViewInsets];
     }
+    
+    //Resize the image view's height to make it proportional
+    float viewWidth = self.navigationController.view.window.frame.size.width;
+    float proportion = viewWidth / self.image.image.size.width;
+    
+    if(self.image.image){
+        float height = self.image.image.size.height * proportion;
+        
+        [self.image mas_updateConstraints:^(MASConstraintMaker * make) {
+            make.height.equalTo([NSNumber numberWithFloat:height]);
+        }];
+    }
+
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -319,26 +338,7 @@ static int contentWidth = 700;
         
         __weak typeof(self) weakSelf = self;
         [self.image setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-            
             weakSelf.image.image = image;
-            
-            //Resize the image view's height to make it proportional
-            float viewWidth = weakSelf.view.frame.size.width;
-            float proportion = viewWidth / image.size.width;
-            float height = image.size.height * proportion;
-            
-            [weakSelf.image mas_remakeConstraints:^(MASConstraintMaker * make) {
-                if(weakSelf.category){
-                    make.top.equalTo(weakSelf.category.mas_bottom);
-                } else {
-                    make.top.equalTo(weakSelf.contentView.mas_top);
-                }
-                
-                make.left.equalTo(weakSelf.contentView.mas_left);
-                make.right.equalTo(weakSelf.contentView.mas_right);
-                make.height.equalTo([NSNumber numberWithFloat:height]);
-            }];
-            
         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
             NSLog(@"Error loading image: %@", error.localizedDescription);
         }];
