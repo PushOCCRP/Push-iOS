@@ -21,6 +21,34 @@
 #import "Constants.h"
 #import <HTMLKit/HTMLKit.h>
 
+@implementation PushImage
+
+- (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
+    if (self = [super init]){
+        self.length = [jsonDictionary[@"length"] integerValue];
+        self.height = [jsonDictionary[@"height"] integerValue];
+        self.start = [jsonDictionary[@"start"] integerValue];
+        self.byline = jsonDictionary[@"byline"];
+        self.width = [jsonDictionary[@"width"] integerValue];
+        self.caption = jsonDictionary[@"caption"];
+        self.url = jsonDictionary[@"url"];
+    }
+    
+    return self;
+}
+@end
+
+@implementation PushVideo
+
+- (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
+    if (self = [super init]){
+        self.youtubeId = jsonDictionary[@"youtube_id"];
+    }
+    
+    return self;
+}
+
+@end
 
 @interface Article ()
 
@@ -48,12 +76,25 @@
         NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"%Y%m%d";
 
+        self.id                 = [[aDecoder decodeObjectForKey:@"id"] integerValue];
         self.headline           = [aDecoder decodeObjectForKey:@"headline"];
         self.descriptionText    = [aDecoder decodeObjectForKey:@"description"];
         self.body               = [aDecoder decodeObjectForKey:@"body"];
         self.headerImage        = [aDecoder decodeObjectForKey:@"header_image"];
-        self.images             = [aDecoder decodeObjectForKey:@"images"];
-        self.videos             = [aDecoder decodeObjectForKey:@"videos"];
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm transactionWithBlock:^{
+            [[aDecoder decodeObjectForKey:@"images"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [self.images addObject:[[PushImage alloc] initWithJSONDictionary:obj]];
+            }] ;
+        }];
+        
+        [realm transactionWithBlock:^{
+            [[aDecoder decodeObjectForKey:@"videos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [self.videos addObject:[[PushVideo alloc] initWithJSONDictionary:obj]];
+            }] ;
+        }];
+
         self.author             = [aDecoder decodeObjectForKey:@"author"];
         self.category           = [aDecoder decodeObjectForKey:@"category"];
         self.publishDate        = [formatter
@@ -93,21 +134,35 @@
     NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
     formatter.dateFormat = @"yyyyMMdd";
 
+    self.id                 = [jsonDictionary[@"id"] integerValue];
     self.headline           = jsonDictionary[@"headline"];
     self.descriptionText    = jsonDictionary[@"description"];
     self.body               = jsonDictionary[@"body"];
     self.headerImage        = jsonDictionary[@"header_image"];
-    self.images             = jsonDictionary[@"images"];
-    self.videos             = jsonDictionary[@"videos"];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [jsonDictionary[@"images"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.images addObject:[[PushImage alloc] initWithJSONDictionary:obj]];
+        }];
+    }];
+    
+    [realm transactionWithBlock:^{
+        [jsonDictionary[@"videos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.videos addObject:[[PushVideo alloc] initWithJSONDictionary:obj]];
+        }] ;
+    }];
+
     self.author             = jsonDictionary[@"author"];
     self.publishDate        = [formatter dateFromString:jsonDictionary[@"publish_date"]];
     
     // For backwards compatibility the first image in the self.images array may also be the header
     // If that's the case, we want to remove it
+
     if((self.images.count > 0 && self.headerImage) && [self.images[0][@"url"] isEqualToString:self.headerImage[@"url"]]) {
-        NSMutableArray * mutableImages = [NSMutableArray arrayWithArray:self.images];
-        [mutableImages removeObjectAtIndex:0];
-        self.images = [NSArray arrayWithArray:mutableImages];
+        [realm beginWriteTransaction];
+        [self.images removeObjectAtIndex:0];
+        [realm commitWriteTransaction];
     }
     
     NSURL * url;
@@ -145,50 +200,60 @@
 {
     
     _body = [self formatArticleHtml:body];
+    self.dbBodyString = _body;
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineSpacing = 7.0f;
-        paragraphStyle.paragraphSpacing = 5.0f;
-        paragraphStyle.paragraphSpacingBefore = 5.0f;
-        
-        NSString * html = [_body stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: '%@'; font-size:%fpx;}</style>", @"Palatino-Roman", 17.0f]];
-        
-        html = [html stringByReplacingOccurrencesOfString:@"</p>\n\n<p>" withString:@"</p><br /><br /><p>"];
-        // For Android you need two breaks to make a proper space. On iOS that adds double blanks.
-        html = [html stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"<br />\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<br><br>" withString:@"<br />\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<br><br />" withString:@"<br />\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<br /><br>" withString:@"<br />\n"];
-        
-        html = [html stringByReplacingOccurrencesOfString:@"<h1>" withString:@"<br /><br /><h1>"];
-        html = [html stringByReplacingOccurrencesOfString:@"<\\h1>" withString:@"<\\h1>\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<h2>" withString:@"<br /><br /><h2>"];
-        html = [html stringByReplacingOccurrencesOfString:@"<\\h2>" withString:@"<\\h2>\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<h3>" withString:@"<br /><br /><h3>"];
-        html = [html stringByReplacingOccurrencesOfString:@"<\\h3>" withString:@"<\\h3>\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<h4>" withString:@"<br /><br /><h4>"];
-        html = [html stringByReplacingOccurrencesOfString:@"<\\h4>" withString:@"<\\h4>\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<h5>" withString:@"<br /><br /><h5>"];
-        html = [html stringByReplacingOccurrencesOfString:@"<\\h5>" withString:@"<\\h5>\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<h6>" withString:@"<br /><br /><h6>"];
-        html = [html stringByReplacingOccurrencesOfString:@"<\\h6>" withString:@"<\\h6>\n"];
-        
-        html = [self addGravestonesForImages:html];
-        html = [html stringByReplacingOccurrencesOfString:@"<br />\n</p><br />\n<p></p><br>" withString:@"</p><br />\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<br>\n</p><br>\n<p></p><br>" withString:@"</p><br />\n"];
-        html = [html stringByReplacingOccurrencesOfString:@"<br>\n<p></p><br>" withString:@"<br />\n"];
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    //});
 
-        
-        NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
-                                                          initWithHTML:[html dataUsingEncoding:NSUTF8StringEncoding]
-                                                          baseURL:[SettingsManager sharedManager].cmsBaseUrl
-                                                          documentAttributes:nil];
-        
-        [bodyAttributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, bodyAttributedText.string.length)];
-        
-        self.bodyHTML = [self addImagePlaceholderToAttributedString:bodyAttributedText];
-    });
+}
+
+- (NSString*)getBody {
+    return self.dbBodyString;
+}
+
+- (NSAttributedString*)bodyHTML {
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 7.0f;
+    paragraphStyle.paragraphSpacing = 5.0f;
+    paragraphStyle.paragraphSpacingBefore = 5.0f;
+    
+    NSString * html = [self.dbBodyString stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: '%@'; font-size:%fpx;}</style>", @"Palatino-Roman", 17.0f]];
+    
+    html = [html stringByReplacingOccurrencesOfString:@"</p>\n\n<p>" withString:@"</p><br /><br /><p>"];
+    // For Android you need two breaks to make a proper space. On iOS that adds double blanks.
+    html = [html stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"<br />\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<br><br>" withString:@"<br />\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<br><br />" withString:@"<br />\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<br /><br>" withString:@"<br />\n"];
+    
+    html = [html stringByReplacingOccurrencesOfString:@"<h1>" withString:@"<br /><br /><h1>"];
+    html = [html stringByReplacingOccurrencesOfString:@"<\\h1>" withString:@"<\\h1>\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<h2>" withString:@"<br /><br /><h2>"];
+    html = [html stringByReplacingOccurrencesOfString:@"<\\h2>" withString:@"<\\h2>\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<h3>" withString:@"<br /><br /><h3>"];
+    html = [html stringByReplacingOccurrencesOfString:@"<\\h3>" withString:@"<\\h3>\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<h4>" withString:@"<br /><br /><h4>"];
+    html = [html stringByReplacingOccurrencesOfString:@"<\\h4>" withString:@"<\\h4>\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<h5>" withString:@"<br /><br /><h5>"];
+    html = [html stringByReplacingOccurrencesOfString:@"<\\h5>" withString:@"<\\h5>\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<h6>" withString:@"<br /><br /><h6>"];
+    html = [html stringByReplacingOccurrencesOfString:@"<\\h6>" withString:@"<\\h6>\n"];
+    
+    html = [self addGravestonesForImages:html];
+    html = [html stringByReplacingOccurrencesOfString:@"<br />\n</p><br />\n<p></p><br>" withString:@"</p><br />\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<br>\n</p><br>\n<p></p><br>" withString:@"</p><br />\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<br>\n<p></p><br>" withString:@"<br />\n"];
+    
+    
+    NSMutableAttributedString * bodyAttributedText = [[NSMutableAttributedString alloc]
+                                                      initWithHTML:[html dataUsingEncoding:NSUTF8StringEncoding]
+                                                      baseURL:[SettingsManager sharedManager].cmsBaseUrl
+                                                      documentAttributes:nil];
+    
+    [bodyAttributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, bodyAttributedText.string.length)];
+    
+    
+    return [self addImagePlaceholderToAttributedString:bodyAttributedText];
 
 }
 
@@ -285,6 +350,7 @@
     // If the headerImage is start start at 0, if isn't start at 1
     
     int index = 1;
+    
     if(self.headerImage){
         index = 0;
     }
@@ -306,6 +372,7 @@
     // If the headerImage is start start at 0, if isn't start at 1
     // I was dumb before, this is now the right way to do it.
     index = 1;
+    
     if(self.headerImage){
         index = 0;
     }
@@ -389,7 +456,7 @@
                          attachment.image = responseObject;
 
                          // Set the body test
-                         self.bodyHTML = attributedText;
+                         _bodyHTML = attributedText;
                          *stop = YES;
                      }
                  }
@@ -420,6 +487,7 @@
 
 }
 
+//
 - (void)setHeaderImage:(NSDictionary *)headerImage
 {
     if(!headerImage){
@@ -433,7 +501,7 @@
     });
 }
 
-- (void)setImages:(NSArray *)images
+- (void)setImages:(RLMArray<PushImage*><PushImage> *)images
 {
     _images = images;
     
@@ -442,6 +510,23 @@
             [self preloadImage:image[@"url"]];
         });
     }
+}
+
+- (void)setLanguage:(ArticleLanguage)language
+{
+    self.languageInteger = language;
+}
+
+- (ArticleLanguage)getLanguage {
+    return self.languageInteger;
+}
+
+- (void)setLinkURL:(NSURL *)linkURL {
+    self.linkURLString = linkURL.absoluteString;
+}
+
+- (NSURL*)linkURL {
+    return [NSURL URLWithString:self.linkURLString];
 }
 
 - (NSString*)formatArticleHtml:(NSString*)html
@@ -537,6 +622,7 @@
     NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
     formatter.dateFormat = @"%Y%m%d";
     
+    [encoder encodeObject:[NSNumber numberWithInt:self.id] forKey:@"id"];
     [encoder encodeObject:self.headline forKey:@"headline"];
     [encoder encodeObject:self.descriptionText forKey:@"description"];
     [encoder encodeObject:self.body forKey:@"body"];
@@ -580,5 +666,14 @@
              @"Article Url":self.linkURL.absoluteString,
              @"Article Description":self.description};
 }
+
++ (NSArray *)ignoredProperties {
+    return @[@"language", @"linkURL", @"bodyHTML", @"body"];
+}
+
++ (NSString *)primaryKey {
+    return @"id";
+}
+
 
 @end

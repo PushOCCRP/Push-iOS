@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3C14B15610A0B331C11653E8 /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */; };
-		4C13CC5C20BD686900DB86D6 /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */; };
-		4C13CC5D20BD686A00DB86D6 /* SecretKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */; };
 		9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0B05CC1D129885001D3B2F /* QuartzCore.framework */; };
 		9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0B05D51D12A524001D3B2F /* ClickIndicator.m */; };
 		9D216105200E96BA001F53EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D216104200E96BA001F53EB /* LoginViewController.m */; };
@@ -200,7 +198,7 @@
 		9DAC1E091C5772F800126A83 /* AboutBarButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutBarButtonView.m; sourceTree = "<group>"; };
 		9DAC1E201C57882E00126A83 /* About.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = About.h; sourceTree = "<group>"; };
 		9DAC1E211C57882E00126A83 /* About.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = About.m; sourceTree = "<group>"; };
-		9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = SecretKeys.plist; path = Push/SecretKeys.plist; sourceTree = SOURCE_ROOT; };
+		9DBFF9CE1C50031600ABCD2C /* SecretKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SecretKeys.plist; sourceTree = "<group>"; };
 		9DBFF9D11C50069800ABCD2C /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
 		9DBFF9D21C50069800ABCD2C /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
 		9DBFF9D41C501B8400ABCD2C /* play@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@1x.png"; sourceTree = "<group>"; };
@@ -943,6 +941,7 @@
 				9DE4A0FB1BE2531D00B69170 /* Frameworks */,
 				9DE4A0FC1BE2531D00B69170 /* Resources */,
 				9D1A14F81C284249000FD08E /* ShellScript */,
+				E13974A53222D1E6BDDEE6E5 /* [CP] Copy Pods Resources */,
 				9D2C1DCE1E341DFF000414B9 /* Embed PlugIns */,
 				EBC5EDA5C720960E46172992 /* [CP] Embed Pods Frameworks */,
 			);
@@ -1003,6 +1002,7 @@
 				TargetAttributes = {
 					9DE4A0FD1BE2531D00B69170 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 9H5K42BU9H;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1021,13 +1021,13 @@
 					};
 					9DE4A1161BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = V2725667MU;
+						DevelopmentTeam = 9H5K42BU9H;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 					9DE4A1211BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = V2725667MU;
+						DevelopmentTeam = 9H5K42BU9H;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
@@ -1112,7 +1112,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C13CC5C20BD686900DB86D6 /* SecretKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,7 +1119,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C13CC5D20BD686A00DB86D6 /* SecretKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,16 +1131,13 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Push-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9D1A14F81C284249000FD08E /* ShellScript */ = {
@@ -1158,48 +1153,30 @@
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
+		E13974A53222D1E6BDDEE6E5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EBC5EDA5C720960E46172992 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/CPAProxy/CPAProxy.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/HTMLKit/HTMLKit.framework",
-				"${BUILT_PRODUCTS_DIR}/LibYAML/LibYAML.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/SVPullToRefresh/SVPullToRefresh.framework",
-				"${BUILT_PRODUCTS_DIR}/YAML-Framework/YAML_Framework.framework",
-				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CPAProxy.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTools.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTMLKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LibYAML.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVPullToRefresh.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YAML_Framework.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1409,7 +1386,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1438,7 +1415,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.izudin.pushtest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1457,7 +1434,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1486,7 +1463,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.izudin.pushtest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1500,13 +1477,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oystereyepublishing.route40;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1516,13 +1493,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1532,13 +1509,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1552,13 +1529,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;
