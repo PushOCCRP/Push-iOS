@@ -405,6 +405,24 @@ dispatch_semaphore_t _sem;
         NSDictionary * categories = [NSDictionary dictionaryWithDictionary:mutableCategoriesResponseDictionary];
         
         [self cacheArticles:categories];
+   
+        // transfer results to realm database
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        NSError * error;
+        [realm transactionWithBlock:^{
+            for(NSString * category in categoriesArray){
+                NSArray * articles = [self articlesForResponse:[response[@"results"] valueForKey:category]];
+                //NSArray * articles = [response[@"results"] valueForKey:category];//[category];
+                for(Article * article in articles){
+                    NSLog(@"test");
+                   
+                    [realm addOrUpdateObject:article];
+              }
+            }
+        } error:&error ];
+        
+        [realm refresh];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             completionHandler(categories);

@@ -140,18 +140,19 @@
     self.body               = jsonDictionary[@"body"];
     self.headerImage        = jsonDictionary[@"header_image"];
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [jsonDictionary[@"images"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self.images addObject:[[PushImage alloc] initWithJSONDictionary:obj]];
-        }];
-    }];
+    // Need to handle images and video without realm transaction block couse at this point they are just NSArrays
     
-    [realm transactionWithBlock:^{
-        [jsonDictionary[@"videos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self.videos addObject:[[PushVideo alloc] initWithJSONDictionary:obj]];
-        }] ;
-    }];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    NSArray * imagesArray = jsonDictionary[@"images"];
+    for (NSDictionary * image in imagesArray) {
+      [self.images addObject:[[PushImage alloc] initWithJSONDictionary:image]];
+    }
+    NSArray * videosArray = jsonDictionary[@"videos"];
+    for (NSDictionary * video in videosArray) {
+        [self.videos addObject:[[PushVideo alloc] initWithJSONDictionary:video]];
+    }
+  
 
     self.author             = jsonDictionary[@"author"];
     self.publishDate        = [formatter dateFromString:jsonDictionary[@"publish_date"]];
@@ -164,7 +165,7 @@
         [self.images removeObjectAtIndex:0];
         [realm commitWriteTransaction];
     }
-    
+
     NSURL * url;
     if(jsonDictionary[@"url"] != nil){
         url = [NSURL URLWithString:jsonDictionary[@"url"]];
@@ -192,6 +193,8 @@
         self.language = GEORGIAN;
     }
 
+    
+    
     return self;
 }
 
@@ -626,9 +629,29 @@
     [encoder encodeObject:self.headline forKey:@"headline"];
     [encoder encodeObject:self.descriptionText forKey:@"description"];
     [encoder encodeObject:self.body forKey:@"body"];
-    [encoder encodeObject:self.headerImage forKey:@"header_image"];
-    [encoder encodeObject:self.images forKey:@"images"];
-    [encoder encodeObject:self.videos forKey:@"videos"];
+    //[encoder encodeObject:self.headerImage forKey:@"header_image"];
+    
+  /*  RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        /*[[aDecoder decodeObjectForKey:@"images"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.images addObject:[[PushImage alloc] initWithJSONDictionary:obj]];
+        }] ;
+        
+       [encoder encodeObject:self.images forKey:@"images"];
+        
+        
+        
+    }];
+    
+    [realm transactionWithBlock:^{
+       [encoder encodeObject:self.videos forKey:@"videos"];
+    }]; */
+    
+    
+    //[encoder encodeObject:self.images forKey:@"images"];
+    //[encoder encodeObject:self.videos forKey:@"videos"];
+    //PushImage image1 = [PushImage ]
+    
     [encoder encodeObject:self.author forKey:@"author"];
     [encoder encodeObject:self.category forKey:@"category"];
     [encoder encodeObject:[formatter stringFromDate:self.publishDate] forKey:@"publish_date"];
