@@ -71,7 +71,8 @@ static int contentWidth = 700;
     
     // TODO: Track the user action that is important for you.
     [AnalyticsManager logContentViewWithName:@"Article List" contentType:nil contentId:nil customAttributes:nil];
-}
+    
+    }
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -81,7 +82,7 @@ static int contentWidth = 700;
     }
     
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
-    [self loadInitialArticles];
+    [self loadInitialArticles]; 
 }
 
 - (void)viewDidDisappear:(BOOL)animated

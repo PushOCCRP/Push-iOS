@@ -412,11 +412,10 @@ dispatch_semaphore_t _sem;
         NSError * error;
         [realm transactionWithBlock:^{
             for(NSString * category in categoriesArray){
-                NSArray * articles = [self articlesForResponse:[response[@"results"] valueForKey:category]];
+                NSArray * articles = [self articlesForResponse:[response[@"results"] valueForKey:category] ];
                 //NSArray * articles = [response[@"results"] valueForKey:category];//[category];
                 for(Article * article in articles){
-                    NSLog(@"test");
-                   
+                    article.category = category;
                     [realm addOrUpdateObject:article];
               }
             }
@@ -579,6 +578,10 @@ dispatch_semaphore_t _sem;
       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
           NSLog(@"Host is not reachable so we're going to start a TOR session.");
           self.startingUp = false;
+          
+          // Log for failure
+          NSLog(@"Failure: %@", error);
+     
           [[TorManager sharedManager] startTorSessionWithSession:self];
           NSLog(@"%lu", (unsigned long)[TorManager sharedManager].status);
           
@@ -627,7 +630,7 @@ dispatch_semaphore_t _sem;
 
 - (NSString*)baseHost
 {
-    return [SettingsManager sharedManager].pushUrl;
+    return [SettingsManager sharedManager].pushUrl ;
 }
 
 - (void)waitForStartupWithCompletionHandler:(void(^)())completionHandler
