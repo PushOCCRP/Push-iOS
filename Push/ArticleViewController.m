@@ -50,36 +50,47 @@
 static NSString * imageGravestoneMarker = @"&&&&";
 static int contentWidth = 700;
 
-- (instancetype)initWithArticle:(Article*)article
-{
-    self = [super init];
-    if(self){
-        self.article = article;
-        
-        self.view.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
-        
-        self.imageLocations = [NSMutableDictionary dictionary];
-        
-        [self setShareButton];
-        [self setupScrollView];
-        [self setupContentView];
-        
 
-    }
-    
-    return self;
-}
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
 }
 
+- (instancetype)initWithArticle:(Article*)article
+{
+    self = [super init];
+    if(self){
+        self.article = article;
+        
+        NSLog(@"This should hapen once in never");
+        
+    }
+    
+    return self;
+}
+
+- (void) doEverything {
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+    
+    self.imageLocations = [NSMutableDictionary dictionary];
+    
+    [self setShareButton];
+    [self setupScrollView];
+    [self setupContentView];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
+    [self doEverything];
+    NSLog(@"ArticleViewController viewDidLoad");
     [self.view layoutIfNeeded];
+}
+
+- (void) dealloc{
+    NSLog(@"ArticleViewController deallocation");
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,7 +117,7 @@ static int contentWidth = 700;
 {
     [super viewDidAppear:animated];
     [self setContraints];
-    
+  
     [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article Viewed Time" contentType:@"Article View Time"
                                                contentId:self.article.description customAttributes:self.article.trackingProperties];
     [AnalyticsManager startTimerForContentViewWithObject:self name:self.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];

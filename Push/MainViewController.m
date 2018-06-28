@@ -63,14 +63,14 @@ static int contentWidth = 700;
     
     __weak typeof(self) weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [AnalyticsManager logCustomEventWithName:@"Pulled To Refresh Home Screen" customAttributes:nil];
+      //  [AnalyticsManager logCustomEventWithName:@"Pulled To Refresh Home Screen" customAttributes:nil];
         [weakSelf loadArticles];
     }];
     
     [self loadPromotions];
     
     // TODO: Track the user action that is important for you.
-    [AnalyticsManager logContentViewWithName:@"Article List" contentType:nil contentId:nil customAttributes:nil];
+    //[AnalyticsManager logContentViewWithName:@"Article List" contentType:nil contentId:nil customAttributes:nil];
     
     }
 
@@ -81,13 +81,13 @@ static int contentWidth = 700;
         return;
     }
     
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
+    //[AnalyticsManager startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
     [self loadInitialArticles]; 
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article List Timer"];
+    //[AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article List Timer"];
 }
 
 - (void)showLoginViewController
@@ -306,8 +306,8 @@ static int contentWidth = 700;
 - (void)didTapOnPromotion:(nonnull Promotion*)promotion
 {
     NSString * language = [LanguageManager sharedManager].languageShortCode;
-    WebSiteViewController * webSiteController = [[WebSiteViewController alloc] initWithURL:[NSURL URLWithString:promotion.urls[language]]];
-    [self.navigationController presentViewController:webSiteController animated:YES completion:nil];
+    //WebSiteViewController * webSiteController = [[WebSiteViewController alloc] initWithURL:[NSURL URLWithString:promotion.urls[language]]];
+    //[self.navigationController presentViewController:webSiteController animated:YES completion:nil];
 //    [self.navigationController pushViewController:webSiteController animated:YES];
 }
 
@@ -503,15 +503,16 @@ static int contentWidth = 700;
         article = self.articles[indexPath.row];
     }
     
-    ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:article];
+    ArticleViewController * articleViewController = [[ArticleViewController alloc] init];
+    articleViewController.article = article;
     [articlePageViewController setViewControllers:@[articleViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
-    [AnalyticsManager logContentViewWithName:@"Article List Item Tapped" contentType:@"Navigation"
+    /*[AnalyticsManager logContentViewWithName:@"Article List Item Tapped" contentType:@"Navigation"
                           contentId:article.description customAttributes:article.trackingProperties];
+    */
     
-    
-    [self.navigationController pushViewController:articlePageViewController animated:YES];
-    
+    [self.navigationController pushViewController:articlePageViewController animated:NO];
+    self.tableView = nil;
 }
 
 #pragma mark - UITableViewDataSource

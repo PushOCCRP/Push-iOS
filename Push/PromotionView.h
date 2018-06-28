@@ -18,7 +18,8 @@
 @interface PromotionView : UIView
 
 @property (nonatomic, retain, readonly, nonnull) Promotion * promotion;
-@property (nonnull, nonatomic, assign) id delegate;
+@property (nonatomic, weak, nullable) id delegate;
+
 
 - (nullable instancetype)initWithPromotion:(nonnull Promotion*)promotion;
 

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3C14B15610A0B331C11653E8 /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */; };
+		4C0E5BBD20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
+		4C0E5BBE20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
+		4C0E5BBF20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
 		9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0B05CC1D129885001D3B2F /* QuartzCore.framework */; };
 		9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0B05D51D12A524001D3B2F /* ClickIndicator.m */; };
 		9D216105200E96BA001F53EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D216104200E96BA001F53EB /* LoginViewController.m */; };
@@ -130,6 +133,8 @@
 
 /* Begin PBXFileReference section */
 		35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C0E5BBB20E144940020AF92 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4C0E5BBC20E144940020AF92 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
 		6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
 		9D0B05CC1D129885001D3B2F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -319,6 +324,15 @@
 				35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C0E5BBA20E144580020AF92 /* Test View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C0E5BBB20E144940020AF92 /* ViewController.h */,
+				4C0E5BBC20E144940020AF92 /* ViewController.m */,
+			);
+			name = "Test View Controller";
 			sourceTree = "<group>";
 		};
 		9D216102200E9661001F53EB /* Login View Controller */ = {
@@ -744,6 +758,7 @@
 				9DC0E1491BF62AD7004A47D4 /* Search View Controller */,
 				9DE4A14D1BE268F500B69170 /* Article Page View Controller */,
 				9DE4A14B1BE268E300B69170 /* Article View Controller */,
+				4C0E5BBA20E144580020AF92 /* Test View Controller */,
 				9DE4A1351BE257F700B69170 /* Main View Controller */,
 			);
 			name = "View Controllers";
@@ -1250,6 +1265,7 @@
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
 				9DE593781E31797C008FEDA1 /* Reachability.m in Sources */,
 				9D4327D41DBB6DF500A6FEB2 /* ArticleTableViewHeader.m in Sources */,
+				4C0E5BBD20E144940020AF92 /* ViewController.m in Sources */,
 				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
 				9DAC1E221C57882E00126A83 /* About.m in Sources */,
 				9DE4A1031BE2531E00B69170 /* main.m in Sources */,
@@ -1262,6 +1278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C0E5BBE20E144940020AF92 /* ViewController.m in Sources */,
 				9DE4A11C1BE2531F00B69170 /* PushTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1270,6 +1287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C0E5BBF20E144940020AF92 /* ViewController.m in Sources */,
 				9DE4A1271BE2531F00B69170 /* PushUITests.m in Sources */,
 				9D51C6151C6CDC8600BF434B /* SnapshotHelper.swift in Sources */,
 			);

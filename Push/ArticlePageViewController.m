@@ -26,14 +26,16 @@
     self.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
 
-    NSMutableArray * initialObjects = [NSMutableArray arrayWithCapacity:3];
-    [initialObjects addObject:self.articles[0]];
-    [initialObjects addObject:self.articles[1]];
-    [initialObjects addObject:self.articles[2]];
-    ArticleViewController * avc = [[ArticleViewController alloc] initWithArticle:self.articles[0]];
+
+    ArticleViewController * avc = [[ArticleViewController alloc] init];
+    avc.article = self.articles[0];
     [self setViewControllers:@[avc] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
     return self;
+}
+
+- (void) dealloc{
+    NSLog(@"ArticlePAgeViewController deallocation");
 }
 
 - (void)viewDidLoad {
@@ -67,7 +69,10 @@
         return nil;
     }
     
-    return [[ArticleViewController alloc] initWithArticle:self.articles[currentIndex - 1]];
+    ArticleViewController * avc = [[ArticleViewController alloc] init];
+    avc.article = self.articles[currentIndex - 1];
+    
+    return avc;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
@@ -77,8 +82,10 @@
     if(currentIndex == self.articles.count - 1){
         return nil;
     }
+    ArticleViewController * avc = [[ArticleViewController alloc] init];
+    avc.article = self.articles[currentIndex + 1];
     
-    return [[ArticleViewController alloc] initWithArticle:self.articles[currentIndex + 1]];
+    return avc;
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
