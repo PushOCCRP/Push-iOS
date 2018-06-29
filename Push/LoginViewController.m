@@ -99,9 +99,9 @@ typedef enum : NSUInteger {
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [AnalyticsManager logContentViewWithName:@"Login Page Appeared" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Login Page Appeared" contentType:@"Navigation"
                                    contentId:nil customAttributes:nil];
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Login Page Viewed Time" contentType:@"Login Page View Time" contentId:nil customAttributes:nil];
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:self name:@"Login Page Viewed Time" contentType:@"Login Page View Time" contentId:nil customAttributes:nil];
     
     [self registerForKeyboardChanges];
 }
@@ -109,7 +109,7 @@ typedef enum : NSUInteger {
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self deregisterForKeyboardChanges];
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Login Page Viewed Time"];
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:self andName:@"Login Page Viewed Time"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -13,12 +13,12 @@
 
 @interface AnalyticsManagerViewTimeEventTracker : NSObject
 
-@property (nonatomic, retain) id object;
-@property (nonatomic, retain) NSDate * time;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * contentType;
-@property (nonatomic, retain) NSString * contentId;
-@property (nonatomic, retain) NSDictionary * customAttributes;
+@property (nonatomic, weak, nullable) id object;
+@property (nonatomic, weak, nullable) NSDate * time;
+@property (nonatomic, weak, nullable) NSString * name;
+@property (nonatomic, weak, nullable) NSString * contentType;
+@property (nonatomic, weak, nullable) NSString * contentId;
+@property (nonatomic, weak, nullable) NSDictionary * customAttributes;
 
 @end
 
@@ -105,10 +105,11 @@ static NSString * uuidKey = @"push_analytics_uuid";
 
 + (CWGAnalytics)analyticsType
 {
+
     return [AnalyticsManager sharedManager].analyticsType;
 }
 
-+ (void)setupForAnaylytics:(CWGAnalytics)analyticsType
+- (void)setupForAnaylytics:(CWGAnalytics)analyticsType
 {
     [AnalyticsManager sharedManager].analyticsType = analyticsType;
     
@@ -123,10 +124,10 @@ static NSString * uuidKey = @"push_analytics_uuid";
             break;
     }
     
-    [AnalyticsManager setupUUID];
+    [[AnalyticsManager sharedManager] setupUUID];
 }
 
-+ (void)setupUUID
+- (void)setupUUID
 {
     NSString * uuid = [[NSUserDefaults standardUserDefaults] objectForKey:uuidKey];
     if(!uuid || uuid.length < 1){
@@ -135,7 +136,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-    switch ([AnalyticsManager analyticsType]) {
+    switch ([[AnalyticsManager sharedManager] analyticsType]) {
         case CWGAnalyticsCrashlytics:
             //[[Crashlytics sharedInstance] setUserIdentifier:uuid];
             break;
@@ -148,11 +149,11 @@ static NSString * uuidKey = @"push_analytics_uuid";
 
 }
 
-+ (void)logContentViewWithName:(NSString*)name contentType:(nullable NSString *)contentTypeOrNil
+- (void)logContentViewWithName:(NSString*)name contentType:(nullable NSString *)contentTypeOrNil
                      contentId:(nullable NSString *)contentIdOrNil
               customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil
 {
-    switch ([AnalyticsManager analyticsType]) {
+    switch ([[AnalyticsManager sharedManager] analyticsType]) {
         case CWGAnalyticsCrashlytics:
             //[Answers logContentViewWithName:name contentType:contentIdOrNil contentId:contentIdOrNil customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
             break;
@@ -164,9 +165,9 @@ static NSString * uuidKey = @"push_analytics_uuid";
     }
 }
 
-+ (void)logSearchWithQuery:(nullable NSString *)queryOrNil customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil
+- (void)logSearchWithQuery:(nullable NSString *)queryOrNil customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil
 {
-    switch ([AnalyticsManager analyticsType]) {
+    switch ([[AnalyticsManager sharedManager] analyticsType]) {
         case CWGAnalyticsCrashlytics:
             //[Answers logSearchWithQuery:queryOrNil customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
             break;
@@ -179,9 +180,9 @@ static NSString * uuidKey = @"push_analytics_uuid";
 
 }
 
-+ (void)logCustomEventWithName:(nonnull NSString *)name customAttributes:(nullable NSDictionary<NSString *, id> *)customAttributesOrNil
+- (void)logCustomEventWithName:(nonnull NSString *)name customAttributes:(nullable NSDictionary<NSString *, id> *)customAttributesOrNil
 {
-    switch ([AnalyticsManager analyticsType]) {
+    switch ([[AnalyticsManager sharedManager] analyticsType]) {
         case CWGAnalyticsCrashlytics:
             //[Answers logCustomEventWithName:name customAttributes:[self attributesDictionaryWithDictionary:customAttributesOrNil]];
             break;
@@ -194,25 +195,29 @@ static NSString * uuidKey = @"push_analytics_uuid";
 
 }
 
-+ (void)logErrorWithErrorDescription:(nonnull NSString *)errorDescription
+- (void)logErrorWithErrorDescription:(nonnull NSString *)errorDescription
 {
     [self logCustomEventWithName:errorDescription customAttributes:nil];
 }
 
-+ (void)startTimerForContentViewWithObject:(id)object name:(NSString*)name contentType:(nullable NSString *)contentTypeOrNil
+- (void)startTimerForContentViewWithObject:(nullable id)object name:(NSString*)name contentType:(nullable NSString *)contentTypeOrNil
                                contentId:(nullable NSString *)contentIdOrNil
                         customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil
 {
     AnalyticsManagerViewTimeEventTracker * tracker = [[AnalyticsManagerViewTimeEventTracker alloc] initWithObject:object name:name contentType:contentTypeOrNil contentId:contentIdOrNil customAttributes:customAttributesOrNil];
     
     [[AnalyticsManager sharedManager].timers addObject:tracker];
+    object = nil;
 }
 
-+ (void)endTimerForContentViewWithObject:(id)object andName:(NSString*)name
+- (void)endTimerForContentViewWithObject:(nullable id)object andName:(NSString*)name
 {
+    object = nil;
     NSSet * timers = [[AnalyticsManager sharedManager].timers objectsPassingTest:^BOOL(id  _Nonnull obj, BOOL * _Nonnull stop) {
         if([[(AnalyticsManagerViewTimeEventTracker*)obj description] isEqualToString:[AnalyticsManagerViewTimeEventTracker descriptionForObject:object andName:name]]){
+            
             return obj;
+            
         }
         return nil;
     }];
@@ -244,7 +249,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
 {
     // If the object's deallocated we want to close all the timers out first
     for(AnalyticsManagerViewTimeEventTracker * timer in self.timers.allObjects){
-        [AnalyticsManager endTimerForContentViewWithObject:timer.object andName:timer.name];
+        [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:timer.object andName:timer.name];
     }
 }
 
@@ -256,7 +261,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
  *
  *  @return dictionary with "Language: English" or whichever language is selected added.
  */
-+ (NSDictionary*)attributesDictionaryWithDictionary:(NSDictionary*)dictionary
+- (NSDictionary*)attributesDictionaryWithDictionary:(NSDictionary*)dictionary
 {
     if(!dictionary){
         dictionary = [NSDictionary dictionary];
@@ -268,7 +273,7 @@ static NSString * uuidKey = @"push_analytics_uuid";
     return [NSDictionary dictionaryWithDictionary:mutableAttributes];
 }
 
-+ (NSUUID*)installationUUID
+- (NSUUID*)installationUUID
 {
     NSUUID * uuid = [[NSUserDefaults standardUserDefaults] valueForKey:installationUUIDKeyName];
     if(!uuid){

@@ -117,26 +117,35 @@ static int contentWidth = 700;
 {
     [super viewDidAppear:animated];
     [self setContraints];
-  
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article Viewed Time" contentType:@"Article View Time"
-                                               contentId:self.article.description customAttributes:self.article.trackingProperties];
-    [AnalyticsManager startTimerForContentViewWithObject:self name:self.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];
     
-    [AnalyticsManager logContentViewWithName:@"Article List Appeared" contentType:@"Navigation"
-                          contentId:self.article.description customAttributes:self.article.trackingProperties];
-    [AnalyticsManager logContentViewWithName:self.article.headline contentType:@"Article View" contentId:nil customAttributes:nil];
+     __weak typeof(self) weakSelf = self;
+    
+    
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:weakSelf name:@"Article Viewed Time" contentType:@"Article View Time"
+                                               contentId:weakSelf.article.description customAttributes:weakSelf.article.trackingProperties];
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:weakSelf name:weakSelf.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];
+    
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Article List Appeared" contentType:@"Navigation"
+                          contentId:weakSelf.article.description customAttributes:weakSelf.article.trackingProperties];
+    [[AnalyticsManager sharedManager] logContentViewWithName:weakSelf.article.headline contentType:@"Article View" contentId:nil customAttributes:nil];
+   
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article Viewed Time"];
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:self.article.headline];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:weakSelf andName:@"Article Viewed Time"];
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:weakSelf andName:self.article.headline];
     
     @try {
         [self.article removeObserver:self forKeyPath:NSStringFromSelector(@selector(bodyHTML))];
     }
     @catch (NSException * __unused exception) {}
+    
+   
 }
 
 - (void)setShareButton {
@@ -477,7 +486,7 @@ static int contentWidth = 700;
 
 - (void)videoButtonTapped
 {
-    [AnalyticsManager logContentViewWithName:@"Video Button Tapped" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Video Button Tapped" contentType:@"Navigation"
                                    contentId:self.article.description customAttributes:self.article.trackingProperties];
 
     YouTubePlayerViewController * youTubePlayerViewController = [[YouTubePlayerViewController alloc] initWithVideoId:self.article.videos.firstObject.youtubeId];

@@ -22,8 +22,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //Initialize Analytics manager
+    //[AnalyticsManager sharedManager];
     // Start analytics tracking
-    [AnalyticsManager setupForAnaylytics:CWGAnalyticsCrashlytics];
+    [[AnalyticsManager sharedManager] setupForAnaylytics:CWGAnalyticsCrashlytics];
    
     //[[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[SettingsManager sharedManager].hockeyAppId];
     // Do some additional configuration if needed here

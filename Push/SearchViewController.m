@@ -39,9 +39,9 @@ static int contentWidth = 700;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [AnalyticsManager logContentViewWithName:@"Search Page Appeared" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Search Page Appeared" contentType:@"Navigation"
                                    contentId:nil customAttributes:nil];
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Search Page Viewed Time" contentType:@"Search Page View Time" contentId:nil customAttributes:nil];
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:self name:@"Search Page Viewed Time" contentType:@"Search Page View Time" contentId:nil customAttributes:nil];
 
     if(!self.articles || self.articles.count < 1){
         [self.searchBar becomeFirstResponder];
@@ -50,7 +50,7 @@ static int contentWidth = 700;
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Search Page Viewed Time"];
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:self andName:@"Search Page Viewed Time"];
 }
 
 - (void)setupSearchBar
@@ -98,7 +98,7 @@ static int contentWidth = 700;
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [AnalyticsManager logSearchWithQuery:searchBar.text customAttributes:nil];
+    [[AnalyticsManager sharedManager] logSearchWithQuery:searchBar.text customAttributes:nil];
     
     [searchBar resignFirstResponder];
 
@@ -152,7 +152,7 @@ static int contentWidth = 700;
 {
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
     Article * article = self.articles[indexPath.row];
-    [AnalyticsManager logContentViewWithName:@"Search List Item Tapped" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Search List Item Tapped" contentType:@"Navigation"
                                    contentId:article.description customAttributes:article.trackingProperties];
 
     ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:article];

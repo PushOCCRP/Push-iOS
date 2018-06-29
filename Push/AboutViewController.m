@@ -48,14 +48,14 @@ static int contentWidth = 700;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [AnalyticsManager logContentViewWithName:@"About Page Appeared" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"About Page Appeared" contentType:@"Navigation"
                                    contentId:nil customAttributes:nil];
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"About Page Viewed Time" contentType:@"About Page View Time" contentId:nil customAttributes:nil];
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:self name:@"About Page Viewed Time" contentType:@"About Page View Time" contentId:nil customAttributes:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"About Page Viewed Time"];
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:self andName:@"About Page Viewed Time"];
 }
 
 - (void)didReceiveMemoryWarning {

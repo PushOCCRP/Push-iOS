@@ -160,7 +160,7 @@ dispatch_semaphore_t _sem;
             //[weakSelf waitForStartup];
             NSDictionary * parameters = @{@"username": username,
                                           @"password": password,
-                                          @"installation_uuid": [AnalyticsManager installationUUID],
+                                          @"installation_uuid": [[AnalyticsManager sharedManager] installationUUID],
                                           @"language":[LanguageManager sharedManager].languageShortCode,
                                           @"v":versionNumber};
             
@@ -233,7 +233,7 @@ dispatch_semaphore_t _sem;
             dispatch_async(self.completionQueue, ^{
                 //[weakSelf waitForStartup];
                 NSMutableDictionary * parameters = [NSMutableDictionary
-                                                    dictionaryWithDictionary:@{@"installation_uuid": [AnalyticsManager installationUUID],
+                                                    dictionaryWithDictionary:@{@"installation_uuid": [[AnalyticsManager sharedManager] installationUUID],
                                                     @"language":[LanguageManager sharedManager].languageShortCode,
                                                     @"v":versionNumber,
                                                     @"categories":@"true"}];
@@ -290,7 +290,7 @@ dispatch_semaphore_t _sem;
         } else {
             NSMutableDictionary * parameters = [NSMutableDictionary
                                                 dictionaryWithDictionary:@{
-                                                                           @"installation_uuid": [AnalyticsManager installationUUID],
+                                                                           @"installation_uuid": [[AnalyticsManager sharedManager] installationUUID],
                                                                            @"id":articleId,
                                                                            @"language":[LanguageManager sharedManager].languageShortCode,
                                                                            @"v":versionNumber}];
@@ -333,7 +333,7 @@ dispatch_semaphore_t _sem;
         } else {
             NSMutableDictionary * parameters = [NSMutableDictionary
                                                 dictionaryWithDictionary:@{
-                                                                           @"installation_uuid": [AnalyticsManager installationUUID],
+                                                                           @"installation_uuid": [[AnalyticsManager sharedManager] installationUUID],
                                                                            @"q":searchTerms,
                                                                            @"language":[LanguageManager sharedManager].languageShortCode,
                                                                            @"v":versionNumber}];
@@ -432,7 +432,7 @@ dispatch_semaphore_t _sem;
 
 - (void)handleError:(NSError*)error failure:(void(^)(NSError *error))failure
 {
-    [AnalyticsManager logErrorWithErrorDescription:error.localizedDescription];
+    [[AnalyticsManager sharedManager] logErrorWithErrorDescription:error.localizedDescription];
     dispatch_async(dispatch_get_main_queue(), ^{
         failure(error);
     });
