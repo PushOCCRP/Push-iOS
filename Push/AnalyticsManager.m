@@ -207,12 +207,12 @@ static NSString * uuidKey = @"push_analytics_uuid";
     AnalyticsManagerViewTimeEventTracker * tracker = [[AnalyticsManagerViewTimeEventTracker alloc] initWithObject:object name:name contentType:contentTypeOrNil contentId:contentIdOrNil customAttributes:customAttributesOrNil];
     
     [[AnalyticsManager sharedManager].timers addObject:tracker];
-    object = nil;
+    //object = nil;
 }
 
 - (void)endTimerForContentViewWithObject:(nullable id)object andName:(NSString*)name
 {
-    object = nil;
+   // object = nil;
     NSSet * timers = [[AnalyticsManager sharedManager].timers objectsPassingTest:^BOOL(id  _Nonnull obj, BOOL * _Nonnull stop) {
         if([[(AnalyticsManagerViewTimeEventTracker*)obj description] isEqualToString:[AnalyticsManagerViewTimeEventTracker descriptionForObject:object andName:name]]){
             
