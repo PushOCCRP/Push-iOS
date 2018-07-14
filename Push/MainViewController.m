@@ -63,15 +63,16 @@ static int contentWidth = 700;
     
     __weak typeof(self) weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [AnalyticsManager logCustomEventWithName:@"Pulled To Refresh Home Screen" customAttributes:nil];
+        [[AnalyticsManager sharedManager] logCustomEventWithName:@"Pulled To Refresh Home Screen" customAttributes:nil];
         [weakSelf loadArticles];
     }];
     
     [self loadPromotions];
     
     // TODO: Track the user action that is important for you.
-    [AnalyticsManager logContentViewWithName:@"Article List" contentType:nil contentId:nil customAttributes:nil];
-}
+    //[AnalyticsManager logContentViewWithName:@"Article List" contentType:nil contentId:nil customAttributes:nil];
+    
+    }
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -80,13 +81,13 @@ static int contentWidth = 700;
         return;
     }
     
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
-    [self loadInitialArticles];
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:self name:@"Article List Timer" contentType:nil contentId:nil customAttributes:nil];
+    [self loadInitialArticles]; 
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article List Timer"];
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:self andName:@"Article List Timer"];
 }
 
 - (void)showLoginViewController
@@ -188,7 +189,6 @@ static int contentWidth = 700;
 - (void)loadInitialArticles
 {
     self.articles = [[PushSyncManager sharedManager] articlesWithCompletionHandler:^(NSArray *articles) {
-        NSLog(@"%@", articles);
         self.articles = articles;
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
@@ -308,14 +308,14 @@ static int contentWidth = 700;
     NSString * language = [LanguageManager sharedManager].languageShortCode;
     WebSiteViewController * webSiteController = [[WebSiteViewController alloc] initWithURL:[NSURL URLWithString:promotion.urls[language]]];
     [self.navigationController presentViewController:webSiteController animated:YES completion:nil];
-//    [self.navigationController pushViewController:webSiteController animated:YES];
+    [self.navigationController pushViewController:webSiteController animated:YES];
 }
 
 #pragma mark - Menu Button Handling
 
 - (void)aboutButtonTapped
 {
-    [AnalyticsManager logContentViewWithName:@"About Tapped" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"About Tapped" contentType:@"Navigation"
                           contentId:nil customAttributes:nil];
 
     AboutViewController * aboutViewController = [[AboutViewController alloc] init];
@@ -324,7 +324,7 @@ static int contentWidth = 700;
 
 - (void)searchButtonTapped
 {
-    [AnalyticsManager logContentViewWithName:@"Search Tapped" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Search Tapped" contentType:@"Navigation"
                           contentId:nil customAttributes:nil];
 
     SearchViewController * searchViewController = [[SearchViewController alloc] init];
@@ -335,12 +335,12 @@ static int contentWidth = 700;
 - (void)languageButtonTapped
 {
     if(!self.languagePickerView){
-        [AnalyticsManager logContentViewWithName:@"Language Button Tapped and Shown" contentType:@"Settings"
+        [[AnalyticsManager sharedManager] logContentViewWithName:@"Language Button Tapped and Shown" contentType:@"Settings"
                               contentId:nil customAttributes:nil];
 
         [self showLanguagePicker];
     } else {
-        [AnalyticsManager logContentViewWithName:@"Language Button Tapped and Hidden" contentType:@"Settings"
+        [[AnalyticsManager sharedManager] logContentViewWithName:@"Language Button Tapped and Hidden" contentType:@"Settings"
                               contentId:nil customAttributes:nil];
 
         [self hideLanguagePicker];
@@ -351,7 +351,7 @@ static int contentWidth = 700;
 
 - (void)languagePickerDidChooseLanguage:(NSString *)language
 {
-    [AnalyticsManager logContentViewWithName:@"Language Chosen" contentType:@"Settings"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Language Chosen" contentType:@"Settings"
                           contentId:language customAttributes:@{@"language":language}];
 
     NSString * oldLanguageShortCode = [LanguageManager sharedManager].languageShortCode;
@@ -503,15 +503,16 @@ static int contentWidth = 700;
         article = self.articles[indexPath.row];
     }
     
-    ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:article];
+    ArticleViewController * articleViewController = [[ArticleViewController alloc] init];
+    articleViewController.article = article;
     [articlePageViewController setViewControllers:@[articleViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
-    [AnalyticsManager logContentViewWithName:@"Article List Item Tapped" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Article List Item Tapped" contentType:@"Navigation"
                           contentId:article.description customAttributes:article.trackingProperties];
     
     
     [self.navigationController pushViewController:articlePageViewController animated:YES];
-    
+    self.tableView = nil;
 }
 
 #pragma mark - UITableViewDataSource

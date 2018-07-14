@@ -16,6 +16,6 @@
 
 @interface LanguagePickerView : UIView <UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (nonatomic, weak) id <LanguagePickerViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id <LanguagePickerViewDelegate> delegate;
 
 @end

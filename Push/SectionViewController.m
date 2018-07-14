@@ -103,7 +103,7 @@ static int contentWidth = 700;
     ArticleViewController * articleViewController = [[ArticleViewController alloc] initWithArticle:article];
     [articlePageViewController setViewControllers:@[articleViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
-    [AnalyticsManager logContentViewWithName:@"Article List Item Tapped" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Article List Item Tapped" contentType:@"Navigation"
                                    contentId:article.description customAttributes:article.trackingProperties];
     
     

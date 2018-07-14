@@ -16,7 +16,7 @@
 
 @implementation ArticlePageViewController
 
-- (instancetype)initWithArticles:(NSArray *)articles
+- (instancetype)initWithArticles:(RLMArray *)articles
 {
     self = [super initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
@@ -26,7 +26,16 @@
     self.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
 
+
+    ArticleViewController * avc = [[ArticleViewController alloc] init];
+    avc.article = self.articles[0];
+    [self setViewControllers:@[avc] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
     return self;
+}
+
+- (void) dealloc{
+    NSLog(@"ArticlePAgeViewController deallocation");
 }
 
 - (void)viewDidLoad {
@@ -60,7 +69,10 @@
         return nil;
     }
     
-    return [[ArticleViewController alloc] initWithArticle:self.articles[currentIndex - 1]];
+    ArticleViewController * avc = [[ArticleViewController alloc] init];
+    avc.article = self.articles[currentIndex - 1];
+    
+    return avc;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
@@ -70,8 +82,10 @@
     if(currentIndex == self.articles.count - 1){
         return nil;
     }
+    ArticleViewController * avc = [[ArticleViewController alloc] init];
+    avc.article = self.articles[currentIndex + 1];
     
-    return [[ArticleViewController alloc] initWithArticle:self.articles[currentIndex + 1]];
+    return avc;
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController

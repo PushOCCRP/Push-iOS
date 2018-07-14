@@ -15,18 +15,19 @@ typedef enum : NSUInteger {
 
 @interface AnalyticsManager : NSObject
 
-+ (void)setupForAnaylytics:(CWGAnalytics)analyticsType;
-+ (void)logContentViewWithName:(NSString* _Nonnull)name contentType:(nullable NSString *)contentTypeOrNil contentId:(nullable NSString *)contentIdOrNil customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;
-+ (void)logSearchWithQuery:(nullable NSString *)queryOrNil customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;
-+ (void)logCustomEventWithName:(nonnull NSString *)name customAttributes:(nullable NSDictionary<NSString *, id> *)attributes;
++ (AnalyticsManager *)sharedManager;
+- (void)setupForAnaylytics:(CWGAnalytics)analyticsType;
+- (void)logContentViewWithName:(NSString* _Nonnull)name contentType:(nullable NSString *)contentTypeOrNil contentId:(nullable NSString *)contentIdOrNil customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;
+- (void)logSearchWithQuery:(nullable NSString *)queryOrNil customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;
+- (void)logCustomEventWithName:(nonnull NSString *)name customAttributes:(nullable NSDictionary<NSString *, id> *)attributes;
 
-+ (void)logErrorWithErrorDescription:(nonnull NSString *)errorDescription;
+- (void)logErrorWithErrorDescription:(nonnull NSString *)errorDescription;
 
-+ (void)startTimerForContentViewWithObject:(id _Nonnull)object name:(NSString* _Nonnull)name contentType:(nullable NSString *)contentTypeOrNil
+- (void)startTimerForContentViewWithObject:(nullable id)object name:(NSString* _Nonnull)name contentType:(nullable NSString *)contentTypeOrNil
                                  contentId:(nullable NSString *)contentIdOrNil
                           customAttributes:(nullable NSDictionary<NSString *,id> *)customAttributesOrNil;
-+ (void)endTimerForContentViewWithObject:(id _Nonnull)object andName:(NSString* _Nonnull)name;
+- (void)endTimerForContentViewWithObject:(nullable id)object andName:(NSString* _Nonnull)name;
 
-+ (nonnull NSUUID*)installationUUID;
+- (nonnull NSUUID*)installationUUID;
 
 @end

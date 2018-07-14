@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3C14B15610A0B331C11653E8 /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */; };
+		4C0E5BBD20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
+		4C0E5BBE20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
+		4C0E5BBF20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
 		9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0B05CC1D129885001D3B2F /* QuartzCore.framework */; };
 		9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0B05D51D12A524001D3B2F /* ClickIndicator.m */; };
 		9D216105200E96BA001F53EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D216104200E96BA001F53EB /* LoginViewController.m */; };
@@ -130,6 +133,8 @@
 
 /* Begin PBXFileReference section */
 		35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C0E5BBB20E144940020AF92 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4C0E5BBC20E144940020AF92 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
 		6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
 		9D0B05CC1D129885001D3B2F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -319,6 +324,15 @@
 				35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C0E5BBA20E144580020AF92 /* Test View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C0E5BBB20E144940020AF92 /* ViewController.h */,
+				4C0E5BBC20E144940020AF92 /* ViewController.m */,
+			);
+			name = "Test View Controller";
 			sourceTree = "<group>";
 		};
 		9D216102200E9661001F53EB /* Login View Controller */ = {
@@ -744,6 +758,7 @@
 				9DC0E1491BF62AD7004A47D4 /* Search View Controller */,
 				9DE4A14D1BE268F500B69170 /* Article Page View Controller */,
 				9DE4A14B1BE268E300B69170 /* Article View Controller */,
+				4C0E5BBA20E144580020AF92 /* Test View Controller */,
 				9DE4A1351BE257F700B69170 /* Main View Controller */,
 			);
 			name = "View Controllers";
@@ -941,7 +956,6 @@
 				9DE4A0FB1BE2531D00B69170 /* Frameworks */,
 				9DE4A0FC1BE2531D00B69170 /* Resources */,
 				9D1A14F81C284249000FD08E /* ShellScript */,
-				E13974A53222D1E6BDDEE6E5 /* [CP] Copy Pods Resources */,
 				9D2C1DCE1E341DFF000414B9 /* Embed PlugIns */,
 				EBC5EDA5C720960E46172992 /* [CP] Embed Pods Frameworks */,
 			);
@@ -1002,11 +1016,11 @@
 				TargetAttributes = {
 					9DE4A0FD1BE2531D00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = V2725667MU;
+						DevelopmentTeam = 9H5K42BU9H;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -1021,13 +1035,13 @@
 					};
 					9DE4A1161BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = V2725667MU;
+						DevelopmentTeam = 9H5K42BU9H;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 					9DE4A1211BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = V2725667MU;
+						DevelopmentTeam = 9H5K42BU9H;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
@@ -1131,13 +1145,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Push-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9D1A14F81C284249000FD08E /* ShellScript */ = {
@@ -1153,30 +1170,50 @@
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
-		E13974A53222D1E6BDDEE6E5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EBC5EDA5C720960E46172992 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CPAProxy/CPAProxy.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/HTMLKit/HTMLKit.framework",
+				"${BUILT_PRODUCTS_DIR}/LibYAML/LibYAML.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/SVPullToRefresh/SVPullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/YAML-Framework/YAML_Framework.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CPAProxy.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTools.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTMLKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LibYAML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVPullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YAML_Framework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1228,6 +1265,7 @@
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
 				9DE593781E31797C008FEDA1 /* Reachability.m in Sources */,
 				9D4327D41DBB6DF500A6FEB2 /* ArticleTableViewHeader.m in Sources */,
+				4C0E5BBD20E144940020AF92 /* ViewController.m in Sources */,
 				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
 				9DAC1E221C57882E00126A83 /* About.m in Sources */,
 				9DE4A1031BE2531E00B69170 /* main.m in Sources */,
@@ -1240,6 +1278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C0E5BBE20E144940020AF92 /* ViewController.m in Sources */,
 				9DE4A11C1BE2531F00B69170 /* PushTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1248,6 +1287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C0E5BBF20E144940020AF92 /* ViewController.m in Sources */,
 				9DE4A1271BE2531F00B69170 /* PushUITests.m in Sources */,
 				9D51C6151C6CDC8600BF434B /* SnapshotHelper.swift in Sources */,
 			);
@@ -1386,7 +1426,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1415,7 +1455,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oystereyepublishing.route40;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.pushtest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1434,7 +1474,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1463,7 +1503,7 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oystereyepublishing.route40;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.pushtest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1477,13 +1517,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oystereyepublishing.route40;
+				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1493,13 +1533,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1509,13 +1549,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1529,13 +1569,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2725667MU;
+				DEVELOPMENT_TEAM = 9H5K42BU9H;
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b4b94e8-b7d7-4644-b349-f807355ebc39";
-				PROVISIONING_PROFILE_SPECIFIER = "com.oystereyepublishing.route40 Development";
+				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
+				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;

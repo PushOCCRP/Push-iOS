@@ -40,14 +40,14 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [AnalyticsManager logContentViewWithName:@"Video Player Appeared" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Video Player Appeared" contentType:@"Navigation"
                                    contentId:self.videoId customAttributes:nil];
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Video Viewed Time" contentType:@"Video View Time" contentId:self.videoId customAttributes:nil];
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:self name:@"Video Viewed Time" contentType:@"Video View Time" contentId:self.videoId customAttributes:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Video Viewed Time"];
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:self andName:@"Video Viewed Time"];
 }
 
 - (BOOL)shouldAutorotate

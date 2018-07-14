@@ -22,8 +22,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //Initialize Analytics manager
+    //[AnalyticsManager sharedManager];
     // Start analytics tracking
-    [AnalyticsManager setupForAnaylytics:CWGAnalyticsCrashlytics];
+    [[AnalyticsManager sharedManager] setupForAnaylytics:CWGAnalyticsCrashlytics];
    
     //[[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[SettingsManager sharedManager].hockeyAppId];
     // Do some additional configuration if needed here
@@ -34,7 +37,7 @@
     [LanguageManager sharedManager];
     
     // Set up the notifications
-    [NotificationManager sharedManager];
+    //[NotificationManager sharedManager];
     
     [PushSyncManager sharedManager];
     
@@ -56,13 +59,13 @@
     [self setWindow:window];
 
     
-    NSMutableAttributedString *attrStringFromHtml = [[NSMutableAttributedString alloc]
+    /*NSMutableAttributedString *attrStringFromHtml = [[NSMutableAttributedString alloc]
                                                      initWithData: [@"<span>html enabled</span>" dataUsingEncoding:NSUnicodeStringEncoding
                                                                                               allowLossyConversion:NO]
                                                      options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType}
                                                      documentAttributes:nil error:nil];
     NSLog(@"%@",[attrStringFromHtml string]);
-
+      */
 
     return YES;
 }

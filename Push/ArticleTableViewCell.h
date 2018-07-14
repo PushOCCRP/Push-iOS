@@ -11,7 +11,7 @@
 
 @interface ArticleTableViewCell : UITableViewCell
 
-@property (nonatomic, retain) Article * article;
+@property (nonatomic, weak, nullable) Article * article;
 @property IBOutlet UILabel * headlineLabel;
 @property IBOutlet UIImageView * articleImageView;
 @property IBOutlet UILabel * dateBylinesLabel;

@@ -50,73 +50,102 @@
 static NSString * imageGravestoneMarker = @"&&&&";
 static int contentWidth = 700;
 
-- (instancetype)initWithArticle:(Article*)article
-{
-    self = [super init];
-    if(self){
-        self.article = article;
-    }
-    
-    return self;
-}
+
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (instancetype)initWithArticle:(Article*)article
+{
+    self = [super init];
+    if(self){
+        self.article = article;
+        
+        NSLog(@"This should hapen once in never");
+        
+    }
+    
+    return self;
+}
 
+- (void) doEverything {
     self.view.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
     
     self.imageLocations = [NSMutableDictionary dictionary];
     
     [self setShareButton];
     [self setupScrollView];
+    [self setupContentView];
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self doEverything];
+    NSLog(@"ArticleViewController viewDidLoad");
+    [self.view layoutIfNeeded];
+}
+
+- (void) dealloc{
+    NSLog(@"ArticleViewController deallocation");
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //Resize the image view's height to make it proportional
-    float viewWidth = self.navigationController.view.window.frame.size.width;
-    float proportion = viewWidth / self.image.image.size.width;
-    
-    if(self.image.image){
-        float height = self.image.image.size.height * proportion;
-        
-        [self.image mas_updateConstraints:^(MASConstraintMaker * make) {
-            make.height.equalTo([NSNumber numberWithFloat:height]);
-        }];
-    }
+
+//    //Resize the image view's height to make it proportional
+//    float viewWidth = self.navigationController.view.window.frame.size.width;
+//    float proportion = viewWidth / self.image.image.size.width;
+//
+//    if(self.image.image){
+//        float height = self.image.image.size.height * proportion;
+//
+//        [self.image mas_updateConstraints:^(MASConstraintMaker * make) {
+//            make.height.equalTo([NSNumber numberWithFloat:height]);
+//        }];
+//    }
+    // Set all the data to views for the article
+    [self setViewsForArticle];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self setupContentView];
     [self setContraints];
     
-    [AnalyticsManager startTimerForContentViewWithObject:self name:@"Article Viewed Time" contentType:@"Article View Time"
-                                               contentId:self.article.description customAttributes:self.article.trackingProperties];
-    [AnalyticsManager startTimerForContentViewWithObject:self name:self.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];
+     __weak typeof(self) weakSelf = self;
     
-    [AnalyticsManager logContentViewWithName:@"Article List Appeared" contentType:@"Navigation"
-                          contentId:self.article.description customAttributes:self.article.trackingProperties];
-    [AnalyticsManager logContentViewWithName:self.article.headline contentType:@"Article View" contentId:nil customAttributes:nil];
+    
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:weakSelf name:@"Article Viewed Time" contentType:@"Article View Time"
+                                               contentId:weakSelf.article.description customAttributes:weakSelf.article.trackingProperties];
+    [[AnalyticsManager sharedManager] startTimerForContentViewWithObject:weakSelf name:weakSelf.article.headline contentType:@"Article Timer" contentId:nil customAttributes:nil];
+    
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Article List Appeared" contentType:@"Navigation"
+                          contentId:weakSelf.article.description customAttributes:weakSelf.article.trackingProperties];
+    [[AnalyticsManager sharedManager] logContentViewWithName:weakSelf.article.headline contentType:@"Article View" contentId:nil customAttributes:nil];
+   
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:@"Article Viewed Time"];
-    [AnalyticsManager endTimerForContentViewWithObject:self andName:self.article.headline];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:weakSelf andName:@"Article Viewed Time"];
+    [[AnalyticsManager sharedManager] endTimerForContentViewWithObject:weakSelf andName:self.article.headline];
     
     @try {
         [self.article removeObserver:self forKeyPath:NSStringFromSelector(@selector(bodyHTML))];
     }
     @catch (NSException * __unused exception) {}
+    
+   
 }
 
 - (void)setShareButton {
@@ -193,9 +222,6 @@ static int contentWidth = 700;
     [self.contentView addSubview:self.date];
     [self.contentView addSubview:self.headline];
     [self.contentView addSubview:self.body];
-    
-    // Set all the data to views for the article
-    [self setViewsForArticle];
     
     // Make it scroll
     [self.scrollView addSubview:self.contentView];
@@ -291,6 +317,19 @@ static int contentWidth = 700;
 
         [self.scrollView setContentInset:scrollViewInsets];
     }
+    
+    //Resize the image view's height to make it proportional
+    float viewWidth = self.navigationController.view.window.frame.size.width;
+    float proportion = viewWidth / self.image.image.size.width;
+    
+    if(self.image.image){
+        float height = self.image.image.size.height * proportion;
+        
+        [self.image mas_updateConstraints:^(MASConstraintMaker * make) {
+            make.height.equalTo([NSNumber numberWithFloat:height]);
+        }];
+    }
+
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -319,26 +358,7 @@ static int contentWidth = 700;
         
         __weak typeof(self) weakSelf = self;
         [self.image setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-            
             weakSelf.image.image = image;
-            
-            //Resize the image view's height to make it proportional
-            float viewWidth = weakSelf.view.frame.size.width;
-            float proportion = viewWidth / image.size.width;
-            float height = image.size.height * proportion;
-            
-            [weakSelf.image mas_remakeConstraints:^(MASConstraintMaker * make) {
-                if(weakSelf.category){
-                    make.top.equalTo(weakSelf.category.mas_bottom);
-                } else {
-                    make.top.equalTo(weakSelf.contentView.mas_top);
-                }
-                
-                make.left.equalTo(weakSelf.contentView.mas_left);
-                make.right.equalTo(weakSelf.contentView.mas_right);
-                make.height.equalTo([NSNumber numberWithFloat:height]);
-            }];
-            
         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
             NSLog(@"Error loading image: %@", error.localizedDescription);
         }];
@@ -346,15 +366,15 @@ static int contentWidth = 700;
         //Set image caption, hide if there is none.
         NSString * headerImageCaption;
         NSString * headerImageByline;
-        if(self.article.headerImage && [[self.article.headerImage allKeys] containsObject:@"caption"]){
-            headerImageCaption = self.article.headerImage[@"caption"];
-            if([[self.article.images.firstObject allKeys] containsObject:@"caption"]){
+        if(self.article.headerImage && self.article.headerImage.caption){
+            headerImageCaption = self.article.headerImage.caption;
+            if(self.article.images.firstObject.caption){
                 headerImageByline = self.article.images.firstObject[@"byline"];
             }
-        } else if(self.article.images.count > 0 && [[self.article.images[0] allKeys] containsObject:@"caption"]){
-            headerImageCaption = self.article.images.firstObject[@"caption"];
-            if([[self.article.images.firstObject allKeys] containsObject:@"caption"]){
-                headerImageByline = self.article.images.firstObject[@"byline"];
+        } else if(self.article.images.count > 0 && self.article.images[0].caption){
+            headerImageCaption = self.article.images.firstObject.caption;
+            if(self.article.images.firstObject.caption){
+                headerImageByline = self.article.images.firstObject.byline;
             }
         }
         
@@ -466,10 +486,10 @@ static int contentWidth = 700;
 
 - (void)videoButtonTapped
 {
-    [AnalyticsManager logContentViewWithName:@"Video Button Tapped" contentType:@"Navigation"
+    [[AnalyticsManager sharedManager] logContentViewWithName:@"Video Button Tapped" contentType:@"Navigation"
                                    contentId:self.article.description customAttributes:self.article.trackingProperties];
 
-    YouTubePlayerViewController * youTubePlayerViewController = [[YouTubePlayerViewController alloc] initWithVideoId:self.article.videos.firstObject[@"youtube_id"]];
+    YouTubePlayerViewController * youTubePlayerViewController = [[YouTubePlayerViewController alloc] initWithVideoId:self.article.videos.firstObject.youtubeId];
     youTubePlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     youTubePlayerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
