@@ -31,5 +31,6 @@ target "Push" do
     pod 'YAML-Framework'
     pod '1PasswordExtension', '~> 1.8.5'
     pod 'Realm'
+    pod 'SnapKit'
 end
 

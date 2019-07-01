@@ -497,7 +497,7 @@
         return;
     }
  
-    _headerImage = headerImage;
+    _headerImage = [[PushImage alloc] initWithJSONDictionary:headerImage];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self preloadImage:headerImage[@"url"]];

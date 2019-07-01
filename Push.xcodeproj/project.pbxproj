@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3C14B15610A0B331C11653E8 /* Pods_Push.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */; };
-		4C0E5BBD20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
-		4C0E5BBE20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
-		4C0E5BBF20E144940020AF92 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E5BBC20E144940020AF92 /* ViewController.m */; };
 		9D0B05CD1D129885001D3B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0B05CC1D129885001D3B2F /* QuartzCore.framework */; };
 		9D0B05D61D12A524001D3B2F /* ClickIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0B05D51D12A524001D3B2F /* ClickIndicator.m */; };
 		9D216105200E96BA001F53EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D216104200E96BA001F53EB /* LoginViewController.m */; };
@@ -40,6 +37,7 @@
 		9D56AF4C1D10C22000892C87 /* Promotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D56AF4B1D10C22000892C87 /* Promotion.m */; };
 		9D56AF501D10C4B900892C87 /* PromotionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D56AF4F1D10C4B900892C87 /* PromotionsManager.m */; };
 		9D56AF671D10CA6800892C87 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D56AF651D10CA5000892C87 /* libresolv.tbd */; };
+		9D5D8B6022C9937100ABDC22 /* SectionSplitNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D8B5F22C9937100ABDC22 /* SectionSplitNew.swift */; };
 		9D69C1B11C624D2800D537EF /* PlayButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B01C624D2800D537EF /* PlayButtonView.m */; };
 		9D69C1BA1C62624100D537EF /* PlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1B91C62624100D537EF /* PlayButton.m */; };
 		9D69C1EA1C62756E00D537EF /* PauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69C1E91C62756E00D537EF /* PauseButton.m */; };
@@ -133,8 +131,6 @@
 
 /* Begin PBXFileReference section */
 		35C2C28FA1EFD053B5231B92 /* Pods_Push.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C0E5BBB20E144940020AF92 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4C0E5BBC20E144940020AF92 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.debug.xcconfig"; sourceTree = "<group>"; };
 		6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push.release.xcconfig"; path = "Pods/Target Support Files/Pods-Push/Pods-Push.release.xcconfig"; sourceTree = "<group>"; };
 		9D0B05CC1D129885001D3B2F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -180,6 +176,8 @@
 		9D56AF4E1D10C4B900892C87 /* PromotionsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromotionsManager.h; sourceTree = "<group>"; };
 		9D56AF4F1D10C4B900892C87 /* PromotionsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromotionsManager.m; sourceTree = "<group>"; };
 		9D56AF651D10CA5000892C87 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		9D5D8B5E22C9937100ABDC22 /* Push-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Push-Bridging-Header.h"; sourceTree = "<group>"; };
+		9D5D8B5F22C9937100ABDC22 /* SectionSplitNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSplitNew.swift; sourceTree = "<group>"; };
 		9D69C1AF1C624D2800D537EF /* PlayButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonView.h; sourceTree = "<group>"; };
 		9D69C1B01C624D2800D537EF /* PlayButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonView.m; sourceTree = "<group>"; };
 		9D69C1B81C62624100D537EF /* PlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButton.h; sourceTree = "<group>"; };
@@ -326,15 +324,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4C0E5BBA20E144580020AF92 /* Test View Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4C0E5BBB20E144940020AF92 /* ViewController.h */,
-				4C0E5BBC20E144940020AF92 /* ViewController.m */,
-			);
-			name = "Test View Controller";
-			sourceTree = "<group>";
-		};
 		9D216102200E9661001F53EB /* Login View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +403,7 @@
 			children = (
 				9D4327DA1DBB6E2B00A6FEB2 /* SectionSplit.h */,
 				9D4327DB1DBB6E2B00A6FEB2 /* SectionSplit.m */,
+				9D5D8B5F22C9937100ABDC22 /* SectionSplitNew.swift */,
 			);
 			name = "Section Split";
 			sourceTree = "<group>";
@@ -714,6 +704,7 @@
 		9DE4A1011BE2531E00B69170 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9D5D8B5E22C9937100ABDC22 /* Push-Bridging-Header.h */,
 				9DC7FE121D10D4AF007204C4 /* promotions.yml */,
 				9DAC1DF51C57093300126A83 /* About Html Files */,
 				9DBFF9E71C50402F00ABCD2C /* Assets.bundle */,
@@ -758,7 +749,6 @@
 				9DC0E1491BF62AD7004A47D4 /* Search View Controller */,
 				9DE4A14D1BE268F500B69170 /* Article Page View Controller */,
 				9DE4A14B1BE268E300B69170 /* Article View Controller */,
-				4C0E5BBA20E144580020AF92 /* Test View Controller */,
 				9DE4A1351BE257F700B69170 /* Main View Controller */,
 			);
 			name = "View Controllers";
@@ -1016,11 +1006,12 @@
 				TargetAttributes = {
 					9DE4A0FD1BE2531D00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 2699642UD6;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -1035,13 +1026,12 @@
 					};
 					9DE4A1161BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
+						DevelopmentTeam = 2699642UD6;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
 					};
 					9DE4A1211BE2531F00B69170 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9H5K42BU9H;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9DE4A0FD1BE2531D00B69170;
@@ -1176,7 +1166,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Push/Pods-Push-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -1192,6 +1182,7 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/SVPullToRefresh/SVPullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YAML-Framework/YAML_Framework.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
@@ -1212,12 +1203,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVPullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YAML_Framework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Push/Pods-Push-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Push/Pods-Push-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1254,6 +1246,7 @@
 				9DE593751E317965008FEDA1 /* TorManager.m in Sources */,
 				9DC1057E1D54F59800D5D441 /* NSURL+URLWithNonLatinString.m in Sources */,
 				9DAC1E0A1C5772F800126A83 /* AboutBarButtonView.m in Sources */,
+				9D5D8B6022C9937100ABDC22 /* SectionSplitNew.swift in Sources */,
 				9D3240811F58B635004600FF /* LanguageButton.m in Sources */,
 				9D56AF501D10C4B900892C87 /* PromotionsManager.m in Sources */,
 				9DCC797E1BF3639900F28F18 /* MainViewController.m in Sources */,
@@ -1265,7 +1258,6 @@
 				9DE4A1441BE2637F00B69170 /* ArticleTableViewCell.m in Sources */,
 				9DE593781E31797C008FEDA1 /* Reachability.m in Sources */,
 				9D4327D41DBB6DF500A6FEB2 /* ArticleTableViewHeader.m in Sources */,
-				4C0E5BBD20E144940020AF92 /* ViewController.m in Sources */,
 				9DF9B0F31C41198F00EA3BFA /* LanguageManager.m in Sources */,
 				9DAC1E221C57882E00126A83 /* About.m in Sources */,
 				9DE4A1031BE2531E00B69170 /* main.m in Sources */,
@@ -1278,7 +1270,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C0E5BBE20E144940020AF92 /* ViewController.m in Sources */,
 				9DE4A11C1BE2531F00B69170 /* PushTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1287,7 +1278,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C0E5BBF20E144940020AF92 /* ViewController.m in Sources */,
 				9DE4A1271BE2531F00B69170 /* PushUITests.m in Sources */,
 				9D51C6151C6CDC8600BF434B /* SnapshotHelper.swift in Sources */,
 			);
@@ -1421,12 +1411,14 @@
 			baseConfigurationReference = 56238ADECDA5C2AEF1436CA9 /* Pods-Push.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2699642UD6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1455,10 +1447,13 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.pushtest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dailycardinal.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "291d505d-0377-4855-88bd-19356bbeda96";
+				PROVISIONING_PROFILE_SPECIFIER = "com.dailycardinal.push Development";
+				SWIFT_OBJC_BRIDGING_HEADER = "Push/Push-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1469,12 +1464,14 @@
 			baseConfigurationReference = 6C35FD7A9ADC79A2128465A9 /* Pods-Push.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Push/Push.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2699642UD6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1503,10 +1500,12 @@
 				INFOPLIST_FILE = Push/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.pushtest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dailycardinal.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "291d505d-0377-4855-88bd-19356bbeda96";
+				PROVISIONING_PROFILE_SPECIFIER = "com.dailycardinal.push Development";
+				SWIFT_OBJC_BRIDGING_HEADER = "Push/Push-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1515,15 +1514,16 @@
 		9DE4A12F1BE2531F00B69170 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = 2699642UD6;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.occrp.push;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dailycardinal.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
+				PROVISIONING_PROFILE = "291d505d-0377-4855-88bd-19356bbeda96";
+				PROVISIONING_PROFILE_SPECIFIER = "com.dailycardinal.push Development";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Debug;
@@ -1531,15 +1531,16 @@
 		9DE4A1301BE2531F00B69170 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = 2699642UD6;
 				INFOPLIST_FILE = PushTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
+				PROVISIONING_PROFILE = "291d505d-0377-4855-88bd-19356bbeda96";
+				PROVISIONING_PROFILE_SPECIFIER = "com.dailycardinal.push Development";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Push.app/Push";
 			};
 			name = Release;
@@ -1547,15 +1548,17 @@
 		9DE4A1321BE2531F00B69170 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
+				PROVISIONING_PROFILE = "291d505d-0377-4855-88bd-19356bbeda96";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1567,15 +1570,17 @@
 		9DE4A1331BE2531F00B69170 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9H5K42BU9H;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PushUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = whatisuplabs.PushUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29e9354c-2369-4bfb-bc0e-1019a0be82a3";
-				PROVISIONING_PROFILE_SPECIFIER = "com.occrp.push Development 1528193866";
+				PROVISIONING_PROFILE = "291d505d-0377-4855-88bd-19356bbeda96";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PushUITests/PushUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Push;

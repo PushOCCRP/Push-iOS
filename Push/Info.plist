@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>OCCRP</string>
+	<string>The Daily Cardinal</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -32,7 +32,7 @@
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
-		<string>e8e3bbc2256c70be95a43e59ef78a0e1b312db75</string>
+		<string>xxxxxxxxxxxxxxxxx</string>
 		<key>Kits</key>
 		<array>
 			<dict>
@@ -44,11 +44,9 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>148846052145556</string>
+	<string>xxxxxxxxxxxxxxxxx</string>
 	<key>FacebookDisplayName</key>
-	<string>OCCRP</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
+	<string>The Daily Cardinal</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -88,15 +86,7 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) uses photos</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
@@ -115,5 +105,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses photos</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

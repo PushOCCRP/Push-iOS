@@ -9,7 +9,8 @@
 #import "ArticleTableViewHeader.h"
 #import <Masonry/Masonry.h>
 #import "HorizontalRule.h"
-#import "SectionSplit.h"
+//#import "SectionSplit.h"
+#import "Push-Swift.h"
 
 @interface ArticleTableViewHeader()
 
@@ -37,7 +38,7 @@
     self.categoryNameLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:16.0f];
     self.categoryNameLabel.textColor = [UIColor darkTextColor];
     
-    UIView * topView = [[SectionSplit alloc] initWithTop:top];
+    UIView * topView = [[SectionSplitNew alloc] initWithTop: YES];
     UIView * horizontalRuleBottom = [[HorizontalRule alloc] init];
     
     [self addSubview:topView];
